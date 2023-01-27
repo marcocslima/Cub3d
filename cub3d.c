@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/01/27 07:30:34 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/01/27 23:27:59 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,27 @@ void	print_exit(char *input)
 {
 	printf("%s\n", input);
 	exit (1);
+}
+
+char	**read_map(int fd)
+{
+	char		*line;
+	char		*ret;
+	char		**map;
+
+	ret = get_next_line(fd);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		ret = ft_strjoin(ret, line);
+		free(line);
+	}
+	close (fd);
+	map = ft_split(ret, '\n');
+	free(ret);
+	return (map);
 }
 
 int	check_input(int argc, char **argv)
@@ -45,13 +66,18 @@ int	check_input(int argc, char **argv)
 
 int	main(int argc, char *argv[])
 {
-	int		map;
-	char 	*line;
+	int		fd;
+	char	**map;
+	int		i;
 	
-	map  = check_input(argc, argv);
-	line = get_next_line(map);
-	printf("%s\n", line);
-	free(line);
-	close(map);
+	i = -1;
+	fd  = check_input(argc, argv);
+	map = read_map(fd);
+	while(map[++i])
+	{
+		printf("%s\n", map[i]);
+		free(map[i]);
+	}
+	free(map);
 	return (0);
 }
