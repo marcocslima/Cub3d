@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/01/27 00:25:20 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/01/27 06:59:51 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	print_exit(char *input)
 	exit (1);
 }
 
-int check_input(int argc, char **argv)
+char *check_input(int argc, char **argv)
 {
 	int		len_entry;
-	char 	*is_cub;
+	char	*is_cub;
 
 	len_entry = ft_strlen(argv[1]);
 	
@@ -32,12 +32,16 @@ int check_input(int argc, char **argv)
 	{
 		free(is_cub);
 		print_exit("Error: map file needs to be .cub");
-	}	
-	return (0);
+	}
+	free(is_cub);
+	return (argv[1]);
 }
 
 int	main(int argc, char *argv[])
 {
-	check_input(argc, argv);
+	char *map;
+	
+	map  = check_input(argc, argv);
+	printf("%s\n", map);
 	return (0);
 }
