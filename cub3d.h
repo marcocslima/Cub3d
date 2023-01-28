@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/01/26 23:15:30 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/01/28 09:36:04 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,12 @@
 # define S	115
 # define D	100
 # define A	97
+
+typedef struct s_map
+{
+	int		map_width;
+	int		map_higth;
+	char	**map;
+} t_map;
 
 #endif

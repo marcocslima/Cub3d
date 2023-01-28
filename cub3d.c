@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/01/27 23:27:59 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/01/28 13:16:20 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,6 @@ void	print_exit(char *input)
 	exit (1);
 }
 
-char	**read_map(int fd)
-{
-	char		*line;
-	char		*ret;
-	char		**map;
-
-	ret = get_next_line(fd);
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		ret = ft_strjoin(ret, line);
-		free(line);
-	}
-	close (fd);
-	map = ft_split(ret, '\n');
-	free(ret);
-	return (map);
-}
 
 int	check_input(int argc, char **argv)
 {
@@ -64,20 +44,72 @@ int	check_input(int argc, char **argv)
 	return (fd);
 }
 
+char	**read_file(int fd)
+{
+	char		*line;
+	char		*ret;
+	char		**map;
+
+	ret = get_next_line(fd);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		ret = ft_strjoin(ret, line);
+		free(line);
+	}
+	close (fd);
+	map = ft_split(ret, '\n');
+	free(ret);
+	return (map);
+}
+
+t_map *get_map(char **file)
+{
+	t_map	*map;
+	int		i;
+	int		j;
+	int		init_map;
+
+	i = -1;
+	j = -1;
+	init_map = 0;
+	map = (t_map *)malloc(sizeof(t_map));
+	map->map_width = 0;
+	while(file[++i])
+	{
+		if(file[i][0] == ' ' || file[i][0] == '1')
+		{	
+			if (init_map == 0)
+				init_map = i;
+			if ((int)ft_strlen(file[i]) > map->map_width)
+				map->map_width = ft_strlen(file[i]);
+		}
+	}
+	map->map_higth = i - init_map;
+	map->map = malloc(sizeof(char *) * map->map_higth);
+	while (++j < map->map_higth)
+		map->map[j] = file[init_map++];
+	return (map);
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
-	char	**map;
+	char	**file;
+	t_map	*map;
 	int		i;
 	
 	i = -1;
 	fd  = check_input(argc, argv);
-	map = read_map(fd);
-	while(map[++i])
-	{
-		printf("%s\n", map[i]);
-		free(map[i]);
-	}
-	free(map);
+	file = read_file(fd);
+	map = get_map(file);
+	while(map->map[++i])
+		printf("%s\n", map->map[i]);
+	i = -1;
+	while(file[++i])
+		free(file[i]);
+	free(file);
 	return (0);
 }
