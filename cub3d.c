@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/01/28 13:16:20 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/01/29 07:46:01 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**read_file(int fd)
 {
 	char		*line;
 	char		*ret;
-	char		**map;
+	char		**file;
 
 	ret = get_next_line(fd);
 	while (1)
@@ -60,9 +60,31 @@ char	**read_file(int fd)
 		free(line);
 	}
 	close (fd);
-	map = ft_split(ret, '\n');
+	file = ft_split(ret, '\n');
 	free(ret);
-	return (map);
+	return (file);
+}
+
+char *norm_line(char *line, int width)
+{
+	char 	*norm_line;
+	int		i;
+
+	i = -1;
+	norm_line = (char *)calloc(width + 1, sizeof(char));
+	while(++i < width)
+	{
+		if(line[i])
+			norm_line[i] = line[i];
+		else
+			norm_line[i] = ' ';
+	}
+	i = -1;
+	while(++i < width)
+		if(norm_line[i] == ' ')
+			norm_line[i] = 'S';
+	free(line);
+	return(norm_line);
 }
 
 t_map *get_map(char **file)
@@ -90,7 +112,7 @@ t_map *get_map(char **file)
 	map->map_higth = i - init_map;
 	map->map = malloc(sizeof(char *) * map->map_higth);
 	while (++j < map->map_higth)
-		map->map[j] = file[init_map++];
+		map->map[j] = norm_line(file[init_map++], map->map_width);
 	return (map);
 }
 
@@ -108,8 +130,8 @@ int	main(int argc, char *argv[])
 	while(map->map[++i])
 		printf("%s\n", map->map[i]);
 	i = -1;
-	while(file[++i])
-		free(file[i]);
-	free(file);
+	//while(file[++i])
+	//	free(file[i]);
+	//free(file);
 	return (0);
 }
