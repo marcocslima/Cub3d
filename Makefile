@@ -3,23 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 23:52:54 by mcesar-d          #+#    #+#              #
-#    Updated: 2023/01/26 23:57:47 by mcesar-d         ###   ########.fr        #
+#    Updated: 2023/01/29 15:54:19 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SOURCES =	cub3d.c
+SOURCES =	cub3d.c\
+			check_file.c
 
 NAME = cub3D
-FLAGS = -g3 -Werror -Wextra -Wall
+FLAGS = -g3 #-Werror -Wextra -Wall
 MLX_FLAGS = -lm -lbsd -lmlx -lXext -lX11
 RM = rm -rf
-LIBFT = ./libft/libft.a
-LIBFT_PATH = ./libft
-MLX = ./minilibx-linux/libmlx.a
-MLX_PATH = ./minilibx-linux
+LIBFT = ./libraries/libft/libft.a
+LIBFT_PATH = ./libraries/libft
+MLX = ./libraries/minilibx-linux/libmlx.a
+MLX_PATH = ./libraries/minilibx-linux
 
 SRC_PATH =	./
 OBJ_PATH =	obj/

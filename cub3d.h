@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/01/28 09:36:04 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/01/29 16:00:28 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <sys/stat.h>
 # include <string.h>
 # include <math.h>
-# include "mlx.h"
-# include "./libft/libft.h"
-# include "./minilibx-linux/mlx.h"
+//# include "mlx.h"
+# include "./libraries/libft/libft.h"
+# include "./libraries/minilibx-linux/mlx.h"
 
 # define WIDTH 1024
 # define HEIGHT 768
@@ -39,11 +39,24 @@
 # define D	100
 # define A	97
 
+typedef struct s_map_header
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*f;
+	char	*c;
+} t_map_header;
+
 typedef struct s_map
 {
 	int		map_width;
 	int		map_higth;
 	char	**map;
 } t_map;
+
+void	check_file_line(char *line);
+void	exit_error_msg(char *msg, int code);
 
 #endif

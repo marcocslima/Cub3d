@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/01/29 07:46:01 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/01/29 16:02:01 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	print_exit(char *input)
 	printf("%s\n", input);
 	exit (1);
 }
-
 
 int	check_input(int argc, char **argv)
 {
@@ -44,6 +43,13 @@ int	check_input(int argc, char **argv)
 	return (fd);
 }
 
+void	exit_error_msg(char *msg, int code)
+{
+	write(2, "Error: ", 7);
+	write(2, msg, ft_strlen(msg));
+	exit(code);
+}
+
 char	**read_file(int fd)
 {
 	char		*line;
@@ -51,11 +57,13 @@ char	**read_file(int fd)
 	char		**file;
 
 	ret = get_next_line(fd);
+	check_file_line(ret);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		check_file_line(line);
 		ret = ft_strjoin(ret, line);
 		free(line);
 	}
@@ -102,7 +110,7 @@ t_map *get_map(char **file)
 	while(file[++i])
 	{
 		if(file[i][0] == ' ' || file[i][0] == '1')
-		{	
+		{
 			if (init_map == 0)
 				init_map = i;
 			if ((int)ft_strlen(file[i]) > map->map_width)
@@ -122,7 +130,7 @@ int	main(int argc, char *argv[])
 	char	**file;
 	t_map	*map;
 	int		i;
-	
+
 	i = -1;
 	fd  = check_input(argc, argv);
 	file = read_file(fd);
