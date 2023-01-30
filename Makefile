@@ -6,12 +6,15 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 23:52:54 by mcesar-d          #+#    #+#              #
-#    Updated: 2023/01/29 15:54:19 by alida-si         ###   ########.fr        #
+#    Updated: 2023/01/29 20:23:44 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SOURCES =	cub3d.c\
-			check_file.c
+			check_file.c\
+			check_input.c\
+			create_map.c\
+			utils.c
 
 NAME = cub3D
 FLAGS = -g3 #-Werror -Wextra -Wall
