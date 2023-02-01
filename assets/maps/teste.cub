@@ -1,7 +1,7 @@
-NO ./a.txt
-SO ./a.txt
-WE ./a.txt
-EA ./a.txt
+NO assets/imgs/valid_path
+SO assets/imgs/valid_path
+WE assets/imgs/valid_path
+EA assets/imgs/valid_path
 
 F 220,100,0
 C 225,30,0
