@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/04 16:59:24 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/04 17:11:22 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,23 @@ char	**create_map_matrix(char **file)
 	return(matrix);
 }
 
+void	free_matrix(char **ptr)
+{
+	int	i;
+
+	if (ptr != NULL)
+	{
+		i = 0;
+		while (ptr[i])
+		{
+			free(ptr[i]);
+			ptr[i] = NULL;
+			i++;
+		}
+		free(ptr);
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -66,13 +83,15 @@ int	main(int argc, char *argv[])
 	fd  = check_input(argc, argv);
 	file = read_file(fd);
 	matrix_map = create_map_matrix(file);
-	/*while(matrix_map[i])
+	while(matrix_map[i])
 	{
 		printf("%s\n", matrix_map[i]);
 		i++;
-	}*/
+	}
 	//map = get_map(file);
 	/*while(map->map[++i])
 		printf("%s\n", map->map[i]);*/
+	free_matrix(matrix_map);
+	free_matrix(file);
 	return (0);
 }
