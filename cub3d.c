@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/04 17:11:22 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/04 17:36:22 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,25 @@ void	free_matrix(char **ptr)
 	}
 }
 
+void	normalize_map(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while(map[i])
+	{
+		j = 0;
+		while(j < (int)ft_strlen(map[i]))
+		{
+			if(map[i][j] == ' ')
+				map[i][j] = 'S';
+			j++;
+		}
+		i++;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -83,6 +102,7 @@ int	main(int argc, char *argv[])
 	fd  = check_input(argc, argv);
 	file = read_file(fd);
 	matrix_map = create_map_matrix(file);
+	normalize_map(matrix_map);
 	while(matrix_map[i])
 	{
 		printf("%s\n", matrix_map[i]);
