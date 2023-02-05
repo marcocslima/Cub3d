@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/05 13:07:50 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 13:24:10 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,6 @@ char	**create_map_matrix(char **file)
 	}
 	*&matrix[j] = NULL;
 	return (matrix);
-}
-
-void	free_matrix(char **ptr)
-{
-	int	i;
-
-	if (ptr != NULL)
-	{
-		i = 0;
-		while (ptr[i])
-		{
-			free(ptr[i]);
-			ptr[i] = NULL;
-			i++;
-		}
-		free(ptr);
-	}
 }
 
 void	normalize_map(char **map)
