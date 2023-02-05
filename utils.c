@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:22:44 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/05 13:24:15 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:39:37 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,14 @@ void	free_matrix(char **ptr)
 		}
 		free(ptr);
 	}
+}
+
+void	free_map_header(t_map **map)
+{
+	free_matrix((*map)->map_header->no);
+	free_matrix((*map)->map_header->so);
+	free_matrix((*map)->map_header->we);
+	free_matrix((*map)->map_header->ea);
+	free_matrix((*map)->map_header->f);
+	free_matrix((*map)->map_header->c);
 }

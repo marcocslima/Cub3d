@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/05 16:22:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:39:47 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int		check_input(int argc, char **argv);
 void	*get_map(char **file, t_map **map);
 void	print_error_msg(char *msg);
 void	free_matrix(char **ptr);
+void	free_map_header(t_map **map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/05 16:27:55 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:39:29 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,10 @@ int	main(int argc, char *argv[])
 		get_header(file, &map);
 		//while(map->map[++i])
 		//	printf("%s\n", map->map[i]);
-		free_matrix(map->map_header->no);
-		free_matrix(map->map_header->so);
-		free_matrix(map->map_header->we);
-		free_matrix(map->map_header->ea);
-		free_matrix(map->map_header->f);
-		free_matrix(map->map_header->c);
+		free_map_header(&map);
 		free_matrix(map->map);
-		free(map->map_header);
 		free_matrix(file);
+		free(map->map_header);
 		free(map);
 	}
 	return (0);
