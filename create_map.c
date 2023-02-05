@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:20:09 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/05 15:36:43 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:05:09 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,20 @@ void *get_map(char **file, t_map **map)
 {
 	int		i;
 	int		j;
-	int		init_map;
 
 	i = -1;
 	j = -1;
-	init_map = 0;
 	while(file[++i])
 	{
 		if(file[i][0] == ' ' || file[i][0] == '1')
 		{
-			if (init_map == 0)
-				init_map = i;
+			if ((*map)->init_map == 0)
+				(*map)->init_map = i;
 			if ((int)ft_strlen(file[i]) > (*map)->map_width)
 				(*map)->map_width = ft_strlen(file[i]);
 		}
 	}
-	(*map)->map_higth = i - init_map;
-	(*map)->map = create_map_matrix(file, init_map, (*map)->map_higth);
+	(*map)->map_higth = i - (*map)->init_map;
+	(*map)->map = create_map_matrix(file, (*map)->init_map, (*map)->map_higth);
 	normalize_map((*map)->map);
 }

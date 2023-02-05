@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/05 15:37:19 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:27:55 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,46 @@ char	**read_file(int fd)
 
 void	init_data(t_map **map)
 {
+	t_map_header	*header;
+
+	header = (t_map_header *) malloc(sizeof(t_map_header));
+	header->no = NULL;
+	header->so = NULL;
+	header->we = NULL;
+	header->ea = NULL;
+	header->f = NULL;
+	header->c = NULL;
 	*map = (t_map *) malloc(sizeof(t_map));
 	(*map)->map_higth = 0;
 	(*map)->map_width = 0;
+	(*map)->init_map = 0;
 	(*map)->map = NULL;
+	(*map)->map_header = header;
+}
+
+void	get_header(char **file, t_map **map)
+{
+	int		i;
+	char	**config;
+
+	i = 0;
+	while (i < (*map)->init_map)
+	{
+		config = ft_split(file[i], ' ');
+		if (ft_strcmp_eq(config[0], "NO") || ft_strcmp_eq(config[0], "N"))
+			(*map)->map_header->no = config;
+		if (ft_strcmp_eq(config[0], "SO") || ft_strcmp_eq(config[0], "S"))
+			(*map)->map_header->so = config;
+		if (ft_strcmp_eq(config[0], "WE") || ft_strcmp_eq(config[0], "W"))
+			(*map)->map_header->we = config;
+		if (ft_strcmp_eq(config[0], "EA") || ft_strcmp_eq(config[0], "E"))
+			(*map)->map_header->ea = config;
+		if (ft_strcmp_eq(config[0], "FL") || ft_strcmp_eq(config[0], "F"))
+			(*map)->map_header->f = config;
+		if (ft_strcmp_eq(config[0], "CE") || ft_strcmp_eq(config[0], "C"))
+			(*map)->map_header->c = config;
+		i++;
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -57,16 +93,24 @@ int	main(int argc, char *argv[])
 	t_map	*map;
 	int		i;
 
-	i = 0;
+	i = -1;
 	fd = check_input(argc, argv);
 	file = read_file(fd);
 	if (file != NULL)
 	{
 		init_data(&map);
 		get_map(file, &map);
-		while(map->map[++i])
-			printf("%s\n", map->map[i]);
+		get_header(file, &map);
+		//while(map->map[++i])
+		//	printf("%s\n", map->map[i]);
+		free_matrix(map->map_header->no);
+		free_matrix(map->map_header->so);
+		free_matrix(map->map_header->we);
+		free_matrix(map->map_header->ea);
+		free_matrix(map->map_header->f);
+		free_matrix(map->map_header->c);
 		free_matrix(map->map);
+		free(map->map_header);
 		free_matrix(file);
 		free(map);
 	}

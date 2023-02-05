@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/05 15:36:57 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:22:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,21 @@
 
 typedef struct s_map_header
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
+	char	**no;
+	char	**so;
+	char	**we;
+	char	**ea;
 	char	**f;
 	char	**c;
 }	t_map_header;
 
 typedef struct s_map
 {
-	int		map_width;
-	int		map_higth;
-	//t_map_header	*map_header;
-	char	**map;
+	int				init_map;
+	int				map_width;
+	int				map_higth;
+	t_map_header	*map_header;
+	char			**map;
 }	t_map;
 
 int		check_file_line(char *line);
