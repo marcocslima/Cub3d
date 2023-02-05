@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/05 16:39:29 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:51:43 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,6 @@ void	init_data(t_map **map)
 	t_map_header	*header;
 
 	header = (t_map_header *) malloc(sizeof(t_map_header));
-	header->no = NULL;
-	header->so = NULL;
-	header->we = NULL;
-	header->ea = NULL;
-	header->f = NULL;
-	header->c = NULL;
 	*map = (t_map *) malloc(sizeof(t_map));
 	(*map)->map_higth = 0;
 	(*map)->map_width = 0;
@@ -86,14 +80,29 @@ void	get_header(char **file, t_map **map)
 	}
 }
 
+void	print_whole_map(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	printf("HEADER\n");
+	printf("%s  %s\n", map->map_header->no[0], map->map_header->no[1]);
+	printf("%s  %s\n", map->map_header->so[0], map->map_header->so[1]);
+	printf("%s  %s\n", map->map_header->we[0], map->map_header->we[1]);
+	printf("%s  %s\n", map->map_header->ea[0], map->map_header->ea[1]);
+	printf("%s   %s\n", map->map_header->f[0], map->map_header->f[1]);
+	printf("%s   %s\n\n", map->map_header->c[0], map->map_header->c[1]);
+	printf("MAP\n");
+	while(map->map[++i])
+		printf("%s\n", map->map[i]);
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
 	char	**file;
 	t_map	*map;
-	int		i;
 
-	i = -1;
 	fd = check_input(argc, argv);
 	file = read_file(fd);
 	if (file != NULL)
@@ -101,8 +110,7 @@ int	main(int argc, char *argv[])
 		init_data(&map);
 		get_map(file, &map);
 		get_header(file, &map);
-		//while(map->map[++i])
-		//	printf("%s\n", map->map[i]);
+		print_whole_map(map);
 		free_map_header(&map);
 		free_matrix(map->map);
 		free_matrix(file);
