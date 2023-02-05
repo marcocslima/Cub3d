@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/01 11:58:36 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 13:02:58 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define D	100
 # define A	97
 
+# define RED "\033[38;2;222;56;43m"
+# define RESET "\033[0m"
+
 typedef struct s_map_header
 {
 	char	*no;
@@ -47,7 +50,7 @@ typedef struct s_map_header
 	char	*ea;
 	char	**f;
 	char	**c;
-} t_map_header;
+}	t_map_header;
 
 typedef struct s_map
 {
@@ -55,11 +58,12 @@ typedef struct s_map
 	int		map_higth;
 	//t_map_header	*map_header;
 	char	**map;
-} t_map;
+}	t_map;
 
-void	check_file_line(char *line);
+int		check_file_line(char *line);
 int		check_input(int argc, char **argv);
 t_map	*get_map(char **file);
-void	exit_error_msg(char *msg, int code);
+void	print_error_msg(char *msg);
+void	free_matrix(char **ptr);
 
 #endif
