@@ -20,7 +20,7 @@
 # include <sys/stat.h>
 # include <string.h>
 # include <math.h>
-# include "mlx.h"
+//# include "mlx.h"
 # include "./libft/libft.h"
 # include "./minilibx-linux/mlx.h"
 
@@ -45,5 +45,14 @@ typedef struct s_map
 	int		map_higth;
 	char	**map;
 } t_map;
+
+typedef struct s_game
+{
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
+	t_map	*map;
+} t_game;
 
 #endif

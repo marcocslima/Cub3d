@@ -18,7 +18,6 @@ void	print_exit(char *input)
 	exit (1);
 }
 
-
 int	check_input(int argc, char **argv)
 {
 	int		len_entry;
@@ -81,8 +80,15 @@ char *norm_line(char *line, int width)
 	}
 	i = -1;
 	while(++i < width)
-		if(norm_line[i] == ' ')
-			norm_line[i] = 'S';
+		if(norm_line[i] == '1')
+			norm_line[i] = '1';
+		else if((norm_line[i] == ' ' && norm_line[i + 1] != '0')
+			|| norm_line[i] == '1')
+			norm_line[i] = '1';
+		else if(norm_line[i] == '0')
+			norm_line[i] = '0';
+		else
+			norm_line[i] = 'E';
 	free(line);
 	return(norm_line);
 }
@@ -116,22 +122,65 @@ t_map *get_map(char **file)
 	return (map);
 }
 
+void verify_map(char **map, int height, int width)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	y = -1;
+
+	while(++y < width)
+		if(map[0][y] != '1' || map[height - 1][y] != '1')
+		{
+			printf("Error: map needs to be closed...");
+			exit(1);
+		}
+	x = -1;
+	while(++x < height)
+		if(map[x][0] != '1' || map[x][width - 1] != '1')
+		{
+			printf("Error: map needs to be closed...");
+			exit(1);
+		}
+	x = -1;
+	while (++x < height)
+	{
+		y = -1;
+		while (++y < width)
+			if(map[x][y] == 'E')
+			{
+				printf("Error: map needs to be closed...");
+				exit(1);
+			}
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
 	char	**file;
-	t_map	*map;
-	int		i;
-	
-	i = -1;
+	t_game	*game;
+	int i;
+
+	game = (t_game *)malloc(sizeof(t_game));
 	fd  = check_input(argc, argv);
 	file = read_file(fd);
-	map = get_map(file);
-	while(map->map[++i])
-		printf("%s\n", map->map[i]);
+	game->map = get_map(file);
+	verify_map(game->map->map, game->map->map_higth, game->map->map_width);
+	printf("\n");
 	i = -1;
-	//while(file[++i])
-	//	free(file[i]);
-	//free(file);
+	while(++i < game->map->map_higth)
+		free(game->map->map[i]);
+	free(game->map->map);
+	free(game->map);
+	free(game);
+	free(file[0]);
+	free(file[1]);
+	free(file[2]);
+	free(file[3]);
+	free(file[4]);
+	free(file[5]);
+	free(file);
 	return (0);
 }

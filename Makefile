@@ -28,8 +28,11 @@ OBJS =	$(addprefix $(OBJ_PATH), $(SOURCES:.c=.o))
 
 all: $(NAME)
 
-$(NAME) : $(MLX) $(LIBFT) $(OBJS)
-	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) -L$(MLX_PATH) $(MLX_FLAGS)
+$(NAME) : $(LIBFT) $(OBJS)
+	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+
+#$(NAME) : $(MLX) $(LIBFT) $(OBJS)
+#	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) -L$(MLX_PATH) $(MLX_FLAGS)
 
 ${OBJ_PATH}%.o:	$(SRC_PATH)%.c
 				@mkdir -p obj
