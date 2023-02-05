@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/05 13:02:58 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 15:36:57 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_map
 
 int		check_file_line(char *line);
 int		check_input(int argc, char **argv);
-t_map	*get_map(char **file);
+void	*get_map(char **file, t_map **map);
 void	print_error_msg(char *msg);
 void	free_matrix(char **ptr);
 
