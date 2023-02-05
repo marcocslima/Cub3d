@@ -88,7 +88,6 @@ char *norm_line(char *line, int width)
 			norm_line[i] = '0';
 		else if(norm_line[i] == ' ' && norm_line[i + 1] != '0')
 			norm_line[i] = '1';
-
 		else
 			norm_line[i] = 'E';
 	free(line);
@@ -135,14 +134,14 @@ void verify_map(char **map, int height, int width)
 	while(++y < width)
 		if(map[0][y] != '1' || map[height - 1][y] != '1')
 		{
-			printf("Error: map needs to be closed...");
+			printf("Error: map needs to be closed...\n");
 			exit(1);
 		}
 	x = -1;
 	while(++x < height)
 		if(map[x][0] != '1' || map[x][width - 1] != '1')
 		{
-			printf("Error: map needs to be closed...");
+			printf("Error: map needs to be closed...\n");
 			exit(1);
 		}
 	x = -1;
@@ -152,7 +151,7 @@ void verify_map(char **map, int height, int width)
 		while (++y < width)
 			if(map[x][y] == 'E')
 			{
-				printf("Error: map needs to be closed...");
+				printf("Error: find error on map...\n");
 				exit(1);
 			}
 	}
@@ -170,7 +169,6 @@ int	main(int argc, char *argv[])
 	file = read_file(fd);
 	game->map = get_map(file);
 	verify_map(game->map->map, game->map->map_higth, game->map->map_width);
-	printf("\n");
 	i = -1;
 	while(++i < game->map->map_higth)
 		free(game->map->map[i]);
