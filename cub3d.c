@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/05 13:24:10 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/05 14:48:24 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,14 @@ void	normalize_map(char **map)
 	}
 }
 
+void	init_data(t_map **map)
+{
+	*map = (t_map *) malloc(sizeof(t_map));
+	(*map)->map_higth = 0;
+	(*map)->map_width = 0;
+	(*map)->map = NULL;
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -95,16 +103,14 @@ int	main(int argc, char *argv[])
 	{
 		matrix_map = create_map_matrix(file);
 		normalize_map(matrix_map);
-		while (matrix_map[i])
-		{
-			printf("%s\n", matrix_map[i]);
-			i++;
-		}
-		/*map = get_map(file);
+		init_data(&map);
+		map->map = matrix_map;
+		//map = get_map(file);
 		while(map->map[++i])
-			printf("%s\n", map->map[i]);*/
+			printf("%s\n", map->map[i]);
 		free_matrix(matrix_map);
 		free_matrix(file);
+		free(map);
 	}
 	return (0);
 }
