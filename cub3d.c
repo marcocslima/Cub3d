@@ -80,13 +80,15 @@ char *norm_line(char *line, int width)
 	}
 	i = -1;
 	while(++i < width)
-		if(norm_line[i] == '1')
-			norm_line[i] = '1';
-		else if((norm_line[i] == ' ' && norm_line[i + 1] != '0')
-			|| norm_line[i] == '1')
+		if(norm_line[i - 1] == '0' && norm_line[i] == ' ')
+			norm_line[i] = 'E';
+		else if(norm_line[i] == '1')
 			norm_line[i] = '1';
 		else if(norm_line[i] == '0')
 			norm_line[i] = '0';
+		else if(norm_line[i] == ' ' && norm_line[i + 1] != '0')
+			norm_line[i] = '1';
+
 		else
 			norm_line[i] = 'E';
 	free(line);
