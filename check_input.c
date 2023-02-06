@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:17:20 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/05 12:32:37 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/06 09:51:13 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_input(int argc, char **argv)
 	char	*is_cub;
 
 	len_entry = ft_strlen(argv[1]);
-	if (argc != 2)
+	if(argc != 2)
 		print_exit("Error: wrong number of arguments");
 	is_cub = ft_substr(argv[1], (len_entry - 4), 5);
 	if (ft_strncmp(is_cub, ".cub", 5))

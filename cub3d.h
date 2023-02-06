@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/06 10:03:08 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:39:00 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_map_header
 	char	**ea;
 	char	**f;
 	char	**c;
-}	t_map_header;
+} t_map_header;
 
 typedef struct s_map
 {
@@ -71,15 +71,6 @@ int		check_input(int argc, char **argv);
 void	*get_map(char **file, t_map **map);
 void	print_error_msg(char *msg);
 void	free_matrix(char **ptr);
-void	free_map_header(t_map **map);
-
-typedef struct s_game
-{
-	char	*no_texture;
-	char	*so_texture;
-	char	*we_texture;
-	char	*ea_texture;
-	t_map	*map;
-} t_game;
+void	free_map_header(t_map_header **header);
 
 #endif

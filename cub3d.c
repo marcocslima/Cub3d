@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/06 10:28:10 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:49:49 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int	main(int argc, char *argv[])
 		verify_map(game->map->map, game->map->map_higth, game->map->map_width);
 		get_header(file, &game);
 		print_whole_map(game);
-		free_map_header(&game);
+		free_map_header(&game->header);
 		free_matrix(game->map->map);
 		free_matrix(file);
 		free(game->header);

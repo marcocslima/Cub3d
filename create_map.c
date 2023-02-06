@@ -6,32 +6,42 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:20:09 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/05 16:05:09 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:59:45 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	normalize_map(char **map)
+char *norm_line(char *line, int width)
 {
-	int	i;
-	int	j;
+	char 	*norm_line;
+	int		i;
 
-	i = 0;
-	while (map[i])
+	i = -1;
+	norm_line = (char *)ft_calloc(width + 1, sizeof(char));
+	while(++i < width)
 	{
-		j = 0;
-		while (j < (int)ft_strlen(map[i]))
-		{
-			if (map[i][j] == ' ')
-				map[i][j] = 'S';
-			j++;
-		}
-		i++;
+		if(line[i])
+			norm_line[i] = line[i];
+		else
+			norm_line[i] = ' ';
 	}
+	i = -1;
+	while(++i < width)
+		if(i != 0 && norm_line[i - 1] == '0' && norm_line[i] == ' ')
+			norm_line[i] = 'E';
+		else if(norm_line[i] == '1')
+			norm_line[i] = '1';
+		else if(norm_line[i] == '0')
+			norm_line[i] = '0';
+		else if(norm_line[i] == ' ' && norm_line[i + 1] != '0')
+			norm_line[i] = '1';
+		else
+			norm_line[i] = 'E';
+	return(norm_line);
 }
 
-char	**create_map_matrix(char **file, int init_map, int map_size)
+char	**create_map_matrix(char **file, int init_map, int map_size, int width)
 {
 	int		i;
 	int		j;
@@ -42,7 +52,7 @@ char	**create_map_matrix(char **file, int init_map, int map_size)
 	matrix = (char **)malloc(((sizeof(char *)) * (map_size + 1)));
 	while (file[i])
 	{
-		matrix[j] = ft_substr(file[i], 0, ft_strlen(file[i]));
+		matrix[j] = norm_line(file[i], width);
 		i++;
 		j++;
 	}
@@ -68,6 +78,6 @@ void *get_map(char **file, t_map **map)
 		}
 	}
 	(*map)->map_higth = i - (*map)->init_map;
-	(*map)->map = create_map_matrix(file, (*map)->init_map, (*map)->map_higth);
-	normalize_map((*map)->map);
+	(*map)->map = create_map_matrix(file, (*map)->init_map, (*map)->map_higth, (*map)->map_width);
+	//normalize_map((*map)->map);
 }
