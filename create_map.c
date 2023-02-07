@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-char *norm_line(char *line, int width)
+char	*norm_line(char *line, int width)
 {
 	char 	*norm_line;
 	int		i;
@@ -21,7 +21,7 @@ char *norm_line(char *line, int width)
 	norm_line = (char *)ft_calloc(width + 1, sizeof(char));
 	while(++i < width)
 	{
-		if(line[i])
+		if(i < ft_strlen(line))
 			norm_line[i] = line[i];
 		else
 			norm_line[i] = ' ';
@@ -30,10 +30,8 @@ char *norm_line(char *line, int width)
 	while(++i < width)
 		if(i != 0 && norm_line[i - 1] == '0' && norm_line[i] == ' ')
 			norm_line[i] = 'E';
-		else if(norm_line[i] == '1')
-			norm_line[i] = '1';
-		else if(norm_line[i] == '0')
-			norm_line[i] = '0';
+		else if(norm_line[i] == '1' || norm_line[i] == '0')
+			continue;
 		else if(norm_line[i] == ' ' && norm_line[i + 1] != '0')
 			norm_line[i] = '1';
 		else
@@ -79,5 +77,4 @@ void *get_map(char **file, t_map **map)
 	}
 	(*map)->map_higth = i - (*map)->init_map;
 	(*map)->map = create_map_matrix(file, (*map)->init_map, (*map)->map_higth, (*map)->map_width);
-	//normalize_map((*map)->map);
 }

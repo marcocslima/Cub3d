@@ -35,10 +35,7 @@ char	**read_file(int fd)
 	file = ft_split(ret, '\n');
 	free(ret);
 	if (check_flag > 0)
-	{
 		free_matrix(file);
-		file = NULL;
-	}
 	return (file);
 }
 
@@ -107,7 +104,6 @@ void verify_map(char **map, int height, int width)
 
 	x = -1;
 	y = -1;
-
 	while(++y < width)
 		if(map[0][y] != '1' || map[height - 1][y] != '1')
 		{
