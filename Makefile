@@ -59,4 +59,7 @@ fclean: clean
 
 re: fclean all
 
+val: all
+	valgrind --leak-check=full ./cub3D ./assets/maps/teste.cub
+
 .PHONY: all bonus clean fclean re rebonus mlx

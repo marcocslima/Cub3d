@@ -67,7 +67,7 @@ void *get_map(char **file, t_map **map)
 	j = -1;
 	while(file[++i])
 	{
-		if(file[i][0] == ' ' || file[i][0] == '1')
+		if(file[i][0] == ' ' || file[i][0] == '1' || file[i][0] == '0')
 		{
 			if ((*map)->init_map == 0)
 				(*map)->init_map = i;

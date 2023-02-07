@@ -35,7 +35,10 @@ char	**read_file(int fd)
 	file = ft_split(ret, '\n');
 	free(ret);
 	if (check_flag > 0)
+	{
 		free_matrix(file);
+		file = NULL;
+	}
 	return (file);
 }
 
