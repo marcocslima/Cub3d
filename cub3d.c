@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/08 19:12:59 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:25:06 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,6 @@ char	**read_file(int fd)
 	if (check_flag > 0)
 		free_file(file);
 	return (file);
-}
-
-void	init_data(t_game **game)
-{
-	t_map_header	*header;
-	t_map			*map;
-
-	header = (t_map_header *) malloc(sizeof(t_map_header));
-	header->c = NULL;
-	header->ea = NULL;
-	header->f = NULL;
-	header->no = NULL;
-	header->so = NULL;
-	header->we = NULL;
-	map = (t_map *) malloc(sizeof(t_map));
-	map->map_higth = 0;
-	map->map_width = 0;
-	map->init_map = 0;
-	map->map = NULL;
-	*game = (t_game *) malloc(sizeof(t_game));
-	(*game)->map = map;
-	(*game)->header = header;
 }
 
 int	header_is_all_full(t_map_header *header)

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/08 18:28:50 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:25:43 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void	*get_map(char **file, t_map **map);
 void	print_error_msg(char *msg);
 void	free_matrix(char **ptr);
 void	free_map_header(t_map_header **header);
+void	init_data(t_game **game);
 
 #endif
