@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/08 18:28:21 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:03:19 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ void	init_data(t_game **game)
 	t_map			*map;
 
 	header = (t_map_header *) malloc(sizeof(t_map_header));
+	header->c = NULL;
+	header->ea = NULL;
+	header->f = NULL;
+	header->no = NULL;
+	header->so = NULL;
+	header->we = NULL;
 	map = (t_map *) malloc(sizeof(t_map));
 	map->map_higth = 0;
 	map->map_width = 0;
@@ -59,6 +65,14 @@ void	init_data(t_game **game)
 	*game = (t_game *) malloc(sizeof(t_game));
 	(*game)->map = map;
 	(*game)->header = header;
+}
+
+int	header_is_all_full(t_map_header *header)
+{
+	if (header->c == NULL || header->ea == NULL || header->f == NULL
+		|| header->no == NULL || header->so == NULL || header->we == NULL)
+		return (0);
+	return (1);
 }
 
 void	get_header(char **file, t_game **game)
@@ -83,6 +97,11 @@ void	get_header(char **file, t_game **game)
 		if (ft_strcmp_eq(config[0], "CE") || ft_strcmp_eq(config[0], "C"))
 			(*game)->header->c = config;
 		i++;
+	}
+	if (!header_is_all_full((*game)->header))
+	{
+		print_error_msg("Header isn't full\n");
+		exit(1);
 	}
 }
 
