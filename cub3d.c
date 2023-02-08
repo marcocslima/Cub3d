@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+void	free_file(char **file)
+{
+	free_matrix(file);
+	file = NULL;
+}
+
 char	**read_file(int fd)
 {
 	char		*line;
@@ -35,10 +41,7 @@ char	**read_file(int fd)
 	file = ft_split(ret, '\n');
 	free(ret);
 	if (check_flag > 0)
-	{
-		free_matrix(file);
-		file = NULL;
-	}
+		free_file(file);
 	return (file);
 }
 
