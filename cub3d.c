@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/06 10:49:49 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/08 18:28:21 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,40 +99,46 @@ void	print_whole_map(t_game *game)
 	printf("%s   %s\n", game->header->f[0], game->header->f[1]);
 	printf("%s   %s\n\n", game->header->c[0], game->header->c[1]);
 	printf("MAP\n");
-	while(game->map->map[++i])
+	while (game->map->map[++i])
 		printf("%s\n", game->map->map[i]);
 }
 
-void verify_map(char **map, int height, int width)
+void	verify_map(char **map, int height, int width)
 {
 	int	x;
 	int	y;
 
 	x = -1;
 	y = -1;
-	while(++y < width)
-		if(map[0][y] != '1' || map[height - 1][y] != '1')
+	while (++y < width)
+	{
+		if (map[0][y] != '1' || map[height - 1][y] != '1')
 		{
 			printf("Error: map needs to be closed...\n");
 			exit(1);
 		}
+	}
 	x = -1;
-	while(++x < height)
-		if(map[x][0] != '1' || map[x][width - 1] != '1')
+	while (++x < height)
+	{
+		if (map[x][0] != '1' || map[x][width - 1] != '1')
 		{
 			printf("Error: map needs to be closed...\n");
 			exit(1);
 		}
+	}
 	x = -1;
 	while (++x < height)
 	{
 		y = -1;
 		while (++y < width)
-			if(map[x][y] == 'E')
+		{
+			if (map[x][y] == 'E')
 			{
 				printf("Error: find error on map...\n");
 				exit(1);
 			}
+		}
 	}
 }
 
