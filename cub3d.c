@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/08 19:03:19 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:12:59 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,12 @@ void	get_header(char **file, t_game **game)
 	if (!header_is_all_full((*game)->header))
 	{
 		print_error_msg("Header isn't full\n");
+		free_map_header(&(*game)->header);
+		free_matrix((*game)->map->map);
+		free_matrix(file);
+		free((*game)->header);
+		free((*game)->map);
+		free(*game);
 		exit(1);
 	}
 }
