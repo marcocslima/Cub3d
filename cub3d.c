@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/08 20:31:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/09 09:04:50 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	verify_map(t_game **game)
 	while (++y < (*game)->map->map_width)
 		if ((*game)->map->map[0][y] != '1'
 			|| (*game)->map->map[(*game)->map->map_higth - 1][y] != '1')
-				print_error_exit(game, "Error: map needs to be closed...\n");
+			print_error_exit(game, "Error: map needs to be closed...\n");
 	x = -1;
 	while (++x < (*game)->map->map_higth)
 		if ((*game)->map->map[x][0] != '1'
 			|| (*game)->map->map[x][(*game)->map->map_width - 1] != '1')
-				print_error_exit(game, "Error: map needs to be closed...\n");
+			print_error_exit(game, "Error: map needs to be closed...\n");
 	x = -1;
 	while (++x < (*game)->map->map_higth)
 	{
