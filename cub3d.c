@@ -45,42 +45,29 @@ char	**read_file(int fd)
 	return (file);
 }
 
-void	verify_map(char **map, int height, int width)
+void	verify_map(t_game **game)
 {
 	int	x;
 	int	y;
 
 	x = -1;
 	y = -1;
-	while (++y < width)
-	{
-		if (map[0][y] != '1' || map[height - 1][y] != '1')
-		{
-			printf("Error: map needs to be closed...\n");
-			exit(1);
-		}
-	}
+	while (++y < (*game)->map->map_width)
+		if ((*game)->map->map[0][y] != '1'
+			|| (*game)->map->map[(*game)->map->map_higth - 1][y] != '1')
+				print_error_exit(game, "Error: map needs to be closed...\n");
 	x = -1;
-	while (++x < height)
-	{
-		if (map[x][0] != '1' || map[x][width - 1] != '1')
-		{
-			printf("Error: map needs to be closed...\n");
-			exit(1);
-		}
-	}
+	while (++x < (*game)->map->map_higth)
+		if ((*game)->map->map[x][0] != '1'
+			|| (*game)->map->map[x][(*game)->map->map_width - 1] != '1')
+				print_error_exit(game, "Error: map needs to be closed...\n");
 	x = -1;
-	while (++x < height)
+	while (++x < (*game)->map->map_higth)
 	{
 		y = -1;
-		while (++y < width)
-		{
-			if (map[x][y] == 'E')
-			{
-				printf("Error: find error on map...\n");
-				exit(1);
-			}
-		}
+		while (++y < (*game)->map->map_width)
+			if ((*game)->map->map[x][y] == 'E')
+				print_error_exit(game, "Error: find error on map...\n");
 	}
 }
 
@@ -95,7 +82,7 @@ int	main(int argc, char *argv[])
 	if (game->file != NULL)
 	{
 		get_map(game->file, &game->map);
-		verify_map(game->map->map, game->map->map_higth, game->map->map_width);
+		verify_map(&game);
 		get_header(&game);
 		print_whole_map(game);
 		free_cub3d(&game);

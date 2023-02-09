@@ -70,6 +70,7 @@ typedef struct s_game
 int		check_file_line(char *line);
 int		check_input(int argc, char **argv);
 void	*get_map(char **file, t_map **map);
+void	print_error_exit(t_game **game, char *msg);
 void	print_error_msg(char *msg);
 void	free_matrix(char **ptr);
 void	free_map_header(t_map_header **header);
