@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/08 19:25:06 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/08 20:18:05 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,22 @@ int	header_is_all_full(t_map_header *header)
 	return (1);
 }
 
-void	get_header(char **file, t_game **game)
+/*void	fill_header_struct(char )
+{
+
+}*/
+
+void	free_cub3d(t_game **game)
+{
+	free_map_header(&(*game)->header);
+	free_matrix((*game)->map->map);
+	free_matrix((*game)->file);
+	free((*game)->header);
+	free((*game)->map);
+	free(*game);
+}
+
+void	fill_header_struct(t_game **game)
 {
 	int		i;
 	char	**config;
@@ -61,7 +76,7 @@ void	get_header(char **file, t_game **game)
 	i = 0;
 	while (i < (*game)->map->init_map)
 	{
-		config = ft_split(file[i], ' ');
+		config = ft_split((*game)->file[i], ' ');
 		if (ft_strcmp_eq(config[0], "NO") || ft_strcmp_eq(config[0], "N"))
 			(*game)->header->no = config;
 		if (ft_strcmp_eq(config[0], "SO") || ft_strcmp_eq(config[0], "S"))
@@ -76,15 +91,15 @@ void	get_header(char **file, t_game **game)
 			(*game)->header->c = config;
 		i++;
 	}
+}
+
+void	get_header(t_game **game)
+{
+	fill_header_struct(game);
 	if (!header_is_all_full((*game)->header))
 	{
-		print_error_msg("Header isn't full\n");
-		free_map_header(&(*game)->header);
-		free_matrix((*game)->map->map);
-		free_matrix(file);
-		free((*game)->header);
-		free((*game)->map);
-		free(*game);
+		print_error_msg("Missing identifier\n");
+		free_cub3d(game);
 		exit(1);
 	}
 }
@@ -148,24 +163,18 @@ void	verify_map(char **map, int height, int width)
 int	main(int argc, char *argv[])
 {
 	int		fd;
-	char	**file;
 	t_game	*game;
 
 	fd = check_input(argc, argv);
-	file = read_file(fd);
-	if (file != NULL)
+	init_data(&game);
+	game->file = read_file(fd);
+	if (game->file != NULL)
 	{
-		init_data(&game);
-		get_map(file, &game->map);
+		get_map(game->file, &game->map);
 		verify_map(game->map->map, game->map->map_higth, game->map->map_width);
-		get_header(file, &game);
+		get_header(&game);
 		print_whole_map(game);
-		free_map_header(&game->header);
-		free_matrix(game->map->map);
-		free_matrix(file);
-		free(game->header);
-		free(game->map);
-		free(game);
+		free_cub3d(&game);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/08 19:25:43 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/08 20:08:40 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_game
 {
 	t_map_header	*header;
 	t_map			*map;
+	char			**file;
 }	t_game;
 
 int		check_file_line(char *line);
