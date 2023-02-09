@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 23:52:54 by mcesar-d          #+#    #+#              #
-#    Updated: 2023/02/08 20:26:04 by alida-si         ###   ########.fr        #
+#    Updated: 2023/02/08 20:32:20 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SOURCES =	cub3d.c\
 			create_map.c\
 			init.c\
 			get_header.c\
+			test.c\
 			utils.c
 
 NAME = cub3D
