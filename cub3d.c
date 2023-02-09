@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/09 09:23:56 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/09 10:25:02 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ void	free_file(char **file)
 	file = NULL;
 }
 
-char	**read_file(int fd)
+void	**read_file(int fd, t_game **game)
 {
 	char		*line;
 	char		*ret;
-	char		**file;
 	int			check_flag;
 
 	check_flag = 0;
@@ -38,11 +37,9 @@ char	**read_file(int fd)
 		free(line);
 	}
 	close (fd);
-	file = ft_split(ret, '\n');
+	if (check_flag == 0)
+		(*game)->file = ft_split(ret, '\n');
 	free(ret);
-	if (check_flag > 0)
-		free_file(file);
-	return (file);
 }
 
 void	verify_map(t_game **game)
@@ -78,14 +75,14 @@ int	main(int argc, char *argv[])
 
 	fd = check_input(argc, argv);
 	init_data(&game);
-	game->file = read_file(fd);
+	read_file(fd, &game);
 	if (game->file != NULL)
 	{
 		get_map(game->file, &game->map);
 		verify_map(&game);
 		get_header(&game);
 		print_whole_map(game);
-		free_cub3d(&game);
 	}
+	free_cub3d(&game);
 	return (0);
 }
