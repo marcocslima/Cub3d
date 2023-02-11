@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/11 15:50:14 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:04:13 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,24 @@ void	verify_holes(t_game **game)
 	}
 }
 
+void	verify_sides(t_game **game)
+{
+	t_map	*map;
+	int		i;
+
+	map = (*game)->map;
+	i = -1;
+	while (++i < map->map_higth)
+	{
+		if (map->map[i][0] == '0' || map->map[i][map->map_width - 1] == '0')
+			print_error_exit(game, "find error on map...\n");
+	}
+}
+
 void	verify_map(t_game **game)
 {
 	verify_head_and_foot(game);
+	verify_sides(game);
 	verify_holes(game);
 }
 

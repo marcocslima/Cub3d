@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:50:34 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/05 13:09:19 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:02:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	check_file_line(char *line)
 	char	**info;
 
 	i = 0;
-	if (line[0] == '1' || line[0] == ' ' || line[0] == '\n')
+	if (line[0] == '1' || line[0] == ' ' || line[0] == '\n' || line[0] == '0')
 		return (0);
 	info = ft_split(line, ' ');
 	if (!check_identifier(info[0], "NO,N,SO,S,WE,W,EA,E,F,FL,C,CE", info[1]))
