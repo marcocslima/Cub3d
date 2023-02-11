@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/11 14:44:38 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:50:14 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,46 +42,66 @@ void	**read_file(int fd, t_game **game)
 	free(ret);
 }
 
-/*void	verify_map(t_game **game)
-{
-	int	x;
-	int	y;
-
-	x = -1;
-	y = -1;
-	while (++y < (*game)->map->map_width)
-		if ((*game)->map->map[0][y] != '1'
-			|| (*game)->map->map[(*game)->map->map_higth - 1][y] != '1')
-			print_error_exit(game, "Error: map needs to be closed...\n");
-	x = -1;
-	while (++x < (*game)->map->map_higth)
-		if ((*game)->map->map[x][0] != '1'
-			|| (*game)->map->map[x][(*game)->map->map_width - 1] != '1')
-			print_error_exit(game, "Error: map needs to be closed...\n");
-	x = -1;
-	while (++x < (*game)->map->map_higth)
-	{
-		y = -1;
-		while (++y < (*game)->map->map_width)
-			if ((*game)->map->map[x][y] == 'E')
-				print_error_exit(game, "Error: find error on map...\n");
-	}
-}*/
-
 void	verify_head_and_foot(t_game **game)
 {
 	t_map	*map;
 
 	map = (*game)->map;
 	if (ft_strchr(map->map[0], '0') != NULL)
-		print_error_exit(game, "Error: find error on map...\n");
+		print_error_exit(game, "find error on map...\n");
 	if (ft_strchr(map->map[map->map_higth - 1], '0') != NULL)
-		print_error_exit(game, "Error: find error on map...\n");
+		print_error_exit(game, "find error on map...\n");
+}
+
+int	verify_position(t_map *map, int j, int i)
+{
+	if (map->map[j - 1][i] && map->map[j - 1][i] == ' ')
+		return (0);
+	if (map->map[j - 1][i - 1] && map->map[j - 1][i - 1] == ' ')
+		return (0);
+	if (map->map[j - 1][i + 1] && map->map[j - 1][i + 1] == ' ')
+		return (0);
+	if (map->map[j + 1][i] && map->map[j + 1][i] == ' ')
+		return (0);
+	if (map->map[j + 1][i - 1] && map->map[j + 1][i - 1] == ' ')
+		return (0);
+	if (map->map[j + 1][i + 1] && map->map[j + 1][i + 1] == ' ')
+		return (0);
+	if (map->map[j][i - 1] && map->map[j][i - 1] == ' ')
+		return (0);
+	if (map->map[j][i + 1] && map->map[j][i + 1] == ' ')
+		return (0);
+	return (1);
+}
+
+void	verify_holes(t_game **game)
+{
+	int		i;
+	int		j;
+	t_map	*map;
+
+	j = 1;
+	map = (*game)->map;
+	while (j < map->map_higth - 1)
+	{
+		i = 0;
+		while (i < map->map_width)
+		{
+			if (map->map[j][i] == '0')
+			{
+				if (!verify_position(map, j, i))
+					print_error_exit(game, "find error on map...\n");
+			}
+			i++;
+		}
+		j++;
+	}
 }
 
 void	verify_map(t_game **game)
 {
 	verify_head_and_foot(game);
+	verify_holes(game);
 }
 
 int	main(int argc, char *argv[])
@@ -97,7 +117,6 @@ int	main(int argc, char *argv[])
 		get_map(game->file, &game->map);
 		get_header(&game);
 		verify_map(&game);
-		//verify_map(&game);
 		//print_whole_map(game);
 	}
 	free_cub3d(&game);
