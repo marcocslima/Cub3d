@@ -6,11 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:22:44 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/10 19:54:56 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:11:37 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	print_error_exit(t_game **game, char *msg)
 {

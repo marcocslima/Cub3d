@@ -6,11 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/11 16:04:13 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:12:29 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	free_file(char **file)
 {
@@ -132,7 +132,7 @@ int	main(int argc, char *argv[])
 		get_map(game->file, &game->map);
 		get_header(&game);
 		verify_map(&game);
-		//print_whole_map(game);
+		print_whole_map(game);
 	}
 	free_cub3d(&game);
 	return (0);

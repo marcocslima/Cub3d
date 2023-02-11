@@ -6,11 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:21:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/10 20:11:17 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:11:15 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	fill_header_struct(t_game **game)
 {

@@ -6,11 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:50:34 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/11 16:02:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:10:39 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	check_path(const char *path)
 {
