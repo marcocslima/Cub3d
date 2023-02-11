@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:20:09 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/08 20:07:35 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:10:22 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ char	*norm_line(char *line, int width)
 		else
 			norm_line[i] = ' ';
 	}
-	i = -1;
+	/*i = -1;
 	while (++i < width)
 	{
 		if (i != 0 && norm_line[i - 1] == '0' && norm_line[i] == ' ')
 			norm_line[i] = 'E';
-		else if (norm_line[i] == '1' || norm_line[i] == '0')
+		if (norm_line[i] == '1' || norm_line[i] == '0')
 			continue ;
 		else if (norm_line[i] == ' ' && norm_line[i + 1] != '0')
 			norm_line[i] = '1';
-		else
+		/else
 			norm_line[i] = 'E';
-	}
+	}*/
 	return (norm_line);
 }
 
