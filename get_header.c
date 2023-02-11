@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:21:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/09 18:44:06 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/10 20:11:17 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@ void	fill_header_struct(t_game **game)
 		config = ft_split((*game)->file[i], ' ');
 		if (ft_strcmp_eq(config[0], "NO") || ft_strcmp_eq(config[0], "N"))
 			(*game)->header->no = config;
-		if (ft_strcmp_eq(config[0], "SO") || ft_strcmp_eq(config[0], "S"))
+		else if (ft_strcmp_eq(config[0], "SO") || ft_strcmp_eq(config[0], "S"))
 			(*game)->header->so = config;
-		if (ft_strcmp_eq(config[0], "WE") || ft_strcmp_eq(config[0], "W"))
+		else if (ft_strcmp_eq(config[0], "WE") || ft_strcmp_eq(config[0], "W"))
 			(*game)->header->we = config;
-		if (ft_strcmp_eq(config[0], "EA") || ft_strcmp_eq(config[0], "E"))
+		else if (ft_strcmp_eq(config[0], "EA") || ft_strcmp_eq(config[0], "E"))
 			(*game)->header->ea = config;
-		if (ft_strcmp_eq(config[0], "FL") || ft_strcmp_eq(config[0], "F"))
+		else if (ft_strcmp_eq(config[0], "FL") || ft_strcmp_eq(config[0], "F"))
 			(*game)->header->f = config;
-		if (ft_strcmp_eq(config[0], "CE") || ft_strcmp_eq(config[0], "C"))
+		else if (ft_strcmp_eq(config[0], "CE") || ft_strcmp_eq(config[0], "C"))
 			(*game)->header->c = config;
+		else
+			free_matrix(config);
 		i++;
 	}
 }
