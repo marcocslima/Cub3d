@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/11 14:06:21 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:44:38 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	**read_file(int fd, t_game **game)
 	free(ret);
 }
 
-void	verify_map(t_game **game)
+/*void	verify_map(t_game **game)
 {
 	int	x;
 	int	y;
@@ -66,6 +66,22 @@ void	verify_map(t_game **game)
 			if ((*game)->map->map[x][y] == 'E')
 				print_error_exit(game, "Error: find error on map...\n");
 	}
+}*/
+
+void	verify_head_and_foot(t_game **game)
+{
+	t_map	*map;
+
+	map = (*game)->map;
+	if (ft_strchr(map->map[0], '0') != NULL)
+		print_error_exit(game, "Error: find error on map...\n");
+	if (ft_strchr(map->map[map->map_higth - 1], '0') != NULL)
+		print_error_exit(game, "Error: find error on map...\n");
+}
+
+void	verify_map(t_game **game)
+{
+	verify_head_and_foot(game);
 }
 
 int	main(int argc, char *argv[])
@@ -80,8 +96,9 @@ int	main(int argc, char *argv[])
 	{
 		get_map(game->file, &game->map);
 		get_header(&game);
+		verify_map(&game);
 		//verify_map(&game);
-		print_whole_map(game);
+		//print_whole_map(game);
 	}
 	free_cub3d(&game);
 	return (0);
