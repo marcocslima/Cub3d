@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 23:52:54 by mcesar-d          #+#    #+#              #
-#    Updated: 2023/02/12 15:13:36 by alida-si         ###   ########.fr        #
+#    Updated: 2023/02/12 15:46:20 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SOURCES =	cub3d.c\
 			utils.c
 
 NAME = cub3D
-FLAGS = -g3 #-Werror -Wextra -Wall
+FLAGS = -g3 -Werror -Wextra -Wall
 MLX_FLAGS = -lm -lbsd -lmlx -lXext -lX11
 RM = rm -rf
 LIBFT = ./libraries/libft/libft.a
