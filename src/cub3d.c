@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/12 13:49:19 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:10:41 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,132 +40,6 @@ void	**read_file(int fd, t_game **game)
 	if (check_flag == 0)
 		(*game)->file = ft_split(ret, '\n');
 	free(ret);
-}
-
-void	verify_head_and_foot(t_game **game)
-{
-	t_map	*map;
-
-	map = (*game)->map;
-	if (ft_strchr(map->map[0], '0') != NULL)
-		print_error_exit(game, "find error on map...\n");
-	if (ft_strchr(map->map[map->map_higth - 1], '0') != NULL)
-		print_error_exit(game, "find error on map...\n");
-}
-
-int	verify_position(t_map *map, int j, int i)
-{
-	if (map->map[j - 1][i] && map->map[j - 1][i] == ' ')
-		return (0);
-	if (map->map[j - 1][i - 1] && map->map[j - 1][i - 1] == ' ')
-		return (0);
-	if (map->map[j - 1][i + 1] && map->map[j - 1][i + 1] == ' ')
-		return (0);
-	if (map->map[j + 1][i] && map->map[j + 1][i] == ' ')
-		return (0);
-	if (map->map[j + 1][i - 1] && map->map[j + 1][i - 1] == ' ')
-		return (0);
-	if (map->map[j + 1][i + 1] && map->map[j + 1][i + 1] == ' ')
-		return (0);
-	if (map->map[j][i - 1] && map->map[j][i - 1] == ' ')
-		return (0);
-	if (map->map[j][i + 1] && map->map[j][i + 1] == ' ')
-		return (0);
-	return (1);
-}
-
-void	verify_holes(t_game **game)
-{
-	int		i;
-	int		j;
-	t_map	*map;
-
-	j = 1;
-	map = (*game)->map;
-	while (j < map->map_higth - 1)
-	{
-		i = 0;
-		while (i < map->map_width)
-		{
-			if (map->map[j][i] == '0')
-			{
-				if (!verify_position(map, j, i))
-					print_error_exit(game, "find error on map...\n");
-			}
-			i++;
-		}
-		j++;
-	}
-}
-
-void	verify_sides(t_game **game)
-{
-	t_map	*map;
-	int		i;
-
-	map = (*game)->map;
-	i = -1;
-	while (++i < map->map_higth)
-	{
-		if (map->map[i][0] == '0' || map->map[i][map->map_width - 1] == '0')
-			print_error_exit(game, "find error on map...\n");
-	}
-}
-
-void	verify_invalid_char(t_game **game)
-{
-	t_map	*map;
-	int		i;
-	int		j;
-
-	map = (*game)->map;
-	i = 0;
-	while (map->map[i])
-	{
-		j = 0;
-		while (map->map[i][j])
-		{
-			if (map->map[i][j] != '1' && map->map[i][j] != '0'
-			&& map->map[i][j] != ' ' && map->map[i][j] != 'N')
-				print_error_exit(game, "Invalid character inside map\n");
-			j++;
-		}
-		i++;
-	}
-}
-
-void	verify_player(t_game **game)
-{
-	t_map	*map;
-	int		nb_player;
-	int		i;
-	int		j;
-
-	map = (*game)->map;
-	nb_player = 0;
-	i = 0;
-	while (map->map[i])
-	{
-		j = 0;
-		while (map->map[i][j])
-		{
-			if (map->map[i][j] == 'N')
-				nb_player++;
-			j++;
-		}
-		i++;
-	}
-	if (nb_player != 1)
-		print_error_exit(game, "Invalid number of players\n");
-}
-
-void	verify_map(t_game **game)
-{
-	verify_head_and_foot(game);
-	verify_sides(game);
-	verify_holes(game);
-	verify_invalid_char(game);
-	verify_player(game);
 }
 
 int	main(int argc, char *argv[])
