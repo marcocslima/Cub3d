@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/12 15:16:35 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 16:21:19 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_game
 
 int		check_file_line(char *line);
 int		check_input(int argc, char **argv);
-void	*get_map(char **file, t_map **map);
+void	get_map(char **file, t_map **map);
 void	print_error_exit(t_game **game, char *msg);
 void	print_error_msg(char *msg);
 void	free_matrix(char **ptr);
@@ -83,6 +83,10 @@ void	verify_sides(t_game **game, char character);
 void	verify_middle(t_game **game, char character);
 void	verify_top_and_bottom(t_game **game, char character);
 void	verify_map(t_game **game);
+int		check_str_is_number(char *str);
+int		matrix_len(char **matrix);
+int		check_range_is_valid(char **rgb);
+int		check_range(char *rgb);
 
 //test
 void	print_whole_map(t_game *game);

@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 23:52:54 by mcesar-d          #+#    #+#              #
-#    Updated: 2023/02/12 15:46:20 by alida-si         ###   ########.fr        #
+#    Updated: 2023/02/12 16:21:37 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SOURCES =	cub3d.c\
 			verify_map.c\
 			verify_map_player.c\
 			verify_map_walls.c\
+			free_game.c\
+			utils_check_file.c\
 			utils.c
 
 NAME = cub3D

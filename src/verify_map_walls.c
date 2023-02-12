@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 15:08:05 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/12 15:09:08 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:51:10 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	verify_sides(t_game **game, char character)
 	i = -1;
 	while (++i < map->map_higth)
 	{
-		if (map->map[i][0] == character || map->map[i][map->map_width - 1] == character)
+		if (map->map[i][0] == character
+			|| map->map[i][map->map_width - 1] == character)
 			print_error_exit(game, "find error on map...\n");
 	}
 }
