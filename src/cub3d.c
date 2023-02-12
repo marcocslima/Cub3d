@@ -140,9 +140,9 @@ void	verify_sides(t_game **game)
 
 void	verify_map(t_game **game)
 {
-	//verify_head_and_foot(game);
-	//verify_sides(game);
-	//verify_holes(game);
+	verify_head_and_foot(game);
+	verify_sides(game);
+	verify_holes(game);
 }
 
 int	main(int argc, char *argv[])
@@ -158,7 +158,7 @@ int	main(int argc, char *argv[])
 		get_map(game->file, &game->map);
 		get_header(&game);
 		verify_map(&game);
-		//print_whole_map(game);
+		print_whole_map(game);
 	}
 	free_cub3d(&game);
 	return (0);
