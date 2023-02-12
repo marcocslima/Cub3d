@@ -18,6 +18,31 @@ void	free_file(char **file)
 	file = NULL;
 }
 
+void	verify_empty_lines(char *file, t_game **game)
+{
+	int	i;
+	int	k;
+	int	flag;
+
+	i = -1;
+	k = 0;
+	flag = 0;
+	while(file[++i])
+	{
+		if(file[i] == '\n'
+			&& (file[i + 1] == ' ' || file[i + 1] == '0'
+			|| file[i + 1] == '1'))
+				flag++;
+		if(flag > 0 && file[i + 1] == '\n')
+			k++;
+	}
+	if (k - flag > 0)
+	{
+		free(file);
+		print_error_exit(game, "find error on map...\n");
+	}
+}
+
 void	**read_file(int fd, t_game **game)
 {
 	char		*line;
@@ -37,6 +62,7 @@ void	**read_file(int fd, t_game **game)
 		free(line);
 	}
 	close (fd);
+	verify_empty_lines(ret, game);
 	if (check_flag == 0)
 		(*game)->file = ft_split(ret, '\n');
 	free(ret);
@@ -114,9 +140,9 @@ void	verify_sides(t_game **game)
 
 void	verify_map(t_game **game)
 {
-	verify_head_and_foot(game);
-	verify_sides(game);
-	verify_holes(game);
+	//verify_head_and_foot(game);
+	//verify_sides(game);
+	//verify_holes(game);
 }
 
 int	main(int argc, char *argv[])
@@ -132,7 +158,7 @@ int	main(int argc, char *argv[])
 		get_map(game->file, &game->map);
 		get_header(&game);
 		verify_map(&game);
-		print_whole_map(game);
+		//print_whole_map(game);
 	}
 	free_cub3d(&game);
 	return (0);

@@ -26,18 +26,6 @@ char	*norm_line(char *line, int width)
 		else
 			norm_line[i] = ' ';
 	}
-	/*i = -1;
-	while (++i < width)
-	{
-		if (i != 0 && norm_line[i - 1] == '0' && norm_line[i] == ' ')
-			norm_line[i] = 'E';
-		if (norm_line[i] == '1' || norm_line[i] == '0')
-			continue ;
-		else if (norm_line[i] == ' ' && norm_line[i + 1] != '0')
-			norm_line[i] = '1';
-		/else
-			norm_line[i] = 'E';
-	}*/
 	return (norm_line);
 }
 
