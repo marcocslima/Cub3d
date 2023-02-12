@@ -6,11 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/12 16:14:50 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 16:38:42 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 void	read_file(int fd, t_game **game)
 {

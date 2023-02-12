@@ -6,13 +6,16 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 23:52:54 by mcesar-d          #+#    #+#              #
-#    Updated: 2023/02/12 16:21:37 by alida-si         ###   ########.fr        #
+#    Updated: 2023/02/12 18:26:14 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_DIR = ./src/
 
-VPATH = $(SRC_DIR)
+VPATH = $(SRC_DIR)\
+		$(SRC_DIR)close_game\
+		$(SRC_DIR)start_game\
+		$(SRC_DIR)validate
 
 SOURCES =	cub3d.c\
 			check_file.c\
@@ -21,11 +24,11 @@ SOURCES =	cub3d.c\
 			init.c\
 			get_header.c\
 			test.c\
+			utils_check_file.c\
 			verify_map.c\
 			verify_map_player.c\
 			verify_map_walls.c\
 			free_game.c\
-			utils_check_file.c\
 			utils.c
 
 NAME = cub3D

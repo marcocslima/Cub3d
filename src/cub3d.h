@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/12 16:21:19 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 17:09:28 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <string.h>
 # include <math.h>
 //# include "mlx.h"
-# include "./libraries/libft/libft.h"
-# include "./libraries/minilibx-linux/mlx.h"
+# include "../libraries/libft/libft.h"
+# include "../libraries/minilibx-linux/mlx.h"
 
 # define WIDTH 1024
 # define HEIGHT 768
