@@ -6,34 +6,38 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 15:05:47 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/12 15:24:56 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:35:10 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	verify_nb_player(t_game **game)
+int	char_occurrence_matrix(char **matrix, char character)
 {
-	t_map	*map;
-	int		nb_player;
+	int		nb_char;
 	int		i;
 	int		j;
 
-	map = (*game)->map;
-	nb_player = 0;
-	i = 0;
-	while (map->map[i])
+	nb_char = 0;
+	i = -1;
+	while (matrix[++i])
 	{
-		j = 0;
-		while (map->map[i][j])
+		j = -1;
+		while (matrix[i][++j])
 		{
-			if (map->map[i][j] == 'N')
-				nb_player++;
-			j++;
+			if (matrix[i][j] == character)
+				nb_char++;
 		}
-		i++;
 	}
-	if (nb_player != 1)
+	return (nb_char);
+}
+
+void	verify_nb_player(t_game **game)
+{
+	t_map	*map;
+
+	map = (*game)->map;
+	if (char_occurrence_matrix(map->map, 'N') != 1)
 		print_error_exit(game, "Invalid number of players\n");
 }
 
