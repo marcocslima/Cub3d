@@ -138,11 +138,38 @@ void	verify_sides(t_game **game)
 	}
 }
 
+void	verify_onlyspace_line(t_game **game)
+{
+	int		i;
+	int		j;
+	int		c;
+	t_map	*map;
+
+	i = 0;
+	j = 1;
+	c = 0;
+	map = (*game)->map;
+	while (j < map->map_higth - 1)
+	{
+		if (map->map[j][0] == '1' && map->map[j][map->map_width - 1] == '1'
+			&& map->map[j][1] == ' ' && map->map[j][map->map_width - 2] == ' ')
+		{
+			while (++i < map->map_width - 1)
+				if (map->map[j][i] == ' ')
+					c++;
+		}
+		j++;
+	}
+	if(map->map_width - c == 2)
+		print_error_exit(game, "find only space line...\n");
+}
+
 void	verify_map(t_game **game)
 {
 	verify_head_and_foot(game);
 	verify_sides(game);
 	verify_holes(game);
+	verify_onlyspace_line(game);
 }
 
 int	main(int argc, char *argv[])
@@ -158,7 +185,7 @@ int	main(int argc, char *argv[])
 		get_map(game->file, &game->map);
 		get_header(&game);
 		verify_map(&game);
-		print_whole_map(game);
+		//print_whole_map(game);
 	}
 	free_cub3d(&game);
 	return (0);
