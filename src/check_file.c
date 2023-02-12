@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:50:34 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/12 10:11:52 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 12:23:37 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,80 @@ int	check_path(const char *path)
 	return (valid_flag);
 }
 
-int	check_range(char *rgb)
+int	matrix_len(char **matrix)
 {
-	int		i;
-	char	**matrix;
+	int	i;
 
 	i = 0;
-	matrix = ft_split(rgb, ',');
 	while (matrix[i])
+		i++;
+	return (i);
+}
+
+int	check_str_is_number(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (ft_atoi(matrix[i]) < 0 || ft_atoi(matrix[i]) > 255)
-		{
-			print_error_msg("Invalid RGB range\n");
-			free_matrix(matrix);
+		if (!ft_isdigit(str[i]))
 			return (0);
-		}
 		i++;
 	}
-	free_matrix(matrix);
 	return (1);
+}
+
+int	check_range_is_valid(char **rgb)
+{
+	int	i;
+
+	i = 0;
+	while (rgb[i])
+	{
+		if (check_str_is_number(rgb[i]))
+		{
+			if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
+				return (0);
+		}
+		else
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_range(char *rgb)
+{
+	char	**matrix;
+	int		valid_flag;
+	int		i;
+
+	i = 0;
+	valid_flag = 0;
+	matrix = ft_split(rgb, ',');
+	if (matrix_len(matrix) == 3)
+		valid_flag = check_range_is_valid(matrix);
+	free_matrix(matrix);
+	return (valid_flag);
+}
+
+int	check_rgb(char *info)
+{
+	char	**rgb;
+
+	rgb = ft_split(info, '\n');
+	if (rgb[0] != NULL)
+	{
+		if (check_range(rgb[0]))
+		{
+			free_matrix(rgb);
+			return (1);
+		}
+	}
+	print_error_msg("Invalid RGB range\n");
+	free_matrix(rgb);
+	return (0);
 }
 
 int	check_config(char *info, char *path)
@@ -69,7 +124,7 @@ int	check_config(char *info, char *path)
 	if (info[0] != 'F' && info[0] != 'C')
 		check_flag = check_path(path);
 	else
-		check_flag = check_range(path);
+		check_flag = check_rgb(path);
 	return (check_flag);
 }
 
