@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:50:34 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/12 09:54:37 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 10:11:52 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,28 @@ int	check_path(const char *path)
 {
 	int		fd;
 	char	**matrix;
+	int		valid_flag;
 
 	fd = 0;
+	valid_flag = 1;
 	matrix = ft_split(path, '\n');
-	if (matrix[0] == NULL)
+	if (matrix[0] != NULL)
 	{
-		print_error_msg("Invalid path to texture\n");
-		free_matrix(matrix);
-		return (0);
+		fd = open(matrix[0], O_DIRECTORY);
+		if (fd != -1)
+			valid_flag = 0;
+		fd = open(matrix[0], O_RDWR);
+		if (fd == -1)
+			valid_flag = 0;
 	}
-	fd = open(matrix[0], O_DIRECTORY);
-	if (fd != -1)
-	{
-		print_error_msg("Invalid path to texture\n");
-		free_matrix(matrix);
-		close(fd);
-		return (0);
-	}
-	fd = open(matrix[0], O_RDWR);
-	if (fd == -1)
-	{
-		print_error_msg("Invalid path to texture\n");
-		free_matrix(matrix);
-		return (0);
-	}
-	close(fd);
+	else
+		valid_flag = 0;
 	free_matrix(matrix);
-	return (1);
+	if (fd != -1 && fd != 0)
+		close(fd);
+	if (!valid_flag)
+		print_error_msg("Invalid path to texture\n");
+	return (valid_flag);
 }
 
 int	check_range(char *rgb)
