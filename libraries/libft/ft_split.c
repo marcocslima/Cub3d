@@ -3,62 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acosta-a <acosta-a@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 13:04:31 by mcesar-d          #+#    #+#             */
-/*   Updated: 2022/10/30 10:16:18 by acosta-a         ###   ########.fr       */
+/*   Updated: 2023/02/12 09:55:28 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	words_counter(const char *s, char c)
+size_t	token_count(char const *s, char c)
 {
 	size_t	i;
-	int		flag;
-	int		counter;
+	size_t	nb;
 
 	i = 0;
-	flag = 0;
-	counter = 0;
-	while (i <= ft_strlen(s))
+	nb = 0;
+	while (s[i])
 	{
-		if (s[i] != c && s[i] != '\0' && flag == 0)
+		while (s[i] == c && s[i])
+			i++;
+		if (s[i] != c && s[i])
 		{
-			counter++;
-			flag = 1;
+			if (s[i] == '\'')
+				skip(s, i, '\'');
+			else if (s[i] == '\"')
+				skip(s, i, '\"');
+			nb++;
+			while (s[i] != c && s[i])
+				i++;
 		}
-		else if (s[i] == c)
-			flag = 0;
+	}
+	return (nb);
+}
+
+char const	*quote_alloc(char const *s, char **matrix, char c, char quote)
+{
+	int	len_ptr;
+
+	len_ptr = 0;
+	while (s[len_ptr + 1] != quote)
+		len_ptr++;
+	*matrix = ft_substr(s, 0, (len_ptr + 2));
+	s = s + len_ptr;
+	s++;
+	s++;
+	while (*s == c)
+		s++;
+	return (s);
+}
+
+int	is_not_quote(const char *s, char c, int i, char **matrix)
+{
+	int	len_ptr;
+
+	len_ptr = 0;
+	while (s[len_ptr] != c && s[len_ptr])
+		len_ptr++;
+	matrix[i] = ft_substr(s, 0, len_ptr);
+	if (matrix[i] == NULL)
+		ft_matrix_free(matrix);
+	return (len_ptr);
+}
+
+void	letter_alloc(char **matrix, char const *s, char c, size_t nb_token)
+{
+	size_t	len_ptr;
+	size_t	i;
+
+	i = 0;
+	while (i < nb_token)
+	{
+		if (*s == c)
+		{
+			while (*++s == c)
+				;
+		}
+		if (*s != c && *s != '\'' && *s != '\"')
+		{
+			len_ptr = is_not_quote(s, c, i, matrix);
+			s = s + len_ptr;
+		}
+		if (*s == '\'')
+			s = quote_alloc(s, &matrix[i], c, '\'');
+		else if (*s == '\"')
+			s = quote_alloc(s, &matrix[i], c, '\"');
 		i++;
 	}
-	return (counter);
+	matrix[i] = NULL;
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	int		flag;
-	char	**result;
+	char	**matrix;
+	size_t	nb_token;
 
-	i = 0;
-	j = 0;
-	flag = -1;
-	result = (char **)malloc((words_counter(s, c) + 1) * sizeof(char *));
-	if (!s || !result)
-		return (0);
-	while (i <= ft_strlen(s))
-	{
-		if (s[i] != c && flag < 0)
-			flag = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && flag >= 0)
-		{
-			result[j++] = ft_substr(s, flag, i - flag);
-			flag = -1;
-		}
-		i++;
-	}
-	result[j] = 0;
-	return (result);
+	if (!s)
+		return (NULL);
+	nb_token = token_count(s, c);
+	matrix = (char **)malloc(((sizeof(char *)) * (nb_token + 1)));
+	if (!matrix)
+		return (NULL);
+	letter_alloc(matrix, s, c, nb_token);
+	return (matrix);
 }

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:50:34 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/11 16:10:39 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 09:54:37 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ int	check_path(const char *path)
 
 	fd = 0;
 	matrix = ft_split(path, '\n');
+	if (matrix[0] == NULL)
+	{
+		print_error_msg("Invalid path to texture\n");
+		free_matrix(matrix);
+		return (0);
+	}
 	fd = open(matrix[0], O_DIRECTORY);
 	if (fd != -1)
 	{
@@ -66,9 +72,7 @@ int	check_config(char *info, char *path)
 
 	check_flag = 0;
 	if (info[0] != 'F' && info[0] != 'C')
-	{
 		check_flag = check_path(path);
-	}
 	else
 		check_flag = check_range(path);
 	return (check_flag);

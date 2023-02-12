@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:28:41 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/01/29 15:59:40 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 09:39:03 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		check_break(char *actual);
 char	**ft_str_arrayndup_free(size_t start, char **array);
 size_t	ft_str_arraylen(char **array);
 int		ft_strcmp_eq(char *s1, char *s2);
-
+void	ft_matrix_free(char **ptr);
+int		skip(const char *s, int i, char c);
 
 #endif
