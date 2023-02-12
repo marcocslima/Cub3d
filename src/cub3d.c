@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/12 13:10:08 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:49:19 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,38 @@ void	verify_invalid_char(t_game **game)
 	}
 }
 
+void	verify_player(t_game **game)
+{
+	t_map	*map;
+	int		nb_player;
+	int		i;
+	int		j;
+
+	map = (*game)->map;
+	nb_player = 0;
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == 'N')
+				nb_player++;
+			j++;
+		}
+		i++;
+	}
+	if (nb_player != 1)
+		print_error_exit(game, "Invalid number of players\n");
+}
+
 void	verify_map(t_game **game)
 {
 	verify_head_and_foot(game);
 	verify_sides(game);
 	verify_holes(game);
 	verify_invalid_char(game);
+	verify_player(game);
 }
 
 int	main(int argc, char *argv[])
