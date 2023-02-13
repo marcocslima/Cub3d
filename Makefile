@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 23:52:54 by mcesar-d          #+#    #+#              #
-#    Updated: 2023/02/11 16:08:00 by alida-si         ###   ########.fr        #
+#    Updated: 2023/02/12 21:28:02 by mcesar-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,13 @@ VPATH = $(SRC_DIR)
 SOURCES =	cub3d.c\
 			check_file.c\
 			check_input.c\
+			check_map_two.c\
+			check_map.c\
 			create_map.c\
 			init.c\
 			get_header.c\
 			test.c\
+			utils_print.c\
 			utils.c
 
 NAME = cub3D

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/08 20:32:10 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:23:56 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,16 @@ typedef struct s_game
 int		check_file_line(char *line);
 int		check_input(int argc, char **argv);
 void	*get_map(char **file, t_map **map);
+void	verify_head_and_foot(t_game **game);
+int		verify_position(t_map *map, int j, int i);
+void	verify_holes(t_game **game);
+void	verify_sides(t_game **game);
+void	verify_empty_lines(char *file, t_game **game);
+void	verify_onlyspace_line(t_game **game);
+void	verify_map(t_game **game);
 void	print_error_exit(t_game **game, char *msg);
 void	print_error_msg(char *msg);
+void	free_file(char **file);
 void	free_matrix(char **ptr);
 void	free_map_header(t_map_header **header);
 void	init_data(t_game **game);
