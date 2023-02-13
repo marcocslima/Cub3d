@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 23:52:54 by mcesar-d          #+#    #+#              #
-#    Updated: 2023/02/12 18:26:14 by alida-si         ###   ########.fr        #
+#    Updated: 2023/02/13 09:36:07 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRC_DIR = ./src/
 VPATH = $(SRC_DIR)\
 		$(SRC_DIR)close_game\
 		$(SRC_DIR)start_game\
-		$(SRC_DIR)validate
+		$(SRC_DIR)validate\
+		$(SRC_DIR)utils
 
 SOURCES =	cub3d.c\
 			check_file.c\

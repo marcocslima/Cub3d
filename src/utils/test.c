@@ -6,11 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:31:35 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/12 16:55:38 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/13 09:34:30 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	print_whole_map(t_game *game)
 {
