@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:20:09 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/11 16:10:59 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/12 16:15:59 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*norm_line(char *line, int width)
 	norm_line = (char *)ft_calloc(width + 1, sizeof(char));
 	while (++i < width)
 	{
-		if (i < ft_strlen(line))
+		if (i < (int)ft_strlen(line))
 			norm_line[i] = line[i];
 		else
 			norm_line[i] = ' ';
@@ -48,13 +48,11 @@ char	**create_map_matrix(char **file, int init_map, int map_size, int width)
 	return (matrix);
 }
 
-void	*get_map(char **file, t_map **map)
+void	get_map(char **file, t_map **map)
 {
 	int		i;
-	int		j;
 
 	i = -1;
-	j = -1;
 	while (file[++i])
 	{
 		if (file[i][0] == ' ' || file[i][0] == '1' || file[i][0] == '0')

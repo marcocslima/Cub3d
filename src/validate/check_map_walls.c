@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_map_walls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 21:24:57 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/12 21:25:01 by mcesar-d         ###   ########.fr       */
+/*   Created: 2023/02/13 10:42:39 by alida-si          #+#    #+#             */
+/*   Updated: 2023/02/13 10:42:45 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	verify_head_and_foot(t_game **game)
+void	verify_top_and_bottom(t_game **game, char character)
 {
 	t_map	*map;
 
 	map = (*game)->map;
-	if (ft_strchr(map->map[0], '0') != NULL)
+	if (ft_strchr(map->map[0], character) != NULL)
 		print_error_exit(game, "find error on map...\n");
-	if (ft_strchr(map->map[map->map_higth - 1], '0') != NULL)
+	if (ft_strchr(map->map[map->map_higth - 1], character) != NULL)
 		print_error_exit(game, "find error on map...\n");
 }
 
@@ -44,7 +44,7 @@ int	verify_position(t_map *map, int j, int i)
 	return (1);
 }
 
-void	verify_holes(t_game **game)
+void	verify_middle(t_game **game, char character)
 {
 	int		i;
 	int		j;
@@ -57,7 +57,7 @@ void	verify_holes(t_game **game)
 		i = 0;
 		while (i < map->map_width)
 		{
-			if (map->map[j][i] == '0')
+			if (map->map[j][i] == character)
 			{
 				if (!verify_position(map, j, i))
 					print_error_exit(game, "find error on map...\n");
@@ -68,7 +68,7 @@ void	verify_holes(t_game **game)
 	}
 }
 
-void	verify_sides(t_game **game)
+void	verify_sides(t_game **game, char character)
 {
 	t_map	*map;
 	int		i;
@@ -77,15 +77,15 @@ void	verify_sides(t_game **game)
 	i = -1;
 	while (++i < map->map_higth)
 	{
-		if (map->map[i][0] == '0' || map->map[i][map->map_width - 1] == '0')
+		if (map->map[i][0] == character
+			|| map->map[i][map->map_width - 1] == character)
 			print_error_exit(game, "find error on map...\n");
 	}
 }
 
-void	verify_map(t_game **game)
+void	verify_walls(t_game **game)
 {
-	verify_head_and_foot(game);
-	verify_sides(game);
-	verify_holes(game);
-	verify_onlyspace_line(game);
+	verify_top_and_bottom(game, '0');
+	verify_sides(game, '0');
+	verify_middle(game, '0');
 }

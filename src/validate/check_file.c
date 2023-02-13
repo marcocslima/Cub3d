@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:50:34 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/11 16:10:39 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/13 09:51:09 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,46 @@ int	check_path(const char *path)
 {
 	int		fd;
 	char	**matrix;
+	int		valid_flag;
 
 	fd = 0;
-	matrix = ft_split(path, '\n');
-	fd = open(matrix[0], O_DIRECTORY);
-	if (fd != -1)
+	valid_flag = 1;
+	matrix = ft_split2(path, '\n');
+	if (matrix[0] != NULL)
 	{
-		print_error_msg("Invalid path to texture\n");
-		free_matrix(matrix);
-		close(fd);
-		return (0);
+		fd = open(matrix[0], O_DIRECTORY);
+		if (fd != -1)
+			valid_flag = 0;
+		fd = open(matrix[0], O_RDWR);
+		if (fd == -1)
+			valid_flag = 0;
 	}
-	fd = open(matrix[0], O_RDWR);
-	if (fd == -1)
-	{
-		print_error_msg("Invalid path to texture\n");
-		free_matrix(matrix);
-		return (0);
-	}
-	close(fd);
+	else
+		valid_flag = 0;
 	free_matrix(matrix);
-	return (1);
+	if (fd != -1 && fd != 0)
+		close(fd);
+	if (!valid_flag)
+		print_error_msg("Invalid path to texture\n");
+	return (valid_flag);
 }
 
-int	check_range(char *rgb)
+int	check_rgb(char *info)
 {
-	int		i;
-	char	**matrix;
+	char	**rgb;
 
-	i = 0;
-	matrix = ft_split(rgb, ',');
-	while (matrix[i])
+	rgb = ft_split2(info, '\n');
+	if (rgb[0] != NULL)
 	{
-		if (ft_atoi(matrix[i]) < 0 || ft_atoi(matrix[i]) > 255)
+		if (check_range(rgb[0]))
 		{
-			print_error_msg("Invalid RGB range\n");
-			free_matrix(matrix);
-			return (0);
+			free_matrix(rgb);
+			return (1);
 		}
-		i++;
 	}
-	free_matrix(matrix);
-	return (1);
+	print_error_msg("Invalid RGB range\n");
+	free_matrix(rgb);
+	return (0);
 }
 
 int	check_config(char *info, char *path)
@@ -66,11 +64,9 @@ int	check_config(char *info, char *path)
 
 	check_flag = 0;
 	if (info[0] != 'F' && info[0] != 'C')
-	{
 		check_flag = check_path(path);
-	}
 	else
-		check_flag = check_range(path);
+		check_flag = check_rgb(path);
 	return (check_flag);
 }
 
@@ -80,7 +76,7 @@ int	check_identifier(char *info, char *list, char *path)
 	char	**identifiers;
 
 	i = 0;
-	identifiers = ft_split(list, ',');
+	identifiers = ft_split2(list, ',');
 	while (identifiers[i])
 	{
 		if (ft_strcmp_eq(info, identifiers[i]) == 1)
@@ -102,13 +98,11 @@ int	check_identifier(char *info, char *list, char *path)
 
 int	check_file_line(char *line)
 {
-	int		i;
 	char	**info;
 
-	i = 0;
 	if (line[0] == '1' || line[0] == ' ' || line[0] == '\n' || line[0] == '0')
 		return (0);
-	info = ft_split(line, ' ');
+	info = ft_split2(line, ' ');
 	if (!check_identifier(info[0], "NO,N,SO,S,WE,W,EA,E,F,FL,C,CE", info[1]))
 	{
 		free_matrix(info);

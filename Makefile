@@ -3,31 +3,38 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/26 23:52:54 by mcesar-d          #+#    #+#              #
-#    Updated: 2023/02/12 21:28:02 by mcesar-d         ###   ########.fr        #
+#    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
+#    Updated: 2023/02/13 11:01:52 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_DIR = ./src/
 
-VPATH = $(SRC_DIR)
+VPATH = $(SRC_DIR)\
+		$(SRC_DIR)close_game\
+		$(SRC_DIR)start_game\
+		$(SRC_DIR)validate\
+		$(SRC_DIR)utils
 
 SOURCES =	cub3d.c\
 			check_file.c\
 			check_input.c\
-			check_map_two.c\
-			check_map.c\
 			create_map.c\
 			init.c\
 			get_header.c\
 			test.c\
-			utils_print.c\
-			utils.c
+			utils_check_file.c\
+			check_map.c\
+			check_map_player.c\
+			check_map_walls.c\
+			free_game.c\
+			check_map_emp_lines.c\
+			utils_print.c
 
 NAME = cub3D
-FLAGS = -g3 #-Werror -Wextra -Wall
+FLAGS = -g3 -Werror -Wextra -Wall
 MLX_FLAGS = -lm -lbsd -lmlx -lXext -lX11
 RM = rm -rf
 LIBFT = ./libraries/libft/libft.a
