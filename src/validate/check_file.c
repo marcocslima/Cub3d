@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:50:34 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/12 17:25:15 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/13 09:42:34 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_path(const char *path)
 
 	fd = 0;
 	valid_flag = 1;
-	matrix = ft_split(path, '\n');
+	matrix = ft_split2(path, '\n');
 	if (matrix[0] != NULL)
 	{
 		fd = open(matrix[0], O_DIRECTORY);
@@ -44,7 +44,7 @@ int	check_rgb(char *info)
 {
 	char	**rgb;
 
-	rgb = ft_split(info, '\n');
+	rgb = ft_split2(info, '\n');
 	if (rgb[0] != NULL)
 	{
 		if (check_range(rgb[0]))
@@ -76,7 +76,7 @@ int	check_identifier(char *info, char *list, char *path)
 	char	**identifiers;
 
 	i = 0;
-	identifiers = ft_split(list, ',');
+	identifiers = ft_split2(list, ',');
 	while (identifiers[i])
 	{
 		if (ft_strcmp_eq(info, identifiers[i]) == 1)
@@ -102,7 +102,7 @@ int	check_file_line(char *line)
 
 	if (line[0] == '1' || line[0] == ' ' || line[0] == '\n' || line[0] == '0')
 		return (0);
-	info = ft_split(line, ' ');
+	info = ft_split2(line, ' ');
 	if (!check_identifier(info[0], "NO,N,SO,S,WE,W,EA,E,F,FL,C,CE", info[1]))
 	{
 		free_matrix(info);
