@@ -6,9 +6,29 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/02/14 08:22:18 by alida-si         ###   ########.fr        #
+#    Updated: 2023/02/14 08:59:57 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+NAME = cub3D
+
+# LIBRARY #
+
+LIBFT = ./libraries/libft/libft.a
+LIBFT_PATH = ./libraries/libft
+MLX = ./libraries/minilibx-linux/libmlx.a
+MLX_PATH = ./libraries/minilibx-linux
+MLX_FLAGS = -lm -lbsd -lmlx -lXext -lX11
+
+# COMPILATION #
+
+FLAGS = -g3 -Werror -Wextra -Wall
+
+# DELETE #
+
+RM = rm -rf
+
+# DIRECTORIES #
 
 SRC_DIR = ./src/
 
@@ -17,6 +37,8 @@ VPATH = $(SRC_DIR)\
 		$(SRC_DIR)start_game\
 		$(SRC_DIR)validate\
 		$(SRC_DIR)utils
+
+# FILES #
 
 SOURCES =	cub3d.c\
 			check_header.c\
@@ -35,19 +57,17 @@ SOURCES =	cub3d.c\
 			finish_game.c\
 			utils_print.c
 
-NAME = cub3D
-FLAGS = -g3 -Werror -Wextra -Wall
-MLX_FLAGS = -lm -lbsd -lmlx -lXext -lX11
-RM = rm -rf
-LIBFT = ./libraries/libft/libft.a
-LIBFT_PATH = ./libraries/libft
-MLX = ./libraries/minilibx-linux/libmlx.a
-MLX_PATH = ./libraries/minilibx-linux
+
+# COMPILED_SOURCES #
 
 SRC_PATH =	./
 OBJ_PATH =	obj/
 SRCS =	${addprefix ${SRC_PATH}, ${SOURCES}}
 OBJS =	$(addprefix $(OBJ_PATH), $(SOURCES:.c=.o))
+
+# *************************************************************************** #
+
+# RULES #
 
 all: $(NAME)
 
