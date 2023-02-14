@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_print.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/29 20:22:44 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/14 08:27:11 by alida-si         ###   ########.fr       */
+/*   Created: 2023/02/14 08:13:20 by alida-si          #+#    #+#             */
+/*   Updated: 2023/02/14 08:14:17 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	print_error_exit(t_game **game, char *msg)
+int	matrix_len(char **matrix)
 {
-	print_error_msg(msg);
-	close_game(game);
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+		i++;
+	return (i);
 }
 
-void	print_error_msg(char *msg)
+int	check_str_is_number(char *str)
 {
-	write(2, RED, ft_strlen(RED));
-	write(2, "Error: ", 7);
-	write(2, msg, ft_strlen(msg));
-	write(2, RESET, ft_strlen(RESET));
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
