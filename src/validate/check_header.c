@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   check_header.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:50:34 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/14 08:16:29 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/14 08:25:34 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,7 @@ void	check_header(t_game **game)
 	while (i < (*game)->map->init_map)
 	{
 		if (!check_file_line((*game)->file[i]))
-		{
-			free_cub3d(game);
-			exit (1);
-		}
+			close_game(game);
 		i++;
 	}
 }
