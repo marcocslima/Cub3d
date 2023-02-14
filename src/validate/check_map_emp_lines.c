@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_emp_lines.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:42:51 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/13 10:42:56 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/13 21:12:33 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,15 @@ void	verify_onlyspace_line(t_game **game)
 
 	i = 0;
 	j = 1;
-	c = 0;
 	map = (*game)->map;
 	while (j < map->map_higth - 1)
 	{
-		if (map->map[j][0] == '1' && map->map[j][map->map_width - 1] == '1'
-			&& map->map[j][1] == ' ' && map->map[j][map->map_width - 2] == ' ')
-		{
-			while (++i < map->map_width - 1)
-				if (map->map[j][i] == ' ')
-					c++;
-		}
+		c = 0;
+		while (++i < map->map_width - 1)
+			if (map->map[j][i] == '0')
+				c++;
+		if (c == 0)
+			print_error_exit(game, "find only spaces or ones in line...\n");
 		j++;
 	}
-	if (map->map_width - c == 2)
-		print_error_exit(game, "find only space line...\n");
 }
