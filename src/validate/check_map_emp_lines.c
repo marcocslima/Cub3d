@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:42:51 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/13 21:12:33 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/02/14 14:52:02 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	verify_onlyspace_line(t_game **game)
 	int		c;
 	t_map	*map;
 
-	i = 0;
 	j = 1;
 	map = (*game)->map;
 	while (j < map->map_higth - 1)
 	{
+		i = 0;
 		c = 0;
 		while (++i < map->map_width - 1)
 			if (map->map[j][i] == '0')
