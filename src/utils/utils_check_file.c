@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:18:58 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/14 08:15:00 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/14 09:30:00 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_path(const char *path)
 	fd = 0;
 	valid_flag = 1;
 	matrix = ft_split2(path, '\n');
-	if (matrix[0] != NULL)
+	if (matrix != NULL)
 	{
 		fd = open(matrix[0], O_DIRECTORY);
 		if (fd != -1)
@@ -77,7 +77,7 @@ int	check_rgb(char *info)
 	char	**rgb;
 
 	rgb = ft_split2(info, '\n');
-	if (rgb[0] != NULL)
+	if (rgb != NULL)
 	{
 		if (check_range(rgb[0]))
 		{
