@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/14 08:24:32 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/14 08:51:56 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/stat.h>
 # include <string.h>
 # include <math.h>
-//# include "mlx.h"
 # include "../libraries/libft/libft.h"
 # include "../libraries/minilibx-linux/mlx.h"
 
@@ -67,33 +66,49 @@ typedef struct s_game
 	char			**file;
 }	t_game;
 
-int		check_file_line(char *line);
-int		check_input(int argc, char **argv);
-int		verify_position(t_map *map, int j, int i);
-void	verify_empty_lines(char *file, t_game **game);
-void	verify_onlyspace_line(t_game **game);
-void	get_map(char **file, t_map **map);
-void	print_error_exit(t_game **game, char *msg);
-void	print_error_msg(char *msg);
+/* ---------------------------------------------------------------------*\
+|							close_game									|
+\* ---------------------------------------------------------------------*/
+
+void	close_game(t_game **game);
 void	free_matrix(char **ptr);
 void	free_map_header(t_map_header **header);
-void	init_data(t_game **game);
 void	free_cub3d(t_game **game);
+
+/* ---------------------------------------------------------------------*\
+|							start_game									|
+\* ---------------------------------------------------------------------*/
+
+void	get_map(char **file, t_map **map);
 void	get_header(t_game **game);
-void	verify_player(t_game **game);
-void	verify_walls(t_game **game);
-void	verify_sides(t_game **game, char character);
-void	verify_middle(t_game **game, char character);
-void	verify_top_and_bottom(t_game **game, char character);
-void	verify_map(t_game **game);
-int		check_str_is_number(char *str);
-int		matrix_len(char **matrix);
-int		check_range_is_valid(char **rgb);
-int		check_range(char *rgb);
-int		check_path(const char *path);
+void	init_data(t_game **game);
+
+/* ---------------------------------------------------------------------*\
+|								utils									|
+\* ---------------------------------------------------------------------*/
+
 int		check_rgb(char *info);
+int		check_path(const char *path);
+void	print_error_exit(t_game **game, char *msg);
+void	print_error_msg(char *msg);
+int		matrix_len(char **matrix);
+int		check_str_is_number(char *str);
+
+/* ---------------------------------------------------------------------*\
+|							validate									|
+\* ---------------------------------------------------------------------*/
+
 void	check_header(t_game **game);
-void	close_game(t_game **game);
+int		check_input(int argc, char **argv);
+void	verify_empty_lines(char *file, t_game **game);
+void	verify_onlyspace_line(t_game **game);
+void	verify_player(t_game **game);
+void	verify_top_and_bottom(t_game **game, char character);
+int		verify_position(t_map *map, int j, int i);
+void	verify_middle(t_game **game, char character);
+void	verify_sides(t_game **game, char character);
+void	verify_walls(t_game **game);
+void	verify_map(t_game **game);
 
 //test
 void	print_whole_map(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:42:39 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/13 10:42:45 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/14 08:51:11 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	verify_top_and_bottom(t_game **game, char character)
 
 	map = (*game)->map;
 	if (ft_strchr(map->map[0], character) != NULL)
-		print_error_exit(game, "find error on map...\n");
+		print_error_exit(game, "Find error on map...\n");
 	if (ft_strchr(map->map[map->map_higth - 1], character) != NULL)
-		print_error_exit(game, "find error on map...\n");
+		print_error_exit(game, "Find error on map...\n");
 }
 
 int	verify_position(t_map *map, int j, int i)
@@ -60,7 +60,7 @@ void	verify_middle(t_game **game, char character)
 			if (map->map[j][i] == character)
 			{
 				if (!verify_position(map, j, i))
-					print_error_exit(game, "find error on map...\n");
+					print_error_exit(game, "Find error on map...\n");
 			}
 			i++;
 		}
@@ -79,7 +79,7 @@ void	verify_sides(t_game **game, char character)
 	{
 		if (map->map[i][0] == character
 			|| map->map[i][map->map_width - 1] == character)
-			print_error_exit(game, "find error on map...\n");
+			print_error_exit(game, "Find error on map...\n");
 	}
 }
 
