@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/13 10:05:40 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/13 22:51:00 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,36 @@ void	read_file(int fd, t_game **game)
 {
 	char		*line;
 	char		*ret;
-	int			check_flag;
 
-	check_flag = 0;
 	ret = get_next_line(fd);
-	check_flag += check_file_line(ret);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		check_flag += check_file_line(line);
 		ret = ft_strjoin(ret, line);
 		free(line);
 	}
 	close (fd);
 	verify_empty_lines(ret, game);
-	if (check_flag == 0)
-		(*game)->file = ft_split(ret, '\n');
+	(*game)->file = ft_split(ret, '\n');
 	free(ret);
+}
+
+void	verify_header(t_game **game)
+{
+	int	i;
+
+	i = 0;
+	while (i < (*game)->map->init_map)
+	{
+		if (!check_file_line((*game)->file[i]))
+		{
+			free_cub3d(game);
+			exit (1);
+		}
+		i++;
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -49,6 +60,7 @@ int	main(int argc, char *argv[])
 	{
 		get_map(game->file, &game->map);
 		get_header(&game);
+		verify_header(&game);
 		verify_map(&game);
 		print_whole_map(game);
 	}

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:50:34 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/13 09:51:09 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/13 22:48:07 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ int	check_file_line(char *line)
 	if (!check_identifier(info[0], "NO,N,SO,S,WE,W,EA,E,F,FL,C,CE", info[1]))
 	{
 		free_matrix(info);
-		return (1);
+		return (0);
 	}
 	free_matrix(info);
-	return (0);
+	return (1);
 }
