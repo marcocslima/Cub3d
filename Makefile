@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/02/13 11:01:52 by alida-si         ###   ########.fr        #
+#    Updated: 2023/02/14 08:18:42 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ VPATH = $(SRC_DIR)\
 		$(SRC_DIR)utils
 
 SOURCES =	cub3d.c\
-			check_file.c\
+			check_header.c\
 			check_input.c\
 			create_map.c\
 			init.c\
@@ -31,6 +31,7 @@ SOURCES =	cub3d.c\
 			check_map_walls.c\
 			free_game.c\
 			check_map_emp_lines.c\
+			utils.c\
 			utils_print.c
 
 NAME = cub3D

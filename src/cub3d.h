@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/13 22:36:32 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/14 08:16:39 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ int		check_str_is_number(char *str);
 int		matrix_len(char **matrix);
 int		check_range_is_valid(char **rgb);
 int		check_range(char *rgb);
+int		check_path(const char *path);
+int		check_rgb(char *info);
+void	check_header(t_game **game);
 
 //test
 void	print_whole_map(t_game *game);

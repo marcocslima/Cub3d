@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/13 22:51:00 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/14 08:17:08 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,6 @@ void	read_file(int fd, t_game **game)
 	free(ret);
 }
 
-void	verify_header(t_game **game)
-{
-	int	i;
-
-	i = 0;
-	while (i < (*game)->map->init_map)
-	{
-		if (!check_file_line((*game)->file[i]))
-		{
-			free_cub3d(game);
-			exit (1);
-		}
-		i++;
-	}
-}
-
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -60,7 +44,7 @@ int	main(int argc, char *argv[])
 	{
 		get_map(game->file, &game->map);
 		get_header(&game);
-		verify_header(&game);
+		check_header(&game);
 		verify_map(&game);
 		print_whole_map(game);
 	}

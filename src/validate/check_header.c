@@ -6,57 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:50:34 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/13 22:48:07 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/14 08:16:29 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	check_path(const char *path)
-{
-	int		fd;
-	char	**matrix;
-	int		valid_flag;
-
-	fd = 0;
-	valid_flag = 1;
-	matrix = ft_split2(path, '\n');
-	if (matrix[0] != NULL)
-	{
-		fd = open(matrix[0], O_DIRECTORY);
-		if (fd != -1)
-			valid_flag = 0;
-		fd = open(matrix[0], O_RDWR);
-		if (fd == -1)
-			valid_flag = 0;
-	}
-	else
-		valid_flag = 0;
-	free_matrix(matrix);
-	if (fd != -1 && fd != 0)
-		close(fd);
-	if (!valid_flag)
-		print_error_msg("Invalid path to texture\n");
-	return (valid_flag);
-}
-
-int	check_rgb(char *info)
-{
-	char	**rgb;
-
-	rgb = ft_split2(info, '\n');
-	if (rgb[0] != NULL)
-	{
-		if (check_range(rgb[0]))
-		{
-			free_matrix(rgb);
-			return (1);
-		}
-	}
-	print_error_msg("Invalid RGB range\n");
-	free_matrix(rgb);
-	return (0);
-}
 
 int	check_config(char *info, char *path)
 {
@@ -110,4 +64,20 @@ int	check_file_line(char *line)
 	}
 	free_matrix(info);
 	return (1);
+}
+
+void	check_header(t_game **game)
+{
+	int	i;
+
+	i = 0;
+	while (i < (*game)->map->init_map)
+	{
+		if (!check_file_line((*game)->file[i]))
+		{
+			free_cub3d(game);
+			exit (1);
+		}
+		i++;
+	}
 }

@@ -6,35 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:18:58 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/13 22:29:54 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/14 08:15:00 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	matrix_len(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-		i++;
-	return (i);
-}
-
-int	check_str_is_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 int	check_range_is_valid(char **rgb)
 {
@@ -66,4 +42,50 @@ int	check_range(char *rgb)
 		valid_flag = check_range_is_valid(matrix);
 	free_matrix(matrix);
 	return (valid_flag);
+}
+
+int	check_path(const char *path)
+{
+	int		fd;
+	char	**matrix;
+	int		valid_flag;
+
+	fd = 0;
+	valid_flag = 1;
+	matrix = ft_split2(path, '\n');
+	if (matrix[0] != NULL)
+	{
+		fd = open(matrix[0], O_DIRECTORY);
+		if (fd != -1)
+			valid_flag = 0;
+		fd = open(matrix[0], O_RDWR);
+		if (fd == -1)
+			valid_flag = 0;
+	}
+	else
+		valid_flag = 0;
+	free_matrix(matrix);
+	if (fd != -1 && fd != 0)
+		close(fd);
+	if (!valid_flag)
+		print_error_msg("Invalid path to texture\n");
+	return (valid_flag);
+}
+
+int	check_rgb(char *info)
+{
+	char	**rgb;
+
+	rgb = ft_split2(info, '\n');
+	if (rgb[0] != NULL)
+	{
+		if (check_range(rgb[0]))
+		{
+			free_matrix(rgb);
+			return (1);
+		}
+	}
+	print_error_msg("Invalid RGB range\n");
+	free_matrix(rgb);
+	return (0);
 }
