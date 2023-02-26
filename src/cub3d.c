@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/26 07:45:23 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/02/26 09:48:32 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	read_file(int fd, t_game **game)
 void	run_game(t_game **game)
 {
 	(*game)->mlx_p->mlx = mlx_init();
+	printf("%p",(*game)->mlx_p->mlx);
+	//(*game)->mlx_p->window = mlx_new_window((*game)->mlx_p->mlx,WIDTH,HEIGHT,"Hello World");
+	// mlx_loop((*game)->mlx_p->mlx);
 }
 
 int	main(int argc, char *argv[])
@@ -51,8 +54,9 @@ int	main(int argc, char *argv[])
 		get_header(&game);
 		check_header(&game);
 		verify_map(&game);
-		printf("%s\n",game->header->no[0]);
+		//printf("%s\n",game->header->no[1]);
 		//print_whole_map(game);
+		//run_game(&game);
 	}
 	free_cub3d(&game);
 	return (0);
