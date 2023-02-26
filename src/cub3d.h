@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/14 09:17:24 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/26 07:46:45 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,18 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*window;
+}	t_mlx;
+
 typedef struct s_game
 {
 	t_map_header	*header;
 	t_map			*map;
 	char			**file;
+	t_mlx			*mlx_p;
 }	t_game;
 
 /* ---------------------------------------------------------------------*\

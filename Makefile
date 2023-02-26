@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/02/14 08:59:57 by alida-si         ###   ########.fr        #
+#    Updated: 2023/02/26 07:51:24 by mcesar-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,11 +71,11 @@ OBJS =	$(addprefix $(OBJ_PATH), $(SOURCES:.c=.o))
 
 all: $(NAME)
 
-$(NAME) : $(LIBFT) $(OBJS)
-	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+#$(NAME) : $(LIBFT) $(OBJS)
+#	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-#$(NAME) : $(MLX) $(LIBFT) $(OBJS)
-#	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) -L$(MLX_PATH) $(MLX_FLAGS)
+$(NAME) : $(MLX) $(LIBFT) $(OBJS)
+	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) -L$(MLX_PATH) $(MLX_FLAGS)
 
 ${OBJ_PATH}%.o:	$(SRC_PATH)%.c
 				@mkdir -p obj

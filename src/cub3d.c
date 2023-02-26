@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/16 09:06:21 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/02/26 07:45:23 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void	read_file(int fd, t_game **game)
 	free(ret);
 }
 
+void	run_game(t_game **game)
+{
+	(*game)->mlx_p->mlx = mlx_init();
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -46,7 +51,8 @@ int	main(int argc, char *argv[])
 		get_header(&game);
 		check_header(&game);
 		verify_map(&game);
-		print_whole_map(game);
+		printf("%s\n",game->header->no[0]);
+		//print_whole_map(game);
 	}
 	free_cub3d(&game);
 	return (0);
