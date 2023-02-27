@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/26 07:46:45 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/02/27 02:58:31 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,23 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
-typedef struct s_mlx
+typedef struct s_img
 {
-	void	*mlx;
-	void	*window;
-}	t_mlx;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 typedef struct s_game
 {
 	t_map_header	*header;
 	t_map			*map;
 	char			**file;
-	t_mlx			*mlx_p;
+	void			*mlx;
+ 	void			*mlx_window;
+	t_img			*img_ptr;
 }	t_game;
 
 /* ---------------------------------------------------------------------*\
