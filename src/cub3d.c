@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/28 04:41:56 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/02/28 05:07:38 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	}
 }
 
-void	render_background(t_img *img, int ccell, int cflor)
+void	render_background(t_img *img, int cceil, int cflor)
 {
 	int	i;
 	int	j;
@@ -68,7 +68,7 @@ void	render_background(t_img *img, int ccell, int cflor)
 	{
 		j = 0;
 		while (j < WIDTH)
-			img_pix_put(img, j++, i, ccell);
+			img_pix_put(img, j++, i, cceil);
 	}
 }
 
