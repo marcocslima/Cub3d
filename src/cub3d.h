@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/27 02:58:31 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/02/27 21:32:40 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <string.h>
 # include <math.h>
 # include "../libraries/libft/libft.h"
+#include <X11/X.h>
+#include <X11/keysym.h>
 # include "../libraries/minilibx-linux/mlx.h"
 
 # define WIDTH 1024
@@ -41,6 +43,12 @@
 # define RED "\033[38;2;222;56;43m"
 # define RESET "\033[0m"
 
+#define MLX_ERROR 1
+
+#define BLUE_SKY_PIXEL 0x87CEEB
+#define FLOR_PIXEL 0xE2725B
+#define WHITE_PIXEL 0xFFFFFF
+
 typedef struct s_map_header
 {
 	char	**no;
@@ -59,23 +67,40 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
+
 typedef struct s_img
 {
-	void	*img;
+	void	*mlx_img;
 	char	*addr;
-	int		bpp;
-	int		line_length;
+	int		bpp; /* bits per pixel */
+	int		line_len;
 	int		endian;
 }	t_img;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	img;
+	int		cur_img;
+}	t_data;
+
+typedef struct s_rect
+{
+	int	x;
+	int	y;
+	int width;
+	int height;
+	int color;
+}	t_rect;
+
 
 typedef struct s_game
 {
 	t_map_header	*header;
 	t_map			*map;
 	char			**file;
-	void			*mlx;
- 	void			*mlx_window;
-	t_img			*img_ptr;
+	t_data			data;
 }	t_game;
 
 /* ---------------------------------------------------------------------*\

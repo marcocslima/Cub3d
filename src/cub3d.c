@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/27 03:27:17 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/02/27 21:41:19 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ void	read_file(int fd, t_game **game)
 	free(ret);
 }
 
-
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
-	char    *pixel;
+	char	*pixel;
 	int		i;
 
 	i = img->bpp - 8;
-    pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	while (i >= 0)
 	{
 		/* big endian, MSB is the leftmost bit */
@@ -52,12 +51,20 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	}
 }
 
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+int render_rect(t_img *img, t_rect rect)
 {
-	char	*dst;
+	int	i;
+	int j;
 
-	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
-	*(unsigned int *)dst = color;
+	i = rect.y;
+	while (i < rect.y + rect.height)
+	{
+		j = rect.x;
+		while (j < rect.x + rect.width)
+			img_pix_put(img, j++, i, rect.color);
+		++i;
+	}
+	return (0);
 }
 
 void	render_background(t_img *img, int color)
@@ -71,40 +78,59 @@ void	render_background(t_img *img, int color)
 		j = 0;
 		while (j < WIDTH)
 		{
-			//my_mlx_pixel_put(img, j++, i, color);
 			img_pix_put(img, j++, i, color);
 		}
 		++i;
 	}
 }
 
-int	create_rgb(int r, int g, int b)
+int	handle_keypress(int keysym, t_data *data)
 {
-	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
-}
-
-int	render(t_game **game)
-{
-	if ((*game)->mlx_window == NULL)
-		return (1);
-	render_background((*game)->img_ptr, create_rgb(255, 0, 0));
-
-	mlx_put_image_to_window((*game)->mlx, (*game)->mlx_window, (*game)->img_ptr->img, 0, 0);
-
+	if (keysym == XK_Escape)
+	{
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		data->win_ptr = NULL;
+	}
 	return (0);
 }
 
-
-
-void	run_game(t_game **game)
+int	render(t_data *data)
 {
-	(*game)->mlx = mlx_init();
-	(*game)->mlx_window = mlx_new_window((*game)->mlx,WIDTH,HEIGHT,"Cub3D");
-	(*game)->img_ptr = mlx_new_image((*game)->mlx,WIDTH,HEIGHT);
-	(*game)->img_ptr->addr = mlx_get_data_addr((*game)->img_ptr, &(*game)->img_ptr->bpp, &(*game)->img_ptr->line_length, &(*game)->img_ptr->endian);
+	if (data->win_ptr == NULL)
+		return (1);
+	render_background(&data->img, FLOR_PIXEL);
+	render_rect(&data->img, (t_rect){0, 0, WIDTH, HEIGHT/2, BLUE_SKY_PIXEL});
 
-	mlx_loop_hook((*game)->mlx, &render, &(*game));
-	mlx_loop((*game)->mlx);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+	return (0);
+}
+
+int	run_game(t_game *game)
+{
+	game->data.mlx_ptr = mlx_init();
+	if (game->data.mlx_ptr == NULL)
+		return (MLX_ERROR);
+	game->data.win_ptr = mlx_new_window(game->data.mlx_ptr, WIDTH, HEIGHT, "Cub3D");
+	if (game->data.win_ptr == NULL)
+	{
+		free(game->data.win_ptr);
+		return (MLX_ERROR);
+	}
+
+	game->data.img.mlx_img = mlx_new_image(game->data.mlx_ptr, WIDTH, HEIGHT);
+	
+	game->data.img.addr = mlx_get_data_addr(game->data.img.mlx_img, &game->data.img.bpp,
+			&game->data.img.line_len, &game->data.img.endian);
+
+	mlx_loop_hook(game->data.mlx_ptr, &render, &game->data);
+	mlx_hook(game->data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &game->data);
+
+	mlx_loop(game->data.mlx_ptr);
+
+	mlx_destroy_image(game->data.mlx_ptr, game->data.img.mlx_img);
+	mlx_destroy_display(game->data.mlx_ptr);
+	free(game->data.mlx_ptr);
+	return(0);
 }
 
 int	main(int argc, char *argv[])
@@ -121,9 +147,8 @@ int	main(int argc, char *argv[])
 		get_header(&game);
 		check_header(&game);
 		verify_map(&game);
-		//printf("%s\n",game->header->no[1]);
-		//print_whole_map(game);
-		run_game(&game);
+		print_whole_map(game);
+		run_game(game);
 	}
 	free_cub3d(&game);
 	return (0);
