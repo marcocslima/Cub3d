@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/27 21:32:40 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:42:57 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@
 
 #define BLUE_SKY_PIXEL 0x87CEEB
 #define FLOR_PIXEL 0xE2725B
-#define WHITE_PIXEL 0xFFFFFF
 
 typedef struct s_map_header
 {
@@ -67,7 +66,6 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
-
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -84,16 +82,6 @@ typedef struct s_data
 	t_img	img;
 	int		cur_img;
 }	t_data;
-
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int width;
-	int height;
-	int color;
-}	t_rect;
-
 
 typedef struct s_game
 {
