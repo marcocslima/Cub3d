@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/14 09:17:24 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:07:53 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,15 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
+typedef struct s_data
+{
+	void			*mlx_ptr;
+	void			*mlx_win;
+}	t_data;
+
 typedef struct s_game
 {
+	t_data			*mlx_data;
 	t_map_header	*header;
 	t_map			*map;
 	char			**file;
