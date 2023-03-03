@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/02 11:57:03 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:15:00 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,31 @@ void	init_data_mlx(t_data **mlx_data)
 			500, 500, "cub3D");
 }
 
+void	init_data_img(t_img **img)
+{
+	*img = (t_img *) malloc(sizeof(t_img));
+	(*img)->mlx_img = NULL;
+	(*img)->addr = NULL;
+	(*img)->bpp = 0;
+	(*img)->endian = 0;
+	(*img)->line_len = 0;
+}
+
 void	init_data(t_game **game)
 {
 	t_map_header	*header;
 	t_map			*map;
 	t_data			*mlx_data;
+	t_img			*img;
 
 	init_data_header(&header);
 	init_data_map(&map);
 	init_data_mlx(&mlx_data);
+	init_data_img(&img);
 	*game = (t_game *) malloc(sizeof(t_game));
 	(*game)->map = map;
 	(*game)->header = header;
 	(*game)->mlx_data = mlx_data;
+	(*game)->img = img;
 	(*game)->file = NULL;
 }
