@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/02/28 04:42:57 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/03 05:28:02 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@
 
 #define BLUE_SKY_PIXEL 0x87CEEB
 #define FLOR_PIXEL 0xE2725B
+#define BRICK_PIXEL 0x6E4132
+#define BEIGE_PIXEL 0xDAC8B3
+#define RED_PIXEL 0xFF0000
+#define GREEN_PIXEL 0xFF00
+#define WHITE_PIXEL 0xFFFFFF
+#define BLACK_PIXEL 0x000000
 
 typedef struct s_map_header
 {
@@ -75,21 +81,31 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_data
+typedef struct s_rect
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	img;
-	int		cur_img;
-}	t_data;
+	int	x;
+	int	y;
+	int width;
+	int height;
+	int color;
+}	t_rect;
 
 typedef struct s_game
 {
 	t_map_header	*header;
 	t_map			*map;
 	char			**file;
-	t_data			data;
 }	t_game;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	img;
+	int		cur_img;
+	int		l_side;
+	t_game	*gm;
+}	t_data;
 
 /* ---------------------------------------------------------------------*\
 |							close_game									|
@@ -137,5 +153,6 @@ void	verify_map(t_game **game);
 
 //test
 void	print_whole_map(t_game *game);
+void	print_map(t_game *game);
 
 #endif

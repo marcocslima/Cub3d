@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:31:35 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/13 09:34:30 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/03 04:51:36 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,19 @@ void	print_whole_map(t_game *game)
 	printf("MAP\n");
 	while (game->map->map[++i])
 		printf("%s\n", game->map->map[i]);
+}
+
+void	print_map(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while(++i < game->map->map_higth)
+	{
+		j = -1;
+		while(++j < game->map->map_width)
+			printf("%c",game->map->map[i][j]);
+		printf("\n");
+	}
 }
