@@ -6,13 +6,11 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/03 05:35:40 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/03 21:22:10 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 void	read_file(int fd, t_game **game)
 {
@@ -108,7 +106,7 @@ void	plot_map(t_data *data)
 	int	side;
 
 	i = -1;
-	side = 20;
+	side = data->l_side;
 	while(++i < data->gm->map->map_higth)
 	{
 		j = -1;
@@ -122,8 +120,8 @@ void	plot_map(t_data *data)
 			if(data->gm->map->map[i][j] == 'N')
 				color = GREEN_PIXEL;
 			render_rect(&data->img, (t_rect){j * side, i * side, side, side, color});
-			if(data->gm->map->map[i][j] == 'N')
-				render_rect(&data->img, (t_rect){j * side + side * 0.4, i * side + side * 0.4, 5, 5, RED_PIXEL});
+			render_rect(&data->img, (t_rect){data->gm->player.pos[0] * side, data->gm->player.pos[1] * side, 2, 2, RED_PIXEL});
+				//render_rect(&data->img, (t_rect){j * side + side * 0.4, i * side + side * 0.4, 5, 5, RED_PIXEL});
 		}
 	}
 }
@@ -131,16 +129,40 @@ void	plot_map(t_data *data)
 int	render(t_data *data)
 {
 	if (data->gm->map->map_higth <= data->gm->map->map_width)
-		data->l_side = HEIGHT / data->gm->map->map_higth;
+		data->l_side = HEIGHT / data->gm->map->map_width;
 	else
-		data->l_side = WIDTH / data->gm->map->map_width;
-	printf("%d\n",data->l_side);
+		data->l_side = WIDTH / data->gm->map->map_higth;
 	if (data->win_ptr == NULL)
 		return (1);
 	render_background(&data->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
 	plot_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
+}
+
+void	init_player(t_game *game)
+{
+	int	x;
+	int	y;
+
+	game->player.dir[0] = 0;
+	game->player.dir[1] = -1;
+	game->player.cam_plane[0] = 0.66;
+	game->player.cam_plane[1] = 0;
+	y = -1;
+	while(++y < game->map->map_higth)
+	{
+		x = -1;
+		while(++x < game->map->map_width)
+		{
+			if (game->map->map[y][x] == 'N')
+			{
+				game->player.pos[0] = (float)x + 0.5;
+				game->player.pos[1] = (float)y + 0.5;
+				return ;
+			}
+		}
+	}
 }
 
 int	run_game(t_game *game)
@@ -158,7 +180,6 @@ int	run_game(t_game *game)
 		free(data->win_ptr);
 		return (MLX_ERROR);
 	}
-
 	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp,
 			&data->img.line_len, &data->img.endian);
@@ -187,6 +208,7 @@ int	main(int argc, char *argv[])
 		verify_map(&game);
 		//print_whole_map(game);
 		print_map(game);
+		init_player(game);
 		run_game(game);
 	}
 	free_cub3d(&game);

@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/03 05:28:02 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/03 20:58:40 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,19 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
+typedef struct s_player
+{
+	float	dir[2];
+	float	pos[2];
+	float	cam_plane[2];
+}	t_player;
+
 typedef struct s_game
 {
 	t_map_header	*header;
 	t_map			*map;
 	char			**file;
+	t_player		player;
 }	t_game;
 
 typedef struct s_data
