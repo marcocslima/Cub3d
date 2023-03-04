@@ -6,15 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/04 16:06:03 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:17:54 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	render(t_game *game);
-int	render_rect(t_game *game);
-void	render_background(t_game *game, int color);
 
 void	read_file(int fd, t_game **game)
 {
@@ -34,15 +30,6 @@ void	read_file(int fd, t_game **game)
 	verify_empty_lines(ret, game);
 	(*game)->file = ft_split(ret, '\n');
 	free(ret);
-}
-
-int	close_window(t_game *game)
-{
-	printf("fechar janela\n");
-	mlx_destroy_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win);
-	mlx_destroy_display(game->mlx_data->mlx_ptr);
-	free(game->mlx_data->mlx_ptr);
-	close_game(&game);
 }
 
 int	handle_events(int key_code, t_game *game)
