@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/27 20:47:03 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/04 04:19:17 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,12 @@ void	init_data(t_game **game)
 {
 	t_map_header	*header;
 	t_map			*map;
-	//t_img			*img;
 
 	init_data_header(&header);
 	init_data_map(&map);
-	//init_img(&img);
 	*game = (t_game *) malloc(sizeof(t_game));
 	(*game)->map = map;
 	(*game)->header = header;
 	(*game)->file = NULL;
+	(*game)->ang = 0;
 }

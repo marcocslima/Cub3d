@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/03 20:58:40 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/04 04:25:56 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 #define BRICK_PIXEL 0x6E4132
 #define BEIGE_PIXEL 0xDAC8B3
 #define RED_PIXEL 0xFF0000
+#define BLUE_PIXEL 0x0000FF
 #define GREEN_PIXEL 0xFF00
 #define WHITE_PIXEL 0xFFFFFF
 #define BLACK_PIXEL 0x000000
@@ -103,6 +104,7 @@ typedef struct s_game
 	t_map			*map;
 	char			**file;
 	t_player		player;
+	float			ang;
 }	t_game;
 
 typedef struct s_data

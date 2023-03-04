@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/03 21:22:10 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/04 04:50:58 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,52 @@ void	plot_map(t_data *data)
 			color = BLACK_PIXEL;
 			if(data->gm->map->map[i][j] == '1')
 				color = BRICK_PIXEL;
-			if(data->gm->map->map[i][j] == '0')
+			if(data->gm->map->map[i][j] == '0' || data->gm->map->map[i][j] == 'N')
 				color = BEIGE_PIXEL;
-			if(data->gm->map->map[i][j] == 'N')
-				color = GREEN_PIXEL;
 			render_rect(&data->img, (t_rect){j * side, i * side, side, side, color});
-			render_rect(&data->img, (t_rect){data->gm->player.pos[0] * side, data->gm->player.pos[1] * side, 2, 2, RED_PIXEL});
-				//render_rect(&data->img, (t_rect){j * side + side * 0.4, i * side + side * 0.4, 5, 5, RED_PIXEL});
+			render_rect(&data->img, (t_rect){data->gm->player.pos[0] * side, data->gm->player.pos[1] * side, 5, 5, RED_PIXEL});
+			render_rect(&data->img, (t_rect){data->gm->player.pos[0] * side + data->gm->player.dir[0], data->gm->player.pos[1] * side + data->gm->player.dir[1], 3, 3, BLUE_PIXEL});
+			render_rect(&data->img, (t_rect){j * side, i * side, 1, side, BLUE_SKY_PIXEL});
+			render_rect(&data->img, (t_rect){j * side, i * side, side, 1, BLUE_SKY_PIXEL});
 		}
 	}
+}
+
+int looking(int key, t_data *data)
+{
+	if (key == 65361)
+	{
+		data->gm->ang -= 0.1;
+		if(data->gm->ang < 0)
+			data->gm->ang += 2 * PI;
+	 	data->gm->player.dir[0] = cos(data->gm->ang) * 20;
+		data->gm->player.dir[1] = sin(data->gm->ang) * 20;
+	}
+	if (key == 65363)
+	{
+		data->gm->ang += 0.1;
+		if(data->gm->ang > 2 * PI)
+			data->gm->ang -= 2 * PI;
+	 	data->gm->player.dir[0] = cos(data->gm->ang) * 20;
+		data->gm->player.dir[1] = sin(data->gm->ang) * 20;
+	}
+	return(0);
+}
+
+int moving(int key, t_data *data)
+{
+	if (key == A)
+		data->gm->player.pos[0] = data->gm->player.pos[0] - 0.1;
+	if (key == D)
+		data->gm->player.pos[0] = data->gm->player.pos[0] + 0.1;
+	if (key == W)
+		data->gm->player.pos[1] = data->gm->player.pos[1] - 0.1;
+	if (key == S)
+		data->gm->player.pos[1] = data->gm->player.pos[1] + 0.1;
+	if (key == 65361 || key == 65363)
+		looking(key, data);
+	printf("pos: %f # %f | dir: %f # %f\n\n",data->gm->player.pos[0],data->gm->player.pos[1],data->gm->player.dir[0],data->gm->player.dir[1]);
+	return(0);
 }
 
 int	render(t_data *data)
@@ -185,6 +222,7 @@ int	run_game(t_game *game)
 			&data->img.line_len, &data->img.endian);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
+	mlx_hook(data->win_ptr, 2, 1L << 0, moving, data);
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	mlx_destroy_display(data->mlx_ptr);
