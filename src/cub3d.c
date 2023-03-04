@@ -6,11 +6,15 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/03 13:22:37 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:06:03 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	render(t_game *game);
+int	render_rect(t_game *game);
+void	render_background(t_game *game, int color);
 
 void	read_file(int fd, t_game **game)
 {
@@ -34,7 +38,7 @@ void	read_file(int fd, t_game **game)
 
 int	close_window(t_game *game)
 {
-	printf("entrou aqui\n");
+	printf("fechar janela\n");
 	mlx_destroy_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win);
 	mlx_destroy_display(game->mlx_data->mlx_ptr);
 	free(game->mlx_data->mlx_ptr);
@@ -45,50 +49,15 @@ int	handle_events(int key_code, t_game *game)
 {
 	if (key_code == 65307)
 		close_window(game);
-	return (1);
-}
-
-void	img_pix_put(t_img *img, int x, int y, int color)
-{
-	char	*pixel;
-	int		i;
-
-	i = img->bpp - 8;
-    pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	while (i >= 0)
-	{
-		/* big endian, MSB is the leftmost bit */
-		if (img->endian != 0)
-			*pixel++ = (color >> i) & 0xFF;
-		/* little endian, LSB is the leftmost bit */
-		else
-			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-		i -= 8;
-	}
-}
-
-int	render_rect(t_game *game)
-{
-	int	i;
-	int	j;
-
-	if (game->mlx_data->mlx_win == NULL)
-		return (1);
-	i = 250;
-	while (i < 250 + 8)
-	{
-		j = 250;
-		while (j < 250 + 8)
-			img_pix_put(game->img, j++, i, 0xFF0000);
-		++i;
-	}
-	return (0);
-}
-
-int	render(t_game *game)
-{
-	render_rect(game);
-	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win, game->img->mlx_img, 0, 0);
+	if (key_code == W)
+		*&game->img->y_position -= 5;
+	if (key_code == S)
+		*&game->img->y_position += 5;
+	if (key_code == A)
+		*&game->img->x_position -= 5;
+	if (key_code == D)
+		*&game->img->x_position += 5;
+	render(game);
 	return (1);
 }
 
@@ -113,7 +82,7 @@ int	main(int argc, char *argv[])
 
 		mlx_loop_hook(game->mlx_data->mlx_ptr, &render, game);
 		mlx_hook(game->mlx_data->mlx_win, 17, 1L << 17, close_window, game);
-		mlx_key_hook(game->mlx_data->mlx_win, handle_events, game);
+		mlx_hook(game->mlx_data->mlx_win, 02, 1L << 0, handle_events, game);
 		mlx_loop(game->mlx_data->mlx_ptr);
 	}
 	free_cub3d(&game);

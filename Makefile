@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/02/26 16:27:09 by alida-si         ###   ########.fr        #
+#    Updated: 2023/03/04 16:04:00 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SOURCES =	cub3d.c\
 			check_map_emp_lines.c\
 			utils.c\
 			finish_game.c\
+			render_img.c\
 			utils_print.c
 
 

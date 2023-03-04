@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/03 11:10:06 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:08:23 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@
 # define RED "\033[38;2;222;56;43m"
 # define RESET "\033[0m"
 
+# define COLOR_RED 0xFF0000
+# define COLOR_BLACK 0x000000
+
 typedef struct s_map_header
 {
 	char	**no;
@@ -66,6 +69,8 @@ typedef struct s_img
 	int		bpp; /* bits per pixel */
 	int		line_len;
 	int		endian;
+	int		y_position;
+	int		x_position;
 }	t_img;
 
 typedef struct s_data
@@ -126,6 +131,8 @@ void	verify_middle(t_game **game, char character);
 void	verify_sides(t_game **game, char character);
 void	verify_walls(t_game **game);
 void	verify_map(t_game **game);
+
+int		render(t_game *game);
 
 //test
 void	print_whole_map(t_game *game);

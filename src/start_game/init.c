@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/03 11:15:00 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/04 13:46:17 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	init_data_img(t_img **img)
 	(*img)->bpp = 0;
 	(*img)->endian = 0;
 	(*img)->line_len = 0;
+	(*img)->y_position = 250;
+	(*img)->x_position = 250;
 }
 
 void	init_data(t_game **game)
