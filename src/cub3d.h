@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/04 16:27:57 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:38:58 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_data
 typedef struct s_game
 {
 	t_data			*mlx_data;
-	t_img			*img;
+	t_img			*img_data;
 	t_map_header	*header;
 	t_map			*map;
 	char			**file;

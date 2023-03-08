@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/04 16:17:31 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:41:07 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	render_background(t_game *game, int color)
 	{
 		j = 0;
 		while (j < 500)
-			img_pix_put(game->img, j++, i, color);
+			img_pix_put(game->img_data, j++, i, color);
 		++i;
 	}
 }
@@ -57,14 +57,14 @@ int	render_rect(t_game *game)
 
 	if (game->mlx_data->mlx_win == NULL)
 		return (1);
-	rect_height = 5;
-	rect_width = 5;
-	i = game->img->y_position;
-	while (i < game->img->y_position + rect_height)
+	rect_height = 1;
+	rect_width = 1;
+	i = game->img_data->y_position;
+	while (i < game->img_data->y_position + rect_height)
 	{
-		j = game->img->x_position;
-		while (j < game->img->x_position + rect_width)
-			img_pix_put(game->img, j++, i, COLOR_RED);
+		j = game->img_data->x_position;
+		while (j < game->img_data->x_position + rect_width)
+			img_pix_put(game->img_data, j++, i, COLOR_RED);
 		++i;
 	}
 	return (0);
@@ -74,6 +74,6 @@ int	render(t_game *game)
 {
 	render_background(game, COLOR_BLACK);
 	render_rect(game);
-	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win, game->img->mlx_img, 0, 0);
+	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win, game->img_data->mlx_img, 0, 0);
 	return (1);
 }
