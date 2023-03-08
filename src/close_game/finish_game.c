@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:22:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/04 16:28:13 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:34:06 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	close_window(t_game *game)
 {
 	printf("fechar janela\n");
+	mlx_destroy_image(game->mlx_data->mlx_ptr, game->img->mlx_img);
 	mlx_destroy_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win);
 	mlx_destroy_display(game->mlx_data->mlx_ptr);
 	free(game->mlx_data->mlx_ptr);
