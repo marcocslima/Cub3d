@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/08 19:55:01 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/08 21:12:48 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define COLOR_RED 0xFF0000
 # define COLOR_BLACK 0x000000
 # define COLOR_YELLOW 0xFFFF00
+# define COLOR_WHITE 0xFFFFFF
+# define COLOR_GRAY 0x4F4F4F
 
 typedef struct s_map_header
 {

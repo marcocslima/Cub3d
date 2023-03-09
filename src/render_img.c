@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/08 20:07:08 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/08 21:44:10 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,38 +42,62 @@ void	render_background(t_game *game, int color)
 	while (i < 500)
 	{
 		j = 0;
-		while (j < 500)
+		while (j < 1000)
 			img_pix_put(game->img_data, j++, i, color);
 		++i;
 	}
 }
 
-int	render_rect(t_game *game, int color)
+int	render_rect(t_game *game, int color, int rect_height, int rect_width, int y_position, int x_position)
 {
 	int	i;
 	int	j;
-	int	rect_height;
-	int	rect_width;
 
 	if (game->mlx_data->mlx_win == NULL)
 		return (1);
-	rect_height = 1;
-	rect_width = 1;
-	i = game->img_data->y_position;
-	while (i < game->img_data->y_position + rect_height)
+	i = y_position;
+	while (i < y_position + rect_height)
 	{
-		j = game->img_data->x_position;
-		while (j < game->img_data->x_position + rect_width)
+		j = x_position;
+		while (j < x_position + rect_width)
 			img_pix_put(game->img_data, j++, i, color);
 		++i;
 	}
 	return (0);
 }
 
+void	render_map(t_game *game)
+{
+	int i = 0;
+	int j = 0;
+	int	color;
+
+	while (i < game->map->map_higth)
+	{
+		j = 0;
+		while (j < game->map->map_width)
+		{
+			if (game->map->map[i][j] == '1')
+				color = COLOR_WHITE;
+			if (game->map->map[i][j] == '0' || game->map->map[i][j] == 'N')
+				color = COLOR_BLACK;
+			render_rect(game, color, 25, 25, i*26, j*26);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	render_player(t_game *game)
+{
+	render_rect(game, COLOR_RED, 5, 5, game->img_data->y_position, game->img_data->x_position);
+}
+
 int	render(t_game *game)
 {
-	render_background(game, COLOR_BLACK);
-	render_rect(game, COLOR_RED);
+	render_background(game, COLOR_GRAY);
+	render_map(game);
+	render_player(game);
 	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win, game->img_data->mlx_img, 0, 0);
 	return (1);
 }

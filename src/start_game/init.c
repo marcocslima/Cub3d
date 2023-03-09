@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/08 19:44:03 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/08 20:39:36 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_data_mlx(t_data **mlx_data)
 	*mlx_data = (t_data *) malloc(sizeof(t_data));
 	(*mlx_data)->mlx_ptr = mlx_init();
 	(*mlx_data)->mlx_win = mlx_new_window((*mlx_data)->mlx_ptr,
-			500, 500, "cub3D");
+			1000, 500, "cub3D");
 }
 
 void	init_data_img(t_img **img)
