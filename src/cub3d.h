@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/09 10:10:27 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/09 11:48:00 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,17 @@ typedef struct s_img
 	int		bpp; /* bits per pixel */
 	int		line_len;
 	int		endian;
-	int		y_position;
-	int		x_position;
 }	t_img;
+
+typedef struct s_player
+{
+	float	x_position;
+	float	y_position;
+	float	delta_x;
+	float	delta_y;
+	float	angle;
+
+}	t_player;
 
 typedef struct s_data
 {
@@ -89,6 +97,7 @@ typedef struct s_game
 	t_img			*img_data;
 	t_map_header	*header;
 	t_map			*map;
+	t_player		*player;
 	char			**file;
 }	t_game;
 

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/08 20:39:36 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/09 11:48:46 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,16 @@ void	init_data_img(t_img **img)
 	(*img)->bpp = 0;
 	(*img)->endian = 0;
 	(*img)->line_len = 0;
-	(*img)->y_position = 250;
-	(*img)->x_position = 250;
+}
+
+void	init_player(t_player **player)
+{
+	*player = (t_player *) malloc(sizeof(t_player));
+	(*player)->y_position = 250;
+	(*player)->x_position = 250;
+	(*player)->angle = 0;
+	(*player)->delta_x = 0;
+	(*player)->delta_y = 0;
 }
 
 void	init_data(t_game **game)
@@ -58,15 +66,18 @@ void	init_data(t_game **game)
 	t_map			*map;
 	t_data			*mlx_data;
 	t_img			*img;
+	t_player		*player;
 
 	init_data_header(&header);
 	init_data_map(&map);
 	init_data_mlx(&mlx_data);
 	init_data_img(&img);
+	init_player(&player);
 	*game = (t_game *) malloc(sizeof(t_game));
 	(*game)->map = map;
 	(*game)->header = header;
 	(*game)->mlx_data = mlx_data;
 	(*game)->img_data = img;
+	(*game)->player = player;
 	(*game)->file = NULL;
 }
