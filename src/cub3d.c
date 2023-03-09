@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/09 11:49:26 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:41:00 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,27 @@ void	read_file(int fd, t_game **game)
 	free(ret);
 }
 
+void	move_direction(t_game *game, int key_code)
+{
+	if (key_code == LEFT_ARROW)
+	{
+		game->player->angle -= 0.1;
+		if(game->player->angle < 0)
+			game->player->angle += 2 * PI;
+		game->player->delta_x = cos(game->player->angle) * 60;
+		game->player->delta_y = sin(game->player->angle) * 60;
+	}
+
+	if (key_code == RIGHT_ARROW)
+	{
+		game->player->angle += 0.1;
+		if(game->player->angle > 2 * PI)
+			game->player->angle -= 2 * PI;
+		game->player->delta_x = cos(game->player->angle) * 60;
+		game->player->delta_y = sin(game->player->angle) * 60;
+	}
+}
+
 int	handle_events(int key_code, t_game *game)
 {
 	if (key_code == ESC)
@@ -44,6 +65,8 @@ int	handle_events(int key_code, t_game *game)
 		*&game->player->x_position -= 5;
 	if (key_code == D)
 		*&game->player->x_position += 5;
+	if (key_code == LEFT_ARROW || key_code == RIGHT_ARROW)
+		move_direction(game, key_code);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/09 11:48:00 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:11:05 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,13 @@
 # define DOWN 0
 # define RIGHT 2
 # define LEFT 3
-# define W	119
-# define S	115
-# define D	100
-# define A	97
+
+# define LEFT_ARROW 65361
+# define RIGHT_ARROW 65363
+# define W 119
+# define S 115
+# define D 100
+# define A 97
 # define ESC 65307
 
 # define RED "\033[38;2;222;56;43m"

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/09 11:52:39 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:39:41 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,25 @@ void	render_map(t_game *game)
 
 void	render_player(t_game *game)
 {
-	render_rect(game, COLOR_RED, 5, 5, game->player->y_position, game->player->x_position);
+	render_rect(game, COLOR_RED, 2, 2, game->player->y_position, game->player->x_position);
+}
+
+void	teste(t_game *game)
+{
+	float d = 0.1;
+	while(d < 1)
+	{
+		render_rect(game, COLOR_RED, 2, 2, game->player->y_position + game->player->delta_y * d, game->player->x_position + game->player->delta_x * d);
+		d = d + 0.02;
+	}
 }
 
 int	render(t_game *game)
 {
 	render_background(game, COLOR_GRAY);
 	render_map(game);
-	render_player(game);
+	//render_player(game);
+	teste(game);
 	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win, game->img_data->mlx_img, 0, 0);
 	return (1);
 }

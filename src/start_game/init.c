@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/09 11:48:46 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:24:15 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	init_player(t_player **player)
 	(*player)->x_position = 250;
 	(*player)->angle = 0;
 	(*player)->delta_x = 0;
-	(*player)->delta_y = 0;
+	(*player)->delta_y = -1;
 }
 
 void	init_data(t_game **game)
