@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/08 19:41:07 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/08 20:07:08 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	render_background(t_game *game, int color)
 	}
 }
 
-int	render_rect(t_game *game)
+int	render_rect(t_game *game, int color)
 {
 	int	i;
 	int	j;
@@ -64,7 +64,7 @@ int	render_rect(t_game *game)
 	{
 		j = game->img_data->x_position;
 		while (j < game->img_data->x_position + rect_width)
-			img_pix_put(game->img_data, j++, i, COLOR_RED);
+			img_pix_put(game->img_data, j++, i, color);
 		++i;
 	}
 	return (0);
@@ -73,7 +73,7 @@ int	render_rect(t_game *game)
 int	render(t_game *game)
 {
 	render_background(game, COLOR_BLACK);
-	render_rect(game);
+	render_rect(game, COLOR_RED);
 	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win, game->img_data->mlx_img, 0, 0);
 	return (1);
 }
