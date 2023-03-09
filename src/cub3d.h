@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/08 21:12:48 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/09 10:10:27 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define S	115
 # define D	100
 # define A	97
+# define ESC 65307
 
 # define RED "\033[38;2;222;56;43m"
 # define RESET "\033[0m"

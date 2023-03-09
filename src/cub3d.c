@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/09 10:07:43 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/09 10:10:23 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	read_file(int fd, t_game **game)
 
 int	handle_events(int key_code, t_game *game)
 {
-	if (key_code == 65307)
+	if (key_code == ESC)
 		close_window(game);
 	if (key_code == W)
 		*&game->img_data->y_position -= 5;
