@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/04 04:25:56 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/13 09:12:33 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,19 @@ typedef struct s_player
 	float	cam_plane[2];
 }	t_player;
 
+typedef struct s_ray
+{
+	float	dir_x;
+	float	dir_y;
+}	t_ray;
+
 typedef struct s_game
 {
 	t_map_header	*header;
 	t_map			*map;
 	char			**file;
 	t_player		player;
+	t_ray			ray;
 	float			ang;
 }	t_game;
 
@@ -133,6 +140,8 @@ void	free_cub3d(t_game **game);
 void	get_map(char **file, t_map **map);
 void	get_header(t_game **game);
 void	init_data(t_game **game);
+int		drawRay(t_data *data);
+void	ray_dir(float pixel, t_data *data);
 
 /* ---------------------------------------------------------------------*\
 |								utils									|
