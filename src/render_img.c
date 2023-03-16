@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/09 19:15:50 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/16 11:27:14 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	render_background(t_game *game, int color)
 	if (game->mlx_data->mlx_win == NULL)
 		return ;
 	i = 0;
-	while (i < 500)
+	while (i < 600)
 	{
 		j = 0;
-		while (j < 1000)
+		while (j < 1500)
 			img_pix_put(game->img_data, j++, i, color);
 		++i;
 	}
@@ -81,7 +81,7 @@ void	render_map(t_game *game)
 				color = COLOR_WHITE;
 			if (game->map->map[i][j] == '0' || game->map->map[i][j] == 'N')
 				color = COLOR_BLACK;
-			render_rect(game, color, 25, 25, i*26, j*26);
+			render_rect(game, color, 39, 39, i*40, j*40);
 			j++;
 		}
 		i++;
@@ -103,12 +103,51 @@ void	teste(t_game *game)
 	}
 }
 
+/*void	cast_ray(t_game *game)
+{
+	int		r, mx, my, mp, dof;
+	float	rx, ry, ra, xo, yo;
+
+	ra = game->player->angle;
+	for (r = 0; r < 1; r++)
+	{
+		dof = 0;
+		float atan = -1 / tan(ra);
+		if (ra > PI)
+		{
+			ry = (((int)game->player->y_position >> 3) <<3) - 0.0001;
+			rx = (game->player->y_position - ry) * atan + game->player->x_position;
+			yo = -64;
+			xo = -yo * atan;
+		}
+		while (dof < 8)
+		{
+			mx = (int)(rx)>>3;
+			my = (int)(ry)>>3;
+			mp = my * 18 + mx;
+			if (mp>0 && mp<18*14 && game->map->map[mp]==1)
+			{
+				dof = 8;
+			}
+			else
+			{
+				rx += xo;
+				ry += yo;
+				dof += 1;
+			}
+		}
+		render_rect(game, COLOR_RED, 1, 1, game->player->y_position + game->player->delta_y * d, game->player->x_position + game->player->delta_x * d);
+		glLineWidth(2); glBegin(GL_LINES); glVertex2i(px,py); glVertex2i(rx,ry); glEnd();
+	}
+}*/
+
 int	render(t_game *game)
 {
 	render_background(game, COLOR_GRAY);
 	render_map(game);
 	//render_player(game);
 	teste(game);
+	//cast_ray(game);
 	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win, game->img_data->mlx_img, 0, 0);
 	return (1);
 }

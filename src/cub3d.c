@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/09 18:46:34 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/16 11:30:54 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,20 @@ int	handle_events(int key_code, t_game *game)
 	if (key_code == ESC)
 		close_window(game);
 	if (key_code == W)
-		*&game->player->y_position -= 5;
+		*&game->player->y_position -= 1;
 	if (key_code == S)
-		*&game->player->y_position += 5;
+		*&game->player->y_position += 1;
 	if (key_code == A)
-		*&game->player->x_position -= 5;
+		*&game->player->x_position -= 1;
 	if (key_code == D)
-		*&game->player->x_position += 5;
+		*&game->player->x_position += 1;
 	if (key_code == LEFT_ARROW || key_code == RIGHT_ARROW)
 		move_direction(game, key_code);
+	if (key_code == 'p')
+	{
+		printf("# posição y: %f\n", game->player->y_position);
+		printf("# posição x: %f\n", game->player->x_position);
+	}
 	return (1);
 }
 
@@ -86,7 +91,7 @@ int	main(int argc, char *argv[])
 		verify_map(&game);
 		//print_whole_map(game);
 
-		game->img_data->mlx_img = mlx_new_image(game->mlx_data->mlx_ptr, 1000, 500);
+		game->img_data->mlx_img = mlx_new_image(game->mlx_data->mlx_ptr, 1500, 600);
 		game->img_data->addr = mlx_get_data_addr(game->img_data->mlx_img, &game->img_data->bpp, &game->img_data->line_len, &game->img_data->endian);
 
 		mlx_loop_hook(game->mlx_data->mlx_ptr, &render, game);
