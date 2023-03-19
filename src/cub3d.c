@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/13 11:05:05 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/19 09:47:55 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ int	render(t_data *data)
 	while (++pixel < WIDTH)
 	{
 		ray_dir(pixel, data);
+		calc_delta_dist(data);
 	}
 	//drawRay(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);

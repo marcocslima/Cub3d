@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/13 09:12:33 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/19 09:48:06 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,14 @@ typedef struct s_ray
 	float	dir_y;
 }	t_ray;
 
+typedef struct s_dists
+{
+	float	delta_dist_x;
+	float	delta_dist_y;
+	float	dist_side_x;
+	float	dist_side_y;
+}	t_dists;
+
 typedef struct s_game
 {
 	t_map_header	*header;
@@ -111,6 +119,7 @@ typedef struct s_game
 	char			**file;
 	t_player		player;
 	t_ray			ray;
+	t_dists			dists;
 	float			ang;
 }	t_game;
 
@@ -140,8 +149,8 @@ void	free_cub3d(t_game **game);
 void	get_map(char **file, t_map **map);
 void	get_header(t_game **game);
 void	init_data(t_game **game);
-int		drawRay(t_data *data);
 void	ray_dir(float pixel, t_data *data);
+void	calc_delta_dist(t_data *data);
 
 /* ---------------------------------------------------------------------*\
 |								utils									|
