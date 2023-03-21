@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/19 09:48:06 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/20 06:11:14 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,23 @@ typedef struct s_dists
 	float	dist_side_y;
 }	t_dists;
 
+typedef struct s_dda
+{
+	int		map_pos_x;
+	int		map_pos_y;
+	int		step_x;
+	int		step_y;
+	float	ddaLineSizeX;
+	float	ddaLineSizeY;
+	float	wall_map_pos_x;
+	float	wall_map_pos_y;
+	int		hitSide;
+	float	perp_dist;
+	float	wall_line_height;
+	float	line_start;
+	float	line_end;
+}	t_dda;
+
 typedef struct s_game
 {
 	t_map_header	*header;
@@ -120,6 +137,7 @@ typedef struct s_game
 	t_player		player;
 	t_ray			ray;
 	t_dists			dists;
+	t_dda			dda;
 	float			ang;
 }	t_game;
 
@@ -150,7 +168,10 @@ void	get_map(char **file, t_map **map);
 void	get_header(t_game **game);
 void	init_data(t_game **game);
 void	ray_dir(float pixel, t_data *data);
-void	calc_delta_dist(t_data *data);
+void	calc_side_dist(t_data *data);
+void	calc_dda(t_data *data);
+void	calc_perp_dist(t_data *data);
+void	calc_wall(t_data *data);
 
 /* ---------------------------------------------------------------------*\
 |								utils									|

@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/19 09:47:55 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:47:30 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,40 +119,58 @@ void	plot_map(t_data *data)
 				color = BEIGE_PIXEL;
 			render_rect(&data->img, (t_rect){j * side, i * side, side, side, color});
 			render_rect(&data->img, (t_rect){data->gm->player.pos[0] * side, data->gm->player.pos[1] * side, 5, 5, RED_PIXEL});
-			float d = 0.1;
-			while(d < 1)
-			{
-				render_rect(&data->img, (t_rect){data->gm->player.pos[0] * side + data->gm->player.dir[0] * d, data->gm->player.pos[1] * side + data->gm->player.dir[1] * d, 2, 2, BLUE_PIXEL});
-				d = d + 0.02;
-			}
+			// float d = 0.1;
+			// while(d < 1)
+			// {
+			// 	render_rect(&data->img, (t_rect){data->gm->player.pos[0] * side + data->gm->player.dir[0] * d, data->gm->player.pos[1] * side + data->gm->player.dir[1] * d, 2, 2, BLUE_PIXEL});
+			// 	d = d + 0.02;
+			// }
 			render_rect(&data->img, (t_rect){j * side, i * side, 1, side, BLUE_SKY_PIXEL});
 			render_rect(&data->img, (t_rect){j * side, i * side, side, 1, BLUE_SKY_PIXEL});
 		}
 	}
 }
 
-int looking(int key, t_data *data)
+int looking(float ang, t_data *data)
 {
-	int len = 100;
-	
-	if (key == 65361)
-	{
-		data->gm->ang -= 0.05;
-		if(data->gm->ang < 0)
-			data->gm->ang += 2 * PI;
-		data->gm->player.dir[0] = cos(data->gm->ang) * len;
-		data->gm->player.dir[1] = sin(data->gm->ang) * len;
-	}
-	if (key == 65363)
-	{
-		data->gm->ang += 0.1;
-		if(data->gm->ang > 2 * PI)
-			data->gm->ang -= 2 * PI;
-	 	data->gm->player.dir[0] = cos(data->gm->ang) * len;
-		data->gm->player.dir[1] = sin(data->gm->ang) * len;
-	}
+	float	tmp;
+	float	tmpplane;
+
+	tmp = cos(ang) * data->gm->player.dir[0] - sin(ang) * data->gm->player.dir[1];
+	data->gm->player.dir[1] = sin(ang) * data->gm->player.dir[0] + cos(ang)
+		* data->gm->player.dir[1];
+	data->gm->player.dir[0] = tmp;
+	tmpplane = cos(ang) * data->gm->player.cam_plane[0]
+		- sin(ang) * data->gm->player.cam_plane[1];
+	data->gm->player.cam_plane[1] = sin(ang) * data->gm->player.cam_plane[0]
+		+ cos(ang) * data->gm->player.cam_plane[1];
+	data->gm->player.cam_plane[0] = tmpplane;
 	return(0);
 }
+
+// int looking(int key, t_data *data)
+// {
+// 	int len = 1;
+	
+// 	if (key == 65361)
+// 	{
+// 		data->gm->ang -= 0.05;
+// 		if(data->gm->ang < 0)
+// 			data->gm->ang += 2 * PI;
+// 		data->gm->player.dir[0] = cos(data->gm->ang) * len;
+// 		data->gm->player.dir[1] = sin(data->gm->ang) * len;
+// 	}
+// 	if (key == 65363)
+// 	{
+// 		data->gm->ang += 0.1;
+// 		if(data->gm->ang > 2 * PI)
+// 			data->gm->ang -= 2 * PI;
+// 	 	data->gm->player.dir[0] = cos(data->gm->ang) * len;
+// 		data->gm->player.dir[1] = sin(data->gm->ang) * len;
+// 	}
+// 	return(0);
+// }
+
 
 int moving(int key, t_data *data)
 {
@@ -164,9 +182,14 @@ int moving(int key, t_data *data)
 		data->gm->player.pos[1] = data->gm->player.pos[1] - 0.1;
 	if (key == S)
 		data->gm->player.pos[1] = data->gm->player.pos[1] + 0.1;
-	if (key == 65361 || key == 65363)
-		looking(key, data);
-	//printf("ang: %f | pos: %f # %f | dir: %f # %f\n\n",data->gm->ang,data->gm->player.pos[0],data->gm->player.pos[1],data->gm->player.dir[0],data->gm->player.dir[1]);
+	if (key == 65361)
+		looking(-PI / 100, data);
+	if (key == 65363)
+		looking(+PI / 100, data);
+	
+	
+	// if (key == 65361 || key == 65363)
+	// 	looking(key, data);
 	return(0);
 }
 
@@ -187,9 +210,22 @@ int	render(t_data *data)
 	while (++pixel < WIDTH)
 	{
 		ray_dir(pixel, data);
-		calc_delta_dist(data);
+		calc_side_dist(data);
+		calc_dda(data);
+		calc_perp_dist(data);
+		calc_wall(data);
+		//printf("%f\n",data->gm->dda.perp_dist);
+		//render_rect(&data->img, (t_rect){pixel, 1, 1, 
+		//	(1 / data->gm->dda.perp_dist * HEIGHT), BLUE_PIXEL});
+
+		float d = 0.1;
+		while(d < 1)
+		{
+			render_rect(&data->img, (t_rect){((data->gm->player.pos[0] * 64) + data->gm->player.dir[0] * d) + 10,
+				((data->gm->player.pos[1] * 64) + data->gm->player.dir[1] * d) + 10, 2, 2, BLUE_PIXEL});
+		  	d = d + 0.02;
+		}
 	}
-	//drawRay(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
 }
