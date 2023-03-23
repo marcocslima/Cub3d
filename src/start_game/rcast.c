@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/20 06:10:47 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/22 05:50:04 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,21 @@ void	calc_dda(t_data *data)
 	{
 		if(data->gm->dda.ddaLineSizeX < data->gm->dda.ddaLineSizeY)
 		{
-			data->gm->dda.wall_map_pos_x += data->gm->dda.step_x;
-			data->gm->dda.ddaLineSizeX += data->gm->dists.delta_dist_x;
+			data->gm->dda.wall_map_pos_x = data->gm->dda.wall_map_pos_x + data->gm->dda.step_x;
+			data->gm->dda.ddaLineSizeX = data->gm->dda.ddaLineSizeX + data->gm->dists.delta_dist_x;
 			data->gm->dda.hitSide = 0;
 		}
 		else
 		{
-			data->gm->dda.wall_map_pos_y += data->gm->dda.step_y;
-			data->gm->dda.ddaLineSizeY += data->gm->dists.delta_dist_y;
+			data->gm->dda.wall_map_pos_y = data->gm->dda.wall_map_pos_y + data->gm->dda.step_y;
+			data->gm->dda.ddaLineSizeY = data->gm->dda.ddaLineSizeY + data->gm->dists.delta_dist_y;
 			data->gm->dda.hitSide = 1;
 		}
 		if(data->gm->map->map[(int)floor(data->gm->dda.wall_map_pos_x)][(int)floor(data->gm->dda.wall_map_pos_y)] == '1')
+		{
+			//printf("wall_map_pos_x: %f | wall_map_pos_y: %f\n", floor(data->gm->dda.wall_map_pos_x), floor(data->gm->dda.wall_map_pos_y));
 			hit = 1;
+		}
 	}
 }
 
