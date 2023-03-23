@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/09 12:11:05 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:18:45 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void	verify_sides(t_game **game, char character);
 void	verify_walls(t_game **game);
 void	verify_map(t_game **game);
 
+int		render_rect(t_game *game, int color, int rect_height, int rect_width, int y_position, int x_position);
 int		render(t_game *game);
 
 //test
