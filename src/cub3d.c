@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/25 12:24:38 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:15:21 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,6 @@ void	plot_map(t_data *data)
 				color = BEIGE_PIXEL;
 			render_rect(&data->img, (t_rect){j * side, i * side, side, side, color});
 			render_rect(&data->img, (t_rect){data->gm->player.pos[0] * side, data->gm->player.pos[1] * side, 5, 5, RED_PIXEL});
-			// float d = 0.1;
-			// while(d < 1)
-			// {
-			// 	render_rect(&data->img, (t_rect){data->gm->player.pos[0] * side + data->gm->player.dir[0] * d, data->gm->player.pos[1] * side + data->gm->player.dir[1] * d, 2, 2, BLUE_PIXEL});
-			// 	d = d + 0.02;
-			// }
 			render_rect(&data->img, (t_rect){j * side, i * side, 1, side, BLUE_SKY_PIXEL});
 			render_rect(&data->img, (t_rect){j * side, i * side, side, 1, BLUE_SKY_PIXEL});
 		}
@@ -134,43 +128,19 @@ void	plot_map(t_data *data)
 int looking(float ang, t_data *data)
 {
 	float	tmp;
-	float	tmpplane;
+	float	tmp_plane;
 
 	tmp = cos(ang) * data->gm->player.dir[0] - sin(ang) * data->gm->player.dir[1];
 	data->gm->player.dir[1] = sin(ang) * data->gm->player.dir[0] + cos(ang)
 		* data->gm->player.dir[1];
 	data->gm->player.dir[0] = tmp;
-	tmpplane = cos(ang) * data->gm->player.cam_plane[0]
+	tmp_plane = cos(ang) * data->gm->player.cam_plane[0]
 		- sin(ang) * data->gm->player.cam_plane[1];
 	data->gm->player.cam_plane[1] = sin(ang) * data->gm->player.cam_plane[0]
 		+ cos(ang) * data->gm->player.cam_plane[1];
-	data->gm->player.cam_plane[0] = tmpplane;
+	data->gm->player.cam_plane[0] = tmp_plane;
 	return(0);
 }
-
-// int looking(int key, t_data *data)
-// {
-// 	int len = 1;
-	
-// 	if (key == 65361)
-// 	{
-// 		data->gm->ang -= 0.05;
-// 		if(data->gm->ang < 0)
-// 			data->gm->ang += 2 * PI;
-// 		data->gm->player.dir[0] = cos(data->gm->ang) * len;
-// 		data->gm->player.dir[1] = sin(data->gm->ang) * len;
-// 	}
-// 	if (key == 65363)
-// 	{
-// 		data->gm->ang += 0.1;
-// 		if(data->gm->ang > 2 * PI)
-// 			data->gm->ang -= 2 * PI;
-// 	 	data->gm->player.dir[0] = cos(data->gm->ang) * len;
-// 		data->gm->player.dir[1] = sin(data->gm->ang) * len;
-// 	}
-// 	return(0);
-// }
-
 
 int moving(int key, t_data *data)
 {
@@ -186,10 +156,6 @@ int moving(int key, t_data *data)
 		looking(- PI / 100, data);
 	if (key == 65363)
 		looking(+ PI / 100, data);
-	
-	
-	// if (key == 65361 || key == 65363)
-	// 	looking(key, data);
 	return(0);
 }
 
@@ -204,58 +170,29 @@ int	render(t_data *data)
 	render_background(&data->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
 	plot_map(data);
 
-	// float	pixel;
+	float	pixel;
 
-	// pixel = -1;
-	// while (++pixel < WIDTH)
-	// {
-		ray_dir(WIDTH / 2, data);//ray_dir(pixel, data);
+	pixel = -1;
+	while (++pixel < WIDTH)
+	{
+		ray_dir(WIDTH / 2, data);
+		ray_dir(pixel, data);
 		calc_delta_dist(data);
 		calc_side_dist(data);
 		calc_dda(data);
 		calc_perp_dist(data);
 		// calc_wall(data);
-		//printf("%f\n",data->gm->dda.perp_dist);
-		//render_rect(&data->img, (t_rect){pixel, 1, 1, 
-		//	(1 / data->gm->dda.perp_dist * HEIGHT), BLUE_PIXEL});
 
 		float d = 0.01;
 		while(d < 1)
 		{
-			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (64 * data->gm->ray.dir_x * d),
-				(data->gm->player.pos[1] * 64) + (64 * data->gm->ray.dir_y * d), 1, 1, BLUE_PIXEL});
-			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (data->gm->player.dir[0] * 64 * d),
-				(data->gm->player.pos[1] * 64) + (data->gm->player.dir[1] * 64 * d), 2, 2, BLACK_PIXEL});
-		  	// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (64 * data->gm->dda.ddaLineSizeX * data->gm->ray.dir_x * d),
-			// 	(data->gm->player.pos[1] * 64) + (64 *data->gm->dda.ddaLineSizeY * data->gm->ray.dir_y * d), 2, 2, BLUE_PIXEL});
-			// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + 
-			// 		(64 * (data->gm->dists.delta_dist_x + data->gm->dists.dist_side_x) * d) * data->gm->ray.dir_x,
-			//  		(data->gm->player.pos[1] * 64) + 
-			// 		(64 * (data->gm->dists.delta_dist_y + data->gm->dists.dist_side_y) * d) * data->gm->ray.dir_y, 1, 1, BLUE_PIXEL});
-			// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (64 * (data->gm->dists.delta_dist_x) * data->gm->ray.dir_x * d),
-			// 	(data->gm->player.pos[1] * 64) + (64 * (data->gm->dists.delta_dist_y) * data->gm->ray.dir_y * d), 1, 1, BLUE_PIXEL});
-			// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (64 * (data->gm->dists.dist_side_x) * data->gm->ray.dir_x * d),
-			// 	(data->gm->player.pos[1] * 64) + (64 * (data->gm->dists.dist_side_y) * data->gm->ray.dir_y * d), 1, 1, GREEN_PIXEL});
-			// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + 
-			// 		(64 * (data->gm->dda.ddaLineSizeX) * d) * data->gm->ray.dir_x,
-			//  		(data->gm->player.pos[1] * 64) + 
-			// 		(64 * (data->gm->dda.ddaLineSizeY) * d) * data->gm->ray.dir_y, 1, 1, BLUE_PIXEL});
-
-			d = d + 0.01;
+			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + 
+				(64 * data->gm->ray.dir_x * d * data->gm->dda.perp_dist),
+				(data->gm->player.pos[1] * 64) + 
+				(64 * data->gm->ray.dir_y * d  * data->gm->dda.perp_dist), 1, 1, GREEN_PIXEL});
+			d = d + 0.001;
 		}
-		//if(data->gm->ray.dir_x > 0.6)
-		//{
-			// printf("pos_x: %f | pos_y: %f\n",data->gm->player.pos[0],data->gm->player.pos[1]);
-			// printf("dir_x: %f | dir_y: %f\n",data->gm->player.dir[0],data->gm->player.dir[1]);
-			// printf("ray_dir_x: %f | ray_dir_y: %f\n",data->gm->ray.dir_x,data->gm->ray.dir_y);
-			printf("delta_dist_x: %f | delta_dist_y: %f\n",data->gm->dists.delta_dist_x,data->gm->dists.delta_dist_y);
-			printf("dist_side_x: %f | dist_side_y: %f\n",data->gm->dists.dist_side_x,data->gm->dists.dist_side_y);
-			printf("LineSizeX: %f | LineSizeY: %f\n",data->gm->dda.ddaLineSizeX,data->gm->dda.ddaLineSizeY);
-			printf("perp_dist: %f\n",data->gm->dda.perp_dist);
-			//printf("wall_map_pos_x: %f | wall_map_pos_y: %f\n",data->gm->dda.wall_map_pos_x,data->gm->dda.wall_map_pos_y);
-			printf("----------------------------------------------\n");
-		//}
-	//}
+	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
 }
@@ -325,7 +262,7 @@ int	main(int argc, char *argv[])
 	{
 		get_map(game->file, &game->map);
 		get_header(&game);
-		//check_header(&game);
+		check_header(&game);
 		verify_map(&game);
 		//print_whole_map(game);
 		//print_map(game);
