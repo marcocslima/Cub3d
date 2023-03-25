@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/20 06:11:14 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/24 03:42:40 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ void	get_map(char **file, t_map **map);
 void	get_header(t_game **game);
 void	init_data(t_game **game);
 void	ray_dir(float pixel, t_data *data);
+void	calc_delta_dist(t_data *data);
 void	calc_side_dist(t_data *data);
 void	calc_dda(t_data *data);
 void	calc_perp_dist(t_data *data);

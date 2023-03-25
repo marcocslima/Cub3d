@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/22 06:18:36 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/25 12:24:38 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,9 +183,9 @@ int moving(int key, t_data *data)
 	if (key == S)
 		data->gm->player.pos[1] = data->gm->player.pos[1] + 0.1;
 	if (key == 65361)
-		looking(-PI / 100, data);
+		looking(- PI / 100, data);
 	if (key == 65363)
-		looking(+PI / 100, data);
+		looking(+ PI / 100, data);
 	
 	
 	// if (key == 65361 || key == 65363)
@@ -204,16 +204,17 @@ int	render(t_data *data)
 	render_background(&data->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
 	plot_map(data);
 
-	float	pixel;
+	// float	pixel;
 
-	pixel = -1;
-	while (++pixel < WIDTH)
-	{
-		ray_dir(pixel, data);
+	// pixel = -1;
+	// while (++pixel < WIDTH)
+	// {
+		ray_dir(WIDTH / 2, data);//ray_dir(pixel, data);
+		calc_delta_dist(data);
 		calc_side_dist(data);
 		calc_dda(data);
 		calc_perp_dist(data);
-		calc_wall(data);
+		// calc_wall(data);
 		//printf("%f\n",data->gm->dda.perp_dist);
 		//render_rect(&data->img, (t_rect){pixel, 1, 1, 
 		//	(1 / data->gm->dda.perp_dist * HEIGHT), BLUE_PIXEL});
@@ -221,31 +222,40 @@ int	render(t_data *data)
 		float d = 0.01;
 		while(d < 1)
 		{
-			// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (data->gm->player.dir[0] * 64 * d),
-			// 	(data->gm->player.pos[1] * 64) + (data->gm->player.dir[1] * 64 * d), 2, 2, BLUE_PIXEL});
+			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (64 * data->gm->ray.dir_x * d),
+				(data->gm->player.pos[1] * 64) + (64 * data->gm->ray.dir_y * d), 1, 1, BLUE_PIXEL});
+			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (data->gm->player.dir[0] * 64 * d),
+				(data->gm->player.pos[1] * 64) + (data->gm->player.dir[1] * 64 * d), 2, 2, BLACK_PIXEL});
 		  	// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (64 * data->gm->dda.ddaLineSizeX * data->gm->ray.dir_x * d),
 			// 	(data->gm->player.pos[1] * 64) + (64 *data->gm->dda.ddaLineSizeY * data->gm->ray.dir_y * d), 2, 2, BLUE_PIXEL});
-			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + 
-					(64 * (data->gm->dists.delta_dist_x + data->gm->dists.dist_side_x) * d) * data->gm->ray.dir_x,
-			 		(data->gm->player.pos[1] * 64) + 
-					(64 * (data->gm->dists.delta_dist_y + data->gm->dists.dist_side_y) * d) * data->gm->ray.dir_y, 1, 1, BLUE_PIXEL});
-			//render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (64 * (data->gm->dists.delta_dist_x) * data->gm->ray.dir_x * d),
+			// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + 
+			// 		(64 * (data->gm->dists.delta_dist_x + data->gm->dists.dist_side_x) * d) * data->gm->ray.dir_x,
+			//  		(data->gm->player.pos[1] * 64) + 
+			// 		(64 * (data->gm->dists.delta_dist_y + data->gm->dists.dist_side_y) * d) * data->gm->ray.dir_y, 1, 1, BLUE_PIXEL});
+			// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (64 * (data->gm->dists.delta_dist_x) * data->gm->ray.dir_x * d),
 			// 	(data->gm->player.pos[1] * 64) + (64 * (data->gm->dists.delta_dist_y) * data->gm->ray.dir_y * d), 1, 1, BLUE_PIXEL});
-			//render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (64 * (data->gm->dists.dist_side_x) * data->gm->ray.dir_x * d),
+			// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + (64 * (data->gm->dists.dist_side_x) * data->gm->ray.dir_x * d),
 			// 	(data->gm->player.pos[1] * 64) + (64 * (data->gm->dists.dist_side_y) * data->gm->ray.dir_y * d), 1, 1, GREEN_PIXEL});
-
+			// render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + 
+			// 		(64 * (data->gm->dda.ddaLineSizeX) * d) * data->gm->ray.dir_x,
+			//  		(data->gm->player.pos[1] * 64) + 
+			// 		(64 * (data->gm->dda.ddaLineSizeY) * d) * data->gm->ray.dir_y, 1, 1, BLUE_PIXEL});
 
 			d = d + 0.01;
 		}
-		//printf("---------------------------------------------------------------------------\n");
-		//printf("pos_x: %f | pos_y: %f\n",data->gm->player.pos[0],data->gm->player.pos[1]);
-		//printf("dir_x: %f | dir_y: %f\n",data->gm->player.dir[0],data->gm->player.dir[1]);
-		//printf("ray_dir_x: %f | ray_dir_y: %f\n",data->gm->ray.dir_x,data->gm->ray.dir_y);
-		//printf("LineSizeX: %f | LineSizeY: %f\n",data->gm->dda.ddaLineSizeX,data->gm->dda.ddaLineSizeY);
-		//printf("delta_dist_x: %f | delta_dist_y: %f\n",data->gm->dists.delta_dist_x,data->gm->dists.delta_dist_y);
-		//printf("dist_side_x: %f | dist_side_y: %f\n",data->gm->dists.dist_side_x,data->gm->dists.dist_side_y);
-		//printf("wall_map_pos_x: %f | wall_map_pos_y: %f\n",data->gm->dda.wall_map_pos_x,data->gm->dda.wall_map_pos_y);
-	}
+		//if(data->gm->ray.dir_x > 0.6)
+		//{
+			// printf("pos_x: %f | pos_y: %f\n",data->gm->player.pos[0],data->gm->player.pos[1]);
+			// printf("dir_x: %f | dir_y: %f\n",data->gm->player.dir[0],data->gm->player.dir[1]);
+			// printf("ray_dir_x: %f | ray_dir_y: %f\n",data->gm->ray.dir_x,data->gm->ray.dir_y);
+			printf("delta_dist_x: %f | delta_dist_y: %f\n",data->gm->dists.delta_dist_x,data->gm->dists.delta_dist_y);
+			printf("dist_side_x: %f | dist_side_y: %f\n",data->gm->dists.dist_side_x,data->gm->dists.dist_side_y);
+			printf("LineSizeX: %f | LineSizeY: %f\n",data->gm->dda.ddaLineSizeX,data->gm->dda.ddaLineSizeY);
+			printf("perp_dist: %f\n",data->gm->dda.perp_dist);
+			//printf("wall_map_pos_x: %f | wall_map_pos_y: %f\n",data->gm->dda.wall_map_pos_x,data->gm->dda.wall_map_pos_y);
+			printf("----------------------------------------------\n");
+		//}
+	//}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
 }
