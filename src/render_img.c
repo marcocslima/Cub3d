@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/23 13:35:42 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:48:28 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,19 +120,19 @@ int	check_hit_wall_up(t_game *game)
 	d_y = game->player->y_position - ay;
 	d_x = game->player->x_position - ax;
 	hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
-	printf("cel_y: %i, cel_x: %i\n", ay/40 - 1, ax/40);
-	while (game->map->map[(ay/40) - 1][ax/40] != '1')
+	int cel_x = ax/40;
+	int cel_y = ay/40 - 1;
+	while (cel_x >= 0 && cel_x < game->map->map_width
+			&& cel_y >= 0 && cel_y < game->map->map_higth && game->map->map[(ay/40) - 1][ax/40] != '1')
 	{
 		ay -= 40;
 		ax += x_step;
 		d_y = game->player->y_position - ay;
 		d_x = game->player->x_position - ax;
 		hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
-		printf("cel_y: %i, cel_x: %i\n", ay/40 - 1, ax/40);
+		cel_x = ax/40;
+		cel_y = ay/40 - 1;
 	}
-	printf ("hipotenusa: %i\n", hipotenusa);
-	render_rect(game, COLOR_YELLOW, 1, 1, ay, ax);
-	render_rect(game, COLOR_YELLOW, 1, 1, game->player->y_position, game->player->x_position);
 	return (hipotenusa);
 }
 
@@ -160,27 +160,133 @@ int	check_hit_wall_down(t_game *game)
 	d_y = game->player->y_position - ay;
 	d_x = game->player->x_position - ax;
 	hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
-	printf("cel_y: %i, cel_x: %i\n", ay/40, ax/40);
-	while (game->map->map[(ay/40)][ax/40] != '1')
+	int cel_x = ax/40;
+	int cel_y = ay/40;
+	while (cel_x >= 0 && cel_x < game->map->map_width
+			&& cel_y >= 0 && cel_y < game->map->map_higth && game->map->map[(ay/40)][ax/40] != '1')
 	{
-		printf("cel_y: %i, cel_x: %i\n", ay/40, ax/40);
 		ay += 40;
 		ax += x_step;
 		d_y = game->player->y_position - ay;
 		d_x = game->player->x_position - ax;
 		hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
+		cel_x = ax/40;
+		cel_y = ay/40;
 	}
-	printf ("hipotenusa: %i\n", hipotenusa);
-	render_rect(game, COLOR_YELLOW, 1, 1, ay, ax);
-	render_rect(game, COLOR_YELLOW, 1, 1, game->player->y_position, game->player->x_position);
+	return (hipotenusa);
+}
+
+int	check_vertical_hit_wall_rigth(t_game *game)
+{
+	int	ay;
+	int	ax;
+	int	d_y;
+	int	d_x;
+	int	hipotenusa;
+
+	if (game->player->angle == 0)
+		return (60);
+	ax = game->player->x_position / 40;
+	ax *= 40;
+	ax += 40;
+	ay = (game->player->x_position - ax) * ( -tan (game->player->angle));
+	ay += game->player->y_position;
+
+
+	int x_step = 40;
+	int y_step = 40 * tan(game->player->angle);
+	int bx= ax+x_step;
+	int by= ay+y_step;
+
+	d_y = game->player->y_position - ay;
+	d_x = game->player->x_position - ax;
+	hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
+	int cel_x = ax/40;
+	int cel_y = ay/40;
+	while (cel_x >= 0 && cel_x < game->map->map_width
+			&& cel_y >= 0 && cel_y < game->map->map_higth && game->map->map[ay/40][ax/40] != '1')
+	{
+		ay += y_step;
+		ax += x_step;
+		d_y = game->player->y_position - ay;
+		d_x = game->player->x_position - ax;
+		hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
+		cel_x = ax/40;
+		cel_y = ay/40;
+	}
+	return (hipotenusa);
+}
+
+int	check_vertical_hit_wall_left(t_game *game)
+{
+	int	ay;
+	int	ax;
+	int	d_y;
+	int	d_x;
+	int	hipotenusa;
+
+	if (game->player->angle == 0)
+		return (60);
+	//find first vertical intersection
+	ax = game->player->x_position / 40;
+	ax *= 40;
+	ax -= 1;
+	ay = (game->player->x_position - ax) * ( -tan (game->player->angle));
+	ay += game->player->y_position;
+
+
+	int x_step = -40;
+	int y_step = 40 * -tan(game->player->angle);
+	int bx= ax+x_step;
+	int by= ay+y_step;
+
+	d_y = game->player->y_position - ay;
+	d_x = game->player->x_position - ax;
+	hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
+	int cel_x = ax/40;
+	int cel_y = ay/40;
+	while (cel_x >= 0 && cel_x < game->map->map_width
+			&& cel_y >= 0 && cel_y < game->map->map_higth && game->map->map[ay/40][ax/40] != '1')
+	{
+		ay += y_step;
+		ax += x_step;
+		d_y = game->player->y_position - ay;
+		d_x = game->player->x_position - ax;
+		hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
+		cel_x = ax/40;
+		cel_y = ay/40;
+	}
 	return (hipotenusa);
 }
 
 int	check_hit_wall(t_game *game)
 {
+	int vertical;
+	int horizontal;
+
 	if (game->player->angle > PI && game->player->angle < 2 * PI)
-		return (check_hit_wall_up(game));
-	return(check_hit_wall_down(game));
+	{
+		horizontal = (check_hit_wall_up(game));
+		if (game->player->angle > 3*PI/2 || game->player->angle < PI/2)
+			vertical = check_vertical_hit_wall_rigth(game);
+		if (game->player->angle < 3*PI/2 && game->player->angle > PI/2)
+		{
+			vertical = check_vertical_hit_wall_left(game);
+		}
+	}
+	else
+	{
+		horizontal = (check_hit_wall_down(game));
+		if (game->player->angle >= 3*PI/2 || game->player->angle <= PI/2)
+			vertical = check_vertical_hit_wall_rigth(game);
+		else
+			vertical = check_vertical_hit_wall_left(game);
+	}
+	if (horizontal < vertical)
+		return (horizontal);
+	else
+		return (vertical);
+	return(-1);
 }
 
 void	teste(t_game *game)
