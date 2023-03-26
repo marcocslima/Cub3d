@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/26 17:48:28 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:07:27 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,14 +298,8 @@ void	teste(t_game *game)
 	while(d < 1)
 	{
 		render_rect(game, COLOR_RED, 1, 1, game->player->y_position + game->player->delta_y * d, game->player->x_position + game->player->delta_x * d);
-		d += 0.01;
+		d += 0.001;
 	}
-	//find_first_intersection(game);
-	// int cel_y = (int)(ay) / 40;
-	// int cel_x = (int)(ax) / 40;
-	// printf("cel_y: %i, cel_x: %i\n", cel_y, cel_x);
-	// int ya = -40;
-	// int xa = 40 / -tan(game->player->angle);
 }
 
 int	render(t_game *game)
