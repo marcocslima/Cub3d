@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/24 03:42:40 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/26 06:36:41 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 #define BEIGE_PIXEL 0xDAC8B3
 #define RED_PIXEL 0xFF0000
 #define BLUE_PIXEL 0x0000FF
+#define GRAY1_PIXEL 0x5e514f
+#define GRAY2_PIXEL 0xa99e8d
 #define GREEN_PIXEL 0xFF00
 #define WHITE_PIXEL 0xFFFFFF
 #define BLACK_PIXEL 0x000000

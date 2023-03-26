@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/25 16:15:21 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/26 06:38:51 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	plot_map(t_data *data)
 	int	side;
 
 	i = -1;
-	side = 64;//data->l_side;
+	side = 15;//data->l_side;
 	while(++i < data->gm->map->map_higth)
 	{
 		j = -1;
@@ -175,23 +175,35 @@ int	render(t_data *data)
 	pixel = -1;
 	while (++pixel < WIDTH)
 	{
-		ray_dir(WIDTH / 2, data);
+		//ray_dir(WIDTH / 2, data);
 		ray_dir(pixel, data);
 		calc_delta_dist(data);
 		calc_side_dist(data);
 		calc_dda(data);
+		printf("hit_side: %d\n",data->gm->dda.hitSide);
+		char *color;
+		if(data->gm->dda.hitSide == 1)
+			color = GRAY1_PIXEL;
+		else if(data->gm->dda.hitSide == 0)
+			color = GRAY2_PIXEL;
 		calc_perp_dist(data);
-		// calc_wall(data);
+		calc_wall(data);
 
 		float d = 0.01;
 		while(d < 1)
 		{
-			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 64) + 
-				(64 * data->gm->ray.dir_x * d * data->gm->dda.perp_dist),
-				(data->gm->player.pos[1] * 64) + 
-				(64 * data->gm->ray.dir_y * d  * data->gm->dda.perp_dist), 1, 1, GREEN_PIXEL});
+			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 15) + 
+				(15 * data->gm->ray.dir_x * d * data->gm->dda.perp_dist),
+				(data->gm->player.pos[1] * 15) + 
+				(15 * data->gm->ray.dir_y * d  * data->gm->dda.perp_dist), 1, 1, GREEN_PIXEL});
 			d = d + 0.001;
 		}
+		
+		render_rect(&data->img, (t_rect){(pixel) + 
+				(data->gm->ray.dir_x),
+				(data->gm->dda.line_start) + 
+				(data->gm->ray.dir_y), 1, data->gm->dda.wall_line_height, color});
+		printf("wall_line_height: %f\n",data->gm->dda.wall_line_height);
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);
