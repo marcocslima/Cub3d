@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/23 12:55:58 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:35:42 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,23 +153,23 @@ int	check_hit_wall_down(t_game *game)
 	ax += game->player->x_position;
 	d_y = game->player->y_position - ay;
 	d_x = game->player->x_position - ax;
-	int x_step = 40/-tan(game->player->angle);
+	int x_step = 40/tan(game->player->angle);
 	int y_step = 40;
 	int bx= ax+x_step;
 	int by= ay+y_step;
 	d_y = game->player->y_position - ay;
 	d_x = game->player->x_position - ax;
 	hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
-	printf("cel_y: %i, cel_x: %i\n", ay/40 - 1, ax/40);
-	/*while (game->map->map[(ay/40) - 1][ax/40] != '1')
+	printf("cel_y: %i, cel_x: %i\n", ay/40, ax/40);
+	while (game->map->map[(ay/40)][ax/40] != '1')
 	{
-		ay -= 40;
+		printf("cel_y: %i, cel_x: %i\n", ay/40, ax/40);
+		ay += 40;
 		ax += x_step;
 		d_y = game->player->y_position - ay;
 		d_x = game->player->x_position - ax;
 		hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
-		printf("cel_y: %i, cel_x: %i\n", ay/40 - 1, ax/40);
-	}*/
+	}
 	printf ("hipotenusa: %i\n", hipotenusa);
 	render_rect(game, COLOR_YELLOW, 1, 1, ay, ax);
 	render_rect(game, COLOR_YELLOW, 1, 1, game->player->y_position, game->player->x_position);
@@ -180,16 +180,8 @@ int	check_hit_wall(t_game *game)
 {
 	if (game->player->angle > PI && game->player->angle < 2 * PI)
 		return (check_hit_wall_up(game));
-	check_hit_wall_down(game);
-	return(60);
+	return(check_hit_wall_down(game));
 }
-
-// void find_horizontal_intersection(t_game *game)
-// {
-// 	int	**coordenadas;
-
-// 	find_first_intersection(game);
-// }
 
 void	teste(t_game *game)
 {
