@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/28 13:34:38 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:20:47 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,34 +259,49 @@ int	check_vertical_hit_wall_left(t_game *game)
 	return (hipotenusa);
 }
 
-int	check_hit_wall(t_game *game)
+int	looking_up(float angle)
 {
-	int vertical;
-	int horizontal;
+	if (angle > PI && angle < 2 * PI)
+		return (1);
+	return (0);
+}
 
-	if (game->player->angle > PI && game->player->angle < 2 * PI)
-	{
-		horizontal = (check_hit_wall_up(game));
-		if (game->player->angle > 3*PI/2 || game->player->angle < PI/2)
-			vertical = check_vertical_hit_wall_rigth(game);
-		if (game->player->angle < 3*PI/2 && game->player->angle > PI/2)
-		{
-			vertical = check_vertical_hit_wall_left(game);
-		}
-	}
+int	looking_right(float angle)
+{
+	if (angle > 3*PI/2 || angle < PI/2)
+		return (1);
+	return (0);
+}
+
+int	looking_left(float angle)
+{
+	if (angle < 3*PI/2 && angle > PI/2)
+		return (1);
+	return (0);
+}
+
+int	shorter_distance(int x, int y)
+{
+	if (x <= y)
+		return (x);
 	else
-	{
-		horizontal = (check_hit_wall_down(game));
-		if (game->player->angle >= 3*PI/2 || game->player->angle <= PI/2)
-			vertical = check_vertical_hit_wall_rigth(game);
-		else
-			vertical = check_vertical_hit_wall_left(game);
-	}
-	if (horizontal < vertical)
-		return (horizontal);
+		return (y);
+}
+
+int	find_wall_intersection(t_game *game)
+{
+	int	vertical_intersection;
+	int	horizontal_intersection;
+
+	if (looking_up(game->player->angle))
+		horizontal_intersection = (check_hit_wall_up(game));
 	else
-		return (vertical);
-	return(-1);
+		horizontal_intersection = (check_hit_wall_down(game));
+	if (looking_right(game->player->angle))
+		vertical_intersection = check_vertical_hit_wall_rigth(game);
+	else
+		vertical_intersection = check_vertical_hit_wall_left(game);
+	return (shorter_distance(horizontal_intersection, vertical_intersection));
 }
 
 void	ray_casting(t_game *game)
@@ -294,7 +309,7 @@ void	ray_casting(t_game *game)
 	float	d = 0.1;
 	int		ray_length;
 
-	ray_length = check_hit_wall(game);
+	ray_length = find_wall_intersection(game);
 	game->player->delta_x = cos(game->player->angle) * ray_length;
 	game->player->delta_y = sin(game->player->angle) * ray_length;
 
