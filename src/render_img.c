@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/28 14:20:47 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:33:17 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,13 +273,6 @@ int	looking_right(float angle)
 	return (0);
 }
 
-int	looking_left(float angle)
-{
-	if (angle < 3*PI/2 && angle > PI/2)
-		return (1);
-	return (0);
-}
-
 int	shorter_distance(int x, int y)
 {
 	if (x <= y)
@@ -288,19 +281,29 @@ int	shorter_distance(int x, int y)
 		return (y);
 }
 
+int	find_vertical_intersection(t_game *game)
+{
+	if (looking_up(game->player->angle))
+		return (check_hit_wall_up(game));
+	else
+		return (check_hit_wall_down(game));
+}
+
+int	find_horizontal_intersection(t_game *game)
+{
+	if (looking_right(game->player->angle))
+		return (check_vertical_hit_wall_rigth(game));
+	else
+		return (check_vertical_hit_wall_left(game));
+}
+
 int	find_wall_intersection(t_game *game)
 {
 	int	vertical_intersection;
 	int	horizontal_intersection;
 
-	if (looking_up(game->player->angle))
-		horizontal_intersection = (check_hit_wall_up(game));
-	else
-		horizontal_intersection = (check_hit_wall_down(game));
-	if (looking_right(game->player->angle))
-		vertical_intersection = check_vertical_hit_wall_rigth(game);
-	else
-		vertical_intersection = check_vertical_hit_wall_left(game);
+	vertical_intersection = find_vertical_intersection(game);
+	horizontal_intersection = find_horizontal_intersection(game);
 	return (shorter_distance(horizontal_intersection, vertical_intersection));
 }
 
