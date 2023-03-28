@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/21 13:56:08 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:28:35 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	move_direction(t_game *game, int key_code)
 		game->player->angle -= 0.1;
 		if(game->player->angle < 0)
 			game->player->angle += 2 * PI;
-		game->player->delta_x = cos(game->player->angle) * 60;
-		game->player->delta_y = sin(game->player->angle) *60;
+		//game->player->delta_x = cos(game->player->angle) * 60;
+		//game->player->delta_y = sin(game->player->angle) *60;
 		//printf("angulo em graus: %f\n", rad_to_deg(game->player->angle));
 	}
 
@@ -49,8 +49,8 @@ void	move_direction(t_game *game, int key_code)
 		game->player->angle += 0.1;
 		if(game->player->angle > 2 * PI)
 			game->player->angle -= 2 * PI;
-		game->player->delta_x = cos(game->player->angle) *60;
-		game->player->delta_y = sin(game->player->angle) *60;
+		//game->player->delta_x = cos(game->player->angle) *60;
+		//game->player->delta_y = sin(game->player->angle) *60;
 		//printf("angulo em graus: %f\n", rad_to_deg(game->player->angle));
 	}
 }

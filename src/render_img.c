@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/26 19:22:07 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:34:38 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,11 +289,14 @@ int	check_hit_wall(t_game *game)
 	return(-1);
 }
 
-void	teste(t_game *game)
+void	ray_casting(t_game *game)
 {
-	float d = 0.1;
-	game->player->delta_x = cos(game->player->angle) * check_hit_wall(game);
-	game->player->delta_y = sin(game->player->angle) * check_hit_wall(game);
+	float	d = 0.1;
+	int		ray_length;
+
+	ray_length = check_hit_wall(game);
+	game->player->delta_x = cos(game->player->angle) * ray_length;
+	game->player->delta_y = sin(game->player->angle) * ray_length;
 
 	while(d < 1)
 	{
@@ -306,8 +309,7 @@ int	render(t_game *game)
 {
 	render_background(game, COLOR_GRAY);
 	render_map(game);
-	//render_player(game);
-	teste(game);
+	ray_casting(game);
 	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win, game->img_data->mlx_img, 0, 0);
 	return (1);
 }
