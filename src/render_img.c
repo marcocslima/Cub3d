@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/29 09:59:59 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:37:20 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	calculate_ray_length(t_game *game, int y_coordinate, int x_coordinate)
 	return (sqrt(pow(delta_y, 2) + pow(delta_x, 2)));
 }
 
-int	hit_wall_looking_up(t_game *game, int y_coordinate, int x_coordinate, int y_step, int x_step)
+int	hit_wall(t_game *game, int y_coordinate, int x_coordinate, int y_step, int x_step)
 {
 	int	cell_x;
 	int	cell_y;
@@ -121,58 +121,36 @@ int	hit_wall_looking_up(t_game *game, int y_coordinate, int x_coordinate, int y_
 	return (calculate_ray_length(game, y_coordinate, x_coordinate));
 }
 
-int	check_hit_wall_up(t_game *game)
+int	distance_to_horizontal_wall_up(t_game *game)
 {
-	int	ay;
-	int	ax;
+	int	y_coordinate;
+	int	x_coordinate;
 	int	x_step;
 	int	y_step;
 	int	ray_length;
 
-	ay = ((int)game->player->y_position / 40) * 40 - 1;
-	ax = ((int)(game->player->y_position - ay) / (-tan (game->player->angle))) + game->player->x_position;
+	y_coordinate = ((int)game->player->y_position / 40) * 40 - 1;
+	x_coordinate = ((int)(game->player->y_position - y_coordinate) / (-tan (game->player->angle))) + game->player->x_position;
 	x_step = 40/-tan(game->player->angle);
 	y_step = -40;
-	ray_length = hit_wall_looking_up(game, ay, ax, y_step, x_step);
+	ray_length = hit_wall(game, y_coordinate, x_coordinate, y_step, x_step);
 	return (ray_length);
 }
 
-int	check_hit_wall_down(t_game *game)
+int	distance_to_horizontal_wall_down(t_game *game)
 {
-	int	ay;
-	int	ax;
-	int	d_y;
-	int	d_x;
-	int	hipotenusa;
+	int	y_coordinate;
+	int	x_coordinate;
+	int	x_step;
+	int	y_step;
+	int	ray_length;
 
-	ay = game->player->y_position / 40;
-	ay *= 40;
-	ay += 40;
-	ax = (game->player->y_position - ay) / (-tan (game->player->angle));
-	ax += game->player->x_position;
-	d_y = game->player->y_position - ay;
-	d_x = game->player->x_position - ax;
-	int x_step = 40/tan(game->player->angle);
-	int y_step = 40;
-	int bx= ax+x_step;
-	int by= ay+y_step;
-	d_y = game->player->y_position - ay;
-	d_x = game->player->x_position - ax;
-	hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
-	int cel_x = ax/40;
-	int cel_y = ay/40;
-	while (cel_x >= 0 && cel_x < game->map->map_width
-			&& cel_y >= 0 && cel_y < game->map->map_higth && game->map->map[(ay/40)][ax/40] != '1')
-	{
-		ay += 40;
-		ax += x_step;
-		d_y = game->player->y_position - ay;
-		d_x = game->player->x_position - ax;
-		hipotenusa = sqrt(pow(d_y, 2) + pow(d_x, 2));
-		cel_x = ax/40;
-		cel_y = ay/40;
-	}
-	return (hipotenusa);
+	y_coordinate = ((int)game->player->y_position / 40) * 40 + 40;
+	x_coordinate = ((int)(game->player->y_position - y_coordinate) / (-tan (game->player->angle))) + game->player->x_position;
+	x_step = 40/tan(game->player->angle);
+	y_step = 40;
+	ray_length = hit_wall(game, y_coordinate, x_coordinate, y_step, x_step);
+	return (ray_length);
 }
 
 int	check_vertical_hit_wall_rigth(t_game *game)
@@ -276,15 +254,15 @@ int	shorter_distance(int x, int y)
 		return (y);
 }
 
-int	find_vertical_intersection(t_game *game)
+int	distance_to_vertical_wall(t_game *game)
 {
 	if (looking_up(game->player->angle))
-		return (check_hit_wall_up(game));
+		return (distance_to_horizontal_wall_up(game));
 	else
-		return (check_hit_wall_down(game));
+		return (distance_to_horizontal_wall_down(game));
 }
 
-int	find_horizontal_intersection(t_game *game)
+int	distance_to_horizontal_wall(t_game *game)
 {
 	if (looking_right(game->player->angle))
 		return (check_vertical_hit_wall_rigth(game));
@@ -292,14 +270,14 @@ int	find_horizontal_intersection(t_game *game)
 		return (check_vertical_hit_wall_left(game));
 }
 
-int	find_wall_intersection(t_game *game)
+int	find_wall_distance(t_game *game)
 {
-	int	vertical_intersection;
-	int	horizontal_intersection;
+	int	vertical_wall_distance;
+	int	horizontal_wall_distance;
 
-	vertical_intersection = find_vertical_intersection(game);
-	horizontal_intersection = find_horizontal_intersection(game);
-	return (shorter_distance(horizontal_intersection, vertical_intersection));
+	vertical_wall_distance = distance_to_vertical_wall(game);
+	horizontal_wall_distance = distance_to_horizontal_wall(game);
+	return (shorter_distance(horizontal_wall_distance, vertical_wall_distance));
 }
 
 void	ray_casting(t_game *game)
