@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/29 13:42:59 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/29 14:26:36 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_img
 {
 	void	*mlx_img;
 	char	*addr;
-	int		bpp; /* bits per pixel */
+	int		bpp;
 	int		line_len;
 	int		endian;
 }	t_img;
@@ -120,7 +120,8 @@ void	free_cub3d(t_game **game);
 
 void	ray_casting(t_game *game);
 int		find_wall_distance(t_game *game);
-int		hit_wall(t_game *game, int y_coordinate, int x_coordinate, int y_step, int x_step);
+int		hit_wall(t_game *game, int y_coordinate, int x_coordinate,
+			int y_step, int x_step);
 int		shorter_distance(int x, int y);
 int		distance_to_horizontal_wall_up(t_game *game);
 int		distance_to_horizontal_wall_down(t_game *game);
@@ -164,7 +165,8 @@ void	verify_sides(t_game **game, char character);
 void	verify_walls(t_game **game);
 void	verify_map(t_game **game);
 
-int		render_rect(t_game *game, int color, int rect_height, int rect_width, int y_position, int x_position);
+int		render_rect(t_game *game, int color, int rect_height, int rect_width,
+			int y_position, int x_position);
 int		render(t_game *game);
 
 //test

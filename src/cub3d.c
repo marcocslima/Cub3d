@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/28 13:28:35 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/29 14:28:38 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,14 @@ void	move_direction(t_game *game, int key_code)
 	if (key_code == LEFT_ARROW)
 	{
 		game->player->angle -= 0.1;
-		if(game->player->angle < 0)
+		if (game->player->angle < 0)
 			game->player->angle += 2 * PI;
-		//game->player->delta_x = cos(game->player->angle) * 60;
-		//game->player->delta_y = sin(game->player->angle) *60;
-		//printf("angulo em graus: %f\n", rad_to_deg(game->player->angle));
 	}
-
 	if (key_code == RIGHT_ARROW)
 	{
 		game->player->angle += 0.1;
-		if(game->player->angle > 2 * PI)
+		if (game->player->angle > 2 * PI)
 			game->player->angle -= 2 * PI;
-		//game->player->delta_x = cos(game->player->angle) *60;
-		//game->player->delta_y = sin(game->player->angle) *60;
-		//printf("angulo em graus: %f\n", rad_to_deg(game->player->angle));
 	}
 }
 
@@ -93,8 +86,11 @@ int	main(int argc, char *argv[])
 		verify_map(&game);
 		//print_whole_map(game);
 
-		game->img_data->mlx_img = mlx_new_image(game->mlx_data->mlx_ptr, 1500, 600);
-		game->img_data->addr = mlx_get_data_addr(game->img_data->mlx_img, &game->img_data->bpp, &game->img_data->line_len, &game->img_data->endian);
+		game->img_data->mlx_img = mlx_new_image(game->mlx_data->mlx_ptr,
+				1500, 600);
+		game->img_data->addr = mlx_get_data_addr(game->img_data->mlx_img,
+				&game->img_data->bpp, &game->img_data->line_len,
+				&game->img_data->endian);
 
 		mlx_loop_hook(game->mlx_data->mlx_ptr, &render, game);
 		mlx_hook(game->mlx_data->mlx_win, 17, 1L << 17, close_window, game);
