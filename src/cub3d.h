@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/19 15:18:45 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/29 13:42:59 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,21 @@ int		close_window(t_game *game);
 void	free_matrix(char **ptr);
 void	free_map_header(t_map_header **header);
 void	free_cub3d(t_game **game);
+
+/* ---------------------------------------------------------------------*\
+|							ray_casting									|
+\* ---------------------------------------------------------------------*/
+
+void	ray_casting(t_game *game);
+int		find_wall_distance(t_game *game);
+int		hit_wall(t_game *game, int y_coordinate, int x_coordinate, int y_step, int x_step);
+int		shorter_distance(int x, int y);
+int		distance_to_horizontal_wall_up(t_game *game);
+int		distance_to_horizontal_wall_down(t_game *game);
+int		distance_to_vertical_wall_right(t_game *game);
+int		distance_to_vertical_wall_left(t_game *game);
+int		looking_up(float angle);
+int		looking_right(float angle);
 
 /* ---------------------------------------------------------------------*\
 |							start_game									|
