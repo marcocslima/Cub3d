@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/26 06:38:51 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/26 09:47:50 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,15 +180,15 @@ int	render(t_data *data)
 		calc_delta_dist(data);
 		calc_side_dist(data);
 		calc_dda(data);
-		printf("hit_side: %d\n",data->gm->dda.hitSide);
-		char *color;
+		calc_perp_dist(data);
+		calc_wall(data);
+
+		int color;
 		if(data->gm->dda.hitSide == 1)
 			color = GRAY1_PIXEL;
 		else if(data->gm->dda.hitSide == 0)
 			color = GRAY2_PIXEL;
-		calc_perp_dist(data);
-		calc_wall(data);
-
+		
 		float d = 0.01;
 		while(d < 1)
 		{
@@ -274,7 +274,7 @@ int	main(int argc, char *argv[])
 	{
 		get_map(game->file, &game->map);
 		get_header(&game);
-		check_header(&game);
+		//check_header(&game);
 		verify_map(&game);
 		//print_whole_map(game);
 		//print_map(game);
