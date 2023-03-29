@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/29 10:47:53 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:04:45 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int	distance_to_horizontal_wall_down(t_game *game)
 	return (ray_length);
 }
 
-int	check_vertical_hit_wall_rigth(t_game *game)
+int	distance_to_vertical_wall_right(t_game *game)
 {
 	int	y_coordinate;
 	int	x_coordinate;
@@ -231,7 +231,7 @@ int	shorter_distance(int x, int y)
 		return (y);
 }
 
-int	distance_to_vertical_wall(t_game *game)
+int	distance_to_horizontal_wall(t_game *game)
 {
 	if (looking_up(game->player->angle))
 		return (distance_to_horizontal_wall_up(game));
@@ -239,10 +239,10 @@ int	distance_to_vertical_wall(t_game *game)
 		return (distance_to_horizontal_wall_down(game));
 }
 
-int	distance_to_horizontal_wall(t_game *game)
+int	distance_to_vertical_wall(t_game *game)
 {
 	if (looking_right(game->player->angle))
-		return (check_vertical_hit_wall_rigth(game));
+		return (distance_to_vertical_wall_right(game));
 	else
 		return (check_vertical_hit_wall_left(game));
 }
