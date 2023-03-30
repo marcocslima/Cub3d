@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/26 09:47:50 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/30 08:03:30 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ int	render(t_data *data)
 				(data->gm->ray.dir_x),
 				(data->gm->dda.line_start) + 
 				(data->gm->ray.dir_y), 1, data->gm->dda.wall_line_height, color});
-		printf("wall_line_height: %f\n",data->gm->dda.wall_line_height);
+		//printf("wall_line_height: %f\n",data->gm->dda.wall_line_height);
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	return (0);

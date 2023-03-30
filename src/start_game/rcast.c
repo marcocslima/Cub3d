@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/26 09:22:48 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/03/30 08:40:58 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ void	calc_perp_dist(t_data *data)
 void	calc_wall(t_data *data)
 {
 	data->gm->dda.wall_line_height = HEIGHT / data->gm->dda.perp_dist;
-	if(data->gm->dda.wall_line_height >= HEIGHT)
-		data->gm->dda.wall_line_height = HEIGHT;
-	data->gm->dda.line_start = (HEIGHT / 2) - (data->gm->dda.wall_line_height / 2);
-	data->gm->dda.line_end = HEIGHT / 2 + data->gm->dda.wall_line_height / 2;
+	data->gm->dda.line_start = HEIGHT / 2 - data->gm->dda.wall_line_height / 2;
+	if (data->gm->dda.line_start < 0)
+		data->gm->dda.line_start = 0;
+	data->gm->dda.line_end = data->gm->dda.wall_line_height / 2 + HEIGHT / 2;
 }
