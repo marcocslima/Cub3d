@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/29 14:28:38 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/30 09:46:27 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char *argv[])
 		//print_whole_map(game);
 
 		game->img_data->mlx_img = mlx_new_image(game->mlx_data->mlx_ptr,
-				1500, 600);
+				900, 600);
 		game->img_data->addr = mlx_get_data_addr(game->img_data->mlx_img,
 				&game->img_data->bpp, &game->img_data->line_len,
 				&game->img_data->endian);

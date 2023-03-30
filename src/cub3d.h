@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/29 14:26:36 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/30 09:42:24 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,14 @@ void	free_cub3d(t_game **game);
 \* ---------------------------------------------------------------------*/
 
 void	ray_casting(t_game *game);
-int		find_wall_distance(t_game *game);
+int		find_wall_distance(t_game *game, float angle);
 int		hit_wall(t_game *game, int y_coordinate, int x_coordinate,
 			int y_step, int x_step);
 int		shorter_distance(int x, int y);
-int		distance_to_horizontal_wall_up(t_game *game);
-int		distance_to_horizontal_wall_down(t_game *game);
-int		distance_to_vertical_wall_right(t_game *game);
-int		distance_to_vertical_wall_left(t_game *game);
+int		distance_to_horizontal_wall_up(t_game *game, float angle);
+int		distance_to_horizontal_wall_down(t_game *game, float angle);
+int		distance_to_vertical_wall_right(t_game *game, float angle);
+int		distance_to_vertical_wall_left(t_game *game, float angle);
 int		looking_up(float angle);
 int		looking_right(float angle);
 
