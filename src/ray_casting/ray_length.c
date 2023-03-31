@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:35:58 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/30 13:32:44 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:41:36 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 float	distance_to_horizontal_wall(t_game *game, float angle)
 {
-	if (looking_up(game->player->angle))
+	if (looking_up(angle))
 		return (distance_to_horizontal_wall_up(game, angle));
 	else
 		return (distance_to_horizontal_wall_down(game, angle));
@@ -22,7 +22,7 @@ float	distance_to_horizontal_wall(t_game *game, float angle)
 
 float	distance_to_vertical_wall(t_game *game, float angle)
 {
-	if (looking_right(game->player->angle))
+	if (looking_right(angle))
 		return (distance_to_vertical_wall_right(game, angle));
 	else
 		return (distance_to_vertical_wall_left(game, angle));
