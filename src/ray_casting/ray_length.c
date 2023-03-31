@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:35:58 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/31 16:41:36 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:37:56 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ float	distance_to_vertical_wall(t_game *game, float angle)
 
 float	find_wall_distance(t_game *game, float angle)
 {
-	int	vertical_wall_distance;
-	int	horizontal_wall_distance;
+	float	vertical_wall_distance;
+	float	horizontal_wall_distance;
 
 	vertical_wall_distance = distance_to_vertical_wall(game, angle);
 	horizontal_wall_distance = distance_to_horizontal_wall(game, angle);
+	//printf("horizontal: %f, vertical: %f\n", horizontal_wall_distance, vertical_wall_distance);
 	return (shorter_distance(horizontal_wall_distance, vertical_wall_distance));
 }
