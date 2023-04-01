@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:35:58 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/31 18:37:56 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:43:02 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 float	distance_to_horizontal_wall(t_game *game, float angle)
 {
+	//printf("looking-up:%i\n", looking_up(angle));
+	//printf("angle: %f\n", angle);
 	if (looking_up(angle))
 		return (distance_to_horizontal_wall_up(game, angle));
 	else

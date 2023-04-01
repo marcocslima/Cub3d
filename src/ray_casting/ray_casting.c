@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/31 18:40:42 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/31 20:16:14 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	ray_casting(t_game *game)
 	float	ray_angle;
 	int		ray_count;
 
-	ray_angle = game->player->angle - (PI/6);
+	ray_angle = game->player->angle - (int)(PI/6);
 	ray_count = 0;
-	while (ray_count < 1)
+	while (ray_count < 900)
 	{
 		ray_length = find_wall_distance(game, ray_angle);
 	//	printf("ray_len: %f\n", ray_length);

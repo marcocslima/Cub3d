@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:41:15 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/31 18:49:59 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:42:26 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ float	distance_to_horizontal_wall_up(t_game *game, float angle)
 	float	x_step;
 	float	y_step;
 	float	ray_length;
+	static int	i = 0;
 
+	i++;
+	//printf("up: %i\n", i);
 	y_coordinate = ((int)game->player->y_position / 40) * 40 - 1;
 	x_coordinate = ((int)(game->player->y_position - y_coordinate))
 			/ (-tan(angle)) + game->player->x_position;
@@ -37,6 +40,10 @@ float	distance_to_horizontal_wall_down(t_game *game, float angle)
 	float	x_step;
 	float	y_step;
 	float	ray_length;
+	static int	i = 0;
+
+	i++;
+	//printf("down: %i\n", i);
 
 	y_coordinate = ((int)game->player->y_position / 40) * 40 + 40;
 	x_coordinate = (((int)(game->player->y_position - y_coordinate))
