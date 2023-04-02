@@ -144,14 +144,32 @@ int looking(float ang, t_data *data)
 
 int moving(int key, t_data *data)
 {
+	float	desloc;
+
+	desloc = 0.1;
 	if (key == A)
-		data->gm->player.pos[0] = data->gm->player.pos[0] - 0.1;
+	{
+		if(data->gm->map->map[(int)data->gm->player.pos[0]][(int)data->gm->player.pos[1]] == '0')
+		{
+			data->gm->player.pos[0] += data->gm->player.dir[1] * desloc;
+			data->gm->player.pos[1] -= data->gm->player.dir[0] * desloc;
+		}
+	}
 	if (key == D)
-		data->gm->player.pos[0] = data->gm->player.pos[0] + 0.1;
+	{
+		data->gm->player.pos[0] -= data->gm->player.dir[1] * desloc;
+		data->gm->player.pos[1] += data->gm->player.dir[0] * desloc;
+	}
 	if (key == W)
-		data->gm->player.pos[1] = data->gm->player.pos[1] - 0.1;
+	{
+		data->gm->player.pos[0] += data->gm->player.dir[0] * desloc;
+		data->gm->player.pos[1] += data->gm->player.dir[1] * desloc;
+	}
 	if (key == S)
-		data->gm->player.pos[1] = data->gm->player.pos[1] + 0.1;
+	{
+		data->gm->player.pos[0] -= data->gm->player.dir[0] * desloc;
+		data->gm->player.pos[1] -= data->gm->player.dir[1] * desloc;
+	}
 	if (key == 65361)
 		looking(- PI / 100, data);
 	if (key == 65363)
@@ -205,7 +223,14 @@ int	render(t_data *data)
 				(data->gm->ray.dir_y), 1, data->gm->dda.wall_line_height, color});
 		//printf("wall_line_height: %f\n",data->gm->dda.wall_line_height);
 	}
+	void *img_ptr;
+	int bits_per_pixel, size_line, endian;
+	int width, height;
+	img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "../cub3d/assets/imgs/colorstone.xpm", &width, &height);
+	char *img_data = mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
+
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_ptr, 0, 0);
 	return (0);
 }
 
@@ -239,12 +264,10 @@ int	run_game(t_game *game)
 	t_data *data;
 
 	data = (t_data *)malloc(sizeof(t_data));
-	data->gm = game;	
+	data->gm = game;
 	data->mlx_ptr = mlx_init();
-	if (data->mlx_ptr == NULL)
-		return (MLX_ERROR);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
-	if (data->win_ptr == NULL)
+	if (data->mlx_ptr == NULL || data->win_ptr == NULL)
 	{
 		free(data->win_ptr);
 		return (MLX_ERROR);

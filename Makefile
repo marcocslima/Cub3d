@@ -56,7 +56,8 @@ SOURCES =	cub3d.c\
 			utils.c\
 			finish_game.c\
 			utils_print.c\
-			rcast.c
+			rcast.c\
+			render.c
 
 
 # COMPILED_SOURCES #
