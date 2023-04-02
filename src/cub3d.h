@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/30 08:20:46 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/02 15:58:37 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,27 @@ typedef struct s_img
 {
 	void	*mlx_img;
 	char	*addr;
+	int		*data;
+	int		wdt;
+	int		hgt;
 	int		bpp; /* bits per pixel */
 	int		line_len;
 	int		endian;
 }	t_img;
+
+typedef struct s_render_tx
+{
+	int		txt_id;
+	float	wallx;
+	int		txtx;
+	float	step;
+	float	txtpos;
+}	t_render_tx;
+
+typedef struct s_img_tx
+{
+	t_img	txt_img;
+}	t_img_tx;
 
 typedef struct s_rect
 {
@@ -141,6 +158,8 @@ typedef struct s_game
 	t_dists			dists;
 	t_dda			dda;
 	float			ang;
+	t_img_tx		tx_img[4];
+	t_render_tx		tx_render;
 }	t_game;
 
 typedef struct s_data
