@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/03 10:05:50 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:04:44 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	ray_casting(t_game *game)
 		correc_wall_distance = ray_length * cos(ray_angle - game->player->angle);
 		distance = (MAP_CELL / correc_wall_distance) * distance_to_proj_plane;
 		//wall_height = (MAP_CELL/ray_length) * distance;
-		draw_line(ray_count, (600/2)- distance, (600/2)+ distance, game);
+		draw_line(ray_count, (600/2)- (distance/2), (600/2)+ (distance/2), game);
 
 		// game->player->delta_x = cos(ray_angle) * ray_length;
 		// game->player->delta_y = sin(ray_angle) * ray_length;
