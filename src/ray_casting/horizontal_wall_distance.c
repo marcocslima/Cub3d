@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:41:15 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/03 10:01:10 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:16:22 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	distance_to_horizontal_wall_up(t_game *game, double angle)
 	double	y_step;
 	double	ray_length;
 
-	y_coordinate = ((int)game->player->y_position / MAP_CELL) * MAP_CELL - 1;
+	y_coordinate = ((int)game->player->y_position / MAP_CELL) * MAP_CELL - 0.0001;
 	x_coordinate = ((int)(game->player->y_position - y_coordinate))
 			/ (-tan(angle)) + game->player->x_position;
 	x_step = MAP_CELL / -tan(angle);
