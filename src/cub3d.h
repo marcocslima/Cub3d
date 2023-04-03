@@ -205,6 +205,7 @@ void	print_error_exit(t_game **game, char *msg);
 void	print_error_msg(char *msg);
 int		matrix_len(char **matrix);
 int		check_str_is_number(char *str);
+void	load_textures(t_data *data);
 
 /* ---------------------------------------------------------------------*\
 |							validate									|

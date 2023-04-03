@@ -221,16 +221,9 @@ int	render(t_data *data)
 				(data->gm->ray.dir_x),
 				(data->gm->dda.line_start) + 
 				(data->gm->ray.dir_y), 1, data->gm->dda.wall_line_height, color});
-		//printf("wall_line_height: %f\n",data->gm->dda.wall_line_height);
 	}
-	void *img_ptr;
-	int bits_per_pixel, size_line, endian;
-	int width, height;
-	img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "../cub3d/assets/imgs/colorstone.xpm", &width, &height);
-	char *img_data = mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
-
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_ptr, 0, 0);
+	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->gm->tx_img[0].txt_img.mlx_img, 0, 0);
 	return (0);
 }
 
@@ -266,6 +259,7 @@ int	run_game(t_game *game)
 	data = (t_data *)malloc(sizeof(t_data));
 	data->gm = game;
 	data->mlx_ptr = mlx_init();
+	load_textures(data);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
 	if (data->mlx_ptr == NULL || data->win_ptr == NULL)
 	{
