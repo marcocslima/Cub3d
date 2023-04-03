@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/02 17:34:26 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/02 23:38:59 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,26 @@ void render_significant_angles(t_game *game)
 	}
 }
 
+void	draw_line(int x1, int y1, int y2, t_game *game)
+{
+	int	i = 0;
+
+	while (y1 < y2)
+	{
+		render_rect(game, COLOR_YELLOW, 1, 1, y1, x1);
+		y1++;
+	}
+}
+
 void	ray_casting(t_game *game)
 {
 	float	d;
 	float	ray_length;
 	float	ray_angle;
+	float	distance;
+	float	correc_wall_distance;
+	float	distance_to_proj_plane;
+	float	wall_height;
 	int		ray_count;
 
 	ray_angle = game->player->angle - deg_to_rad(30);
@@ -79,6 +94,16 @@ void	ray_casting(t_game *game)
 	while (ray_count < 900)
 	{
 		ray_length = find_wall_distance(game, ray_angle);
+
+		//distance = ray_length * cos(ray_angle - game->player->angle);
+		// wall_height = ((600/2) / distance) * 60;
+		// draw_line(ray_count, (600/2)- wall_height, (600/2)+ wall_height, game);
+		distance_to_proj_plane = (900/2) / tan(deg_to_rad(60)/2);
+		correc_wall_distance = ray_length * cos(ray_angle - game->player->angle);
+		distance = (40 / correc_wall_distance) * distance_to_proj_plane;
+		//wall_height = (40/ray_length) * distance;
+		draw_line(ray_count, (600/2)- distance, (600/2)+ distance, game);
+
 		game->player->delta_x = cos(ray_angle) * ray_length;
 		game->player->delta_y = sin(ray_angle) * ray_length;
 		d = 0.001;

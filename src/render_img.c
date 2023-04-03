@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/31 10:31:02 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/02 22:54:48 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,16 @@ void	render_background(t_game *game, int color)
 	{
 		j = 0;
 		while (j < 900)
-			img_pix_put(game->img_data, j++, i, color);
+			img_pix_put(game->img_data, j++, i, COLOR_BLUE);
+		++i;
+	}
+
+	i = 300;
+	while (i < 600)
+	{
+		j = 0;
+		while (j < 900)
+			img_pix_put(game->img_data, j++, i, COLOR_GREEN);
 		++i;
 	}
 }
