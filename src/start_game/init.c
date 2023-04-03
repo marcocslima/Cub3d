@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/31 19:39:55 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 00:05:06 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	init_data_img(t_img **img)
 void	init_player(t_player **player)
 {
 	*player = (t_player *) malloc(sizeof(t_player));
-	(*player)->y_position = 250;
-	(*player)->x_position = 250;
+	(*player)->y_position = 384;
+	(*player)->x_position = 640;
 	(*player)->angle = 2 * PI;
 	(*player)->delta_x = 0;
 	(*player)->delta_y = 0;

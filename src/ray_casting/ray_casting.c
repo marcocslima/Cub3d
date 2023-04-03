@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/02 23:38:59 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 00:16:13 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,22 +100,22 @@ void	ray_casting(t_game *game)
 		// draw_line(ray_count, (600/2)- wall_height, (600/2)+ wall_height, game);
 		distance_to_proj_plane = (900/2) / tan(deg_to_rad(60)/2);
 		correc_wall_distance = ray_length * cos(ray_angle - game->player->angle);
-		distance = (40 / correc_wall_distance) * distance_to_proj_plane;
-		//wall_height = (40/ray_length) * distance;
+		distance = (MAP_CELL / correc_wall_distance) * distance_to_proj_plane;
+		//wall_height = (MAP_CELL/ray_length) * distance;
 		draw_line(ray_count, (600/2)- distance, (600/2)+ distance, game);
 
-		game->player->delta_x = cos(ray_angle) * ray_length;
-		game->player->delta_y = sin(ray_angle) * ray_length;
-		d = 0.001;
-		while (d < 1)
-		{
-			render_rect(game, COLOR_RED, 1, 1,
-				game->player->y_position + game->player->delta_y * d,
-				game->player->x_position + game->player->delta_x * d);
-			d += 0.001;
-		}
+		// game->player->delta_x = cos(ray_angle) * ray_length;
+		// game->player->delta_y = sin(ray_angle) * ray_length;
+		// d = 0.001;
+		// while (d < 1)
+		// {
+		// 	render_rect(game, COLOR_RED, 1, 1,
+		// 		game->player->y_position + game->player->delta_y * d,
+		// 		game->player->x_position + game->player->delta_x * d);
+		// 	d += 0.001;
+		// }
 		ray_angle += deg_to_rad(60)/900;
 		ray_count++;
 	}
-	render_significant_angles(game);
+	//render_significant_angles(game);
 }

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/02 10:54:49 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 00:16:53 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int	handle_events(int key_code, t_game *game)
 	if (key_code == ESC)
 		close_window(game);
 	if (key_code == W)
-		*&game->player->y_position -= 1;
+		*&game->player->y_position -= 5;
 	if (key_code == S)
-		*&game->player->y_position += 1;
+		*&game->player->y_position += 5;
 	if (key_code == A)
-		*&game->player->x_position -= 1;
+		*&game->player->x_position -= 5;
 	if (key_code == D)
-		*&game->player->x_position += 1;
+		*&game->player->x_position += 5;
 	if (key_code == LEFT_ARROW || key_code == RIGHT_ARROW)
 		move_direction(game, key_code);
 	if (key_code == 'p')
