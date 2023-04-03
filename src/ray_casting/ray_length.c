@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:35:58 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/03 10:22:24 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:28:34 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,8 @@ double	find_wall_distance(t_game *game, double angle)
 	vertical_wall_distance = distance_to_vertical_wall(game, angle);
 	horizontal_wall_distance = distance_to_horizontal_wall(game, angle);
 	if (vertical_wall_distance < horizontal_wall_distance)
-	{
 		define_wall_color(&game, COLOR_LIGHT_PINK);
-	}
 	else if (vertical_wall_distance > horizontal_wall_distance)
-	{
 		define_wall_color(&game, COLOR_PINK);
-	}
-	//printf("horizontal: %f, vertical: %f\n", horizontal_wall_distance, vertical_wall_distance);
 	return (shorter_distance(horizontal_wall_distance, vertical_wall_distance));
 }
