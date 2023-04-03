@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/03 09:58:02 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:05:50 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	draw_line(int x1, int y1, int y2, t_game *game)
 
 	while (y1 < y2)
 	{
-		render_rect(game, COLOR_YELLOW, 1, 1, y1, x1);
+		render_rect(game, game->wall_color, 1, 1, y1, x1);
 		y1++;
 	}
 }
