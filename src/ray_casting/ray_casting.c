@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/03 12:04:44 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:20:29 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void render_significant_angles(t_game *game)
 	}
 }
 
-void	draw_line(int x1, int y1, int y2, t_game *game)
+void	draw_line(double x1, double y1, double y2, t_game *game)
 {
 	int	i = 0;
 
