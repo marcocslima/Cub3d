@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/03 00:16:13 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 09:58:02 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ double	deg_to_rad(double degress)
 
 void render_significant_angles(t_game *game)
 {
-	float	d;
-	float	ray_length;
-	float	ray_angle;
+	double	d;
+	double	ray_length;
+	double	ray_angle;
 
 	ray_angle = game->player->angle;
 	ray_length = find_wall_distance(game, game->player->angle);
@@ -78,13 +78,13 @@ void	draw_line(int x1, int y1, int y2, t_game *game)
 
 void	ray_casting(t_game *game)
 {
-	float	d;
-	float	ray_length;
-	float	ray_angle;
-	float	distance;
-	float	correc_wall_distance;
-	float	distance_to_proj_plane;
-	float	wall_height;
+	double	d;
+	double	ray_length;
+	double	ray_angle;
+	double	distance;
+	double	correc_wall_distance;
+	double	distance_to_proj_plane;
+	double	wall_height;
 	int		ray_count;
 
 	ray_angle = game->player->angle - deg_to_rad(30);

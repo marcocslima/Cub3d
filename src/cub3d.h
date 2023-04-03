@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/03 00:16:00 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:00:33 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	float	x_position;
-	float	y_position;
-	float	delta_x;
-	float	delta_y;
-	float	angle;
+	double	x_position;
+	double	y_position;
+	double	delta_x;
+	double	delta_y;
+	double	angle;
 
 }	t_player;
 
@@ -124,16 +124,16 @@ void	free_cub3d(t_game **game);
 \* ---------------------------------------------------------------------*/
 
 void	ray_casting(t_game *game);
-float		find_wall_distance(t_game *game, float angle);
-float		hit_wall(t_game *game, float y_coordinate, float x_coordinate,
-			float y_step, float x_step);
-int		shorter_distance(int x, int y);
-float		distance_to_horizontal_wall_up(t_game *game, float angle);
-float		distance_to_horizontal_wall_down(t_game *game, float angle);
-float		distance_to_vertical_wall_right(t_game *game, float angle);
-float		distance_to_vertical_wall_left(t_game *game, float angle);
-int		looking_up(float angle);
-int		looking_right(float angle);
+double		find_wall_distance(t_game *game, double angle);
+double		hit_wall(t_game *game, double y_coordinate, double x_coordinate,
+			double y_step, double x_step);
+double		shorter_distance(double x, double y);
+double		distance_to_horizontal_wall_up(t_game *game, double angle);
+double		distance_to_horizontal_wall_down(t_game *game, double angle);
+double		distance_to_vertical_wall_right(t_game *game, double angle);
+double		distance_to_vertical_wall_left(t_game *game, double angle);
+int		looking_up(double angle);
+int		looking_right(double angle);
 
 /* ---------------------------------------------------------------------*\
 |							start_game									|

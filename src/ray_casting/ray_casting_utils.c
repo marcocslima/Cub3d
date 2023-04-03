@@ -6,24 +6,24 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:42:55 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/02 23:43:25 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/03 09:58:41 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-float	calculate_ray_length(t_game *game, float y_coordinate, float x_coordinate)
+double	calculate_ray_length(t_game *game, double y_coordinate, double x_coordinate)
 {
-	float	delta_y;
-	float	delta_x;
+	double	delta_y;
+	double	delta_x;
 
 	delta_y = game->player->y_position - y_coordinate;
 	delta_x = game->player->x_position - x_coordinate;
 	return (sqrt(pow(delta_y, 2) + pow(delta_x, 2)));
 }
 
-float	hit_wall(t_game *game, float y_coordinate, float x_coordinate,
-			float y_step, float x_step)
+double	hit_wall(t_game *game, double y_coordinate, double x_coordinate,
+			double y_step, double x_step)
 {
 	int	cell_x;
 	int	cell_y;
@@ -43,21 +43,21 @@ float	hit_wall(t_game *game, float y_coordinate, float x_coordinate,
 	return (calculate_ray_length(game, y_coordinate, x_coordinate));
 }
 
-int	looking_up(float angle)
+int	looking_up(double angle)
 {
 	if (angle >= PI && angle <= 2 * PI)
 		return (1);
 	return (0);
 }
 
-int	looking_right(float angle)
+int	looking_right(double angle)
 {
 	if (angle > 3 * PI / 2 || angle < PI / 2)
 		return (1);
 	return (0);
 }
 
-int	shorter_distance(int x, int y)
+double	shorter_distance(double x, double y)
 {
 	if (x <= y)
 		return (x);
