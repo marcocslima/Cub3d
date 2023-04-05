@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/03 10:22:10 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/05 14:10:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@
 
 # define MAP_CELL 64
 
+# define VERTICAL 0
+# define HORIZONTAL 1
+
 typedef struct s_map_header
 {
 	char	**no;
@@ -101,6 +104,12 @@ typedef struct s_data
 	void			*mlx_win;
 }	t_data;
 
+typedef struct s_ray_casting
+{
+	int			wall_color;
+	int			wall_plane;
+}	t_ray_casting;
+
 typedef struct s_game
 {
 	t_data			*mlx_data;
@@ -108,8 +117,8 @@ typedef struct s_game
 	t_map_header	*header;
 	t_map			*map;
 	t_player		*player;
+	t_ray_casting	*ray;
 	char			**file;
-	int				wall_color;
 }	t_game;
 
 /* ---------------------------------------------------------------------*\

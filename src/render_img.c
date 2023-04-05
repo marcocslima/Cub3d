@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/04 19:02:42 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:41:36 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,21 +111,20 @@ void	teste(t_game *game)
 	int		bpp;
 	int		line_len;
 	int		endian;
-	int		color;
+	unsigned int		color;
 	int		x;
 	int		y;
 	int		i, j = 0;
-
-
+	int		k;
 
 	img = mlx_xpm_file_to_image(game->mlx_data->mlx_ptr, "test.xpm", &x, &y);
 	addr = mlx_get_data_addr(img, &bpp, &line_len, &endian);
-	while (j < 32)
+	while (j < 64)
 	{
 		i = 0;
-		while (i < 32)
+		while (i < 64)
 		{
-			color = (int)addr[i];
+			color = *(unsigned int *) (addr + j * line_len  + i * bpp /8);
 			img_pix_put (game->img_data, 450+i, 300+j, color);
 			i++;
 		}
@@ -139,7 +138,7 @@ int	render(t_game *game)
 	//render_map(game);
 	//render_player(game);
 	ray_casting(game);
-	//teste(game);
+	teste(game);
 	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win,
 		game->img_data->mlx_img, 0, 0);
 	return (1);

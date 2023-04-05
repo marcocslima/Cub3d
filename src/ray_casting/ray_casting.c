@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/04 18:54:31 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:55:49 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,19 @@ void	draw_line(double x1, double y1, double y2, t_game *game)
 
 	while (y1 < y2)
 	{
-		render_rect(game, game->wall_color, 1, 1, y1, x1);
+		render_rect(game, game->ray->wall_color, 1, 1, y1, x1);
 		y1++;
 	}
+}
+
+void	put_texture(t_game *game)
+{
+	int	offset;
+
+	if (game->ray->wall_plane == VERTICAL)
+		printf("vertical\n");
+	else if (game->ray->wall_plane == HORIZONTAL);
+		//offset = game->ray->x_coordinate - ((int)(game->ray->x_coordinate / 64) * 64);
 }
 
 void	ray_casting(t_game *game)
@@ -103,19 +113,8 @@ void	ray_casting(t_game *game)
 		distance = (MAP_CELL / correc_wall_distance) * distance_to_proj_plane;
 		//wall_height = (MAP_CELL/ray_length) * distance;
 		draw_line(ray_count, (600/2)- (distance/2), (600/2)+ (distance/2), game);
-
-		// game->player->delta_x = cos(ray_angle) * ray_length;
-		// game->player->delta_y = sin(ray_angle) * ray_length;
-		// d = 0.001;
-		// while (d < 1)
-		// {
-		// 	render_rect(game, COLOR_RED, 1, 1,
-		// 		game->player->y_position + game->player->delta_y * d,
-		// 		game->player->x_position + game->player->delta_x * d);
-		// 	d += 0.001;
-		// }
+		//put_texture(game);
 		ray_angle += deg_to_rad(60)/900;
 		ray_count++;
 	}
-	//render_significant_angles(game);
 }
