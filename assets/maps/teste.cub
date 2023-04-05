@@ -1,7 +1,7 @@
-NO ../cub3d/assets/imgs/bluestone.xpm
-SO ../cub3d/assets/imgs/colorstone.xpm
-WE ../cub3d/assets/imgs/eagle.xpm
-EA ../cub3d/assets/imgs/greystone.xpm
+NO ../cub3d/assets/imgs/castle_1.xpm
+SO ../cub3d/assets/imgs/castle_2.xpm
+WE ../cub3d/assets/imgs/castle_3.xpm
+EA ../cub3d/assets/imgs/castle_4.xpm
 
 F 220,100,0
 C 225,30,0
