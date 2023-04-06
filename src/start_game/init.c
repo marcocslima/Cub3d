@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/05 14:22:27 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:02:16 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ void	init_data(t_game **game)
 	(*game)->mlx_data = mlx_data;
 	(*game)->img_data = img;
 	(*game)->player = player;
+	(*game)->ray = ray;
 	(*game)->file = NULL;
 }
