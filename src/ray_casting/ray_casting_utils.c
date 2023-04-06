@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:42:55 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/03 09:58:41 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:25:40 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ double	hit_wall(t_game *game, double y_coordinate, double x_coordinate,
 		&& cell_y < game->map->map_higth
 		&& game->map->map[cell_y][cell_x] != '1')
 	{
-		//render_rect(game, COLOR_YELLOW, 2, 2, y_coordinate,x_coordinate);
 		y_coordinate += y_step;
 		x_coordinate += x_step;
 		cell_x = x_coordinate / MAP_CELL;

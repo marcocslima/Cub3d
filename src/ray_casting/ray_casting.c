@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/05 15:55:49 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:04:14 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	put_texture(t_game *game)
 
 	if (game->ray->wall_plane == VERTICAL)
 		printf("vertical\n");
-	else if (game->ray->wall_plane == HORIZONTAL);
-		//offset = game->ray->x_coordinate - ((int)(game->ray->x_coordinate / 64) * 64);
+	else if (game->ray->wall_plane == HORIZONTAL)
+		offset = game->ray->x_coordinate - ((int)(game->ray->x_coordinate / 64) * 64);
 }
 
 void	ray_casting(t_game *game)

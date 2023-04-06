@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:30:57 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,9 @@ typedef struct s_ray_casting
 {
 	int			wall_color;
 	int			wall_plane;
+	double		x_coordinate;
+	double		y_coordinate;
+	double		length;
 }	t_ray_casting;
 
 typedef struct s_game
