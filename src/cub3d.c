@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/03/30 08:03:30 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/06 08:48:39 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ int	render(t_data *data)
 		calc_dda(data);
 		calc_perp_dist(data);
 		calc_wall(data);
+		set_texture(data, pixel);
 
 		int color;
 		if(data->gm->dda.hitSide == 1)
@@ -216,14 +217,20 @@ int	render(t_data *data)
 				(15 * data->gm->ray.dir_y * d  * data->gm->dda.perp_dist), 1, 1, GREEN_PIXEL});
 			d = d + 0.001;
 		}
-		
-		render_rect(&data->img, (t_rect){(pixel) + 
-				(data->gm->ray.dir_x),
-				(data->gm->dda.line_start) + 
-				(data->gm->ray.dir_y), 1, data->gm->dda.wall_line_height, color});
+		//render_texture(data, pixel);
+		// render_rect(&data->img, (t_rect){(pixel) + 
+		// 		(data->gm->ray.dir_x),
+		// 		(data->gm->dda.line_start) + 
+		// 		(data->gm->ray.dir_y), 1, data->gm->dda.wall_line_height, color});
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
-	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->gm->tx_img[0].txt_img.mlx_img, 0, 0);
+
+
+	// data->tx_img[0].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->gm->header->so[1], &data->tx_img[0].txt_img.wdt, &data->tx_img[0].txt_img.hgt);
+	// data->tx_img[0].txt_img.addr = mlx_get_data_addr(data->tx_img[0].txt_img.img_ptr, &data->tx_img[0].txt_img.bpp, &data->tx_img[0].txt_img.line_len, &data->tx_img[0].txt_img.endian);
+
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
+	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->tx_img[3].txt_img.img_ptr, 0, 0);
+
 	return (0);
 }
 
@@ -266,14 +273,18 @@ int	run_game(t_game *game)
 		free(data->win_ptr);
 		return (MLX_ERROR);
 	}
-	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp,
+	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
 			&data->img.line_len, &data->img.endian);
+	
+	data->img.data = (int *)mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
+		&data->img.line_len, &data->img.endian);
+	
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_hook(data->win_ptr, 2, 1L << 0, moving, data);
 	mlx_loop(data->mlx_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	return(0);

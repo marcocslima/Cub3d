@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/02 15:58:37 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/06 03:06:01 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_map
 
 typedef struct s_img
 {
-	void	*mlx_img;
+	void	*img_ptr;
 	char	*addr;
 	int		*data;
 	int		wdt;
@@ -158,18 +158,18 @@ typedef struct s_game
 	t_dists			dists;
 	t_dda			dda;
 	float			ang;
-	t_img_tx		tx_img[4];
-	t_render_tx		tx_render;
 }	t_game;
 
 typedef struct s_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	img;
-	int		cur_img;
-	int		l_side;
-	t_game	*gm;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_img		img;
+	int			cur_img;
+	int			l_side;
+	t_img_tx	tx_img[4];
+	t_render_tx	tx_render;
+	t_game		*gm;
 }	t_data;
 
 /* ---------------------------------------------------------------------*\
@@ -206,6 +206,8 @@ void	print_error_msg(char *msg);
 int		matrix_len(char **matrix);
 int		check_str_is_number(char *str);
 void	load_textures(t_data *data);
+void	set_texture(t_data *data, int pixel);
+void	render_texture(t_data *data, int pixel);
 
 /* ---------------------------------------------------------------------*\
 |							validate									|

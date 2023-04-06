@@ -1,7 +1,7 @@
-NO assets/imgs/valid_path
-SO assets/imgs/valid_path
-WE assets/imgs/valid_path
-EA assets/imgs/valid_path
+NO ../cub3d/assets/imgs/wall_01.xpm
+SO ../cub3d/assets/imgs/wall_02.xpm
+WE ../cub3d/assets/imgs/wall_03.xpm
+EA ../cub3d/assets/imgs/wall_04.xpm
 
 F 220,100,0
 C 225,30,0
