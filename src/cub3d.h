@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/06 09:30:57 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/06 10:40:37 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ typedef struct s_ray_casting
 	int			wall_plane;
 	double		x_coordinate;
 	double		y_coordinate;
+	int			id;
+	double		angle;
 	double		length;
 }	t_ray_casting;
 
@@ -139,14 +141,14 @@ void	free_cub3d(t_game **game);
 \* ---------------------------------------------------------------------*/
 
 void	ray_casting(t_game *game);
-double		find_wall_distance(t_game *game, double angle);
-double		hit_wall(t_game *game, double y_coordinate, double x_coordinate,
+void		find_wall_distance(t_game **game);
+double		hit_wall(t_game *game, double *y_coordinate, double *x_coordinate,
 			double y_step, double x_step);
 double		shorter_distance(double x, double y);
-double		distance_to_horizontal_wall_up(t_game *game, double angle);
-double		distance_to_horizontal_wall_down(t_game *game, double angle);
-double		distance_to_vertical_wall_right(t_game *game, double angle);
-double		distance_to_vertical_wall_left(t_game *game, double angle);
+double		distance_to_horizontal_wall_up(t_game **game);
+double		distance_to_horizontal_wall_down(t_game **game);
+double		distance_to_vertical_wall_right(t_game **game);
+double		distance_to_vertical_wall_left(t_game **game);
 int		looking_up(double angle);
 int		looking_right(double angle);
 

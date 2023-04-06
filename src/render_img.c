@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/05 10:41:36 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:40:09 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int	render(t_game *game)
 	//render_map(game);
 	//render_player(game);
 	ray_casting(game);
-	teste(game);
+	//teste(game);
 	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win,
 		game->img_data->mlx_img, 0, 0);
 	return (1);
