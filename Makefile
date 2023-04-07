@@ -6,7 +6,7 @@
 #    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/07 08:22:09 by mcesar-d         ###   ########.fr        #
+#    Updated: 2023/04/07 08:27:08 by mcesar-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,14 +83,14 @@ $(NAME) : $(MLX) $(LIBFT) $(OBJS)
 	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) -L$(MLX_PATH) $(MLX_FLAGS)
 
 ${OBJ_PATH}%.o:	$(SRC_PATH)%.c
-				@mkdir -p obj
-				@${CC} ${FLAGS} -c $< -o $@
+	@mkdir -p obj
+	@${CC} ${FLAGS} -c $< -o $@
 
 $(MLX):
-			make -C $(MLX_PATH)
+	make -C $(MLX_PATH)
 
 $(LIBFT):
-			make -C $(LIBFT_PATH)
+	make -C $(LIBFT_PATH)
 
 clean:
 	$(RM) $(OBJ_PATH)
