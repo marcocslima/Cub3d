@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/06 18:42:35 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/06 22:44:32 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ int	main(int argc, char *argv[])
 
 		game->teste_img->mlx_img = mlx_xpm_file_to_image(game->mlx_data->mlx_ptr, "test.xpm", &aux, &aux);
 		game->teste_img->addr = mlx_get_data_addr(game->teste_img->mlx_img, &game->teste_img->bpp, &game->teste_img->line_len, &game->teste_img->endian);
+
+		game->teste_img2->mlx_img = mlx_xpm_file_to_image(game->mlx_data->mlx_ptr, "test2.xpm", &aux, &aux);
+		game->teste_img2->addr = mlx_get_data_addr(game->teste_img2->mlx_img, &game->teste_img2->bpp, &game->teste_img2->line_len, &game->teste_img2->endian);
 
 		mlx_loop_hook(game->mlx_data->mlx_ptr, &render, game);
 		mlx_hook(game->mlx_data->mlx_win, 17, 1L << 17, close_window, game);

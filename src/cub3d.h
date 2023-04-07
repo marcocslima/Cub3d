@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/06 16:12:38 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/06 22:38:17 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_game
 	t_player		*player;
 	t_ray_casting	*ray;
 	t_img			*teste_img;
+	t_img			*teste_img2;
 	char			**file;
 }	t_game;
 

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/06 20:53:49 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/07 00:01:11 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,20 @@ double	deg_to_rad(double degress)
 float	get_offset(t_game *game)
 {
 	float	offset = 0;
-	float	cell_size = 64;
-	float	teste = 0;
+	int	cell_size = 64;
 
 	if (game->ray->wall_plane == VERTICAL)
 	{
-		offset = game->ray->y_coordinate / cell_size;
-		//  offset *= 64;
-		//  offset = game->ray->y_coordinate - offset;
+		offset = (int)game->ray->y_coordinate % cell_size;
 	}
 	else if (game->ray->wall_plane == HORIZONTAL)
 	{
-		offset = game->ray->x_coordinate / cell_size;
-		//printf("offset: %f , coordinate: %f\n", offset, game->ray->x_coordinate);
-		// offset *= 64;
-		// offset = game->ray->x_coordinate - offset;
+		offset = (int)game->ray->x_coordinate % cell_size;
 	}
-
 	return (offset);
 }
 
-int	calc_color(t_game *game, double y1, float offset, double wall_height)
+int	calc_color(t_img *img, double y1, float offset, double wall_height)
 {
 	unsigned int	color;
 	double		texture_height;
@@ -50,7 +43,7 @@ int	calc_color(t_game *game, double y1, float offset, double wall_height)
 	texture_height = 64;
 	step = texture_height / wall_height;
 	pixel = step * y1;
-	color = *(unsigned int *) (game->teste_img->addr + (int)pixel * game->teste_img->line_len  + (int)offset * (game->teste_img->bpp /8));
+	color = *(unsigned int *) (img->addr + (int)pixel * img->line_len  + (int)offset * (img->bpp /8));
 	return (color);
 }
 
@@ -62,17 +55,18 @@ void	draw_line(double x1, double y1, double y2, t_game *game, double wall_height
 	{
 		while (i < wall_height)
 		{
-			render_rect(game, calc_color(game, i, get_offset(game), wall_height), 1, 1, y1, x1);
+			render_rect(game, calc_color(game->teste_img, i, get_offset(game), wall_height), 1, 1, y1, x1);
 			y1++;
 			i++;
 		}
 	}
 	else
 	{
-		while (y1 < y2)
+		while (i < wall_height)
 		{
-			render_rect(game, game->ray->wall_color, 1, 1, y1, x1);
+			render_rect(game, calc_color(game->teste_img2, i, get_offset(game), wall_height), 1, 1, y1, x1);
 			y1++;
+			i++;
 		}
 	}
 }
@@ -110,7 +104,7 @@ void	ray_casting(t_game *game)
 		wall_height = (MAP_CELL / correc_wall_distance) * distance_to_proj_plane;
 		draw_line(game->ray->id, (600/2)- (wall_height/2), (600/2)+ (wall_height/2), game, wall_height);
 		//teste_texture(game);
-		put_texture(game);
+		//put_texture(game);
 		game->ray->angle += deg_to_rad(60)/900;
 		game->ray->id++;
 	}
