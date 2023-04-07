@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/06 09:40:09 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/06 20:29:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,30 +105,32 @@ void	render_player(t_game *game)
 
 void	teste(t_game *game)
 {
-	void	*img;
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
 	unsigned int		color;
-	int		x;
-	int		y;
-	int		i, j = 0;
-	int		k;
+	int		aux;
+	int		i= 0;
+	float		k,l = 0;
+	float	step_ty = 0;
+	int	j = 0;
+	float	texture_height = 64;
+	float	wall_height = 64;
 
-	img = mlx_xpm_file_to_image(game->mlx_data->mlx_ptr, "test.xpm", &x, &y);
-	addr = mlx_get_data_addr(img, &bpp, &line_len, &endian);
+	//  game->teste_img->mlx_img = mlx_xpm_file_to_image(game->mlx_data->mlx_ptr, "test.xpm", &aux, &aux);
+	//  game->teste_img->addr = mlx_get_data_addr(game->teste_img->mlx_img, &game->teste_img->bpp, &game->teste_img->line_len, &game->teste_img->endian);
+
+	step_ty = texture_height/wall_height;
 	while (j < 64)
 	{
 		i = 0;
+		l = 0;
 		while (i < 64)
 		{
-			color = *(unsigned int *) (addr + j * line_len  + i * bpp /8);
+			color = *(unsigned int *) (game->teste_img->addr + (int)k * game->teste_img->line_len  + (int)l * game->teste_img->bpp /8);
 			img_pix_put (game->img_data, 450+i, 300+j, color);
 			i++;
+			l+=step_ty;
 		}
 		j++;
+		k+=step_ty;
 	}
 }
 
@@ -138,7 +140,7 @@ int	render(t_game *game)
 	//render_map(game);
 	//render_player(game);
 	ray_casting(game);
-	//teste(game);
+	teste(game);
 	mlx_put_image_to_window(game->mlx_data->mlx_ptr, game->mlx_data->mlx_win,
 		game->img_data->mlx_img, 0, 0);
 	return (1);

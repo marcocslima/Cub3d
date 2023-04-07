@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/03 10:52:39 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/06 18:42:35 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	handle_events(int key_code, t_game *game)
 int	main(int argc, char *argv[])
 {
 	int		fd;
+	int		aux;
 	t_game	*game;
 
 	fd = check_input(argc, argv);
@@ -91,6 +92,9 @@ int	main(int argc, char *argv[])
 		game->img_data->addr = mlx_get_data_addr(game->img_data->mlx_img,
 				&game->img_data->bpp, &game->img_data->line_len,
 				&game->img_data->endian);
+
+		game->teste_img->mlx_img = mlx_xpm_file_to_image(game->mlx_data->mlx_ptr, "test.xpm", &aux, &aux);
+		game->teste_img->addr = mlx_get_data_addr(game->teste_img->mlx_img, &game->teste_img->bpp, &game->teste_img->line_len, &game->teste_img->endian);
 
 		mlx_loop_hook(game->mlx_data->mlx_ptr, &render, game);
 		mlx_hook(game->mlx_data->mlx_win, 17, 1L << 17, close_window, game);
