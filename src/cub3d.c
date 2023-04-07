@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/06 08:48:39 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/07 02:06:08 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	while (i >= 0)
 	{
-		/* big endian, MSB is the leftmost bit */
 		if (img->endian != 0)
 			*pixel++ = (color >> i) & 0xFF;
-		/* little endian, LSB is the leftmost bit */
 		else
 			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
 		i -= 8;
@@ -106,7 +104,7 @@ void	plot_map(t_data *data)
 	int	side;
 
 	i = -1;
-	side = 15;//data->l_side;
+	side = 15;
 	while(++i < data->gm->map->map_higth)
 	{
 		j = -1;
@@ -144,12 +142,16 @@ int looking(float ang, t_data *data)
 
 int moving(int key, t_data *data)
 {
+	int		tmp_0;
+	int		tmp_1;
 	float	desloc;
 
 	desloc = 0.1;
 	if (key == A)
 	{
-		if(data->gm->map->map[(int)data->gm->player.pos[0]][(int)data->gm->player.pos[1]] == '0')
+		tmp_0 = (int)(data->gm->player.pos[0] + data->gm->player.dir[1] * 0.5);
+		tmp_1 = (int)(data->gm->player.pos[1] - data->gm->player.dir[0] * 0.5);
+		if(data->gm->map->map[tmp_1][tmp_0] != '1')
 		{
 			data->gm->player.pos[0] += data->gm->player.dir[1] * desloc;
 			data->gm->player.pos[1] -= data->gm->player.dir[0] * desloc;
@@ -157,18 +159,33 @@ int moving(int key, t_data *data)
 	}
 	if (key == D)
 	{
-		data->gm->player.pos[0] -= data->gm->player.dir[1] * desloc;
-		data->gm->player.pos[1] += data->gm->player.dir[0] * desloc;
+		tmp_0 = (int)(data->gm->player.pos[0] - data->gm->player.dir[1] * 0.5);
+		tmp_1 = (int)(data->gm->player.pos[1] + data->gm->player.dir[0] * 0.5);
+		if(data->gm->map->map[tmp_1][tmp_0] != '1')
+		{
+			data->gm->player.pos[0] -= data->gm->player.dir[1] * desloc;
+			data->gm->player.pos[1] += data->gm->player.dir[0] * desloc;
+		}
 	}
 	if (key == W)
 	{
-		data->gm->player.pos[0] += data->gm->player.dir[0] * desloc;
-		data->gm->player.pos[1] += data->gm->player.dir[1] * desloc;
+		tmp_0 = (int)(data->gm->player.pos[0] + data->gm->player.dir[0] * 0.5);
+		tmp_1 = (int)(data->gm->player.pos[1] + data->gm->player.dir[1] * 0.5);
+		if(data->gm->map->map[tmp_1][tmp_0] != '1')
+		{
+			data->gm->player.pos[0] += data->gm->player.dir[0] * desloc;
+			data->gm->player.pos[1] += data->gm->player.dir[1] * desloc;
+		}
 	}
 	if (key == S)
 	{
-		data->gm->player.pos[0] -= data->gm->player.dir[0] * desloc;
-		data->gm->player.pos[1] -= data->gm->player.dir[1] * desloc;
+		tmp_0 = (int)(data->gm->player.pos[0] - data->gm->player.dir[0] * 0.5);
+		tmp_1 = (int)(data->gm->player.pos[1] - data->gm->player.dir[1] * 0.5);
+		if(data->gm->map->map[tmp_1][tmp_0] != '1')
+		{
+			data->gm->player.pos[0] -= data->gm->player.dir[0] * desloc;
+			data->gm->player.pos[1] -= data->gm->player.dir[1] * desloc;
+		}
 	}
 	if (key == 65361)
 		looking(- PI / 100, data);
@@ -193,7 +210,6 @@ int	render(t_data *data)
 	pixel = -1;
 	while (++pixel < WIDTH)
 	{
-		//ray_dir(WIDTH / 2, data);
 		ray_dir(pixel, data);
 		calc_delta_dist(data);
 		calc_side_dist(data);
@@ -201,7 +217,7 @@ int	render(t_data *data)
 		calc_perp_dist(data);
 		calc_wall(data);
 		set_texture(data, pixel);
-
+		
 		int color;
 		if(data->gm->dda.hitSide == 1)
 			color = GRAY1_PIXEL;
@@ -217,20 +233,13 @@ int	render(t_data *data)
 				(15 * data->gm->ray.dir_y * d  * data->gm->dda.perp_dist), 1, 1, GREEN_PIXEL});
 			d = d + 0.001;
 		}
-		//render_texture(data, pixel);
+
 		// render_rect(&data->img, (t_rect){(pixel) + 
-		// 		(data->gm->ray.dir_x),
-		// 		(data->gm->dda.line_start) + 
-		// 		(data->gm->ray.dir_y), 1, data->gm->dda.wall_line_height, color});
+		// 	(data->gm->ray.dir_x),
+		// 	(data->gm->dda.line_start) + 
+		// 	(data->gm->ray.dir_y), 1, data->gm->dda.wall_line_height, color});
 	}
-
-
-	// data->tx_img[0].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->gm->header->so[1], &data->tx_img[0].txt_img.wdt, &data->tx_img[0].txt_img.hgt);
-	// data->tx_img[0].txt_img.addr = mlx_get_data_addr(data->tx_img[0].txt_img.img_ptr, &data->tx_img[0].txt_img.bpp, &data->tx_img[0].txt_img.line_len, &data->tx_img[0].txt_img.endian);
-
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
-	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->tx_img[3].txt_img.img_ptr, 0, 0);
-
 	return (0);
 }
 
@@ -276,10 +285,8 @@ int	run_game(t_game *game)
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
 			&data->img.line_len, &data->img.endian);
-	
 	data->img.data = (int *)mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
 		&data->img.line_len, &data->img.endian);
-	
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_hook(data->win_ptr, 2, 1L << 0, moving, data);
@@ -302,7 +309,7 @@ int	main(int argc, char *argv[])
 	{
 		get_map(game->file, &game->map);
 		get_header(&game);
-		//check_header(&game);
+		check_header(&game);
 		verify_map(&game);
 		//print_whole_map(game);
 		//print_map(game);
