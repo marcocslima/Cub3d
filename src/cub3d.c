@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/07 02:22:21 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/07 07:58:51 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,44 +32,6 @@ void	read_file(int fd, t_game **game)
 	free(ret);
 }
 
-void	img_pix_put(t_img *img, int x, int y, int color)
-{
-	char	*pixel;
-	int		i;
-
-	i = img->bpp - 8;
-	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	while (i >= 0)
-	{
-		if (img->endian != 0)
-			*pixel++ = (color >> i) & 0xFF;
-		else
-			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-		i -= 8;
-	}
-}
-
-void	render_background(t_img *img, int cceil, int cflor)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < HEIGHT)
-	{
-		j = 0;
-		while (j < WIDTH)
-			img_pix_put(img, j++, i, cflor);
-	}
-	i = -1;
-	while (++i < HEIGHT / 2)
-	{
-		j = 0;
-		while (j < WIDTH)
-			img_pix_put(img, j++, i, cceil);
-	}
-}
-
 int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
@@ -78,145 +40,6 @@ int	handle_keypress(int keysym, t_data *data)
 		data->win_ptr = NULL;
 	}
 	return (0);
-}
-
-int render_rect(t_img *img, t_rect rect)
-{
-	int	i;
-	int j;
-
-	i = rect.y;
-	while (i < rect.y + rect.height)
-	{
-		j = rect.x;
-		while (j < rect.x + rect.width)
-			img_pix_put(img, j++, i, rect.color);
-		++i;
-	}
-	return (0);
-}
-
-void	plot_map(t_data *data)
-{
-	int	i;
-	int	j;
-	int	color;
-	int	side;
-
-	i = -1;
-	side = 15;
-	while(++i < data->gm->map->map_higth)
-	{
-		j = -1;
-		while(++j < data->gm->map->map_width)
-		{
-			color = BLACK_PIXEL;
-			if(data->gm->map->map[i][j] == '1')
-				color = BRICK_PIXEL;
-			if(data->gm->map->map[i][j] == '0' || data->gm->map->map[i][j] == 'N')
-				color = BEIGE_PIXEL;
-			render_rect(&data->img, (t_rect){j * side, i * side, side, side, color});
-			render_rect(&data->img, (t_rect){data->gm->player.pos[0] * side, data->gm->player.pos[1] * side, 5, 5, RED_PIXEL});
-			render_rect(&data->img, (t_rect){j * side, i * side, 1, side, BLUE_SKY_PIXEL});
-			render_rect(&data->img, (t_rect){j * side, i * side, side, 1, BLUE_SKY_PIXEL});
-		}
-	}
-	int pixel = -1;
-	while (++pixel < WIDTH)
-	{
-		ray_dir(pixel, data);
-		calc_delta_dist(data);
-		calc_side_dist(data);
-		calc_dda(data);
-		calc_perp_dist(data);
-		calc_wall(data);
-		int color;
-		if(data->gm->dda.hitSide == 1)
-			color = GRAY1_PIXEL;
-		else if(data->gm->dda.hitSide == 0)
-			color = GRAY2_PIXEL;
-		
-		float d = 0.01;
-		while(d < 1)
-		{
-			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 15) + 
-				(15 * data->gm->ray.dir_x * d * data->gm->dda.perp_dist),
-				(data->gm->player.pos[1] * 15) + 
-				(15 * data->gm->ray.dir_y * d  * data->gm->dda.perp_dist), 1, 1, GREEN_PIXEL});
-			d = d + 0.001;
-		}
-	}
-}
-
-int looking(float ang, t_data *data)
-{
-	float	tmp;
-	float	tmp_plane;
-
-	tmp = cos(ang) * data->gm->player.dir[0] - sin(ang) * data->gm->player.dir[1];
-	data->gm->player.dir[1] = sin(ang) * data->gm->player.dir[0] + cos(ang)
-		* data->gm->player.dir[1];
-	data->gm->player.dir[0] = tmp;
-	tmp_plane = cos(ang) * data->gm->player.cam_plane[0]
-		- sin(ang) * data->gm->player.cam_plane[1];
-	data->gm->player.cam_plane[1] = sin(ang) * data->gm->player.cam_plane[0]
-		+ cos(ang) * data->gm->player.cam_plane[1];
-	data->gm->player.cam_plane[0] = tmp_plane;
-	return(0);
-}
-
-int moving(int key, t_data *data)
-{
-	int		tmp_0;
-	int		tmp_1;
-	float	desloc;
-
-	desloc = 0.1;
-	if (key == A)
-	{
-		tmp_0 = (int)(data->gm->player.pos[0] + data->gm->player.dir[1] * 0.5);
-		tmp_1 = (int)(data->gm->player.pos[1] - data->gm->player.dir[0] * 0.5);
-		if(data->gm->map->map[tmp_1][tmp_0] != '1')
-		{
-			data->gm->player.pos[0] += data->gm->player.dir[1] * desloc;
-			data->gm->player.pos[1] -= data->gm->player.dir[0] * desloc;
-		}
-	}
-	if (key == D)
-	{
-		tmp_0 = (int)(data->gm->player.pos[0] - data->gm->player.dir[1] * 0.5);
-		tmp_1 = (int)(data->gm->player.pos[1] + data->gm->player.dir[0] * 0.5);
-		if(data->gm->map->map[tmp_1][tmp_0] != '1')
-		{
-			data->gm->player.pos[0] -= data->gm->player.dir[1] * desloc;
-			data->gm->player.pos[1] += data->gm->player.dir[0] * desloc;
-		}
-	}
-	if (key == W)
-	{
-		tmp_0 = (int)(data->gm->player.pos[0] + data->gm->player.dir[0] * 0.5);
-		tmp_1 = (int)(data->gm->player.pos[1] + data->gm->player.dir[1] * 0.5);
-		if(data->gm->map->map[tmp_1][tmp_0] != '1')
-		{
-			data->gm->player.pos[0] += data->gm->player.dir[0] * desloc;
-			data->gm->player.pos[1] += data->gm->player.dir[1] * desloc;
-		}
-	}
-	if (key == S)
-	{
-		tmp_0 = (int)(data->gm->player.pos[0] - data->gm->player.dir[0] * 0.5);
-		tmp_1 = (int)(data->gm->player.pos[1] - data->gm->player.dir[1] * 0.5);
-		if(data->gm->map->map[tmp_1][tmp_0] != '1')
-		{
-			data->gm->player.pos[0] -= data->gm->player.dir[0] * desloc;
-			data->gm->player.pos[1] -= data->gm->player.dir[1] * desloc;
-		}
-	}
-	if (key == 65361)
-		looking(- PI / 100, data);
-	if (key == 65363)
-		looking(+ PI / 100, data);
-	return(0);
 }
 
 int	render(t_data *data)
@@ -238,36 +61,11 @@ int	render(t_data *data)
 		calc_dda(data);
 		calc_perp_dist(data);
 		calc_wall(data);
-		set_texture(data, pixel);
+		run_textures(data, pixel);
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
 	plot_map(data);
 	return (0);
-}
-
-void	init_player(t_game *game)
-{
-	int	x;
-	int	y;
-
-	game->player.dir[0] = 0;
-	game->player.dir[1] = -1;
-	game->player.cam_plane[0] = 0.66;
-	game->player.cam_plane[1] = 0;
-	y = -1;
-	while(++y < game->map->map_higth)
-	{
-		x = -1;
-		while(++x < game->map->map_width)
-		{
-			if (game->map->map[y][x] == 'N')
-			{
-				game->player.pos[0] = (float)x + 0.5;
-				game->player.pos[1] = (float)y + 0.5;
-				return ;
-			}
-		}
-	}
 }
 
 int	run_game(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/06 03:06:01 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/07 08:00:05 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ void	free_cub3d(t_game **game);
 void	get_map(char **file, t_map **map);
 void	get_header(t_game **game);
 void	init_data(t_game **game);
+void	init_player(t_game *game);
 void	ray_dir(float pixel, t_data *data);
 void	calc_delta_dist(t_data *data);
 void	calc_side_dist(t_data *data);
@@ -206,8 +207,13 @@ void	print_error_msg(char *msg);
 int		matrix_len(char **matrix);
 int		check_str_is_number(char *str);
 void	load_textures(t_data *data);
-void	set_texture(t_data *data, int pixel);
-void	render_texture(t_data *data, int pixel);
+void	run_textures(t_data *data, int pixel);
+void	render_textures(t_data *data, int pixel);
+int		moving(int key, t_data *data);
+int		looking(float ang, t_data *data);
+void	plot_map(t_data *data);
+void	img_pix_put(t_img *img, int x, int y, int color);
+void	render_background(t_img *img, int cceil, int cflor);
 
 /* ---------------------------------------------------------------------*\
 |							validate									|

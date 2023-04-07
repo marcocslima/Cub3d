@@ -6,14 +6,13 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/06 08:49:24 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/07 07:57:31 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-
-void	render_texture(t_data *data, int pixel)
+void	render_textures(t_data *data, int pixel)
 {
 	int	y;
 	int	txty;
@@ -37,7 +36,7 @@ void	render_texture(t_data *data, int pixel)
 	}
 }
 
-void	set_texture(t_data *data, int pixel)
+void	run_textures(t_data *data, int pixel)
 {
 	if (data->gm->dda.hitSide == 0 && data->gm->ray.dir_x >= 0)
 		data->tx_render.txt_id = 0;
@@ -56,7 +55,7 @@ void	set_texture(t_data *data, int pixel)
 	data->tx_render.wallx -= floor(data->tx_render.wallx);
 	data->tx_render.txtx = (int)(data->tx_render.wallx * (float)
 		TILE_SIZE);
-	render_texture(data, pixel);
+	render_textures(data, pixel);
 }
 
 void	load_textures(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/23 02:09:36 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/07 07:56:12 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,29 @@ void	init_data(t_game **game)
 	(*game)->header = header;
 	(*game)->file = NULL;
 	(*game)->ang = 0;
+}
+
+void	init_player(t_game *game)
+{
+	int	x;
+	int	y;
+
+	game->player.dir[0] = 0;
+	game->player.dir[1] = -1;
+	game->player.cam_plane[0] = 0.66;
+	game->player.cam_plane[1] = 0;
+	y = -1;
+	while(++y < game->map->map_higth)
+	{
+		x = -1;
+		while(++x < game->map->map_width)
+		{
+			if (game->map->map[y][x] == 'N')
+			{
+				game->player.pos[0] = (float)x + 0.5;
+				game->player.pos[1] = (float)y + 0.5;
+				return ;
+			}
+		}
+	}
 }

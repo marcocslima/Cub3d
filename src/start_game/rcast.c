@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/02 13:25:31 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/07 08:01:31 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	calc_side_dist(t_data *data)
 
 void	calc_dda(t_data *data)
 {
-	int		hit;
+	int	hit;
 
 	hit = FALSE;
 	data->gm->dda.ddaLineSizeX = data->gm->dists.dist_side_x;
