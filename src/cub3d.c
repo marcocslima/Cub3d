@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/07 02:06:08 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/07 02:22:21 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,31 @@ void	plot_map(t_data *data)
 			render_rect(&data->img, (t_rect){j * side, i * side, side, 1, BLUE_SKY_PIXEL});
 		}
 	}
+	int pixel = -1;
+	while (++pixel < WIDTH)
+	{
+		ray_dir(pixel, data);
+		calc_delta_dist(data);
+		calc_side_dist(data);
+		calc_dda(data);
+		calc_perp_dist(data);
+		calc_wall(data);
+		int color;
+		if(data->gm->dda.hitSide == 1)
+			color = GRAY1_PIXEL;
+		else if(data->gm->dda.hitSide == 0)
+			color = GRAY2_PIXEL;
+		
+		float d = 0.01;
+		while(d < 1)
+		{
+			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 15) + 
+				(15 * data->gm->ray.dir_x * d * data->gm->dda.perp_dist),
+				(data->gm->player.pos[1] * 15) + 
+				(15 * data->gm->ray.dir_y * d  * data->gm->dda.perp_dist), 1, 1, GREEN_PIXEL});
+			d = d + 0.001;
+		}
+	}
 }
 
 int looking(float ang, t_data *data)
@@ -196,6 +221,7 @@ int moving(int key, t_data *data)
 
 int	render(t_data *data)
 {
+	float	pixel;
 	if (data->gm->map->map_higth <= data->gm->map->map_width)
 		data->l_side = HEIGHT / data->gm->map->map_width;
 	else
@@ -203,10 +229,6 @@ int	render(t_data *data)
 	if (data->win_ptr == NULL)
 		return (1);
 	render_background(&data->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
-	plot_map(data);
-
-	float	pixel;
-
 	pixel = -1;
 	while (++pixel < WIDTH)
 	{
@@ -217,29 +239,9 @@ int	render(t_data *data)
 		calc_perp_dist(data);
 		calc_wall(data);
 		set_texture(data, pixel);
-		
-		int color;
-		if(data->gm->dda.hitSide == 1)
-			color = GRAY1_PIXEL;
-		else if(data->gm->dda.hitSide == 0)
-			color = GRAY2_PIXEL;
-		
-		float d = 0.01;
-		while(d < 1)
-		{
-			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 15) + 
-				(15 * data->gm->ray.dir_x * d * data->gm->dda.perp_dist),
-				(data->gm->player.pos[1] * 15) + 
-				(15 * data->gm->ray.dir_y * d  * data->gm->dda.perp_dist), 1, 1, GREEN_PIXEL});
-			d = d + 0.001;
-		}
-
-		// render_rect(&data->img, (t_rect){(pixel) + 
-		// 	(data->gm->ray.dir_x),
-		// 	(data->gm->dda.line_start) + 
-		// 	(data->gm->ray.dir_y), 1, data->gm->dda.wall_line_height, color});
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
+	plot_map(data);
 	return (0);
 }
 
