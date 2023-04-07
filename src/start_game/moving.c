@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/07 08:14:58 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/07 08:20:52 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	moving_right(float	desloc, t_data *data)
 
 int moving(int key, t_data *data)
 {
-	int		tmp_0;
-	int		tmp_1;
 	float	desloc;
 
 	desloc = 0.1;

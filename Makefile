@@ -6,7 +6,7 @@
 #    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/07 07:45:23 by mcesar-d         ###   ########.fr        #
+#    Updated: 2023/04/07 08:22:09 by mcesar-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ MLX_FLAGS = -lm -lbsd -lmlx -lXext -lX11
 
 # COMPILATION #
 
-FLAGS = -g3 #-Werror -Wextra -Wall
+FLAGS = -g3 -Werror -Wextra -Wall
 
 # DELETE #
 
