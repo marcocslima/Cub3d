@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/07 00:01:11 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:55:26 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	draw_line(double x1, double y1, double y2, t_game *game, double wall_height
 	{
 		while (i < wall_height)
 		{
-			render_rect(game, calc_color(game->teste_img2, i, get_offset(game), wall_height), 1, 1, y1, x1);
+			render_rect(game, calc_color(game->teste_img, i, get_offset(game), wall_height), 1, 1, y1, x1);
 			y1++;
 			i++;
 		}
