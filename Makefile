@@ -6,7 +6,7 @@
 #    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/03/11 10:15:40 by mcesar-d         ###   ########.fr        #
+#    Updated: 2023/04/07 02:32:55 by mcesar-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,6 @@ val: all
 	valgrind --leak-check=full ./cub3D ./assets/maps/teste.cub
 
 run: all
-	./cub3D ./assets/maps/teste.cub
+	./cub3D ./assets/maps/teste_map.cub
 
 .PHONY: all bonus clean fclean re rebonus mlx
