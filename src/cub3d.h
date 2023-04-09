@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/09 16:21:15 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/09 17:03:03 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define DOWN 0
 # define RIGHT 2
 # define LEFT 3
+# define KEY_ESC 65307
 # define W	119
 # define S	115
 # define D	100
@@ -180,6 +181,7 @@ void	close_game(t_game **game);
 void	free_matrix(char **ptr);
 void	free_map_header(t_map_header **header);
 void	free_cub3d(t_game **game);
+int		handle_keyesc(t_data *data);
 
 /* ---------------------------------------------------------------------*\
 |							start_game									|
