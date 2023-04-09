@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/07 07:56:12 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/09 15:39:17 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	init_player(t_game *game)
 	game->player.cam_plane[0] = 0.66;
 	game->player.cam_plane[1] = 0;
 	y = -1;
-	while(++y < game->map->map_higth)
+	while (++y < game->map->map_higth)
 	{
 		x = -1;
-		while(++x < game->map->map_width)
+		while (++x < game->map->map_width)
 		{
 			if (game->map->map[y][x] == 'N')
 			{

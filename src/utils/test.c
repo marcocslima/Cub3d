@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:31:35 by alida-si          #+#    #+#             */
-/*   Updated: 2023/03/03 04:51:36 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:27:58 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	print_map(t_game *game)
 	int	j;
 
 	i = -1;
-	while(++i < game->map->map_higth)
+	while (++i < game->map->map_higth)
 	{
 		j = -1;
-		while(++j < game->map->map_width)
-			printf("%c",game->map->map[i][j]);
+		while (++j < game->map->map_width)
+			printf("%c", game->map->map[i][j]);
 		printf("\n");
 	}
 }

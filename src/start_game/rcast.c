@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/07 08:01:31 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:21:39 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,23 @@ void	calc_dda(t_data *data)
 	int	hit;
 
 	hit = FALSE;
-	data->gm->dda.ddaLineSizeX = data->gm->dists.dist_side_x;
-	data->gm->dda.ddaLineSizeY = data->gm->dists.dist_side_y;
+	data->gm->dda.dda_line_size_x = data->gm->dists.dist_side_x;
+	data->gm->dda.dda_line_size_y = data->gm->dists.dist_side_y;
 	data->gm->dda.wall_map_pos_x = data->gm->dda.map_pos_x;
 	data->gm->dda.wall_map_pos_y = data->gm->dda.map_pos_y;
 	while (hit == FALSE)
 	{
-		if (data->gm->dda.ddaLineSizeX < data->gm->dda.ddaLineSizeY)
+		if (data->gm->dda.dda_line_size_x < data->gm->dda.dda_line_size_y)
 		{
 			data->gm->dda.wall_map_pos_x += data->gm->dda.step_x;
-			data->gm->dda.ddaLineSizeX += data->gm->dists.delta_dist_x;
-			data->gm->dda.hitSide = 0;
+			data->gm->dda.dda_line_size_x += data->gm->dists.delta_dist_x;
+			data->gm->dda.hit_side = 0;
 		}
 		else
 		{
 			data->gm->dda.wall_map_pos_y += data->gm->dda.step_y;
-			data->gm->dda.ddaLineSizeY += data->gm->dists.delta_dist_y;
-			data->gm->dda.hitSide = 1;
+			data->gm->dda.dda_line_size_y += data->gm->dists.delta_dist_y;
+			data->gm->dda.hit_side = 1;
 		}
 		if (data->gm->map->map[(int)data->gm->dda.wall_map_pos_y]
 			[(int)data->gm->dda.wall_map_pos_x] == '1')
@@ -95,7 +95,7 @@ void	calc_dda(t_data *data)
 
 void	calc_perp_dist(t_data *data)
 {
-	if (data->gm->dda.hitSide == 0)
+	if (data->gm->dda.hit_side == 0)
 	{
 		data->gm->dda.perp_dist = (data->gm->dda.wall_map_pos_x
 				- data->gm->player.pos[0] + ((1 - data->gm->dda.step_x) / 2));

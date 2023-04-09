@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/07 08:00:05 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:21:15 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <string.h>
 # include <math.h>
 # include "../libraries/libft/libft.h"
-#include <X11/X.h>
-#include <X11/keysym.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include "../libraries/minilibx-linux/mlx.h"
 
 # define WIDTH 1024
@@ -43,19 +43,19 @@
 # define RED "\033[38;2;222;56;43m"
 # define RESET "\033[0m"
 
-#define MLX_ERROR 1
+# define MLX_ERROR 1
 
-#define BLUE_SKY_PIXEL 0x87CEEB
-#define FLOR_PIXEL 0xE2725B
-#define BRICK_PIXEL 0x6E4132
-#define BEIGE_PIXEL 0xDAC8B3
-#define RED_PIXEL 0xFF0000
-#define BLUE_PIXEL 0x0000FF
-#define GRAY1_PIXEL 0x5e514f
-#define GRAY2_PIXEL 0xa99e8d
-#define GREEN_PIXEL 0xFF00
-#define WHITE_PIXEL 0xFFFFFF
-#define BLACK_PIXEL 0x000000
+# define BLUE_SKY_PIXEL 0x87CEEB
+# define FLOR_PIXEL 0xE2725B
+# define BRICK_PIXEL 0x6E4132
+# define BEIGE_PIXEL 0xDAC8B3
+# define RED_PIXEL 0xFF0000
+# define BLUE_PIXEL 0x0000FF
+# define GRAY1_PIXEL 0x5e514f
+# define GRAY2_PIXEL 0xa99e8d
+# define GREEN_PIXEL 0xFF00
+# define WHITE_PIXEL 0xFFFFFF
+# define BLACK_PIXEL 0x000000
 
 typedef struct s_map_header
 {
@@ -82,7 +82,7 @@ typedef struct s_img
 	int		*data;
 	int		wdt;
 	int		hgt;
-	int		bpp; /* bits per pixel */
+	int		bpp;
 	int		line_len;
 	int		endian;
 }	t_img;
@@ -105,9 +105,9 @@ typedef struct s_rect
 {
 	int	x;
 	int	y;
-	int width;
-	int height;
-	int color;
+	int	width;
+	int	height;
+	int	color;
 }	t_rect;
 
 typedef struct s_player
@@ -137,11 +137,11 @@ typedef struct s_dda
 	int		map_pos_y;
 	int		step_x;
 	int		step_y;
-	float	ddaLineSizeX;
-	float	ddaLineSizeY;
+	float	dda_line_size_x;
+	float	dda_line_size_y;
 	float	wall_map_pos_x;
 	float	wall_map_pos_y;
-	int		hitSide;
+	int		hit_side;
 	float	perp_dist;
 	float	wall_line_height;
 	float	line_start;

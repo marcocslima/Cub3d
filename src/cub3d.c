@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/07 07:58:51 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:12:19 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,7 @@ int	handle_keypress(int keysym, t_data *data)
 int	render(t_data *data)
 {
 	float	pixel;
-	if (data->gm->map->map_higth <= data->gm->map->map_width)
-		data->l_side = HEIGHT / data->gm->map->map_width;
-	else
-		data->l_side = WIDTH / data->gm->map->map_higth;
-	if (data->win_ptr == NULL)
-		return (1);
+
 	render_background(&data->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
 	pixel = -1;
 	while (++pixel < WIDTH)
@@ -63,14 +58,15 @@ int	render(t_data *data)
 		calc_wall(data);
 		run_textures(data, pixel);
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->img.img_ptr, 0, 0);
 	plot_map(data);
 	return (0);
 }
 
 int	run_game(t_game *game)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = (t_data *)malloc(sizeof(t_data));
 	data->gm = game;
@@ -86,7 +82,7 @@ int	run_game(t_game *game)
 	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
 			&data->img.line_len, &data->img.endian);
 	data->img.data = (int *)mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
-		&data->img.line_len, &data->img.endian);
+			&data->img.line_len, &data->img.endian);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_hook(data->win_ptr, 2, 1L << 0, moving, data);
@@ -94,7 +90,7 @@ int	run_game(t_game *game)
 	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
-	return(0);
+	return (0);
 }
 
 int	main(int argc, char *argv[])

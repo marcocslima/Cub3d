@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/07 07:57:31 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:22:55 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	render_textures(t_data *data, int pixel)
 	int	txty;
 	int	color;
 
-	if ((data->gm->dda.hitSide == 0 && data->gm->ray.dir_x > 0)
-		|| (data->gm->dda.hitSide == 1 && data->gm->ray.dir_y < 0))
+	if ((data->gm->dda.hit_side == 0 && data->gm->ray.dir_x > 0)
+		|| (data->gm->dda.hit_side == 1 && data->gm->ray.dir_y < 0))
 		data->tx_render.txtx = TILE_SIZE - data->tx_render.txtx - 1;
 	data->tx_render.step = 1.0 * TILE_SIZE / data->gm->dda.wall_line_height;
 	data->tx_render.txtpos = (data->gm->dda.line_start - HEIGHT / 2
@@ -38,23 +38,23 @@ void	render_textures(t_data *data, int pixel)
 
 void	run_textures(t_data *data, int pixel)
 {
-	if (data->gm->dda.hitSide == 0 && data->gm->ray.dir_x >= 0)
+	if (data->gm->dda.hit_side == 0 && data->gm->ray.dir_x >= 0)
 		data->tx_render.txt_id = 0;
-	if (data->gm->dda.hitSide == 0 && data->gm->ray.dir_x < 0)
+	if (data->gm->dda.hit_side == 0 && data->gm->ray.dir_x < 0)
 		data->tx_render.txt_id = 1;
-	if (data->gm->dda.hitSide == 1 && data->gm->ray.dir_y >= 0)
+	if (data->gm->dda.hit_side == 1 && data->gm->ray.dir_y >= 0)
 		data->tx_render.txt_id = 2;
-	if (data->gm->dda.hitSide == 1 && data->gm->ray.dir_y < 0)
+	if (data->gm->dda.hit_side == 1 && data->gm->ray.dir_y < 0)
 		data->tx_render.txt_id = 3;
-	if (data->gm->dda.hitSide == 0)
+	if (data->gm->dda.hit_side == 0)
 		data->tx_render.wallx = data->gm->player.pos[1]
-		+ data->gm->dda.perp_dist * data->gm->ray.dir_y;
+			+ data->gm->dda.perp_dist * data->gm->ray.dir_y;
 	else
 		data->tx_render.wallx = data->gm->player.pos[0]
-		+ data->gm->dda.perp_dist * data->gm->ray.dir_x;
+			+ data->gm->dda.perp_dist * data->gm->ray.dir_x;
 	data->tx_render.wallx -= floor(data->tx_render.wallx);
-	data->tx_render.txtx = (int)(data->tx_render.wallx * (float)
-		TILE_SIZE);
+	data->tx_render.txtx = (int)(data->tx_render.wallx
+			* (float)TILE_SIZE);
 	render_textures(data, pixel);
 }
 
@@ -62,26 +62,18 @@ void	load_textures(t_data *data)
 {
 	data->tx_img[0].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->gm->header->no[1],
 		&data->tx_img[0].txt_img.wdt, &data->tx_img[0].txt_img.hgt);
-	if (data->tx_img[0].txt_img.img_ptr)
-		printf("procedimento de erro aqui!!!!");
 	data->tx_img[0].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[0].txt_img.img_ptr,
 		&data->tx_img[0].txt_img.bpp, &data->tx_img[0].txt_img.line_len, &data->tx_img[0].txt_img.endian);
 	data->tx_img[1].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->gm->header->so[1],
 		&data->tx_img[1].txt_img.wdt, &data->tx_img[1].txt_img.hgt);
-	if (data->tx_img[1].txt_img.img_ptr)
-		printf("procedimento de erro aqui!!!!");
 	data->tx_img[1].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[1].txt_img.img_ptr,
 		&data->tx_img[1].txt_img.bpp, &data->tx_img[1].txt_img.line_len, &data->tx_img[1].txt_img.endian);
 	data->tx_img[2].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->gm->header->we[1],
 		&data->tx_img[2].txt_img.wdt, &data->tx_img[2].txt_img.hgt);
-	if (data->tx_img[2].txt_img.img_ptr)
-		printf("procedimento de erro aqui!!!!");
 	data->tx_img[2].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[2].txt_img.img_ptr,
 		&data->tx_img[2].txt_img.bpp, &data->tx_img[2].txt_img.line_len, &data->tx_img[2].txt_img.endian);
 	data->tx_img[3].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->gm->header->ea[1],
 		&data->tx_img[3].txt_img.wdt, &data->tx_img[3].txt_img.hgt);
-	if (data->tx_img[3].txt_img.img_ptr)
-		printf("procedimento de erro aqui!!!!");
 	data->tx_img[3].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[3].txt_img.img_ptr,
 		&data->tx_img[3].txt_img.bpp, &data->tx_img[3].txt_img.line_len, &data->tx_img[3].txt_img.endian);
 }

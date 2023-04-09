@@ -6,7 +6,7 @@
 #    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/07 08:27:08 by mcesar-d         ###   ########.fr        #
+#    Updated: 2023/04/09 15:50:13 by mcesar-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ SOURCES =	cub3d.c\
 			render.c\
 			moving.c\
 			looking.c\
-			minimap.c
+			minimap.c\
+			ploting.c
 
 
 # COMPILED_SOURCES #
@@ -104,7 +105,7 @@ fclean: clean
 re: fclean all
 
 val: all
-	valgrind --leak-check=full ./cub3D ./assets/maps/teste.cub
+	valgrind --leak-check=full ./cub3D ./assets/maps/teste_map.cub
 
 run: all
 	./cub3D ./assets/maps/teste_map.cub
