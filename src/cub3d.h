@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/06 22:38:17 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:35:55 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@
 
 typedef struct s_map_header
 {
-	char	**no;
-	char	**so;
-	char	**we;
-	char	**ea;
-	char	**f;
-	char	**c;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*f;
+	char	*c;
 }	t_map_header;
 
 typedef struct s_map
@@ -115,6 +115,14 @@ typedef struct s_ray_casting
 	double		length;
 }	t_ray_casting;
 
+typedef struct s_texture_img
+{
+	t_img	*no;
+	t_img	*so;
+	t_img	*we;
+	t_img	*ea;
+}	t_texture_img;
+
 typedef struct s_game
 {
 	t_data			*mlx_data;
@@ -123,6 +131,7 @@ typedef struct s_game
 	t_map			*map;
 	t_player		*player;
 	t_ray_casting	*ray;
+	t_texture_img	*texture_img;
 	t_img			*teste_img;
 	t_img			*teste_img2;
 	char			**file;

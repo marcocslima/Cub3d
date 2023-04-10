@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/07 16:11:20 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:42:27 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,40 @@ int	calc_color(t_img *img, double y1, float offset, double wall_height)
 	return (color);
 }
 
+t_img	*define_texture(double ray_angle, t_texture_img *txt_img, int wall_plane)
+{
+	if (wall_plane == HORIZONTAL)
+	{
+		if (looking_up(ray_angle))
+			return (txt_img->no);
+		else
+			return (txt_img->so);
+	}
+	else
+	{
+		if (looking_right(ray_angle))
+			return (txt_img->ea);
+		else
+			return (txt_img->we);
+	}
+}
+
 void	draw_line(double x1, double y1, double y2, t_game *game, double wall_height)
 {
-	int i = 0;
+	int		i = 0;
+	int		color;
+	t_img	*txt_img;
 
+	// txt_img = define_texture(game->ray->angle, game->texture_img, game->ray->wall_plane);
+	// color = calc_color(txt_img, i, get_offset(game), wall_height);
 	if (game->ray->wall_plane == HORIZONTAL)
 	{
 		while (i < wall_height)
 		{
-			render_rect(game, calc_color(game->teste_img, i, get_offset(game), wall_height), 1, 1, y1, x1);
+			if (looking_up(game->ray->angle))
+				render_rect(game, calc_color(game->texture_img->no, i, get_offset(game), wall_height), 1, 1, y1, x1);
+			else
+				render_rect(game, calc_color(game->texture_img->so, i, get_offset(game), wall_height), 1, 1, y1, x1);
 			y1++;
 			i++;
 		}
@@ -64,7 +89,10 @@ void	draw_line(double x1, double y1, double y2, t_game *game, double wall_height
 	{
 		while (i < wall_height)
 		{
-			render_rect(game, calc_color(game->teste_img2, i, get_offset(game), wall_height), 1, 1, y1, x1);
+			if (looking_right(game->ray->angle))
+				render_rect(game, calc_color(game->texture_img->ea, i, get_offset(game), wall_height), 1, 1, y1, x1);
+			else
+				render_rect(game, calc_color(game->texture_img->we, i, get_offset(game), wall_height), 1, 1, y1, x1);
 			y1++;
 			i++;
 		}

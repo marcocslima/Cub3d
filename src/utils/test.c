@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:31:35 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/13 09:34:30 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:17:28 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	print_whole_map(t_game *game)
 
 	i = -1;
 	printf("HEADER\n");
-	printf("%s  %s\n", game->header->no[0], game->header->no[1]);
-	printf("%s  %s\n", game->header->so[0], game->header->so[1]);
-	printf("%s  %s\n", game->header->we[0], game->header->we[1]);
-	printf("%s  %s\n", game->header->ea[0], game->header->ea[1]);
-	printf("%s   %s\n", game->header->f[0], game->header->f[1]);
-	printf("%s   %s\n\n", game->header->c[0], game->header->c[1]);
+	printf("%s\n", game->header->no);
+	printf("%s\n", game->header->so);
+	printf("%s\n", game->header->we);
+	printf("%s\n", game->header->ea);
+	printf("%s\n", game->header->f);
+	printf("%s\n\n", game->header->c);
 	printf("MAP\n");
 	while (game->map->map[++i])
 		printf("%s\n", game->map->map[i]);

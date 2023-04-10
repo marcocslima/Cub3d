@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/07 16:27:55 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:20:06 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,20 @@ int	handle_events(int key_code, t_game *game)
 	return (1);
 }
 
+void	init_textures(t_texture_img **txt_img, t_map_header *txt_path, void *mlx_ptr)
+{
+	int	aux;
+
+	(*txt_img)->ea->mlx_img = mlx_xpm_file_to_image(mlx_ptr, txt_path->ea, &aux, &aux);
+	(*txt_img)->ea->addr = mlx_get_data_addr((*txt_img)->ea->mlx_img, &(*txt_img)->ea->bpp, &(*txt_img)->ea->line_len, &(*txt_img)->ea->endian);
+	(*txt_img)->no->mlx_img = mlx_xpm_file_to_image(mlx_ptr, txt_path->no, &aux, &aux);
+	(*txt_img)->no->addr = mlx_get_data_addr((*txt_img)->no->mlx_img, &(*txt_img)->no->bpp, &(*txt_img)->no->line_len, &(*txt_img)->no->endian);
+	(*txt_img)->we->mlx_img = mlx_xpm_file_to_image(mlx_ptr, txt_path->we, &aux, &aux);
+	(*txt_img)->we->addr = mlx_get_data_addr((*txt_img)->we->mlx_img, &(*txt_img)->we->bpp, &(*txt_img)->we->line_len, &(*txt_img)->we->endian);
+	(*txt_img)->so->mlx_img = mlx_xpm_file_to_image(mlx_ptr, txt_path->so, &aux, &aux);
+	(*txt_img)->so->addr = mlx_get_data_addr((*txt_img)->so->mlx_img, &(*txt_img)->so->bpp, &(*txt_img)->so->line_len, &(*txt_img)->so->endian);
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -85,7 +99,7 @@ int	main(int argc, char *argv[])
 		get_header(&game);
 		check_header(&game);
 		verify_map(&game);
-		//print_whole_map(game);
+		print_whole_map(game);
 
 		game->img_data->mlx_img = mlx_new_image(game->mlx_data->mlx_ptr,
 				900, 600);
@@ -93,12 +107,7 @@ int	main(int argc, char *argv[])
 				&game->img_data->bpp, &game->img_data->line_len,
 				&game->img_data->endian);
 
-		game->teste_img->mlx_img = mlx_xpm_file_to_image(game->mlx_data->mlx_ptr, "assets/imgs/Selection_1_.xpm", &aux, &aux);
-		game->teste_img->addr = mlx_get_data_addr(game->teste_img->mlx_img, &game->teste_img->bpp, &game->teste_img->line_len, &game->teste_img->endian);
-
-		game->teste_img2->mlx_img = mlx_xpm_file_to_image(game->mlx_data->mlx_ptr, "assets/imgs/Selection_2_.xpm", &aux, &aux);
-		game->teste_img2->addr = mlx_get_data_addr(game->teste_img2->mlx_img, &game->teste_img2->bpp, &game->teste_img2->line_len, &game->teste_img2->endian);
-
+		init_textures(&game->texture_img, game->header, game->mlx_data->mlx_ptr);
 		mlx_loop_hook(game->mlx_data->mlx_ptr, &render, game);
 		mlx_hook(game->mlx_data->mlx_win, 17, 1L << 17, close_window, game);
 		mlx_hook(game->mlx_data->mlx_win, 02, 1L << 0, handle_events, game);
