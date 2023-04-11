@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:21:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/07 19:16:09 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/10 19:33:09 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	fill_header_struct(t_game **game)
 		else if (ft_strcmp_eq(config[0], "CE") || ft_strcmp_eq(config[0], "C"))
 			(*game)->header->c = config[1];
 		else
+		{
 			free_matrix(config);
+			return ;
+		}
 		free(config[0]);
 		free(config);
 		i++;
