@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:22:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/10 21:10:10 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:24:05 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	close_game(t_game **game)
 {
 	free_cub3d(game);
-	//exit(1);
 }
 
 int	handle_keyesc(t_data *data)

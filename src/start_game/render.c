@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/09 16:22:55 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:20:57 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,37 @@ void	run_textures(t_data *data, int pixel)
 	render_textures(data, pixel);
 }
 
+void	load_textures_continue(t_data *data)
+{
+	data->tx_img[2].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->gm->header->we[1], &data->tx_img[2].txt_img.wdt,
+			&data->tx_img[2].txt_img.hgt);
+	data->tx_img[2].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[2]
+			.txt_img.img_ptr, &data->tx_img[2].txt_img.bpp, &data->tx_img[2]
+			.txt_img.line_len, &data->tx_img[2].txt_img.endian);
+	data->tx_img[3].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->gm->header->ea[1], &data->tx_img[3].txt_img.wdt,
+			&data->tx_img[3].txt_img.hgt);
+	data->tx_img[3].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[3]
+			.txt_img.img_ptr, &data->tx_img[3].txt_img.bpp, &data->tx_img[3]
+			.txt_img.line_len, &data->tx_img[3].txt_img.endian);
+}
+
 void	load_textures(t_data *data)
 {
-	data->tx_img[0].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->gm->header->no[1],
-		&data->tx_img[0].txt_img.wdt, &data->tx_img[0].txt_img.hgt);
-	data->tx_img[0].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[0].txt_img.img_ptr,
-		&data->tx_img[0].txt_img.bpp, &data->tx_img[0].txt_img.line_len, &data->tx_img[0].txt_img.endian);
-	data->tx_img[1].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->gm->header->so[1],
-		&data->tx_img[1].txt_img.wdt, &data->tx_img[1].txt_img.hgt);
-	data->tx_img[1].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[1].txt_img.img_ptr,
-		&data->tx_img[1].txt_img.bpp, &data->tx_img[1].txt_img.line_len, &data->tx_img[1].txt_img.endian);
-	data->tx_img[2].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->gm->header->we[1],
-		&data->tx_img[2].txt_img.wdt, &data->tx_img[2].txt_img.hgt);
-	data->tx_img[2].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[2].txt_img.img_ptr,
-		&data->tx_img[2].txt_img.bpp, &data->tx_img[2].txt_img.line_len, &data->tx_img[2].txt_img.endian);
-	data->tx_img[3].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->gm->header->ea[1],
-		&data->tx_img[3].txt_img.wdt, &data->tx_img[3].txt_img.hgt);
-	data->tx_img[3].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[3].txt_img.img_ptr,
-		&data->tx_img[3].txt_img.bpp, &data->tx_img[3].txt_img.line_len, &data->tx_img[3].txt_img.endian);
+	data->tx_img[0].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->gm->header->no[1], &data->tx_img[0].txt_img.wdt,
+			&data->tx_img[0].txt_img.hgt);
+	data->tx_img[0].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[0]
+			.txt_img.img_ptr, &data->tx_img[0].txt_img.bpp, &data->tx_img[0]
+			.txt_img.line_len, &data->tx_img[0].txt_img.endian);
+	data->tx_img[1].txt_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->gm->header->so[1], &data->tx_img[1].txt_img.wdt,
+			&data->tx_img[1].txt_img.hgt);
+	data->tx_img[1].txt_img.data = (int *)mlx_get_data_addr(data->tx_img[1]
+			.txt_img.img_ptr, &data->tx_img[1].txt_img.bpp, &data->tx_img[1]
+			.txt_img.line_len, &data->tx_img[1].txt_img.endian);
+	load_textures_continue(data);
 }
 
 void	calc_wall(t_data *data)
