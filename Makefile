@@ -6,7 +6,7 @@
 #    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/09 15:50:13 by mcesar-d         ###   ########.fr        #
+#    Updated: 2023/04/10 10:57:40 by mcesar-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,7 @@ fclean: clean
 re: fclean all
 
 val: all
-	valgrind --leak-check=full ./cub3D ./assets/maps/teste_map.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./assets/maps/teste_map.cub
 
 run: all
 	./cub3D ./assets/maps/teste_map.cub
