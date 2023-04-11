@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/10 19:27:50 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:43:23 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include "../libraries/libft/libft.h"
 # include "../libraries/minilibx-linux/mlx.h"
 
-# define WIDTH 1024
-# define HEIGHT 768
+# define WINDOW_WIDTH 900
+# define WINDOW_HEIGHT 600
 # define TRUE 1
 # define FALSE 0
 # define PI 3.14159265359
@@ -60,6 +60,9 @@
 
 # define VERTICAL 0
 # define HORIZONTAL 1
+
+# define ANGLE_STEP 0.1
+# define PLAYER_STEP 5
 
 typedef struct s_map_header
 {

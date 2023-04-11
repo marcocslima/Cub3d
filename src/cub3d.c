@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/11 15:09:02 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:43:55 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	move_direction(t_game *game, int key_code)
 {
 	if (key_code == LEFT_ARROW)
 	{
-		game->player->angle -= 0.1;
+		game->player->angle -= ANGLE_STEP;
 		if (game->player->angle < 0)
 			game->player->angle += 2 * PI;
 	}
 	if (key_code == RIGHT_ARROW)
 	{
-		game->player->angle += 0.1;
+		game->player->angle += ANGLE_STEP;
 		if (game->player->angle > 2 * PI)
 			game->player->angle -= 2 * PI;
 	}
@@ -53,13 +53,13 @@ int	handle_events(int key_code, t_game *game)
 	if (key_code == ESC)
 		close_window(game);
 	if (key_code == W)
-		*&game->player->y_position -= 5;
+		*&game->player->y_position -= PLAYER_STEP;
 	if (key_code == S)
-		*&game->player->y_position += 5;
+		*&game->player->y_position += PLAYER_STEP;
 	if (key_code == A)
-		*&game->player->x_position -= 5;
+		*&game->player->x_position -= PLAYER_STEP;
 	if (key_code == D)
-		*&game->player->x_position += 5;
+		*&game->player->x_position += PLAYER_STEP;
 	if (key_code == LEFT_ARROW || key_code == RIGHT_ARROW)
 		move_direction(game, key_code);
 	if (key_code == 'p')
@@ -114,8 +114,8 @@ void	get_player_position(t_game **game)
 		{
 			if ((*game)->map->map[i][j] == 'N')
 			{
-				(*game)->player->x_position = j * 64 + 32;
-				(*game)->player->y_position = i * 64 + 32;
+				(*game)->player->x_position = j * MAP_CELL + MAP_CELL/2;
+				(*game)->player->y_position = i * MAP_CELL + MAP_CELL/2;
 				printf("y: %f x: %f\n", (*game)->player->y_position, (*game)->player->x_position);
 				return ;
 			}
@@ -143,7 +143,7 @@ int	main(int argc, char *argv[])
 		print_whole_map(game);
 
 		game->img_data->mlx_img = mlx_new_image(game->mlx_data->mlx_ptr,
-				900, 600);
+				WINDOW_WIDTH, WINDOW_HEIGHT);
 		game->img_data->addr = mlx_get_data_addr(game->img_data->mlx_img,
 				&game->img_data->bpp, &game->img_data->line_len,
 				&game->img_data->endian);

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/10 14:56:17 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:39:15 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_data_mlx(t_data **mlx_data)
 	*mlx_data = (t_data *) malloc(sizeof(t_data));
 	(*mlx_data)->mlx_ptr = mlx_init();
 	(*mlx_data)->mlx_win = mlx_new_window((*mlx_data)->mlx_ptr,
-			900, 600, "cub3D");
+			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 }
 
 void	init_data_img(t_img **img)
@@ -53,8 +53,8 @@ void	init_data_img(t_img **img)
 void	init_player(t_player **player)
 {
 	*player = (t_player *) malloc(sizeof(t_player));
-	(*player)->y_position = 384;
-	(*player)->x_position = 640;
+	(*player)->y_position = 0;
+	(*player)->x_position = 0;
 	(*player)->angle = 2 * PI;
 	(*player)->delta_x = 0;
 	(*player)->delta_y = 0;
