@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/10 20:42:37 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/11 04:46:24 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void	close_game(t_game **game);
 void	free_matrix(char **ptr);
 void	free_map_header(t_map_header **header);
 void	free_cub3d(t_game **game);
-int		handle_keyesc(t_data *data);
+int		end_game(t_data *data);
 
 /* ---------------------------------------------------------------------*\
 |							start_game									|

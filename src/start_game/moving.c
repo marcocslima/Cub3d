@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/09 17:03:37 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/11 04:46:58 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int	moving(int key, t_data *data)
 	if (key == 65363)
 		looking(+PI / 100, data);
 	if (key == KEY_ESC)
-		handle_keyesc(data);
+		end_game(data);
 	return (0);
 }
