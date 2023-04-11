@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/10 22:49:57 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:09:02 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,30 @@ void	init_textures(t_game **game)
 	get_img_addr(&(*game)->texture_img);
 }
 
+void	get_player_position(t_game **game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while((*game)->map->map[i])
+	{
+		j = 0;
+		while((*game)->map->map[i][j])
+		{
+			if ((*game)->map->map[i][j] == 'N')
+			{
+				(*game)->player->x_position = j * 64 + 32;
+				(*game)->player->y_position = i * 64 + 32;
+				printf("y: %f x: %f\n", (*game)->player->y_position, (*game)->player->x_position);
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -125,6 +149,7 @@ int	main(int argc, char *argv[])
 				&game->img_data->endian);
 
 		init_textures(&game);
+		get_player_position(&game);
 		mlx_loop_hook(game->mlx_data->mlx_ptr, &render, game);
 		mlx_hook(game->mlx_data->mlx_win, 17, 1L << 17, close_window, game);
 		mlx_hook(game->mlx_data->mlx_win, 02, 1L << 0, handle_events, game);
