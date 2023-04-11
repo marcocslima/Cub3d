@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/11 15:43:23 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:09:21 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ int		render_rect(t_game *game, int color, int rect_height, int rect_width,
 			int y_position, int x_position);
 int		render(t_game *game);
 void	img_pix_put(t_img *img, int x, int y, int color);
+void	render_background(t_game *game);
 
 //test
 void	print_whole_map(t_game *game);
