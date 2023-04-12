@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:22:44 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 20:35:21 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 21:38:03 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,12 @@ void	free_ptr(void **ptr)
 
 void	free_map_header(t_map_header **header)
 {
-	//free((*header)->no);
-	free_ptr((void*)(*header)->no);
-	free_ptr((void*)(*header)->so);
-	free_ptr((void*)(*header)->we);
-	free_ptr((void*)(*header)->ea);
-	free_ptr((void*)(*header)->f);
-	free_ptr((void*)(*header)->c);
+	free_ptr((void *)(*header)->no);
+	free_ptr((void *)(*header)->so);
+	free_ptr((void *)(*header)->we);
+	free_ptr((void *)(*header)->ea);
+	free_ptr((void *)(*header)->f);
+	free_ptr((void *)(*header)->c);
 }
 
 void	free_cub3d(t_game **game)
