@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/11 16:24:14 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/11 21:34:19 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SOURCES =	cub3d.c\
 			check_header.c\
 			check_input.c\
 			create_map.c\
-			init.c\
+			init_data.c\
 			get_header.c\
 			test.c\
 			utils_check_file.c\
@@ -65,7 +65,8 @@ SOURCES =	cub3d.c\
 			vertical_wall_distance.c\
 			utils_print.c\
 			render_background.c\
-			init_textures.c
+			init_textures.c\
+			init_data_utils.c
 
 
 # COMPILED_SOURCES #

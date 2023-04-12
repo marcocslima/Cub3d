@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 21:06:50 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 21:31:59 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,6 @@ void	init_data_map(t_map **map)
 	(*map)->map = NULL;
 }
 
-void	init_data_mlx(t_data **mlx_data)
-{
-	*mlx_data = (t_data *) malloc(sizeof(t_data));
-	(*mlx_data)->mlx_ptr = mlx_init();
-	(*mlx_data)->mlx_win = mlx_new_window((*mlx_data)->mlx_ptr,
-			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
-}
-
-void	init_data_img(t_img **img)
-{
-	*img = (t_img *) malloc(sizeof(t_img));
-	(*img)->mlx_img = NULL;
-	(*img)->addr = NULL;
-	(*img)->bpp = 0;
-	(*img)->endian = 0;
-	(*img)->line_len = 0;
-}
-
 void	init_player(t_player **player)
 {
 	*player = (t_player *) malloc(sizeof(t_player));
@@ -70,39 +52,14 @@ void	init_ray(t_ray_casting **ray)
 	(*ray)->length = 0;
 }
 
-void	init_data_texture_img(t_texture_img **texture_img, t_img *img)
-{
-	*texture_img = (t_texture_img *) malloc(sizeof(t_texture_img));
-	init_data_img(&(*texture_img)->ea);
-	init_data_img(&(*texture_img)->no);
-	init_data_img(&(*texture_img)->so);
-	init_data_img(&(*texture_img)->we);
-}
-
 void	init_data(t_game **game)
 {
-	t_map_header	*header;
-	t_map			*map;
-	t_data			*mlx_data;
-	t_img			*img;
-	t_player		*player;
-	t_ray_casting	*ray;
-	t_texture_img	*texture_img;
-
-	init_data_header(&header);
-	init_data_map(&map);
-	init_data_mlx(&mlx_data);
-	init_data_img(&img);
-	init_player(&player);
-	init_ray(&ray);
-	init_data_texture_img(&texture_img, img);
 	*game = (t_game *) malloc(sizeof(t_game));
-	(*game)->map = map;
-	(*game)->header = header;
-	(*game)->mlx_data = mlx_data;
-	(*game)->img_data = img;
-	(*game)->player = player;
-	(*game)->ray = ray;
-	(*game)->texture_img = texture_img;
-	(*game)->file = NULL;
+	init_data_header(&(*game)->header);
+	init_data_map(&(*game)->map);
+	init_data_mlx(&(*game)->mlx_data);
+	init_data_img(&(*game)->img_data);
+	init_player(&(*game)->player);
+	init_ray(&(*game)->ray);
+	init_data_texture_img(&(*game)->texture_img);
 }
