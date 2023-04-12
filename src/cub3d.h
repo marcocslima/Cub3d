@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/11 21:33:55 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 22:37:47 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,12 @@ void	free_map_header(t_map_header **header);
 void	free_cub3d(t_game **game);
 
 /* ---------------------------------------------------------------------*\
+|							handle_events								|
+\* ---------------------------------------------------------------------*/
+
+int		handle_events(int key_code, t_game *game);
+
+/* ---------------------------------------------------------------------*\
 |							ray_casting									|
 \* ---------------------------------------------------------------------*/
 
@@ -174,6 +180,7 @@ void	init_textures(t_game **game);
 void	init_data_mlx(t_data **mlx_data);
 void	init_data_texture_img(t_texture_img **texture_img);
 void	init_data_img(t_img **img);
+void	get_player_position(t_game **game);
 void	init_data(t_game **game);
 
 /* ---------------------------------------------------------------------*\

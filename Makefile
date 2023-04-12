@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/11 22:24:20 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/11 22:38:33 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ VPATH = $(SRC_DIR)\
 		$(SRC_DIR)validate\
 		$(SRC_DIR)ray_casting\
 		$(SRC_DIR)utils\
+		$(SRC_DIR)handle_events\
 		$(SRC_DIR)render
 
 # FILES #
@@ -65,6 +66,7 @@ SOURCES =	cub3d.c\
 			utils_print.c\
 			render_background.c\
 			init_textures.c\
+			handle_events.c\
 			init_data_utils.c
 
 

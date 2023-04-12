@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 21:30:44 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 21:32:21 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 22:37:17 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,27 @@ void	init_data_img(t_img **img)
 	(*img)->bpp = 0;
 	(*img)->endian = 0;
 	(*img)->line_len = 0;
+}
+
+void	get_player_position(t_game **game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while ((*game)->map->map[i])
+	{
+		j = 0;
+		while ((*game)->map->map[i][j])
+		{
+			if ((*game)->map->map[i][j] == 'N')
+			{
+				(*game)->player->x_position = j * MAP_CELL + MAP_CELL / 2;
+				(*game)->player->y_position = i * MAP_CELL + MAP_CELL / 2;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
 }
