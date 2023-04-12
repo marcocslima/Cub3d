@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/11 21:34:19 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/11 22:24:20 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,6 @@ SOURCES =	cub3d.c\
 			create_map.c\
 			init_data.c\
 			get_header.c\
-			test.c\
 			utils_check_file.c\
 			check_map.c\
 			check_map_player.c\

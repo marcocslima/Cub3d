@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 21:31:59 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 22:03:20 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	init_ray(t_ray_casting **ray)
 void	init_data(t_game **game)
 {
 	*game = (t_game *) malloc(sizeof(t_game));
+	(*game)->mlx_data = NULL;
 	init_data_header(&(*game)->header);
 	init_data_map(&(*game)->map);
-	init_data_mlx(&(*game)->mlx_data);
 	init_data_img(&(*game)->img_data);
 	init_player(&(*game)->player);
 	init_ray(&(*game)->ray);
