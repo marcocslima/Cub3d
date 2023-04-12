@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/11 22:37:47 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:58:30 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@
 # define ANGLE_STEP 0.1
 # define PLAYER_STEP 5
 
+# define FOV_ANGLE 60
+
 typedef struct s_map_header
 {
 	char	*no;
@@ -109,7 +111,6 @@ typedef struct s_data
 
 typedef struct s_ray_casting
 {
-	int			wall_color;
 	int			wall_plane;
 	double		x_coordinate;
 	double		y_coordinate;
@@ -142,17 +143,17 @@ typedef struct s_game
 |							close_game									|
 \* ---------------------------------------------------------------------*/
 
-void	close_game(t_game **game, int exit_code);
-int		close_window(t_game *game);
-void	free_matrix(char **ptr);
-void	free_map_header(t_map_header **header);
-void	free_cub3d(t_game **game);
+void		close_game(t_game **game, int exit_code);
+int			close_window(t_game *game);
+void		free_matrix(char **ptr);
+void		free_map_header(t_map_header **header);
+void		free_cub3d(t_game **game);
 
 /* ---------------------------------------------------------------------*\
 |							handle_events								|
 \* ---------------------------------------------------------------------*/
 
-int		handle_events(int key_code, t_game *game);
+int			handle_events(int key_code, t_game *game);
 
 /* ---------------------------------------------------------------------*\
 |							ray_casting									|
@@ -161,12 +162,14 @@ int		handle_events(int key_code, t_game *game);
 void		ray_casting(t_game *game);
 void		find_wall_distance(t_game **game);
 double		hit_wall(t_game *game, double *y_coordinate, double *x_coordinate,
-			double y_step, double x_step);
+				double y_step, double x_step);
 double		shorter_distance(double x, double y);
 double		distance_to_horizontal_wall_up(t_game **game);
 double		distance_to_horizontal_wall_down(t_game **game);
 double		distance_to_vertical_wall_right(t_game **game);
 double		distance_to_vertical_wall_left(t_game **game);
+void		get_ray_data(t_game **game, double x_coordinate, double y_coordinate,
+				double ray_length);
 int			looking_up(double angle);
 int			looking_right(double angle);
 
@@ -174,49 +177,46 @@ int			looking_right(double angle);
 |							init_game									|
 \* ---------------------------------------------------------------------*/
 
-void	get_map(char **file, t_map **map);
-void	get_header(t_game **game);
-void	init_textures(t_game **game);
-void	init_data_mlx(t_data **mlx_data);
-void	init_data_texture_img(t_texture_img **texture_img);
-void	init_data_img(t_img **img);
-void	get_player_position(t_game **game);
-void	init_data(t_game **game);
+void		get_map(char **file, t_map **map);
+void		get_header(t_game **game);
+void		init_textures(t_game **game);
+void		init_data_mlx(t_data **mlx_data);
+void		init_data_texture_img(t_texture_img **texture_img);
+void		init_data_img(t_img **img);
+void		get_player_position(t_game **game);
+void		init_data(t_game **game);
 
 /* ---------------------------------------------------------------------*\
 |								utils									|
 \* ---------------------------------------------------------------------*/
 
-int		check_rgb(char *info);
-int		check_path(const char *path);
-void	print_error_exit(t_game **game, char *msg);
-void	print_error_msg(char *msg);
-int		matrix_len(char **matrix);
-int		check_str_is_number(char *str);
+int			check_rgb(char *info);
+int			check_path(const char *path);
+void		print_error_exit(t_game **game, char *msg);
+void		print_error_msg(char *msg);
+int			matrix_len(char **matrix);
+int			check_str_is_number(char *str);
 
 /* ---------------------------------------------------------------------*\
 |							validate									|
 \* ---------------------------------------------------------------------*/
 
-void	check_header(t_game **game);
-int		check_input(int argc, char **argv);
-void	verify_empty_lines(char *file, t_game **game);
-void	verify_onlyspace_line(t_game **game);
-void	verify_player(t_game **game);
-void	verify_top_and_bottom(t_game **game, char character);
-int		verify_position(t_map *map, int j, int i);
-void	verify_middle(t_game **game, char character);
-void	verify_sides(t_game **game, char character);
-void	verify_walls(t_game **game);
-void	verify_map(t_game **game);
+void		check_header(t_game **game);
+int			check_input(int argc, char **argv);
+void		verify_empty_lines(char *file, t_game **game);
+void		verify_onlyspace_line(t_game **game);
+void		verify_player(t_game **game);
+void		verify_top_and_bottom(t_game **game, char character);
+int			verify_position(t_map *map, int j, int i);
+void		verify_middle(t_game **game, char character);
+void		verify_sides(t_game **game, char character);
+void		verify_walls(t_game **game);
+void		verify_map(t_game **game);
 
-int		render_rect(t_game *game, int color, int rect_height, int rect_width,
-			int y_position, int x_position);
-int		render(t_game *game);
-void	img_pix_put(t_img *img, int x, int y, int color);
-void	render_background(t_game *game);
-
-//test
-void	print_whole_map(t_game *game);
+int			render_rect(t_game *game, int color, int rect_height, int rect_width,
+				int y_position, int x_position);
+int			render(t_game *game);
+void		img_pix_put(t_img *img, int x, int y, int color);
+void		render_background(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:35:58 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/07 00:25:17 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 22:56:16 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ double	distance_to_vertical_wall(t_game **game)
 		return (distance_to_vertical_wall_left(game));
 }
 
-void	define_wall_color(t_game **game, int color)
-{
-	(*game)->ray->wall_color = color;
-}
-
 void	find_wall_distance(t_game **game)
 {
 	double	vertical_wall_distance;
@@ -41,13 +36,7 @@ void	find_wall_distance(t_game **game)
 	vertical_wall_distance = distance_to_vertical_wall(game);
 	horizontal_wall_distance = distance_to_horizontal_wall(game);
 	if (vertical_wall_distance < horizontal_wall_distance)
-	{
 		(*game)->ray->wall_plane = VERTICAL;
-		(*game)->ray->wall_color = COLOR_LIGHT_PINK;
-	}
 	else if (vertical_wall_distance > horizontal_wall_distance)
-	{
 		(*game)->ray->wall_plane = HORIZONTAL;
-		(*game)->ray->wall_color = COLOR_PINK;
-	}
 }
