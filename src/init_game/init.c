@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 15:39:15 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 21:06:50 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ void	init_data(t_game **game)
 	t_img			*img;
 	t_player		*player;
 	t_ray_casting	*ray;
-	t_img			*teste;
-	t_img			*teste2;
 	t_texture_img	*texture_img;
 
 	init_data_header(&header);
@@ -97,8 +95,6 @@ void	init_data(t_game **game)
 	init_data_img(&img);
 	init_player(&player);
 	init_ray(&ray);
-	init_data_img(&teste);
-	init_data_img(&teste2);
 	init_data_texture_img(&texture_img, img);
 	*game = (t_game *) malloc(sizeof(t_game));
 	(*game)->map = map;
@@ -107,8 +103,6 @@ void	init_data(t_game **game)
 	(*game)->img_data = img;
 	(*game)->player = player;
 	(*game)->ray = ray;
-	(*game)->teste_img = teste;
-	(*game)->teste_img2 = teste2;
 	(*game)->texture_img = texture_img;
 	(*game)->file = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/11 16:09:21 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 20:32:41 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,6 @@ typedef struct s_game
 	t_player		*player;
 	t_ray_casting	*ray;
 	t_texture_img	*texture_img;
-	t_img			*teste_img;
-	t_img			*teste_img2;
 	char			**file;
 }	t_game;
 
@@ -154,7 +152,7 @@ void	free_cub3d(t_game **game);
 |							ray_casting									|
 \* ---------------------------------------------------------------------*/
 
-void	ray_casting(t_game *game);
+void		ray_casting(t_game *game);
 void		find_wall_distance(t_game **game);
 double		hit_wall(t_game *game, double *y_coordinate, double *x_coordinate,
 			double y_step, double x_step);
@@ -163,15 +161,16 @@ double		distance_to_horizontal_wall_up(t_game **game);
 double		distance_to_horizontal_wall_down(t_game **game);
 double		distance_to_vertical_wall_right(t_game **game);
 double		distance_to_vertical_wall_left(t_game **game);
-int		looking_up(double angle);
-int		looking_right(double angle);
+int			looking_up(double angle);
+int			looking_right(double angle);
 
 /* ---------------------------------------------------------------------*\
-|							start_game									|
+|							init_game									|
 \* ---------------------------------------------------------------------*/
 
 void	get_map(char **file, t_map **map);
 void	get_header(t_game **game);
+void	init_textures(t_game **game);
 void	init_data(t_game **game);
 
 /* ---------------------------------------------------------------------*\

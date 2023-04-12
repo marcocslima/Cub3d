@@ -6,11 +6,37 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:21:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/10 19:33:09 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/11 20:29:12 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	save_value(char **header_element, char *config)
+{
+	if (*header_element != NULL)
+		free(*header_element);
+	*header_element = config;
+}
+
+int	parse_header_data(t_game **game, char **config)
+{
+	if (ft_strcmp_eq(config[0], "NO") || ft_strcmp_eq(config[0], "N"))
+		save_value(&(*game)->header->no, config[1]);
+	else if (ft_strcmp_eq(config[0], "SO") || ft_strcmp_eq(config[0], "S"))
+		save_value(&(*game)->header->so, config[1]);
+	else if (ft_strcmp_eq(config[0], "WE") || ft_strcmp_eq(config[0], "W"))
+		save_value(&(*game)->header->we, config[1]);
+	else if (ft_strcmp_eq(config[0], "EA") || ft_strcmp_eq(config[0], "E"))
+		save_value(&(*game)->header->ea, config[1]);
+	else if (ft_strcmp_eq(config[0], "FL") || ft_strcmp_eq(config[0], "F"))
+		save_value(&(*game)->header->f, config[1]);
+	else if (ft_strcmp_eq(config[0], "CE") || ft_strcmp_eq(config[0], "C"))
+		save_value(&(*game)->header->c, config[1]);
+	else
+		return (0);
+	return (1);
+}
 
 void	fill_header_struct(t_game **game)
 {
@@ -21,22 +47,10 @@ void	fill_header_struct(t_game **game)
 	while (i < (*game)->map->init_map)
 	{
 		config = ft_split((*game)->file[i], ' ');
-		if (ft_strcmp_eq(config[0], "NO") || ft_strcmp_eq(config[0], "N"))
-			(*game)->header->no = config[1];
-		else if (ft_strcmp_eq(config[0], "SO") || ft_strcmp_eq(config[0], "S"))
-			(*game)->header->so = config[1];
-		else if (ft_strcmp_eq(config[0], "WE") || ft_strcmp_eq(config[0], "W"))
-			(*game)->header->we = config[1];
-		else if (ft_strcmp_eq(config[0], "EA") || ft_strcmp_eq(config[0], "E"))
-			(*game)->header->ea = config[1];
-		else if (ft_strcmp_eq(config[0], "FL") || ft_strcmp_eq(config[0], "F"))
-			(*game)->header->f = config[1];
-		else if (ft_strcmp_eq(config[0], "CE") || ft_strcmp_eq(config[0], "C"))
-			(*game)->header->c = config[1];
-		else
+		if (!parse_header_data(game, config))
 		{
 			free_matrix(config);
-			return ;
+			print_error_exit(game, "Invalid identifier\n");
 		}
 		free(config[0]);
 		free(config);
