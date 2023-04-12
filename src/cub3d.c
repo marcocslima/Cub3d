@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/11 04:58:45 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/12 05:47:04 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	run_game(t_game *game)
 	data->img.data = (int *)mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
 			&data->img.line_len, &data->img.endian);
 	mlx_hook(data->win_ptr, 2, 1L << 0, moving, data);
-	mlx_hook(data->win_ptr, 17, 1L << 17, end_game, data);
+	mlx_hook(data->win_ptr, 17, 1L << 17, end_game_click_x, data);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_loop(data->mlx_ptr);
 	return (0);

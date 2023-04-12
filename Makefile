@@ -6,7 +6,7 @@
 #    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/11 05:00:18 by mcesar-d         ###   ########.fr        #
+#    Updated: 2023/04/12 05:44:40 by mcesar-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,9 +76,6 @@ OBJS =	$(addprefix $(OBJ_PATH), $(SOURCES:.c=.o))
 # RULES #
 
 all: $(NAME)
-
-#$(NAME) : $(LIBFT) $(OBJS)
-#	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(NAME) : $(MLX) $(LIBFT) $(OBJS)
 	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) -L$(MLX_PATH) $(MLX_FLAGS)
