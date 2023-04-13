@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/12 15:53:46 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:49:49 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ double	get_offset(t_game *game)
 
 	offset = 0;
 	if (game->ray->wall_plane == VERTICAL)
-		offset = (int)game->ray->y_coordinate % MAP_CELL;
+		offset = (int)game->ray->y_intersection % MAP_CELL;
 	else if (game->ray->wall_plane == HORIZONTAL)
-		offset = (int)game->ray->x_coordinate % MAP_CELL;
+		offset = (int)game->ray->x_intersection % MAP_CELL;
 	return (offset);
 }
 
@@ -117,6 +117,7 @@ void	ray_casting(t_game *game)
 	while (game->ray->id < WINDOW_WIDTH)
 	{
 		game->ray->length = 0;
+		game->ray_tmp->ray_length = 0;
 		find_wall_distance(&game);
 		wall_height = calculate_wall_height(game);
 		draw_line(game->ray->id, (WINDOW_HEIGHT / 2)- (wall_height / 2), (WINDOW_HEIGHT / 2) + (wall_height / 2), game, wall_height);

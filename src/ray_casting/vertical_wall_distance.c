@@ -6,46 +6,55 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:39:01 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/12 15:55:09 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:49:49 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+static double	x_intersection(t_game *game)
+{
+	double	player_x_posit;
+
+	player_x_posit = game->player->x_position;
+	if (looking_right(game->ray->angle))
+		return (((int)player_x_posit / MAP_CELL) * MAP_CELL + MAP_CELL);
+	return (((int)player_x_posit / MAP_CELL) * MAP_CELL - 0.0001);
+}
+
+static double	y_intersection(t_game *game)
+{
+	double	player_x_posit;
+	double	player_y_posit;
+	double	x_intersection;
+	double	angle;
+
+	player_x_posit = game->player->x_position;
+	player_y_posit = game->player->y_position;
+	x_intersection = game->ray_tmp->x_intersection;
+	angle = game->ray->angle;
+	return (((int)(player_x_posit - x_intersection))
+			* (-tan (angle)) + player_y_posit);
+}
+
 double	distance_to_vertical_wall_right(t_game **game)
 {
-	double	y_coordinate;
-	double	x_coordinate;
-	double	x_step;
-	double	y_step;
-	double	ray_length;
-
-	x_coordinate = ((int)(*game)->player->x_position / MAP_CELL)
-		* MAP_CELL + MAP_CELL;
-	y_coordinate = ((int)((*game)->player->x_position - x_coordinate))
-		* (-tan ((*game)->ray->angle)) + (*game)->player->y_position;
-	x_step = MAP_CELL;
-	y_step = MAP_CELL * tan((*game)->ray->angle);
-	ray_length = hit_wall(*game, &y_coordinate, &x_coordinate, y_step, x_step);
-	get_ray_data(game, x_coordinate, y_coordinate, ray_length);
-	return (ray_length);
+	(*game)->ray_tmp->x_intersection = x_intersection(*game);
+	(*game)->ray_tmp->y_intersection = y_intersection(*game);
+	(*game)->ray_tmp->x_step = MAP_CELL;
+	(*game)->ray_tmp->y_step = MAP_CELL * tan((*game)->ray->angle);
+	hit_wall(game);
+	get_ray_data(game);
+	return ((*game)->ray_tmp->ray_length);
 }
 
 double	distance_to_vertical_wall_left(t_game **game)
 {
-	double	y_coordinate;
-	double	x_coordinate;
-	double	x_step;
-	double	y_step;
-	double	ray_length;
-
-	x_coordinate = ((int)(*game)->player->x_position / MAP_CELL)
-		* MAP_CELL - 0.0001;
-	y_coordinate = ((int)((*game)->player->x_position - x_coordinate))
-		* (-tan ((*game)->ray->angle)) + (*game)->player->y_position;
-	x_step = -MAP_CELL;
-	y_step = MAP_CELL * -tan((*game)->ray->angle);
-	ray_length = hit_wall(*game, &y_coordinate, &x_coordinate, y_step, x_step);
-	get_ray_data(game, x_coordinate, y_coordinate, ray_length);
-	return (ray_length);
+	(*game)->ray_tmp->x_intersection = x_intersection(*game);
+	(*game)->ray_tmp->y_intersection = y_intersection(*game);
+	(*game)->ray_tmp->x_step = -MAP_CELL;
+	(*game)->ray_tmp->y_step = MAP_CELL * -tan((*game)->ray->angle);
+	hit_wall(game);
+	get_ray_data(game);
+	return ((*game)->ray_tmp->ray_length);
 }

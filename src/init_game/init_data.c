@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 22:56:42 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:49:49 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	init_ray(t_ray_casting **ray)
 {
 	*ray = (t_ray_casting *) malloc(sizeof(t_ray_casting));
 	(*ray)->wall_plane = -1;
-	(*ray)->x_coordinate = 0;
-	(*ray)->y_coordinate = 0;
+	(*ray)->x_intersection = 0;
+	(*ray)->y_intersection = 0;
 	(*ray)->length = 0;
 }
 
@@ -60,5 +60,6 @@ void	init_data(t_game **game)
 	init_data_img(&(*game)->img_data);
 	init_player(&(*game)->player);
 	init_ray(&(*game)->ray);
+	init_ray_tmp(&(*game)->ray_tmp);
 	init_data_texture_img(&(*game)->texture_img);
 }

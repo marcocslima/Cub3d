@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/12 15:58:30 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:51:33 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,21 @@ typedef struct s_data
 typedef struct s_ray_casting
 {
 	int			wall_plane;
-	double		x_coordinate;
-	double		y_coordinate;
+	double		x_intersection;
+	double		y_intersection;
 	int			id;
 	double		angle;
 	double		length;
 }	t_ray_casting;
+
+typedef struct s_ray_tmp
+{
+	double		y_step;
+	double		x_step;
+	double		x_intersection;
+	double		y_intersection;
+	double		ray_length;
+}	t_ray_tmp;
 
 typedef struct s_texture_img
 {
@@ -135,6 +144,7 @@ typedef struct s_game
 	t_map			*map;
 	t_player		*player;
 	t_ray_casting	*ray;
+	t_ray_tmp		*ray_tmp;
 	t_texture_img	*texture_img;
 	char			**file;
 }	t_game;
@@ -161,15 +171,13 @@ int			handle_events(int key_code, t_game *game);
 
 void		ray_casting(t_game *game);
 void		find_wall_distance(t_game **game);
-double		hit_wall(t_game *game, double *y_coordinate, double *x_coordinate,
-				double y_step, double x_step);
+void		hit_wall(t_game **game);
 double		shorter_distance(double x, double y);
 double		distance_to_horizontal_wall_up(t_game **game);
 double		distance_to_horizontal_wall_down(t_game **game);
 double		distance_to_vertical_wall_right(t_game **game);
 double		distance_to_vertical_wall_left(t_game **game);
-void		get_ray_data(t_game **game, double x_coordinate, double y_coordinate,
-				double ray_length);
+void		get_ray_data(t_game **game);
 int			looking_up(double angle);
 int			looking_right(double angle);
 
@@ -185,6 +193,7 @@ void		init_data_texture_img(t_texture_img **texture_img);
 void		init_data_img(t_img **img);
 void		get_player_position(t_game **game);
 void		init_data(t_game **game);
+void		init_ray_tmp(t_ray_tmp **ray_tmp);
 
 /* ---------------------------------------------------------------------*\
 |								utils									|

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 21:30:44 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 22:37:17 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:49:49 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ void	init_data_texture_img(t_texture_img **texture_img)
 	init_data_img(&(*texture_img)->no);
 	init_data_img(&(*texture_img)->so);
 	init_data_img(&(*texture_img)->we);
+}
+
+void	init_ray_tmp(t_ray_tmp **ray_tmp)
+{
+	*ray_tmp = (t_ray_tmp *) malloc(sizeof(t_ray_tmp));
+	(*ray_tmp)->x_intersection = 0;
+	(*ray_tmp)->y_intersection = 0;
+	(*ray_tmp)->y_step = 0;
+	(*ray_tmp)->x_step = 0;
+	(*ray_tmp)->ray_length = 0;
 }
 
 void	init_data_img(t_img **img)

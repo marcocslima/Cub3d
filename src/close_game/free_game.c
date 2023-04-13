@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:22:44 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 21:38:03 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:40:04 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void	free_cub3d(t_game **game)
 	free((*game)->mlx_data);
 	free((*game)->player);
 	free((*game)->ray);
+	free((*game)->ray_tmp);
 	free(*game);
 }
