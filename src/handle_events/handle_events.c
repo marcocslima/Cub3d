@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 22:32:25 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 22:33:07 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:38:19 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,33 @@ void	move_direction(t_game *game, int key_code)
 
 int	handle_events(int key_code, t_game *game)
 {
+	double	pdy;
+	double	pdx;
+
+	pdx = cos(game->player->angle) * 5;
+	pdy = sin(game->player->angle) * 5;
 	if (key_code == ESC)
 		close_window(game);
 	if (key_code == W)
-		*&game->player->y_position -= PLAYER_STEP;
+	{
+		*&game->player->y_position += (int)pdy;
+		*&game->player->x_position += (int)pdx;
+	}
 	if (key_code == S)
-		*&game->player->y_position += PLAYER_STEP;
+	{
+		*&game->player->y_position -= (int)pdy;
+		*&game->player->x_position -= (int)pdx;
+	}
 	if (key_code == A)
-		*&game->player->x_position -= PLAYER_STEP;
+	{
+		*&game->player->x_position += (int)pdy;
+		*&game->player->y_position -= (int)pdx;
+	}
 	if (key_code == D)
-		*&game->player->x_position += PLAYER_STEP;
+	{
+		*&game->player->x_position -= (int)pdy;
+		*&game->player->y_position += (int)pdx;
+	}
 	if (key_code == LEFT_ARROW || key_code == RIGHT_ARROW)
 		move_direction(game, key_code);
 	return (1);
