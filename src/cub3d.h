@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/13 12:25:47 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:23:27 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,18 @@ void		distance_to_vertical_wall_left(t_game **game);
 void		get_ray_data(t_game **game, int wall_plane);
 int			looking_up(double angle);
 int			looking_right(double angle);
+double		deg_to_rad(double degress);
+
+/* ---------------------------------------------------------------------*\
+|								render									|
+\* ---------------------------------------------------------------------*/
+
+void		render_line(t_game *game, int color,
+				int y_position, int x_position);
+int			render(t_game *game);
+void		img_pix_put(t_img *img, int x, int y, int color);
+void		render_background(t_game *game);
+void		render_wall(double y, t_game *game, double wall_height);
 
 /* ---------------------------------------------------------------------*\
 |							init_game									|
@@ -220,11 +232,5 @@ void		verify_middle(t_game **game, char character);
 void		verify_sides(t_game **game, char character);
 void		verify_walls(t_game **game);
 void		verify_map(t_game **game);
-
-int			render_rect(t_game *game, int color, int rect_height,
-				int rect_width, int y_position, int x_position);
-int			render(t_game *game);
-void		img_pix_put(t_img *img, int x, int y, int color);
-void		render_background(t_game *game);
 
 #endif

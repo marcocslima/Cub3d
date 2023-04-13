@@ -6,100 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/13 12:30:55 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:20:22 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-double	deg_to_rad(double degress)
-{
-	return (degress * (PI / 180.0));
-}
-
-double	get_offset(t_game *game)
-{
-	double	offset;
-
-	offset = 0;
-	if (game->ray->wall_plane == VERTICAL)
-		offset = (int)game->ray->y_intersection % MAP_CELL;
-	else if (game->ray->wall_plane == HORIZONTAL)
-		offset = (int)game->ray->x_intersection % MAP_CELL;
-	return (offset);
-}
-
-int	calc_color(t_img *img, double y1, double offset, double wall_height)
-{
-	unsigned int	color;
-	double			texture_height;
-	double			step;
-	double			pixel;
-
-	texture_height = MAP_CELL;
-	step = texture_height / wall_height;
-	pixel = step * y1;
-	color = *(unsigned int *)(img->addr + (int)pixel * img->line_len
-			+ (int)offset * (img->bpp / 8));
-	return (color);
-}
-
-t_img	*define_texture(double ray_angle, t_texture_img *txt_img,
-							int wall_plane)
-{
-	if (wall_plane == HORIZONTAL)
-	{
-		if (looking_up(ray_angle))
-			return (txt_img->no);
-		else
-			return (txt_img->so);
-	}
-	else
-	{
-		if (looking_right(ray_angle))
-			return (txt_img->ea);
-		else
-			return (txt_img->we);
-	}
-}
-
-void	draw_line(double x1, double y1, double y2, t_game *game,
-				double wall_height)
-{
-	int		i;
-	int		color;
-	t_img	*txt_img;
-
-	i = 0;
-	if (game->ray->wall_plane == HORIZONTAL)
-	{
-		while (i < wall_height)
-		{
-			if (looking_up(game->ray->angle))
-				render_rect(game, calc_color(game->texture_img->no, i,
-						get_offset(game), wall_height), 1, 1, y1, x1);
-			else
-				render_rect(game, calc_color(game->texture_img->so, i,
-						get_offset(game), wall_height), 1, 1, y1, x1);
-			y1++;
-			i++;
-		}
-	}
-	else
-	{
-		while (i < wall_height)
-		{
-			if (looking_right(game->ray->angle))
-				render_rect(game, calc_color(game->texture_img->ea, i,
-						get_offset(game), wall_height), 1, 1, y1, x1);
-			else
-				render_rect(game, calc_color(game->texture_img->we, i,
-						get_offset(game), wall_height), 1, 1, y1, x1);
-			y1++;
-			i++;
-		}
-	}
-}
 
 double	calculate_wall_height(t_game *game)
 {
@@ -129,8 +40,7 @@ void	ray_casting(t_game *game)
 		game->ray_tmp->ray_length = 0;
 		find_wall_distance(&game);
 		wall_height = calculate_wall_height(game);
-		draw_line(game->ray->id, (WINDOW_HEIGHT / 2) - (wall_height / 2),
-			(WINDOW_HEIGHT / 2) + (wall_height / 2), game, wall_height);
+		render_wall((WINDOW_HEIGHT / 2) - (wall_height / 2), game, wall_height);
 		game->ray->angle += deg_to_rad(FOV_ANGLE) / WINDOW_WIDTH;
 		game->ray->id++;
 	}

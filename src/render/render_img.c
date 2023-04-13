@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:03:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 16:08:53 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:38:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,19 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	}
 }
 
-int	render_rect(t_game *game, int color, int rect_height, int rect_width,
-		int y_position, int x_position)
+void	render_line(t_game *game, int color, int y_position, int x_position)
 {
 	int	i;
 	int	j;
 
-	if (game->mlx_data->mlx_win == NULL)
-		return (1);
 	i = y_position;
-	while (i < y_position + rect_height)
+	while (i < y_position + 1)
 	{
 		j = x_position;
-		while (j < x_position + rect_width)
+		while (j < x_position + 1)
 			img_pix_put(game->img_data, j++, i, color);
 		++i;
 	}
-	return (0);
 }
 
 int	render(t_game *game)
