@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:39:01 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/13 11:49:49 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:09:19 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,22 @@ static double	y_intersection(t_game *game)
 			* (-tan (angle)) + player_y_posit);
 }
 
-double	distance_to_vertical_wall_right(t_game **game)
+void	distance_to_vertical_wall_right(t_game **game)
 {
 	(*game)->ray_tmp->x_intersection = x_intersection(*game);
 	(*game)->ray_tmp->y_intersection = y_intersection(*game);
 	(*game)->ray_tmp->x_step = MAP_CELL;
 	(*game)->ray_tmp->y_step = MAP_CELL * tan((*game)->ray->angle);
 	hit_wall(game);
-	get_ray_data(game);
-	return ((*game)->ray_tmp->ray_length);
+	get_ray_data(game, VERTICAL);
 }
 
-double	distance_to_vertical_wall_left(t_game **game)
+void	distance_to_vertical_wall_left(t_game **game)
 {
 	(*game)->ray_tmp->x_intersection = x_intersection(*game);
 	(*game)->ray_tmp->y_intersection = y_intersection(*game);
 	(*game)->ray_tmp->x_step = -MAP_CELL;
 	(*game)->ray_tmp->y_step = MAP_CELL * -tan((*game)->ray->angle);
 	hit_wall(game);
-	get_ray_data(game);
-	return ((*game)->ray_tmp->ray_length);
+	get_ray_data(game, VERTICAL);
 }
