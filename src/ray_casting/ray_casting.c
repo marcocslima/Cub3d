@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:30:28 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/13 14:20:22 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:18:43 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ double	calculate_wall_height(t_game *game)
 	correc_wall_distance = game->ray->length
 		* cos(game->ray->angle - game->player->angle);
 	wall_height = (MAP_CELL / correc_wall_distance) * distance_to_proj_plane;
+	if (wall_height > WINDOW_HEIGHT)
+		wall_height -= wall_height - WINDOW_HEIGHT;
 	return (wall_height);
 }
 
