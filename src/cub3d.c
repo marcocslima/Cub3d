@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/13 22:11:38 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/14 13:33:05 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,15 @@ void	get_background_rgb(t_game *game)
 
 }
 
+void	init_game(t_game **game)
+{
+	init_data_mlx(&(*game)->mlx_data);
+	init_window_img(game);
+	init_textures(game);
+	get_background_rgb(*game);
+	get_player_position(game);
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -107,11 +116,7 @@ int	main(int argc, char *argv[])
 	if (game->file != NULL)
 	{
 		parser(&game);
-		init_data_mlx(&game->mlx_data);
-		init_window_img(&game);
-		init_textures(&game);
-		get_background_rgb(game);
-		get_player_position(&game);
+		init_game(&game);
 		game_loop(game);
 	}
 	free_cub3d(&game);

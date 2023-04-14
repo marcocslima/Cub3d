@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:21:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 20:29:12 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/14 13:52:22 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ void	fill_header_struct(t_game **game)
 	while (i < (*game)->map->init_map)
 	{
 		config = ft_split((*game)->file[i], ' ');
+		if (matrix_len(config) != 2)
+		{
+			free_matrix(config);
+			print_error_exit(game, "Invalid formatting\n");
+		}
 		if (!parse_header_data(game, config))
 		{
 			free_matrix(config);
