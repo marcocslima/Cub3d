@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/13 18:21:00 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 20:52:05 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ typedef struct s_texture_img
 	t_img	*so;
 	t_img	*we;
 	t_img	*ea;
+	int		f;
+	int		c;
 }	t_texture_img;
 
 typedef struct s_game

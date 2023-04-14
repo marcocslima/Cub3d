@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:04:20 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/11 16:16:00 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:09:33 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	render_background(t_game *game)
 
 	if (game->mlx_data->mlx_win == NULL)
 		return ;
-	render_ceiling(game, COLOR_BLUE);
-	render_floor(game, COLOR_GREEN);
+	render_ceiling(game, game->texture_img->c);
+	render_floor(game, game->texture_img->f);
 }

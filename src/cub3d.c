@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/13 18:23:17 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:11:07 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,45 @@ void	game_loop(t_game *game)
 	mlx_loop(game->mlx_data->mlx_ptr);
 }
 
+void	get_ceiling_rgb(t_game *game)
+{
+	char	**temp;
+	int		r;
+	int		g;
+	int		b;
+
+	temp = ft_split(game->header->c, ',');
+	r = ft_atoi(temp[0]);
+	g = ft_atoi(temp[1]);
+	b = ft_atoi(temp[2]);
+	game->texture_img->c = (r << 16 | g << 8 | b);
+	free_matrix(temp);
+
+}
+
+void	get_floor_rgb(t_game *game)
+{
+	char	**temp;
+	int		r;
+	int		g;
+	int		b;
+
+	temp = ft_split(game->header->f, ',');
+	r = ft_atoi(temp[0]);
+	g = ft_atoi(temp[1]);
+	b = ft_atoi(temp[2]);
+	game->texture_img->f = (r << 16 | g << 8 | b);
+	free_matrix(temp);
+
+}
+
+void	get_background_rgb(t_game *game)
+{
+	get_ceiling_rgb(game);
+	get_floor_rgb(game);
+
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd;
@@ -71,6 +110,7 @@ int	main(int argc, char *argv[])
 		init_data_mlx(&game->mlx_data);
 		init_window_img(&game);
 		init_textures(&game);
+		get_background_rgb(game);
 		get_player_position(&game);
 		game_loop(game);
 	}
