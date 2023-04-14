@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/13 14:21:23 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/13 22:06:46 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,13 @@ NAME = cub3D
 
 LIBFT = ./libraries/libft/libft.a
 LIBFT_PATH = ./libraries/libft
-MLX = ./libraries/minilibx-linux/libmlx.a
-MLX_PATH = ./libraries/minilibx-linux
+MLX = ./libraries/minilibx/libmlx.a
+MLX_PATH = ./libraries/minilibx
 MLX_FLAGS = -lm -lbsd -lmlx -lXext -lX11
 
 # COMPILATION #
 
-FLAGS = -g3 #-Werror -Wextra -Wall
+FLAGS = -g3 -Werror -Wextra -Wall
 
 # DELETE #
 
@@ -84,9 +84,6 @@ OBJS =	$(addprefix $(OBJ_PATH), $(SOURCES:.c=.o))
 # RULES #
 
 all: $(NAME)
-
-#$(NAME) : $(LIBFT) $(OBJS)
-#	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(NAME) : $(MLX) $(LIBFT) $(OBJS)
 	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) -L $(MLX_PATH) $(MLX_FLAGS)

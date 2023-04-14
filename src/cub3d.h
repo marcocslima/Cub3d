@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/13 20:52:05 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:11:27 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,13 @@
 # include <string.h>
 # include <math.h>
 # include "../libraries/libft/libft.h"
-# include "../libraries/minilibx-linux/mlx.h"
+# include "../libraries/minilibx/mlx.h"
 
 # define WINDOW_WIDTH 900
 # define WINDOW_HEIGHT 600
 # define TRUE 1
 # define FALSE 0
 # define PI 3.14159265359
-# define TILE_SIZE 512
-# define UP 1
-# define DOWN 0
-# define RIGHT 2
-# define LEFT 3
-
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
 # define W 119
@@ -41,29 +35,13 @@
 # define D 100
 # define A 97
 # define ESC 65307
-
 # define RED "\033[38;2;222;56;43m"
 # define RESET "\033[0m"
-
-# define COLOR_RED 0xFF0000
-# define COLOR_BLACK 0x000000
-# define COLOR_YELLOW 0xFFFF00
-# define COLOR_WHITE 0xFFFFFF
-# define COLOR_GRAY 0x4F4F4F
-# define COLOR_GREEN 0x7CFC00
-# define COLOR_BLUE 0x87CEEB
-# define COLOR_ORANGE 0xFF4500
-# define COLOR_LIGHT_PINK 0xFFC0CB
-# define COLOR_PINK 0xFF69B4
-
 # define MAP_CELL 64
-
 # define VERTICAL 0
 # define HORIZONTAL 1
-
 # define ANGLE_STEP 0.1
 # define PLAYER_STEP 5
-
 # define FOV_ANGLE 60
 
 typedef struct s_map_header
@@ -157,7 +135,6 @@ typedef struct s_game
 
 void		close_game(t_game **game, int exit_code);
 int			close_window(t_game *game);
-int			close_window_button(t_game *game);
 void		free_matrix(char **ptr);
 void		free_map_header(t_map_header **header);
 void		free_cub3d(t_game **game);

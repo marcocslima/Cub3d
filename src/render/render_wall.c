@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:19:12 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/13 17:16:31 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:14:33 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,6 @@ void	render_textured_line(t_game *game, t_img *txtr_img, double y,
 
 void	render_wall(double y, t_game *game, double wall_height)
 {
-	int		i;
-
-	i = 0;
 	if (game->ray->wall_plane == HORIZONTAL)
 	{
 		if (looking_up(game->ray->angle))

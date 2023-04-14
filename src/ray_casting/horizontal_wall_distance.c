@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:41:15 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/13 12:09:44 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:12:13 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static double	x_intersection(t_game *game)
 
 void	distance_to_horizontal_wall_up(t_game **game)
 {
-	double	ray_length;
-
 	(*game)->ray_tmp->y_intersection = y_intersection(*game);
 	(*game)->ray_tmp->x_intersection = x_intersection(*game);
 	(*game)->ray_tmp->x_step = MAP_CELL / -tan((*game)->ray->angle);

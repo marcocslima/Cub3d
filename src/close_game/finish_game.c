@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:22:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/13 19:49:39 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:11:16 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	close_window(t_game *game)
 	mlx_destroy_display(game->mlx_data->mlx_ptr);
 	free(game->mlx_data->mlx_ptr);
 	close_game(&game, EXIT_SUCCESS);
+	exit(0);
 }
 
 void	close_game(t_game **game, int exit_code)
