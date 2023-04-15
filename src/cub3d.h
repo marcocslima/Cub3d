@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 09:25:57 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:01:48 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@
 # define FALSE 0
 # define PI 3.14159265359
 # define TILE_SIZE 512
-# define UP 1
-# define DOWN 0
-# define RIGHT 2
-# define LEFT 3
 # define KEY_ESC 65307
 # define W	119
 # define S	115
@@ -51,11 +47,7 @@
 # define BRICK_PIXEL 0x6E4132
 # define BEIGE_PIXEL 0xDAC8B3
 # define RED_PIXEL 0xFF0000
-# define BLUE_PIXEL 0x0000FF
-# define GRAY1_PIXEL 0x5e514f
-# define GRAY2_PIXEL 0xa99e8d
 # define GREEN_PIXEL 0xFF00
-# define WHITE_PIXEL 0xFFFFFF
 # define BLACK_PIXEL 0x000000
 
 typedef struct s_map_header

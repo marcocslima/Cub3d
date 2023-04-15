@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 15:44:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:54:30 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int	main(int argc, char *argv[])
 	int		fd;
 	t_game	*game;
 
-	fd = check_input(argc, argv);
 	init_data(&game);
+	fd = check_input(argc, argv);
 	read_file(fd, &game);
 	if (game->file != NULL)
 	{
