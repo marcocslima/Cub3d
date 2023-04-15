@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/09 15:39:17 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:27:27 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,9 @@ void	init_data_map(t_map **map)
 
 void	init_data(t_game **game)
 {
-	t_map_header	*header;
-	t_map			*map;
-
-	init_data_header(&header);
-	init_data_map(&map);
 	*game = (t_game *) malloc(sizeof(t_game));
-	(*game)->map = map;
-	(*game)->header = header;
+	init_data_header(&(*game)->header);
+	init_data_map(&(*game)->map);
 	(*game)->file = NULL;
 	(*game)->ang = 0;
 }

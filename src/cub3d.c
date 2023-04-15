@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 16:18:13 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:27:06 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,18 @@ void	parse_map_file(t_game **game, int argc, char **argv)
 	free_cub3d(game);
 }
 
+/*void	init_game_assets()
+{
+	init_player(game);
+}*/
+
 int	main(int argc, char *argv[])
 {
 	t_game	*game;
 
 	init_data(&game);
 	parse_map_file(&game, argc, argv);
-	ini_game_assets();
+	//init_game_assets();
 	init_player(game);
 	run_game(game);
 	return (0);
