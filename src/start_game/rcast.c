@@ -3,108 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   rcast.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/09 16:21:39 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:10:24 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	ray_dir(float pixel, t_data *data)
+void	ray_dir(float pixel, t_game **game)
 {
 	float	multip;
 	float	cam_pixel[2];
 
 	multip = 2 * (pixel / WIDTH) - 1;
-	cam_pixel[0] = data->gm->player.cam_plane[0] * multip;
-	cam_pixel[1] = data->gm->player.cam_plane[1] * multip;
-	data->gm->ray.dir_x = data->gm->player.dir[0] + cam_pixel[0];
-	data->gm->ray.dir_y = data->gm->player.dir[1] + cam_pixel[1];
+	cam_pixel[0] = (*game)->player.cam_plane[0] * multip;
+	cam_pixel[1] = (*game)->player.cam_plane[1] * multip;
+	(*game)->ray.dir_x = (*game)->player.dir[0] + cam_pixel[0];
+	(*game)->ray.dir_y = (*game)->player.dir[1] + cam_pixel[1];
 }
 
-void	calc_delta_dist(t_data *data)
+void	calc_delta_dist(t_game **game)
 {
-	data->gm->dists.delta_dist_x = fabs(1 / data->gm->ray.dir_x);
-	data->gm->dists.delta_dist_y = fabs(1 / data->gm->ray.dir_y);
-	if (data->gm->dists.delta_dist_x > 1000)
+	(*game)->dists.delta_dist_x = fabs(1 / (*game)->ray.dir_x);
+	(*game)->dists.delta_dist_y = fabs(1 / (*game)->ray.dir_y);
+	if ((*game)->dists.delta_dist_x > 1000)
 	{
-		data->gm->dists.delta_dist_x = 1;
-		data->gm->dists.delta_dist_y = 0;
+		(*game)->dists.delta_dist_x = 1;
+		(*game)->dists.delta_dist_y = 0;
 	}
-	if (data->gm->dists.delta_dist_y > 1000)
+	if ((*game)->dists.delta_dist_y > 1000)
 	{
-		data->gm->dists.delta_dist_x = 0;
-		data->gm->dists.delta_dist_y = 1;
+		(*game)->dists.delta_dist_x = 0;
+		(*game)->dists.delta_dist_y = 1;
 	}
 }
 
-void	calc_side_dist(t_data *data)
+void	calc_side_dist(t_game **game)
 {
-	data->gm->dda.map_pos_x = (int)data->gm->player.pos[0];
-	data->gm->dda.map_pos_y = (int)data->gm->player.pos[1];
-	data->gm->dists.dist_side_x = (data->gm->player.pos[0]
-			- (float)data->gm->dda.map_pos_x) * data->gm->dists.delta_dist_x;
-	data->gm->dda.step_x = -1;
-	if (data->gm->ray.dir_x > 0)
+	(*game)->dda.map_pos_x = (int)(*game)->player.pos[0];
+	(*game)->dda.map_pos_y = (int)(*game)->player.pos[1];
+	(*game)->dists.dist_side_x = ((*game)->player.pos[0]
+			- (float)(*game)->dda.map_pos_x) * (*game)->dists.delta_dist_x;
+	(*game)->dda.step_x = -1;
+	if ((*game)->ray.dir_x > 0)
 	{
-		data->gm->dists.dist_side_x = ((float)data->gm->dda.map_pos_x
-				+ 1 - data->gm->player.pos[0]) * data->gm->dists.delta_dist_x;
-		data->gm->dda.step_x = 1;
+		(*game)->dists.dist_side_x = ((float)(*game)->dda.map_pos_x
+				+ 1 - (*game)->player.pos[0]) * (*game)->dists.delta_dist_x;
+		(*game)->dda.step_x = 1;
 	}
-	data->gm->dists.dist_side_y = (data->gm->player.pos[1]
-			- (float)data->gm->dda.map_pos_y) * data->gm->dists.delta_dist_y;
-	data->gm->dda.step_y = -1;
-	if (data->gm->ray.dir_y > 0)
+	(*game)->dists.dist_side_y = ((*game)->player.pos[1]
+			- (float)(*game)->dda.map_pos_y) * (*game)->dists.delta_dist_y;
+	(*game)->dda.step_y = -1;
+	if ((*game)->ray.dir_y > 0)
 	{
-		data->gm->dists.dist_side_y = ((float)data->gm->dda.map_pos_y
-				+ 1 - data->gm->player.pos[1]) * data->gm->dists.delta_dist_y;
-		data->gm->dda.step_y = 1;
+		(*game)->dists.dist_side_y = ((float)(*game)->dda.map_pos_y
+				+ 1 - (*game)->player.pos[1]) * (*game)->dists.delta_dist_y;
+		(*game)->dda.step_y = 1;
 	}
 }
 
-void	calc_dda(t_data *data)
+void	calc_dda(t_game **game)
 {
 	int	hit;
 
 	hit = FALSE;
-	data->gm->dda.dda_line_size_x = data->gm->dists.dist_side_x;
-	data->gm->dda.dda_line_size_y = data->gm->dists.dist_side_y;
-	data->gm->dda.wall_map_pos_x = data->gm->dda.map_pos_x;
-	data->gm->dda.wall_map_pos_y = data->gm->dda.map_pos_y;
+	(*game)->dda.dda_line_size_x = (*game)->dists.dist_side_x;
+	(*game)->dda.dda_line_size_y = (*game)->dists.dist_side_y;
+	(*game)->dda.wall_map_pos_x = (*game)->dda.map_pos_x;
+	(*game)->dda.wall_map_pos_y = (*game)->dda.map_pos_y;
 	while (hit == FALSE)
 	{
-		if (data->gm->dda.dda_line_size_x < data->gm->dda.dda_line_size_y)
+		if ((*game)->dda.dda_line_size_x < (*game)->dda.dda_line_size_y)
 		{
-			data->gm->dda.wall_map_pos_x += data->gm->dda.step_x;
-			data->gm->dda.dda_line_size_x += data->gm->dists.delta_dist_x;
-			data->gm->dda.hit_side = 0;
+			(*game)->dda.wall_map_pos_x += (*game)->dda.step_x;
+			(*game)->dda.dda_line_size_x += (*game)->dists.delta_dist_x;
+			(*game)->dda.hit_side = 0;
 		}
 		else
 		{
-			data->gm->dda.wall_map_pos_y += data->gm->dda.step_y;
-			data->gm->dda.dda_line_size_y += data->gm->dists.delta_dist_y;
-			data->gm->dda.hit_side = 1;
+			(*game)->dda.wall_map_pos_y += (*game)->dda.step_y;
+			(*game)->dda.dda_line_size_y += (*game)->dists.delta_dist_y;
+			(*game)->dda.hit_side = 1;
 		}
-		if (data->gm->map->map[(int)data->gm->dda.wall_map_pos_y]
-			[(int)data->gm->dda.wall_map_pos_x] == '1')
+		if ((*game)->map->map[(int)(*game)->dda.wall_map_pos_y]
+			[(int)(*game)->dda.wall_map_pos_x] == '1')
 			hit = TRUE;
 	}
 }
 
-void	calc_perp_dist(t_data *data)
+void	calc_perp_dist(t_game **game)
 {
-	if (data->gm->dda.hit_side == 0)
+	if ((*game)->dda.hit_side == 0)
 	{
-		data->gm->dda.perp_dist = (data->gm->dda.wall_map_pos_x
-				- data->gm->player.pos[0] + ((1 - data->gm->dda.step_x) / 2));
-		data->gm->dda.perp_dist /= data->gm->ray.dir_x;
+		(*game)->dda.perp_dist = ((*game)->dda.wall_map_pos_x
+				- (*game)->player.pos[0] + ((1 - (*game)->dda.step_x) / 2));
+		(*game)->dda.perp_dist /= (*game)->ray.dir_x;
 	}
 	else
 	{
-		data->gm->dda.perp_dist = (data->gm->dda.wall_map_pos_y
-				- data->gm->player.pos[1] + ((1 - data->gm->dda.step_y) / 2));
-		data->gm->dda.perp_dist /= data->gm->ray.dir_y;
+		(*game)->dda.perp_dist = ((*game)->dda.wall_map_pos_y
+				- (*game)->player.pos[1] + ((1 - (*game)->dda.step_y) / 2));
+		(*game)->dda.perp_dist /= (*game)->ray.dir_y;
 	}
 }

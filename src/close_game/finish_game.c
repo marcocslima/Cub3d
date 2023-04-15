@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:22:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/15 16:16:25 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:05:01 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,18 @@ void	close_game(t_game **game)
 	exit(0);
 }
 
-int	end_game(t_data *data)
+int	end_game(t_game **game)
 {
-	mlx_destroy_image(data->mlx_ptr, data->tx_img[0].txt_img.img_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->tx_img[1].txt_img.img_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->tx_img[2].txt_img.img_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->tx_img[3].txt_img.img_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	free(data);
-	close_game(&data->gm);
-	exit(0);
-	return (0);
-}
-
-int	end_game_click_x(t_data *data)
-{
-	close_game(&data->gm);
-	mlx_destroy_image(data->mlx_ptr, data->tx_img[0].txt_img.img_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->tx_img[1].txt_img.img_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->tx_img[2].txt_img.img_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->tx_img[3].txt_img.img_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	free(data->mlx_ptr);
-	free(data);
+	mlx_destroy_image((*game)->mlx->ptr, (*game)->tx_img[0].txt_img.img_ptr);
+	mlx_destroy_image((*game)->mlx->ptr, (*game)->tx_img[1].txt_img.img_ptr);
+	mlx_destroy_image((*game)->mlx->ptr, (*game)->tx_img[2].txt_img.img_ptr);
+	mlx_destroy_image((*game)->mlx->ptr, (*game)->tx_img[3].txt_img.img_ptr);
+	mlx_destroy_image((*game)->mlx->ptr, (*game)->img.img_ptr);
+	mlx_destroy_window((*game)->mlx->ptr, (*game)->mlx->win);
+	mlx_destroy_display((*game)->mlx->ptr);
+	free((*game)->mlx->ptr);
+	free(*game);
+	close_game(game);
 	exit(0);
 	return (0);
 }

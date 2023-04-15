@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 16:26:52 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:11:35 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,29 +141,39 @@ typedef struct s_dda
 	float	line_end;
 }	t_dda;
 
+typedef struct s_mlx
+{
+	void			*ptr;
+	void			*win;
+}	t_mlx;
+
 typedef struct s_game
 {
 	t_map_header	*header;
 	t_map			*map;
+	t_mlx			*mlx;
 	char			**file;
 	t_player		player;
 	t_ray			ray;
 	t_dists			dists;
 	t_dda			dda;
 	float			ang;
-}	t_game;
-
-typedef struct s_data
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
 	t_img		img;
 	int			cur_img;
 	int			l_side;
 	t_img_tx	tx_img[4];
 	t_render_tx	tx_render;
-	t_game		*gm;
-}	t_data;
+}	t_game;
+
+// typedef struct s_data
+// {
+// 	t_img		img;
+// 	int			cur_img;
+// 	int			l_side;
+// 	t_img_tx	tx_img[4];
+// 	t_render_tx	tx_render;
+// 	t_game		*gm;
+// }	t_data;
 
 /* ---------------------------------------------------------------------*\
 |							close_game									|
@@ -173,8 +183,7 @@ void	close_game(t_game **game);
 void	free_matrix(char **ptr);
 void	free_map_header(t_map_header **header);
 void	free_cub3d(t_game **game);
-int		end_game(t_data *data);
-int		end_game_click_x(t_data *data);
+int		end_game(t_game **game);
 
 /* ---------------------------------------------------------------------*\
 |							start_game									|
@@ -184,12 +193,12 @@ void	get_map(char **file, t_map **map);
 void	get_header(t_game **game);
 void	init_data(t_game **game);
 void	init_player(t_game *game);
-void	ray_dir(float pixel, t_data *data);
-void	calc_delta_dist(t_data *data);
-void	calc_side_dist(t_data *data);
-void	calc_dda(t_data *data);
-void	calc_perp_dist(t_data *data);
-void	calc_wall(t_data *data);
+void	ray_dir(float pixel, t_game **game);
+void	calc_delta_dist(t_game **game);
+void	calc_side_dist(t_game **game);
+void	calc_dda(t_game **game);
+void	calc_perp_dist(t_game **game);
+void	calc_wall(t_game **game);
 
 /* ---------------------------------------------------------------------*\
 |								utils									|
@@ -201,12 +210,12 @@ void	print_error_exit(t_game **game, char *msg);
 void	print_error_msg(char *msg);
 int		matrix_len(char **matrix);
 int		check_str_is_number(char *str);
-void	load_textures(t_data *data);
-void	run_textures(t_data *data, int pixel);
-void	render_textures(t_data *data, int pixel);
-int		moving(int key, t_data *data);
-int		looking(float ang, t_data *data);
-void	plot_map(t_data *data);
+void	load_textures(t_game *game);
+void	run_textures(t_game **game, int pixel);
+void	render_textures(t_game **game, int pixel);
+int		moving(int key, t_game *game);
+int		looking(float ang, t_game **game);
+void	plot_map(t_game *game);
 void	img_pix_put(t_img *img, int x, int y, int color);
 void	render_background(t_img *img, int cceil, int cflor);
 
@@ -229,5 +238,7 @@ void	verify_map(t_game **game);
 //test
 void	print_whole_map(t_game *game);
 void	print_map(t_game *game);
+
+void	init_textures(t_game **game);
 
 #endif

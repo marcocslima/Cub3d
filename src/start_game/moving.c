@@ -3,89 +3,89 @@
 /*                                                        :::      ::::::::   */
 /*   moving.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/11 04:46:58 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:08:09 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	moving_up(float desloc, t_data *data)
+void	moving_up(float desloc, t_game **game)
 {
 	int	tmp_0;
 	int	tmp_1;
 
-	tmp_0 = (int)(data->gm->player.pos[0] + data->gm->player.dir[0] * 0.5);
-	tmp_1 = (int)(data->gm->player.pos[1] + data->gm->player.dir[1] * 0.5);
-	if (data->gm->map->map[tmp_1][tmp_0] != '1')
+	tmp_0 = (int)((*game)->player.pos[0] + (*game)->player.dir[0] * 0.5);
+	tmp_1 = (int)((*game)->player.pos[1] + (*game)->player.dir[1] * 0.5);
+	if ((*game)->map->map[tmp_1][tmp_0] != '1')
 	{
-		data->gm->player.pos[0] += data->gm->player.dir[0] * desloc;
-		data->gm->player.pos[1] += data->gm->player.dir[1] * desloc;
+		(*game)->player.pos[0] += (*game)->player.dir[0] * desloc;
+		(*game)->player.pos[1] += (*game)->player.dir[1] * desloc;
 	}
 }
 
-void	moving_down(float desloc, t_data *data)
+void	moving_down(float desloc, t_game **game)
 {
 	int	tmp_0;
 	int	tmp_1;
 
-	tmp_0 = (int)(data->gm->player.pos[0] - data->gm->player.dir[0] * 0.5);
-	tmp_1 = (int)(data->gm->player.pos[1] - data->gm->player.dir[1] * 0.5);
-	if (data->gm->map->map[tmp_1][tmp_0] != '1')
+	tmp_0 = (int)((*game)->player.pos[0] - (*game)->player.dir[0] * 0.5);
+	tmp_1 = (int)((*game)->player.pos[1] - (*game)->player.dir[1] * 0.5);
+	if ((*game)->map->map[tmp_1][tmp_0] != '1')
 	{
-		data->gm->player.pos[0] -= data->gm->player.dir[0] * desloc;
-		data->gm->player.pos[1] -= data->gm->player.dir[1] * desloc;
+		(*game)->player.pos[0] -= (*game)->player.dir[0] * desloc;
+		(*game)->player.pos[1] -= (*game)->player.dir[1] * desloc;
 	}
 }
 
-void	moving_left(float desloc, t_data *data)
+void	moving_left(float desloc, t_game **game)
 {
 	int	tmp_0;
 	int	tmp_1;
 
-	tmp_0 = (int)(data->gm->player.pos[0] + data->gm->player.dir[1] * 0.5);
-	tmp_1 = (int)(data->gm->player.pos[1] - data->gm->player.dir[0] * 0.5);
-	if (data->gm->map->map[tmp_1][tmp_0] != '1')
+	tmp_0 = (int)((*game)->player.pos[0] + (*game)->player.dir[1] * 0.5);
+	tmp_1 = (int)((*game)->player.pos[1] - (*game)->player.dir[0] * 0.5);
+	if ((*game)->map->map[tmp_1][tmp_0] != '1')
 	{
-		data->gm->player.pos[0] += data->gm->player.dir[1] * desloc;
-		data->gm->player.pos[1] -= data->gm->player.dir[0] * desloc;
+		(*game)->player.pos[0] += (*game)->player.dir[1] * desloc;
+		(*game)->player.pos[1] -= (*game)->player.dir[0] * desloc;
 	}
 }
 
-void	moving_right(float desloc, t_data *data)
+void	moving_right(float desloc, t_game **game)
 {
 	int	tmp_0;
 	int	tmp_1;
 
-	tmp_0 = (int)(data->gm->player.pos[0] - data->gm->player.dir[1] * 0.5);
-	tmp_1 = (int)(data->gm->player.pos[1] + data->gm->player.dir[0] * 0.5);
-	if (data->gm->map->map[tmp_1][tmp_0] != '1')
+	tmp_0 = (int)((*game)->player.pos[0] - (*game)->player.dir[1] * 0.5);
+	tmp_1 = (int)((*game)->player.pos[1] + (*game)->player.dir[0] * 0.5);
+	if ((*game)->map->map[tmp_1][tmp_0] != '1')
 	{
-		data->gm->player.pos[0] -= data->gm->player.dir[1] * desloc;
-		data->gm->player.pos[1] += data->gm->player.dir[0] * desloc;
+		(*game)->player.pos[0] -= (*game)->player.dir[1] * desloc;
+		(*game)->player.pos[1] += (*game)->player.dir[0] * desloc;
 	}
 }
 
-int	moving(int key, t_data *data)
+int	moving(int key, t_game *game)
 {
 	float	desloc;
 
 	desloc = 0.1;
 	if (key == A)
-		moving_left(desloc, data);
+		moving_left(desloc, &game);
 	if (key == D)
-		moving_right(desloc, data);
+		moving_right(desloc, &game);
 	if (key == W)
-		moving_up(desloc, data);
+		moving_up(desloc, &game);
 	if (key == S)
-		moving_down(desloc, data);
+		moving_down(desloc, &game);
 	if (key == 65361)
-		looking(-PI / 100, data);
+		looking(-PI / 100, &game);
 	if (key == 65363)
-		looking(+PI / 100, data);
+		looking(+PI / 100, &game);
 	if (key == KEY_ESC)
-		end_game(data);
+		end_game(&game);
 	return (0);
 }

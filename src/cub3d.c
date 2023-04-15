@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 16:27:06 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:28:52 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,56 +32,39 @@ void	read_file(int fd, t_game **game)
 	free(ret);
 }
 
-void	ray_casting(t_data *data)
+void	ray_casting(t_game *game)
 {
 	float	pixel;
 
 	pixel = -1;
 	while (++pixel < WIDTH)
 	{
-		ray_dir(pixel, data);
-		calc_delta_dist(data);
-		calc_side_dist(data);
-		calc_dda(data);
-		calc_perp_dist(data);
-		calc_wall(data);
-		run_textures(data, pixel);
+		ray_dir(pixel, &game);
+		calc_delta_dist(&game);
+		calc_side_dist(&game);
+		calc_dda(&game);
+		calc_perp_dist(&game);
+		calc_wall(&game);
+		run_textures(&game, pixel);
 	}
 }
 
-int	render_game(t_data *data)
+int	render_game(t_game *game)
 {
-	render_background(&data->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
-	ray_casting(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-		data->img.img_ptr, 0, 0);
-	plot_map(data);
+	render_background(&game->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
+	ray_casting(game);
+	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win, game->img.img_ptr, 0, 0);
+	plot_map(game);
 	return (0);
 }
 
 int	run_game(t_game *game)
 {
-	t_data	*data;
-
-	data = (t_data *)malloc(sizeof(t_data));
-	data->gm = game;
-	data->mlx_ptr = mlx_init();
-	load_textures(data);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
-	if (data->mlx_ptr == NULL || data->win_ptr == NULL)
-	{
-		free(data->win_ptr);
-		return (MLX_ERROR);
-	}
-	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
-			&data->img.line_len, &data->img.endian);
-	data->img.data = (int *)mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
-			&data->img.line_len, &data->img.endian);
-	mlx_hook(data->win_ptr, 2, 1L << 0, moving, data);
-	mlx_hook(data->win_ptr, 17, 1L << 17, end_game, data);
-	mlx_loop_hook(data->mlx_ptr, &render_game, data);
-	mlx_loop(data->mlx_ptr);
+	//load_textures(game);
+	mlx_hook(game->mlx->win, 2, 1L << 0, moving, game);
+	mlx_hook(game->mlx->win, 17, 1L << 17, end_game, game);
+	mlx_loop_hook(game->mlx->ptr, &render_game, game);
+	mlx_loop(game->mlx->ptr);
 	return (0);
 }
 
@@ -102,10 +85,33 @@ void	parse_map_file(t_game **game, int argc, char **argv)
 	free_cub3d(game);
 }
 
-/*void	init_game_assets()
+void	init_data_mlx(t_mlx **mlx)
 {
-	init_player(game);
-}*/
+	*mlx = (t_mlx *) malloc(sizeof(t_mlx));
+	(*mlx)->ptr = mlx_init();
+	(*mlx)->win = mlx_new_window((*mlx)->ptr,
+			WIDTH, HEIGHT, "Cub3D");
+}
+
+void	init_window_img(t_game **game)
+{
+	(*game)->img.img_ptr = mlx_new_image((*game)->mlx->ptr, WIDTH, HEIGHT);
+	(*game)->img.addr = mlx_get_data_addr((*game)->img.img_ptr,
+			&(*game)->img.bpp, &(*game)->img.line_len,
+			&(*game)->img.endian);
+	(*game)->img.data = (int *)mlx_get_data_addr((*game)->img.img_ptr, &(*game)->img.bpp,
+			&(*game)->img.line_len, &(*game)->img.endian);
+}
+
+void	init_game_assets(t_game **game)
+{
+	init_player(*game);
+	init_data_mlx(&(*game)->mlx);
+	init_window_img(game);
+	init_textures(game);
+	//get_background_rgb(*game);
+	//get_player_position(game);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -113,8 +119,8 @@ int	main(int argc, char *argv[])
 
 	init_data(&game);
 	parse_map_file(&game, argc, argv);
-	//init_game_assets();
-	init_player(game);
+	init_game_assets(&game);
+	// init_player(game);
 	run_game(game);
 	return (0);
 }

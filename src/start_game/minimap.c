@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/09 16:02:02 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:15:12 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	render_rect(t_img *img, t_rect rect)
 	return (0);
 }
 
-void	plot_rays(t_data *data)
+void	plot_rays(t_game *game)
 {
 	int		pixel;
 	float	d;
@@ -36,45 +36,45 @@ void	plot_rays(t_data *data)
 	pixel = -1;
 	while (++pixel < WIDTH)
 	{
-		ray_dir(pixel, data);
-		calc_delta_dist(data);
-		calc_side_dist(data);
-		calc_dda(data);
-		calc_perp_dist(data);
-		calc_wall(data);
+		ray_dir(pixel, &game);
+		calc_delta_dist(&game);
+		calc_side_dist(&game);
+		calc_dda(&game);
+		calc_perp_dist(&game);
+		calc_wall(&game);
 		d = 0.01;
 		while (d < 1)
 		{
-			render_rect(&data->img, (t_rect){(data->gm->player.pos[0] * 15)
-				+ (15 * data->gm->ray.dir_x * d * data->gm->dda.perp_dist),
-				(data->gm->player.pos[1] * 15)
-				+ (15 * data->gm->ray.dir_y * d * data->gm->dda.perp_dist),
+			render_rect(&game->img, (t_rect){(game->player.pos[0] * 15)
+				+ (15 * game->ray.dir_x * d * game->dda.perp_dist),
+				(game->player.pos[1] * 15)
+				+ (15 * game->ray.dir_y * d * game->dda.perp_dist),
 				1, 1, GREEN_PIXEL});
 			d = d + 0.001;
 		}
 	}
 }
 
-void	render_elements(t_data *data, int i, int j, int side)
+void	render_elements(t_game **game, int i, int j, int side)
 {
 	int	color;
 
 	color = BLACK_PIXEL;
-	if (data->gm->map->map[i][j] == '1')
+	if ((*game)->map->map[i][j] == '1')
 		color = BRICK_PIXEL;
-	if (data->gm->map->map[i][j] == '0'
-		|| data->gm->map->map[i][j] == 'N')
+	if ((*game)->map->map[i][j] == '0'
+		|| (*game)->map->map[i][j] == 'N')
 		color = BEIGE_PIXEL;
-	render_rect(&data->img, (t_rect){j * side, i * side, side, side, color});
-	render_rect(&data->img, (t_rect){data->gm->player.pos[0]
-		* side, data->gm->player.pos[1] * side, 5, 5, RED_PIXEL});
-	render_rect(&data->img, (t_rect){j * side, i * side, 1,
+	render_rect(&(*game)->img, (t_rect){j * side, i * side, side, side, color});
+	render_rect(&(*game)->img, (t_rect){(*game)->player.pos[0]
+		* side, (*game)->player.pos[1] * side, 5, 5, RED_PIXEL});
+	render_rect(&(*game)->img, (t_rect){j * side, i * side, 1,
 		side, BLUE_SKY_PIXEL});
-	render_rect(&data->img, (t_rect){j * side, i * side, side,
+	render_rect(&(*game)->img, (t_rect){j * side, i * side, side,
 		1, BLUE_SKY_PIXEL});
 }
 
-void	plot_map(t_data *data)
+void	plot_map(t_game *game)
 {
 	int	i;
 	int	j;
@@ -82,11 +82,11 @@ void	plot_map(t_data *data)
 
 	i = -1;
 	side = 15;
-	while (++i < data->gm->map->map_higth)
+	while (++i < game->map->map_higth)
 	{
 		j = -1;
-		while (++j < data->gm->map->map_width)
-			render_elements(data, i, j, side);
+		while (++j < game->map->map_width)
+			render_elements(&game, i, j, side);
 	}
-	plot_rays(data);
+	plot_rays(game);
 }
