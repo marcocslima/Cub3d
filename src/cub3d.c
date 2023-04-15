@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 18:28:52 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:56:58 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	render_game(t_game *game)
 
 int	run_game(t_game *game)
 {
-	//load_textures(game);
 	mlx_hook(game->mlx->win, 2, 1L << 0, moving, game);
 	mlx_hook(game->mlx->win, 17, 1L << 17, end_game, game);
 	mlx_loop_hook(game->mlx->ptr, &render_game, game);

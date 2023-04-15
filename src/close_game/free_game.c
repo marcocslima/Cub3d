@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:22:44 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/13 11:03:35 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 19:06:01 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,20 @@ void	free_matrix(char **ptr)
 	}
 }
 
+void	free_ptr(void **ptr)
+{
+	if (ptr != NULL)
+		free(ptr);
+}
+
 void	free_map_header(t_map_header **header)
 {
-	free_matrix((*header)->no);
-	free_matrix((*header)->so);
-	free_matrix((*header)->we);
-	free_matrix((*header)->ea);
-	free_matrix((*header)->f);
-	free_matrix((*header)->c);
+	free_ptr((void *)(*header)->no);
+	free_ptr((void *)(*header)->so);
+	free_ptr((void *)(*header)->we);
+	free_ptr((void *)(*header)->ea);
+	free_ptr((void *)(*header)->f);
+	free_ptr((void *)(*header)->c);
 }
 
 void	free_cub3d(t_game **game)

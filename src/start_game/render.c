@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 18:18:54 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:57:14 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,39 +56,6 @@ void	run_textures(t_game **game, int pixel)
 	(*game)->tx_render.txtx = (int)((*game)->tx_render.wallx
 			* (float)TILE_SIZE);
 	render_textures(game, pixel);
-}
-
-void	load_textures_continue(t_game *game)
-{
-	game->tx_img[2].txt_img.img_ptr = mlx_xpm_file_to_image(game->mlx->ptr,
-			game->header->we[1], &game->tx_img[2].txt_img.wdt,
-			&game->tx_img[2].txt_img.hgt);
-	game->tx_img[2].txt_img.data = (int *)mlx_get_data_addr(game->tx_img[2]
-			.txt_img.img_ptr, &game->tx_img[2].txt_img.bpp, &game->tx_img[2]
-			.txt_img.line_len, &game->tx_img[2].txt_img.endian);
-	game->tx_img[3].txt_img.img_ptr = mlx_xpm_file_to_image(game->mlx->ptr,
-			game->header->ea[1], &game->tx_img[3].txt_img.wdt,
-			&game->tx_img[3].txt_img.hgt);
-	game->tx_img[3].txt_img.data = (int *)mlx_get_data_addr(game->tx_img[3]
-			.txt_img.img_ptr, &game->tx_img[3].txt_img.bpp, &game->tx_img[3]
-			.txt_img.line_len, &game->tx_img[3].txt_img.endian);
-}
-
-void	load_textures(t_game *game)
-{
-	game->tx_img[0].txt_img.img_ptr = mlx_xpm_file_to_image(game->mlx->ptr,
-			game->header->no[1], &game->tx_img[0].txt_img.wdt,
-			&game->tx_img[0].txt_img.hgt);
-	game->tx_img[0].txt_img.data = (int *)mlx_get_data_addr(game->tx_img[0]
-			.txt_img.img_ptr, &game->tx_img[0].txt_img.bpp, &game->tx_img[0]
-			.txt_img.line_len, &game->tx_img[0].txt_img.endian);
-	game->tx_img[1].txt_img.img_ptr = mlx_xpm_file_to_image(game->mlx->ptr,
-			game->header->so[1], &game->tx_img[1].txt_img.wdt,
-			&game->tx_img[1].txt_img.hgt);
-	game->tx_img[1].txt_img.data = (int *)mlx_get_data_addr(game->tx_img[1]
-			.txt_img.img_ptr, &game->tx_img[1].txt_img.bpp, &game->tx_img[1]
-			.txt_img.line_len, &game->tx_img[1].txt_img.endian);
-	load_textures_continue(game);
 }
 
 void	calc_wall(t_game **game)

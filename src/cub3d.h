@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 18:11:35 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 19:03:30 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@
 
 typedef struct s_map_header
 {
-	char	**no;
-	char	**so;
-	char	**we;
-	char	**ea;
-	char	**f;
-	char	**c;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*f;
+	char	*c;
 }	t_map_header;
 
 typedef struct s_map
@@ -165,16 +165,6 @@ typedef struct s_game
 	t_render_tx	tx_render;
 }	t_game;
 
-// typedef struct s_data
-// {
-// 	t_img		img;
-// 	int			cur_img;
-// 	int			l_side;
-// 	t_img_tx	tx_img[4];
-// 	t_render_tx	tx_render;
-// 	t_game		*gm;
-// }	t_data;
-
 /* ---------------------------------------------------------------------*\
 |							close_game									|
 \* ---------------------------------------------------------------------*/
@@ -210,7 +200,6 @@ void	print_error_exit(t_game **game, char *msg);
 void	print_error_msg(char *msg);
 int		matrix_len(char **matrix);
 int		check_str_is_number(char *str);
-void	load_textures(t_game *game);
 void	run_textures(t_game **game, int pixel);
 void	render_textures(t_game **game, int pixel);
 int		moving(int key, t_game *game);

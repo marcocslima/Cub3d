@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:48:31 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/15 17:56:56 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 19:09:33 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void	create_img(t_game **game)
 {
 	(*game)->tx_img[0].txt_img.img_ptr = mlx_xpm_file_to_image((*game)->mlx->ptr,
-			(*game)->header->no[1], &(*game)->tx_img[0].txt_img.wdt,
+			(*game)->header->no, &(*game)->tx_img[0].txt_img.wdt,
 			&(*game)->tx_img[0].txt_img.hgt);
 	(*game)->tx_img[1].txt_img.img_ptr = mlx_xpm_file_to_image((*game)->mlx->ptr,
-			(*game)->header->so[1], &(*game)->tx_img[1].txt_img.wdt,
+			(*game)->header->so, &(*game)->tx_img[1].txt_img.wdt,
 			&(*game)->tx_img[1].txt_img.hgt);
 	(*game)->tx_img[2].txt_img.img_ptr = mlx_xpm_file_to_image((*game)->mlx->ptr,
-			(*game)->header->we[1], &(*game)->tx_img[2].txt_img.wdt,
+			(*game)->header->we, &(*game)->tx_img[2].txt_img.wdt,
 			&(*game)->tx_img[2].txt_img.hgt);
 	(*game)->tx_img[3].txt_img.img_ptr = mlx_xpm_file_to_image((*game)->mlx->ptr,
-			(*game)->header->ea[1], &(*game)->tx_img[3].txt_img.wdt,
+			(*game)->header->ea, &(*game)->tx_img[3].txt_img.wdt,
 			&(*game)->tx_img[3].txt_img.hgt);
 }
 
@@ -39,9 +39,6 @@ void	get_img_addr(t_game **game)
 	(*game)->tx_img[2].txt_img.data = (int *)mlx_get_data_addr((*game)->tx_img[2]
 			.txt_img.img_ptr, &(*game)->tx_img[2].txt_img.bpp, &(*game)->tx_img[2]
 			.txt_img.line_len, &(*game)->tx_img[2].txt_img.endian);
-	(*game)->tx_img[3].txt_img.img_ptr = mlx_xpm_file_to_image((*game)->mlx->ptr,
-			(*game)->header->ea[1], &(*game)->tx_img[3].txt_img.wdt,
-			&(*game)->tx_img[3].txt_img.hgt);
 	(*game)->tx_img[3].txt_img.data = (int *)mlx_get_data_addr((*game)->tx_img[3]
 			.txt_img.img_ptr, &(*game)->tx_img[3].txt_img.bpp, &(*game)->tx_img[3]
 			.txt_img.line_len, &(*game)->tx_img[3].txt_img.endian);
