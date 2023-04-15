@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/12 05:06:47 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/15 09:25:57 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "../libraries/libft/libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include "../libraries/minilibx-linux/mlx.h"
+# include "../libraries/minilibx/mlx.h"
 
 # define WIDTH 1024
 # define HEIGHT 768
