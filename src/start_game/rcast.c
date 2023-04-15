@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/09 16:21:39 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:30:15 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	calc_delta_dist(t_data *data)
 {
 	data->gm->dists.delta_dist_x = fabs(1 / data->gm->ray.dir_x);
 	data->gm->dists.delta_dist_y = fabs(1 / data->gm->ray.dir_y);
-	if (data->gm->dists.delta_dist_x > 1000)
+	if (data->gm->dists.delta_dist_x > 100000)
 	{
 		data->gm->dists.delta_dist_x = 1;
 		data->gm->dists.delta_dist_y = 0;
 	}
-	if (data->gm->dists.delta_dist_y > 1000)
+	if (data->gm->dists.delta_dist_y > 100000)
 	{
 		data->gm->dists.delta_dist_x = 0;
 		data->gm->dists.delta_dist_y = 1;
