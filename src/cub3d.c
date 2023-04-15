@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 15:54:30 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:18:13 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,23 +85,31 @@ int	run_game(t_game *game)
 	return (0);
 }
 
-int	main(int argc, char *argv[])
+void	parse_map_file(t_game **game, int argc, char **argv)
 {
 	int		fd;
+
+	fd = check_input(argc, argv);
+	read_file(fd, game);
+	if ((*game)->file != NULL)
+	{
+		get_map((*game)->file, &(*game)->map);
+		get_header(game);
+		check_header(game);
+		verify_map(game);
+		return ;
+	}
+	free_cub3d(game);
+}
+
+int	main(int argc, char *argv[])
+{
 	t_game	*game;
 
 	init_data(&game);
-	fd = check_input(argc, argv);
-	read_file(fd, &game);
-	if (game->file != NULL)
-	{
-		get_map(game->file, &game->map);
-		get_header(&game);
-		check_header(&game);
-		verify_map(&game);
-		init_player(game);
-		run_game(game);
-	}
-	free_cub3d(&game);
+	parse_map_file(&game, argc, argv);
+	ini_game_assets();
+	init_player(game);
+	run_game(game);
 	return (0);
 }

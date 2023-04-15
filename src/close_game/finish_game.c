@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   finish_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:22:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/15 06:51:43 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:16:25 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	close_game(t_game **game)
 {
 	free_cub3d(game);
+	exit(0);
 }
 
 int	end_game(t_data *data)
 {
-	close_game(&data->gm);
 	mlx_destroy_image(data->mlx_ptr, data->tx_img[0].txt_img.img_ptr);
 	mlx_destroy_image(data->mlx_ptr, data->tx_img[1].txt_img.img_ptr);
 	mlx_destroy_image(data->mlx_ptr, data->tx_img[2].txt_img.img_ptr);
@@ -29,6 +29,7 @@ int	end_game(t_data *data)
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	free(data);
+	close_game(&data->gm);
 	exit(0);
 	return (0);
 }
