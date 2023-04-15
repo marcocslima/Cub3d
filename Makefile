@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/15 09:25:18 by mcesar-d         ###   ########.fr        #
+#    Updated: 2023/04/15 15:34:10 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = cub3D
 
 LIBFT = ./libraries/libft/libft.a
 LIBFT_PATH = ./libraries/libft
-MLX = ./libraries/minilibx-linux/libmlx.a
+MLX = ./libraries/minilibx/libmlx.a
 MLX_PATH = ./libraries/minilibx
 MLX_FLAGS = -lm -lbsd -lmlx -lXext -lX11
 

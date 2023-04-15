@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 09:28:43 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:39 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ void	read_file(int fd, t_game **game)
 	free(ret);
 }
 
-int	render(t_data *data)
+void	ray_casting(t_data *data)
 {
 	float	pixel;
 
-	render_background(&data->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
 	pixel = -1;
 	while (++pixel < WIDTH)
 	{
@@ -48,6 +47,12 @@ int	render(t_data *data)
 		calc_wall(data);
 		run_textures(data, pixel);
 	}
+}
+
+int	render(t_data *data)
+{
+	render_background(&data->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
+	ray_casting(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.img_ptr, 0, 0);
 	plot_map(data);
