@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 15:37:39 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:44:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ray_casting(t_data *data)
 	}
 }
 
-int	render(t_data *data)
+int	render_game(t_data *data)
 {
 	render_background(&data->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
 	ray_casting(data);
@@ -80,7 +80,7 @@ int	run_game(t_game *game)
 			&data->img.line_len, &data->img.endian);
 	mlx_hook(data->win_ptr, 2, 1L << 0, moving, data);
 	mlx_hook(data->win_ptr, 17, 1L << 17, end_game, data);
-	mlx_loop_hook(data->mlx_ptr, &render, data);
+	mlx_loop_hook(data->mlx_ptr, &render_game, data);
 	mlx_loop(data->mlx_ptr);
 	return (0);
 }
