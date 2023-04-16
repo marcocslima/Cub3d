@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 19:03:30 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 19:15:44 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,17 @@ typedef struct s_mlx
 	void			*win;
 }	t_mlx;
 
+
+typedef struct s_texture_img
+{
+	t_img	*no;
+	t_img	*so;
+	t_img	*we;
+	t_img	*ea;
+	int		f;
+	int		c;
+}	t_texture_img;
+
 typedef struct s_game
 {
 	t_map_header	*header;
@@ -158,11 +169,12 @@ typedef struct s_game
 	t_dists			dists;
 	t_dda			dda;
 	float			ang;
-	t_img		img;
-	int			cur_img;
-	int			l_side;
-	t_img_tx	tx_img[4];
-	t_render_tx	tx_render;
+	t_img			img;
+	int				cur_img;
+	int				l_side;
+	t_texture_img	*texture_img;
+	//t_img_tx		tx_img[4];
+	t_render_tx		tx_render;
 }	t_game;
 
 /* ---------------------------------------------------------------------*\

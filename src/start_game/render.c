@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 18:57:14 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/15 20:03:32 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ void	render_textures(t_game **game, int pixel)
 	{
 		txty = (int)(*game)->tx_render.txtpos & (TILE_SIZE - 1);
 		(*game)->tx_render.txtpos += (*game)->tx_render.step;
-		color = (*game)->tx_img[(*game)->tx_render.txt_id].txt_img.data[TILE_SIZE
-			* txty + (*game)->tx_render.txtx];
+		if ((*game)->tx_render.txt_id == 0)
+		color = (*game)->texture_img->no->data[TILE_SIZE * txty + (*game)->tx_render.txtx];
+		if ((*game)->tx_render.txt_id == 1)
+		color = (*game)->texture_img->so->data[TILE_SIZE * txty + (*game)->tx_render.txtx];
+		if ((*game)->tx_render.txt_id == 2)
+		color = (*game)->texture_img->we->data[TILE_SIZE * txty + (*game)->tx_render.txtx];
+		if ((*game)->tx_render.txt_id == 3)
+		color = (*game)->texture_img->ea->data[TILE_SIZE * txty + (*game)->tx_render.txtx];
 		(*game)->img.data[y * WIDTH + pixel] = color;
 		y++;
 	}
