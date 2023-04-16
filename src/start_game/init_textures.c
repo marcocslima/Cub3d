@@ -6,11 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:48:31 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 09:45:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:02:08 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	create_txt_img(t_texture_img **img, t_map_header *header, void *mlx_ptr)
 {

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 13:59:47 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:21:17 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	init_data_assets(t_texture_img **texture_img, t_color **background_color, t_game *game)
 {
 	*texture_img = (t_texture_img *) malloc(sizeof(t_texture_img));
+	*background_color = (t_color *) malloc(sizeof(t_color));
 	init_data_img(&(*texture_img)->ea);
 	init_data_img(&(*texture_img)->no);
 	init_data_img(&(*texture_img)->so);
 	init_data_img(&(*texture_img)->we);
-	*background_color = (t_color *) malloc(sizeof(t_color));
 	get_background_rgb(game);
 }
 
