@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:31:35 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 13:51:06 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:59:47 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_map(t_game *game)
 	int	j;
 
 	i = -1;
-	while (++i < game->map->higth)
+	while (++i < game->map->height)
 	{
 		j = -1;
 		while (++j < game->map->width)

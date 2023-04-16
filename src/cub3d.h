@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 13:47:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:59:47 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_map
 {
 	int		init;
 	int		width;
-	int		higth;
+	int		height;
 	char	**matrix;
 }	t_map;
 

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 13:49:45 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:59:47 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	plot_map(t_game *game)
 
 	i = -1;
 	side = 15;
-	while (++i < game->map->higth)
+	while (++i < game->map->height)
 	{
 		j = -1;
 		while (++j < game->map->width)

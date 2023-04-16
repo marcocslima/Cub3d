@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:20:09 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 13:55:53 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:59:47 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	get_map(char **file, t_map **map)
 				(*map)->width = ft_strlen(file[i]);
 		}
 	}
-	(*map)->higth = i - (*map)->init;
+	(*map)->height = i - (*map)->init;
 	(*map)->matrix = create_map_matrix(file, (*map)->init,
-			(*map)->higth, (*map)->width);
+			(*map)->height, (*map)->width);
 }

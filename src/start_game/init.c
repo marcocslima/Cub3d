@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 13:48:08 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:59:47 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_data_header(t_map_header **header)
 void	init_data_map(t_map **map)
 {
 	*map = (t_map *) malloc(sizeof(t_map));
-	(*map)->higth = 0;
+	(*map)->height = 0;
 	(*map)->width = 0;
 	(*map)->init = 0;
 	(*map)->matrix = NULL;
@@ -80,7 +80,7 @@ void	init_player(t_game *game)
 	game->player.cam_plane[0] = 0.66;
 	game->player.cam_plane[1] = 0;
 	y = -1;
-	while (++y < game->map->higth)
+	while (++y < game->map->height)
 	{
 		x = -1;
 		while (++x < game->map->width)
