@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 10:58:52 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 11:28:54 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,11 @@ int		end_game(t_game **game);
 void	get_map(char **file, t_map **map);
 void	get_header(t_game **game);
 void	init_data(t_game **game);
+void	init_game_assets(t_game **game);
+void	init_data_assets(t_texture_img **texture_img, t_color **background_color, t_game *game);
+void	init_data_mlx(t_mlx **mlx);
+void	init_data_img(t_img **img);
+void	get_background_rgb(t_game *game);
 void	init_player(t_game *game);
 void	ray_dir(float pixel, t_game **game);
 void	calc_delta_dist(t_game **game);

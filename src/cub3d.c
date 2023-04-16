@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 11:09:11 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 11:15:31 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,93 +82,6 @@ void	parse_map_file(t_game **game, int argc, char **argv)
 		return ;
 	}
 	free_cub3d(game);
-}
-
-void	init_data_mlx(t_mlx **mlx)
-{
-	*mlx = (t_mlx *) malloc(sizeof(t_mlx));
-	(*mlx)->ptr = mlx_init();
-	(*mlx)->win = mlx_new_window((*mlx)->ptr,
-			WIDTH, HEIGHT, "Cub3D");
-}
-
-void	init_data_img(t_img **img)
-{
-	*img = (t_img *) malloc(sizeof(t_img));
-	(*img)->img_ptr = NULL;
-	(*img)->addr = NULL;
-	(*img)->data = 0;
-	(*img)->bpp = 0;
-	(*img)->endian = 0;
-	(*img)->line_len = 0;
-}
-
-void	init_window_img(t_img **img, void *mlx_ptr)
-{
-	init_data_img(img);
-	(*img)->img_ptr = mlx_new_image(mlx_ptr, WIDTH, HEIGHT);
-	(*img)->addr = mlx_get_data_addr((*img)->img_ptr, &(*img)->bpp, &(*img)->line_len, &(*img)->endian);
-	(*img)->data = (int *)mlx_get_data_addr((*img)->img_ptr, &(*img)->bpp, &(*img)->line_len, &(*img)->endian);
-}
-
-void	init_data_assets(t_texture_img **texture_img, t_color **background_color)
-{
-	*texture_img = (t_texture_img *) malloc(sizeof(t_texture_img));
-	init_data_img(&(*texture_img)->ea);
-	init_data_img(&(*texture_img)->no);
-	init_data_img(&(*texture_img)->so);
-	init_data_img(&(*texture_img)->we);
-	*background_color = (t_color *) malloc(sizeof(t_color));
-	(*background_color)->ceiling = 0;
-	(*background_color)->floor = 0;
-}
-
-void	get_ceiling_rgb(t_color *color, t_map_header *header)
-{
-	char	**temp;
-	int		r;
-	int		g;
-	int		b;
-
-	temp = ft_split(header->c, ',');
-	r = ft_atoi(temp[0]);
-	g = ft_atoi(temp[1]);
-	b = ft_atoi(temp[2]);
-	color->ceiling = (r << 16 | g << 8 | b);
-	free_matrix(temp);
-}
-
-void	get_floor_rgb(t_color *color, t_map_header *header)
-{
-	char	**temp;
-	int		r;
-	int		g;
-	int		b;
-
-	temp = ft_split(header->f, ',');
-	r = ft_atoi(temp[0]);
-	g = ft_atoi(temp[1]);
-	b = ft_atoi(temp[2]);
-	color->floor = (r << 16 | g << 8 | b);
-	free_matrix(temp);
-
-}
-
-void	get_background_rgb(t_game *game)
-{
-	get_ceiling_rgb(game->background_color, game->header);
-	get_floor_rgb(game->background_color, game->header);
-
-}
-
-void	init_game_assets(t_game **game)
-{
-	init_player(*game);
-	init_data_mlx(&(*game)->mlx);
-	init_window_img(&(*game)->img, (*game)->mlx->ptr);
-	init_data_assets(&(*game)->texture_img, &(*game)->background_color);
-	init_textures(game);
-	get_background_rgb(*game);
 }
 
 int	main(int argc, char *argv[])

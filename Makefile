@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/15 17:49:32 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/16 11:23:32 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,8 @@ SOURCES =	cub3d.c\
 			looking.c\
 			minimap.c\
 			init_textures.c\
+			init_data_utils.c\
+			init_game_assets.c\
 			ploting.c
 
 
