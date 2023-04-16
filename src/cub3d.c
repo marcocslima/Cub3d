@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 10:33:07 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 10:40:11 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,41 +125,41 @@ void	init_data_assets(t_texture_img **texture_img, t_color **background_color)
 	(*background_color)->floor = 0;
 }
 
-void	get_ceiling_rgb(t_game *game)
+void	get_ceiling_rgb(t_color *color, t_map_header *header)
 {
 	char	**temp;
 	int		r;
 	int		g;
 	int		b;
 
-	temp = ft_split(game->header->c, ',');
+	temp = ft_split(header->c, ',');
 	r = ft_atoi(temp[0]);
 	g = ft_atoi(temp[1]);
 	b = ft_atoi(temp[2]);
-	game->background_color->ceiling = (r << 16 | g << 8 | b);
+	color->ceiling = (r << 16 | g << 8 | b);
 	free_matrix(temp);
 }
 
-void	get_floor_rgb(t_game *game)
+void	get_floor_rgb(t_color *color, t_map_header *header)
 {
 	char	**temp;
 	int		r;
 	int		g;
 	int		b;
 
-	temp = ft_split(game->header->f, ',');
+	temp = ft_split(header->f, ',');
 	r = ft_atoi(temp[0]);
 	g = ft_atoi(temp[1]);
 	b = ft_atoi(temp[2]);
-	game->background_color->floor = (r << 16 | g << 8 | b);
+	color->floor = (r << 16 | g << 8 | b);
 	free_matrix(temp);
 
 }
 
 void	get_background_rgb(t_game *game)
 {
-	get_ceiling_rgb(game);
-	get_floor_rgb(game);
+	get_ceiling_rgb(game->background_color, game->header);
+	get_floor_rgb(game->background_color, game->header);
 
 }
 
