@@ -6,49 +6,45 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:48:31 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 09:09:09 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 09:45:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	create_img(t_game **game)
+void	create_txt_img(t_texture_img **img, t_map_header *header, void *mlx_ptr)
 {
-	int	aux;
+	int	a;
 
-	aux = 0;
-	(*game)->texture_img->no->img_ptr = mlx_xpm_file_to_image((*game)->mlx->ptr,
-			(*game)->header->no, &aux, &aux);
-	(*game)->texture_img->so->img_ptr = mlx_xpm_file_to_image((*game)->mlx->ptr,
-			(*game)->header->so, &aux, &aux);
-	(*game)->texture_img->we->img_ptr = mlx_xpm_file_to_image((*game)->mlx->ptr,
-			(*game)->header->we, &aux, &aux);
-	(*game)->texture_img->ea->img_ptr = mlx_xpm_file_to_image((*game)->mlx->ptr,
-			(*game)->header->ea, &aux, &aux);
+	a = 0;
+	(*img)->no->img_ptr = mlx_xpm_file_to_image(mlx_ptr, header->no, &a, &a);
+	(*img)->so->img_ptr = mlx_xpm_file_to_image(mlx_ptr, header->so, &a, &a);
+	(*img)->we->img_ptr = mlx_xpm_file_to_image(mlx_ptr, header->we, &a, &a);
+	(*img)->ea->img_ptr = mlx_xpm_file_to_image(mlx_ptr, header->ea, &a, &a);
 }
 
-void	get_img_addr(t_game **game)
+void	get_img_addr(t_texture_img **img)
 {
-	(*game)->texture_img->no->data = (int *)mlx_get_data_addr((*game)->texture_img->no->img_ptr,
-	 &(*game)->texture_img->no->bpp, &(*game)->texture_img->no->line_len, &(*game)->texture_img->no->endian);
-	(*game)->texture_img->so->data = (int *)mlx_get_data_addr((*game)->texture_img->so->img_ptr,
-	 &(*game)->texture_img->so->bpp, &(*game)->texture_img->so->line_len, &(*game)->texture_img->so->endian);
-	(*game)->texture_img->we->data = (int *)mlx_get_data_addr((*game)->texture_img->we->img_ptr,
-	 &(*game)->texture_img->we->bpp, &(*game)->texture_img->we->line_len, &(*game)->texture_img->we->endian);
-	(*game)->texture_img->ea->data = (int *)mlx_get_data_addr((*game)->texture_img->ea->img_ptr,
-	 &(*game)->texture_img->ea->bpp, &(*game)->texture_img->ea->line_len, &(*game)->texture_img->ea->endian);
+	(*img)->no->data = (int *)mlx_get_data_addr((*img)->no->img_ptr,
+			&(*img)->no->bpp, &(*img)->no->line_len, &(*img)->no->endian);
+	(*img)->so->data = (int *)mlx_get_data_addr((*img)->so->img_ptr,
+			&(*img)->so->bpp, &(*img)->so->line_len, &(*img)->so->endian);
+	(*img)->we->data = (int *)mlx_get_data_addr((*img)->we->img_ptr,
+			&(*img)->we->bpp, &(*img)->we->line_len, &(*img)->we->endian);
+	(*img)->ea->data = (int *)mlx_get_data_addr((*img)->ea->img_ptr,
+			&(*img)->ea->bpp, &(*img)->ea->line_len, &(*img)->ea->endian);
 }
 
-// void	check_img_is_valid(t_texture_img *texture, t_game **game)
-// {
-// 	if (texture->ea->mlx_img == NULL || texture->no->mlx_img == NULL
-// 		|| texture->we->mlx_img == NULL || texture->so->mlx_img == NULL)
-// 		print_error_exit(game, "Invalid texture\n");
-// }
+void	check_img_is_valid(t_texture_img *texture, t_game **game)
+{
+	if (texture->ea->img_ptr == NULL || texture->no->img_ptr == NULL
+		|| texture->we->img_ptr == NULL || texture->so->img_ptr == NULL)
+		print_error_exit(game, "Invalid texture\n");
+}
 
 void	init_textures(t_game **game)
 {
-	create_img(game);
-	//check_img_is_valid(game);
-	get_img_addr(game);
+	create_txt_img(&(*game)->texture_img, (*game)->header, (*game)->mlx->ptr);
+	check_img_is_valid((*game)->texture_img, game);
+	get_img_addr(&(*game)->texture_img);
 }
