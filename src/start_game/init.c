@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 11:30:59 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:48:08 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	init_data_mlx(t_mlx **mlx)
 {
 	*mlx = (t_mlx *) malloc(sizeof(t_mlx));
 	(*mlx)->ptr = mlx_init();
-	(*mlx)->win = mlx_new_window((*mlx)->ptr,
-			WIDTH, HEIGHT, "Cub3D");
+	(*mlx)->win = mlx_new_window((*mlx)->ptr, WIDTH, HEIGHT, "Cub3D");
 }
 
 void	init_data_img(t_img **img)
@@ -56,10 +55,10 @@ void	init_data_header(t_map_header **header)
 void	init_data_map(t_map **map)
 {
 	*map = (t_map *) malloc(sizeof(t_map));
-	(*map)->map_higth = 0;
-	(*map)->map_width = 0;
-	(*map)->init_map = 0;
-	(*map)->map = NULL;
+	(*map)->higth = 0;
+	(*map)->width = 0;
+	(*map)->init = 0;
+	(*map)->matrix = NULL;
 }
 
 void	init_data(t_game **game)
@@ -81,12 +80,12 @@ void	init_player(t_game *game)
 	game->player.cam_plane[0] = 0.66;
 	game->player.cam_plane[1] = 0;
 	y = -1;
-	while (++y < game->map->map_higth)
+	while (++y < game->map->higth)
 	{
 		x = -1;
-		while (++x < game->map->map_width)
+		while (++x < game->map->width)
 		{
-			if (game->map->map[y][x] == 'N')
+			if (game->map->matrix[y][x] == 'N')
 			{
 				game->player.pos[0] = (float)x + 0.5;
 				game->player.pos[1] = (float)y + 0.5;

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 18:10:24 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:50:42 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	calc_dda(t_game **game)
 			(*game)->dda.dda_line_size_y += (*game)->dists.delta_dist_y;
 			(*game)->dda.hit_side = 1;
 		}
-		if ((*game)->map->map[(int)(*game)->dda.wall_map_pos_y]
+		if ((*game)->map->matrix[(int)(*game)->dda.wall_map_pos_y]
 			[(int)(*game)->dda.wall_map_pos_x] == '1')
 			hit = TRUE;
 	}

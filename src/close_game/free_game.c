@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:22:44 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/15 19:06:01 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:57:05 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	free_map_header(t_map_header **header)
 void	free_cub3d(t_game **game)
 {
 	free_map_header(&(*game)->header);
-	free_matrix((*game)->map->map);
+	free_matrix((*game)->map->matrix);
 	free_matrix((*game)->file);
 	free((*game)->header);
 	free((*game)->map);

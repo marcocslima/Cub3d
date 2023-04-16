@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:21:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/15 19:01:44 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:48:45 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	fill_header_struct(t_game **game)
 	char	**config;
 
 	i = 0;
-	while (i < (*game)->map->init_map)
+	while (i < (*game)->map->init)
 	{
 		config = ft_split((*game)->file[i], ' ');
 		if (matrix_len(config) != 2)

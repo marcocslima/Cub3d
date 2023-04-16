@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 11:06:24 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:49:45 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void	render_elements(t_game **game, int i, int j, int side)
 	int	color;
 
 	color = BLACK_PIXEL;
-	if ((*game)->map->map[i][j] == '1')
+	if ((*game)->map->matrix[i][j] == '1')
 		color = BRICK_PIXEL;
-	if ((*game)->map->map[i][j] == '0'
-		|| (*game)->map->map[i][j] == 'N')
+	if ((*game)->map->matrix[i][j] == '0'
+		|| (*game)->map->matrix[i][j] == 'N')
 		color = BEIGE_PIXEL;
 	render_rect((*game)->img, (t_rect){j * side, i * side, side, side, color});
 	render_rect((*game)->img, (t_rect){(*game)->player.pos[0]
@@ -82,10 +82,10 @@ void	plot_map(t_game *game)
 
 	i = -1;
 	side = 15;
-	while (++i < game->map->map_higth)
+	while (++i < game->map->higth)
 	{
 		j = -1;
-		while (++j < game->map->map_width)
+		while (++j < game->map->width)
 			render_elements(&game, i, j, side);
 	}
 	plot_rays(game);

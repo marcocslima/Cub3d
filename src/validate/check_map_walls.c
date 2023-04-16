@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:42:39 by alida-si          #+#    #+#             */
-/*   Updated: 2023/02/14 08:51:11 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:53:08 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,29 @@ void	verify_top_and_bottom(t_game **game, char character)
 	t_map	*map;
 
 	map = (*game)->map;
-	if (ft_strchr(map->map[0], character) != NULL)
+	if (ft_strchr(map->matrix[0], character) != NULL)
 		print_error_exit(game, "Find error on map...\n");
-	if (ft_strchr(map->map[map->map_higth - 1], character) != NULL)
+	if (ft_strchr(map->matrix[map->higth - 1], character) != NULL)
 		print_error_exit(game, "Find error on map...\n");
 }
 
 int	verify_position(t_map *map, int j, int i)
 {
-	if (map->map[j - 1][i] && map->map[j - 1][i] == ' ')
+	if (map->matrix[j - 1][i] && map->matrix[j - 1][i] == ' ')
 		return (0);
-	if (map->map[j - 1][i - 1] && map->map[j - 1][i - 1] == ' ')
+	if (map->matrix[j - 1][i - 1] && map->matrix[j - 1][i - 1] == ' ')
 		return (0);
-	if (map->map[j - 1][i + 1] && map->map[j - 1][i + 1] == ' ')
+	if (map->matrix[j - 1][i + 1] && map->matrix[j - 1][i + 1] == ' ')
 		return (0);
-	if (map->map[j + 1][i] && map->map[j + 1][i] == ' ')
+	if (map->matrix[j + 1][i] && map->matrix[j + 1][i] == ' ')
 		return (0);
-	if (map->map[j + 1][i - 1] && map->map[j + 1][i - 1] == ' ')
+	if (map->matrix[j + 1][i - 1] && map->matrix[j + 1][i - 1] == ' ')
 		return (0);
-	if (map->map[j + 1][i + 1] && map->map[j + 1][i + 1] == ' ')
+	if (map->matrix[j + 1][i + 1] && map->matrix[j + 1][i + 1] == ' ')
 		return (0);
-	if (map->map[j][i - 1] && map->map[j][i - 1] == ' ')
+	if (map->matrix[j][i - 1] && map->matrix[j][i - 1] == ' ')
 		return (0);
-	if (map->map[j][i + 1] && map->map[j][i + 1] == ' ')
+	if (map->matrix[j][i + 1] && map->matrix[j][i + 1] == ' ')
 		return (0);
 	return (1);
 }
@@ -52,12 +52,12 @@ void	verify_middle(t_game **game, char character)
 
 	j = 1;
 	map = (*game)->map;
-	while (j < map->map_higth - 1)
+	while (j < map->higth - 1)
 	{
 		i = 0;
-		while (i < map->map_width)
+		while (i < map->width)
 		{
-			if (map->map[j][i] == character)
+			if (map->matrix[j][i] == character)
 			{
 				if (!verify_position(map, j, i))
 					print_error_exit(game, "Find error on map...\n");
@@ -75,10 +75,10 @@ void	verify_sides(t_game **game, char character)
 
 	map = (*game)->map;
 	i = -1;
-	while (++i < map->map_higth)
+	while (++i < map->higth)
 	{
-		if (map->map[i][0] == character
-			|| map->map[i][map->map_width - 1] == character)
+		if (map->matrix[i][0] == character
+			|| map->matrix[i][map->width - 1] == character)
 			print_error_exit(game, "Find error on map...\n");
 	}
 }

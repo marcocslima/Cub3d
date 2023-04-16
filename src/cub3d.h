@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 11:28:54 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:47:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ typedef struct s_map_header
 
 typedef struct s_map
 {
-	int		init_map;
-	int		map_width;
-	int		map_higth;
-	char	**map;
+	int		init;
+	int		width;
+	int		higth;
+	char	**matrix;
 }	t_map;
 
 typedef struct s_img
@@ -163,17 +163,17 @@ typedef struct s_game
 	t_map_header	*header;
 	t_map			*map;
 	t_mlx			*mlx;
+	t_img			*img;
+	t_texture_img	*texture_img;
+	t_color			*background_color;
 	char			**file;
 	t_player		player;
 	t_ray			ray;
 	t_dists			dists;
 	t_dda			dda;
 	float			ang;
-	t_img			*img;
 	int				cur_img;
 	int				l_side;
-	t_texture_img	*texture_img;
-	t_color			*background_color;
 	t_render_tx		tx_render;
 }	t_game;
 
