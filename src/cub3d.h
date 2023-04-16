@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 09:25:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 10:07:32 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,14 @@ typedef struct s_texture_img
 	t_img	*so;
 	t_img	*we;
 	t_img	*ea;
-	int		f;
-	int		c;
 }	t_texture_img;
+
+typedef struct s_color
+{
+	int	floor;
+	int	ceiling;
+}	t_color;
+
 
 typedef struct s_game
 {
@@ -168,6 +173,7 @@ typedef struct s_game
 	int				cur_img;
 	int				l_side;
 	t_texture_img	*texture_img;
+	t_color			*background_color;
 	t_render_tx		tx_render;
 }	t_game;
 
@@ -212,7 +218,7 @@ int		moving(int key, t_game *game);
 int		looking(float ang, t_game **game);
 void	plot_map(t_game *game);
 void	img_pix_put(t_img *img, int x, int y, int color);
-void	render_background(t_img *img, int cceil, int cflor);
+void	render_background(t_img *img, t_color *color);
 
 /* ---------------------------------------------------------------------*\
 |							validate									|

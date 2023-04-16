@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 09:11:50 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 10:33:07 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ray_casting(t_game *game)
 
 int	render_game(t_game *game)
 {
-	render_background(&game->img, BLUE_SKY_PIXEL, FLOR_PIXEL);
+	render_background(&game->img, game->background_color);
 	ray_casting(game);
 	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win, game->img.img_ptr, 0, 0);
 	plot_map(game);
@@ -113,15 +113,54 @@ void	init_data_img(t_img **img)
 	(*img)->line_len = 0;
 }
 
-void	init_data_texture_img(t_texture_img **texture_img)
+void	init_data_assets(t_texture_img **texture_img, t_color **background_color)
 {
 	*texture_img = (t_texture_img *) malloc(sizeof(t_texture_img));
 	init_data_img(&(*texture_img)->ea);
 	init_data_img(&(*texture_img)->no);
 	init_data_img(&(*texture_img)->so);
 	init_data_img(&(*texture_img)->we);
-	(*texture_img)->c = 0;
-	(*texture_img)->f = 0;
+	*background_color = (t_color *) malloc(sizeof(t_color));
+	(*background_color)->ceiling = 0;
+	(*background_color)->floor = 0;
+}
+
+void	get_ceiling_rgb(t_game *game)
+{
+	char	**temp;
+	int		r;
+	int		g;
+	int		b;
+
+	temp = ft_split(game->header->c, ',');
+	r = ft_atoi(temp[0]);
+	g = ft_atoi(temp[1]);
+	b = ft_atoi(temp[2]);
+	game->background_color->ceiling = (r << 16 | g << 8 | b);
+	free_matrix(temp);
+}
+
+void	get_floor_rgb(t_game *game)
+{
+	char	**temp;
+	int		r;
+	int		g;
+	int		b;
+
+	temp = ft_split(game->header->f, ',');
+	r = ft_atoi(temp[0]);
+	g = ft_atoi(temp[1]);
+	b = ft_atoi(temp[2]);
+	game->background_color->floor = (r << 16 | g << 8 | b);
+	free_matrix(temp);
+
+}
+
+void	get_background_rgb(t_game *game)
+{
+	get_ceiling_rgb(game);
+	get_floor_rgb(game);
+
 }
 
 void	init_game_assets(t_game **game)
@@ -129,9 +168,9 @@ void	init_game_assets(t_game **game)
 	init_player(*game);
 	init_data_mlx(&(*game)->mlx);
 	init_window_img(game);
-	init_data_texture_img(&(*game)->texture_img);
+	init_data_assets(&(*game)->texture_img, &(*game)->background_color);
 	init_textures(game);
-	//get_background_rgb(*game);
+	get_background_rgb(*game);
 	//get_player_position(game);
 }
 
