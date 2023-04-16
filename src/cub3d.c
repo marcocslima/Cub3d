@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 10:40:11 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 11:09:11 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	ray_casting(t_game *game)
 
 int	render_game(t_game *game)
 {
-	render_background(&game->img, game->background_color);
+	render_background(game->img, game->background_color);
 	ray_casting(game);
-	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win, game->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win, game->img->img_ptr, 0, 0);
 	plot_map(game);
 	return (0);
 }
@@ -92,16 +92,6 @@ void	init_data_mlx(t_mlx **mlx)
 			WIDTH, HEIGHT, "Cub3D");
 }
 
-void	init_window_img(t_game **game)
-{
-	(*game)->img.img_ptr = mlx_new_image((*game)->mlx->ptr, WIDTH, HEIGHT);
-	(*game)->img.addr = mlx_get_data_addr((*game)->img.img_ptr,
-			&(*game)->img.bpp, &(*game)->img.line_len,
-			&(*game)->img.endian);
-	(*game)->img.data = (int *)mlx_get_data_addr((*game)->img.img_ptr, &(*game)->img.bpp,
-			&(*game)->img.line_len, &(*game)->img.endian);
-}
-
 void	init_data_img(t_img **img)
 {
 	*img = (t_img *) malloc(sizeof(t_img));
@@ -111,6 +101,14 @@ void	init_data_img(t_img **img)
 	(*img)->bpp = 0;
 	(*img)->endian = 0;
 	(*img)->line_len = 0;
+}
+
+void	init_window_img(t_img **img, void *mlx_ptr)
+{
+	init_data_img(img);
+	(*img)->img_ptr = mlx_new_image(mlx_ptr, WIDTH, HEIGHT);
+	(*img)->addr = mlx_get_data_addr((*img)->img_ptr, &(*img)->bpp, &(*img)->line_len, &(*img)->endian);
+	(*img)->data = (int *)mlx_get_data_addr((*img)->img_ptr, &(*img)->bpp, &(*img)->line_len, &(*img)->endian);
 }
 
 void	init_data_assets(t_texture_img **texture_img, t_color **background_color)
@@ -167,11 +165,10 @@ void	init_game_assets(t_game **game)
 {
 	init_player(*game);
 	init_data_mlx(&(*game)->mlx);
-	init_window_img(game);
+	init_window_img(&(*game)->img, (*game)->mlx->ptr);
 	init_data_assets(&(*game)->texture_img, &(*game)->background_color);
 	init_textures(game);
 	get_background_rgb(*game);
-	//get_player_position(game);
 }
 
 int	main(int argc, char *argv[])
@@ -181,7 +178,6 @@ int	main(int argc, char *argv[])
 	init_data(&game);
 	parse_map_file(&game, argc, argv);
 	init_game_assets(&game);
-	// init_player(game);
 	run_game(game);
 	return (0);
 }

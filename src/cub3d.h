@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 10:07:32 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 10:58:52 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ typedef struct s_game
 	t_dists			dists;
 	t_dda			dda;
 	float			ang;
-	t_img			img;
+	t_img			*img;
 	int				cur_img;
 	int				l_side;
 	t_texture_img	*texture_img;
