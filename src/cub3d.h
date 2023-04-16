@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/15 19:15:44 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/16 09:25:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,6 @@ typedef struct s_render_tx
 	float	txtpos;
 }	t_render_tx;
 
-typedef struct s_img_tx
-{
-	t_img	txt_img;
-}	t_img_tx;
-
 typedef struct s_rect
 {
 	int	x;
@@ -173,7 +168,6 @@ typedef struct s_game
 	int				cur_img;
 	int				l_side;
 	t_texture_img	*texture_img;
-	//t_img_tx		tx_img[4];
 	t_render_tx		tx_render;
 }	t_game;
 
