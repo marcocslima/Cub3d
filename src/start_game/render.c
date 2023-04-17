@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 11:04:46 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:54:36 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void	run_textures(t_game **game, int pixel)
 	if ((*game)->dda.hit_side == 1 && (*game)->ray.dir_y < 0)
 		(*game)->tx_render.txt_id = 3;
 	if ((*game)->dda.hit_side == 0)
-		(*game)->tx_render.wallx = (*game)->player.pos[1]
+		(*game)->tx_render.wallx = (*game)->player.pos_y
 			+ (*game)->dda.perp_dist * (*game)->ray.dir_y;
 	else
-		(*game)->tx_render.wallx = (*game)->player.pos[0]
+		(*game)->tx_render.wallx = (*game)->player.pos_x
 			+ (*game)->dda.perp_dist * (*game)->ray.dir_x;
 	(*game)->tx_render.wallx -= floor((*game)->tx_render.wallx);
 	(*game)->tx_render.txtx = (int)((*game)->tx_render.wallx

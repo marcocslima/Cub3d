@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 13:59:47 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:53:50 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,10 @@ typedef struct s_rect
 
 typedef struct s_player
 {
-	float	dir[2];
-	float	pos[2];
+	float	dir_x;
+	float	dir_y;
+	float	pos_x;
+	float	pos_y;
 	float	cam_plane[2];
 }	t_player;
 

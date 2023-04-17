@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 13:50:17 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:54:36 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	moving_up(float desloc, t_game **game)
 	int	tmp_0;
 	int	tmp_1;
 
-	tmp_0 = (int)((*game)->player.pos[0] + (*game)->player.dir[0] * 0.5);
-	tmp_1 = (int)((*game)->player.pos[1] + (*game)->player.dir[1] * 0.5);
+	tmp_0 = (int)((*game)->player.pos_x + (*game)->player.dir_x * 0.5);
+	tmp_1 = (int)((*game)->player.pos_y + (*game)->player.dir_y * 0.5);
 	if ((*game)->map->matrix[tmp_1][tmp_0] != '1')
 	{
-		(*game)->player.pos[0] += (*game)->player.dir[0] * desloc;
-		(*game)->player.pos[1] += (*game)->player.dir[1] * desloc;
+		(*game)->player.pos_x += (*game)->player.dir_x * desloc;
+		(*game)->player.pos_y += (*game)->player.dir_y * desloc;
 	}
 }
 
@@ -31,12 +31,12 @@ void	moving_down(float desloc, t_game **game)
 	int	tmp_0;
 	int	tmp_1;
 
-	tmp_0 = (int)((*game)->player.pos[0] - (*game)->player.dir[0] * 0.5);
-	tmp_1 = (int)((*game)->player.pos[1] - (*game)->player.dir[1] * 0.5);
+	tmp_0 = (int)((*game)->player.pos_x - (*game)->player.dir_x * 0.5);
+	tmp_1 = (int)((*game)->player.pos_y - (*game)->player.dir_y * 0.5);
 	if ((*game)->map->matrix[tmp_1][tmp_0] != '1')
 	{
-		(*game)->player.pos[0] -= (*game)->player.dir[0] * desloc;
-		(*game)->player.pos[1] -= (*game)->player.dir[1] * desloc;
+		(*game)->player.pos_x -= (*game)->player.dir_x * desloc;
+		(*game)->player.pos_y -= (*game)->player.dir_y * desloc;
 	}
 }
 
@@ -45,12 +45,12 @@ void	moving_left(float desloc, t_game **game)
 	int	tmp_0;
 	int	tmp_1;
 
-	tmp_0 = (int)((*game)->player.pos[0] + (*game)->player.dir[1] * 0.5);
-	tmp_1 = (int)((*game)->player.pos[1] - (*game)->player.dir[0] * 0.5);
+	tmp_0 = (int)((*game)->player.pos_x + (*game)->player.dir_y * 0.5);
+	tmp_1 = (int)((*game)->player.pos_y - (*game)->player.dir_x * 0.5);
 	if ((*game)->map->matrix[tmp_1][tmp_0] != '1')
 	{
-		(*game)->player.pos[0] += (*game)->player.dir[1] * desloc;
-		(*game)->player.pos[1] -= (*game)->player.dir[0] * desloc;
+		(*game)->player.pos_x += (*game)->player.dir_y * desloc;
+		(*game)->player.pos_y -= (*game)->player.dir_x * desloc;
 	}
 }
 
@@ -59,12 +59,12 @@ void	moving_right(float desloc, t_game **game)
 	int	tmp_0;
 	int	tmp_1;
 
-	tmp_0 = (int)((*game)->player.pos[0] - (*game)->player.dir[1] * 0.5);
-	tmp_1 = (int)((*game)->player.pos[1] + (*game)->player.dir[0] * 0.5);
+	tmp_0 = (int)((*game)->player.pos_x - (*game)->player.dir_y * 0.5);
+	tmp_1 = (int)((*game)->player.pos_y + (*game)->player.dir_x * 0.5);
 	if ((*game)->map->matrix[tmp_1][tmp_0] != '1')
 	{
-		(*game)->player.pos[0] -= (*game)->player.dir[1] * desloc;
-		(*game)->player.pos[1] += (*game)->player.dir[0] * desloc;
+		(*game)->player.pos_x -= (*game)->player.dir_y * desloc;
+		(*game)->player.pos_y += (*game)->player.dir_x * desloc;
 	}
 }
 

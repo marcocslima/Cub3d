@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 14:21:17 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:54:36 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	init_player(t_game *game)
 	int	x;
 	int	y;
 
-	game->player.dir[0] = 0;
-	game->player.dir[1] = -1;
+	game->player.dir_x = 0;
+	game->player.dir_y = -1;
 	game->player.cam_plane[0] = 0.66;
 	game->player.cam_plane[1] = 0;
 	y = -1;
@@ -87,8 +87,8 @@ void	init_player(t_game *game)
 		{
 			if (game->map->matrix[y][x] == 'N')
 			{
-				game->player.pos[0] = (float)x + 0.5;
-				game->player.pos[1] = (float)y + 0.5;
+				game->player.pos_x = (float)x + 0.5;
+				game->player.pos_y = (float)y + 0.5;
 				return ;
 			}
 		}

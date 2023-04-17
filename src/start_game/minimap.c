@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/16 13:59:47 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:54:36 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	plot_rays(t_game *game)
 		d = 0.01;
 		while (d < 1)
 		{
-			render_rect(game->img, (t_rect){(game->player.pos[0] * 15)
+			render_rect(game->img, (t_rect){(game->player.pos_x * 15)
 				+ (15 * game->ray.dir_x * d * game->dda.perp_dist),
-				(game->player.pos[1] * 15)
+				(game->player.pos_y * 15)
 				+ (15 * game->ray.dir_y * d * game->dda.perp_dist),
 				1, 1, GREEN_PIXEL});
 			d = d + 0.001;
@@ -66,8 +66,8 @@ void	render_elements(t_game **game, int i, int j, int side)
 		|| (*game)->map->matrix[i][j] == 'N')
 		color = BEIGE_PIXEL;
 	render_rect((*game)->img, (t_rect){j * side, i * side, side, side, color});
-	render_rect((*game)->img, (t_rect){(*game)->player.pos[0]
-		* side, (*game)->player.pos[1] * side, 5, 5, RED_PIXEL});
+	render_rect((*game)->img, (t_rect){(*game)->player.pos_x
+		* side, (*game)->player.pos_y * side, 5, 5, RED_PIXEL});
 	render_rect((*game)->img, (t_rect){j * side, i * side, 1,
 		side, BLUE_SKY_PIXEL});
 	render_rect((*game)->img, (t_rect){j * side, i * side, side,
