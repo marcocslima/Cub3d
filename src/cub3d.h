@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/17 15:53:50 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:12:53 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ typedef struct s_game
 |							close_game									|
 \* ---------------------------------------------------------------------*/
 
-void	close_game(t_game **game);
+void	close_game(t_game **game, int exit_code);
 void	free_matrix(char **ptr);
 void	free_map_header(t_map_header **header);
 void	free_cub3d(t_game **game);

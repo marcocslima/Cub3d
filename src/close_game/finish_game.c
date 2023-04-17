@@ -6,16 +6,16 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:22:27 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 11:04:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:14:38 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	close_game(t_game **game)
+void	close_game(t_game **game, int exit_code)
 {
 	free_cub3d(game);
-	exit(0);
+	exit(exit_code);
 }
 
 int	end_game(t_game **game)
@@ -28,8 +28,6 @@ int	end_game(t_game **game)
 	mlx_destroy_window((*game)->mlx->ptr, (*game)->mlx->win);
 	mlx_destroy_display((*game)->mlx->ptr);
 	free((*game)->mlx->ptr);
-	free(*game);
-	close_game(game);
-	exit(0);
+	close_game(game, EXIT_SUCCESS);
 	return (0);
 }
