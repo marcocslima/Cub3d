@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/17 16:12:53 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:36:35 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ void	free_matrix(char **ptr);
 void	free_map_header(t_map_header **header);
 void	free_cub3d(t_game **game);
 int		end_game(t_game **game);
+void	free_game_assets(t_game **game);
 
 /* ---------------------------------------------------------------------*\
 |							start_game									|
