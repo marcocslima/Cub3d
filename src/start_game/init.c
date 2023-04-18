@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/17 15:54:36 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:25:10 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	init_player(t_game *game)
 
 	game->player.dir_x = 0;
 	game->player.dir_y = -1;
-	game->player.cam_plane[0] = 0.66;
-	game->player.cam_plane[1] = 0;
+	game->player.cam_plane_x = 0.66;
+	game->player.cam_plane_y = 0;
 	y = -1;
 	while (++y < game->map->height)
 	{

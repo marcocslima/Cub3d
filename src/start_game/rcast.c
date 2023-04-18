@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/17 15:54:36 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:25:10 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ray_dir(float pixel, t_game **game)
 	float	cam_pixel[2];
 
 	multip = 2 * (pixel / WIDTH) - 1;
-	cam_pixel[0] = (*game)->player.cam_plane[0] * multip;
-	cam_pixel[1] = (*game)->player.cam_plane[1] * multip;
+	cam_pixel[0] = (*game)->player.cam_plane_x * multip;
+	cam_pixel[1] = (*game)->player.cam_plane_y * multip;
 	(*game)->ray.dir_x = (*game)->player.dir_x + cam_pixel[0];
 	(*game)->ray.dir_y = (*game)->player.dir_y + cam_pixel[1];
 }
