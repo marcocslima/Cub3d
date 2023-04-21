@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/18 11:05:42 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/20 23:28:08 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,18 @@ void	ray_dir(float pixel, t_game **game)
 	(*game)->ray.dir_y = (*game)->player.dir_y + cam_pixel_y;
 }
 
+float	calc_mag(float x, float y)
+{
+	return sqrt(x*x + y*y);
+}
+
 void	calc_delta_dist(t_game **game)
 {
-	(*game)->dists.delta_dist_x = fabs(1 / (*game)->ray.dir_x);
-	(*game)->dists.delta_dist_y = fabs(1 / (*game)->ray.dir_y);
+	float	ray_dir_mag;
+
+	ray_dir_mag = calc_mag((*game)->ray.dir_x, (*game)->ray.dir_y);
+	(*game)->dists.delta_dist_x = fabs(ray_dir_mag / (*game)->ray.dir_x);
+	(*game)->dists.delta_dist_y = fabs(ray_dir_mag / (*game)->ray.dir_y);
 	if ((*game)->dists.delta_dist_x > 1000)
 	{
 		(*game)->dists.delta_dist_x = 1;
