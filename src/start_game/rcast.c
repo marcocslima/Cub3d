@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 01:53:44 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 14:30:22 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ void	calc_first_offset_x(t_game **game, int map_pos_x)
 {
 	(*game)->dda.first_offset_x = ((*game)->player.pos_x
 			- (float)map_pos_x) * (*game)->dda.offset_x;
-	(*game)->dda.step_x = -1;
+	(*game)->dda.map_step_x = -1;
 	if (looking_right((*game)->ray.dir_x))
 	{
 		(*game)->dda.first_offset_x = ((float)map_pos_x
 				+ 1 - (*game)->player.pos_x) * (*game)->dda.offset_x;
-		(*game)->dda.step_x = 1;
+		(*game)->dda.map_step_x = 1;
 	}
 }
 
@@ -61,12 +61,12 @@ void	calc_first_offset_y(t_game **game, int map_pos_y)
 {
 	(*game)->dda.first_offset_y = ((*game)->player.pos_y
 			- map_pos_y) * (*game)->dda.offset_y;
-	(*game)->dda.step_y = -1;
+	(*game)->dda.map_step_y = -1;
 	if (looking_down((*game)->ray.dir_y))
 	{
 		(*game)->dda.first_offset_y = (map_pos_y
 				+ 1 - (*game)->player.pos_y) * (*game)->dda.offset_y;
-		(*game)->dda.step_y = 1;
+		(*game)->dda.map_step_y = 1;
 	}
 }
 
@@ -119,13 +119,13 @@ void	calc_dda(t_game **game)
 	{
 		if ((*game)->dda.dda_line_size_x < (*game)->dda.dda_line_size_y)
 		{
-			(*game)->dda.wall_map_pos_x += (*game)->dda.step_x;
+			(*game)->dda.wall_map_pos_x += (*game)->dda.map_step_x;
 			(*game)->dda.dda_line_size_x += (*game)->dda.offset_x;
 			(*game)->dda.hit_side = 0;
 		}
 		else
 		{
-			(*game)->dda.wall_map_pos_y += (*game)->dda.step_y;
+			(*game)->dda.wall_map_pos_y += (*game)->dda.map_step_y;
 			(*game)->dda.dda_line_size_y += (*game)->dda.offset_y;
 			(*game)->dda.hit_side = 1;
 		}
@@ -140,13 +140,13 @@ void	calc_perp_dist(t_game **game)
 	if ((*game)->dda.hit_side == 0)
 	{
 		(*game)->dda.perp_dist = ((*game)->dda.wall_map_pos_x
-				- (*game)->player.pos_x + ((1 - (*game)->dda.step_x) / 2));
+				- (*game)->player.pos_x + ((1 - (*game)->dda.map_step_x) / 2));
 		(*game)->dda.perp_dist /= (*game)->ray.dir_x;
 	}
 	else
 	{
 		(*game)->dda.perp_dist = ((*game)->dda.wall_map_pos_y
-				- (*game)->player.pos_y + ((1 - (*game)->dda.step_y) / 2));
+				- (*game)->player.pos_y + ((1 - (*game)->dda.map_step_y) / 2));
 		(*game)->dda.perp_dist /= (*game)->ray.dir_y;
 	}
 }
