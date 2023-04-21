@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 01:06:08 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 01:21:20 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,16 +117,20 @@ typedef struct s_ray
 	float	dir_y;
 }	t_ray;
 
-typedef struct s_steps
+typedef struct s_offset
 {
-	float	step_x;
-	float	step_y;
-	float	first_step_x;
-	float	first_step_y;
-}	t_steps;
+	float	offset_x;
+	float	offset_y;
+	float	first_offset_x;
+	float	first_offset_y;
+}	t_offset;
 
 typedef struct s_dda
 {
+	float	offset_x;
+	float	offset_y;
+	float	first_offset_x;
+	float	first_offset_y;
 	int		map_pos_x;
 	int		map_pos_y;
 	int		step_x;
@@ -175,7 +179,7 @@ typedef struct s_game
 	char			**file;
 	t_player		player;
 	t_ray			ray;
-	t_steps			steps;
+	//t_offset		offset;
 	t_dda			dda;
 	float			ang;
 	int				cur_img;
@@ -208,7 +212,7 @@ void	init_data_img(t_img **img);
 void	get_background_rgb(t_game *game);
 void	init_player(t_game *game);
 void	ray_dir(float pixel, t_game **game);
-void	calc_delta_dist(t_game **game);
+void	calc_offset(t_game **game);
 void	calc_side_dist(t_game **game);
 void	calc_dda(t_game **game);
 void	calc_perp_dist(t_game **game);
