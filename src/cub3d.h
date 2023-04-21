@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/20 23:59:16 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 01:06:08 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,13 @@ typedef struct s_ray
 	float	dir_y;
 }	t_ray;
 
-typedef struct s_dists
+typedef struct s_steps
 {
-	float	delta_dist_x;
-	float	delta_dist_y;
-	float	dist_side_x;
-	float	dist_side_y;
-}	t_dists;
+	float	step_x;
+	float	step_y;
+	float	first_step_x;
+	float	first_step_y;
+}	t_steps;
 
 typedef struct s_dda
 {
@@ -175,7 +175,7 @@ typedef struct s_game
 	char			**file;
 	t_player		player;
 	t_ray			ray;
-	t_dists			dists;
+	t_steps			steps;
 	t_dda			dda;
 	float			ang;
 	int				cur_img;
