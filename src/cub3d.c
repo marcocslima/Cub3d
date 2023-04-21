@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 01:34:10 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 15:45:40 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	render_game(t_game *game)
 int	run_game(t_game *game)
 {
 	mlx_hook(game->mlx->win, 2, 1L << 0, moving, game);
-	mlx_hook(game->mlx->win, 17, 1L << 17, end_game, game);
+	mlx_hook(game->mlx->win, 17, 1L << 17, end_game, &game);
 	mlx_loop_hook(game->mlx->ptr, &render_game, game);
 	mlx_loop(game->mlx->ptr);
 	return (0);
