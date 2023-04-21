@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 01:31:31 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 01:53:44 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,55 @@ float	calc_mag(float x, float y)
 	return sqrt(x*x + y*y);
 }
 
-void	calc_first_offset(t_game **game)
+int	looking_down(float ray_dir_y)
+{
+	if (ray_dir_y > 0)
+		return (1);
+	return (0);
+}
+
+int	looking_right(float ray_dir_x)
+{
+	if (ray_dir_x > 0)
+		return (1);
+	return (0);
+}
+
+void	calc_first_offset_x(t_game **game, int map_pos_x)
+{
+	(*game)->dda.first_offset_x = ((*game)->player.pos_x
+			- (float)map_pos_x) * (*game)->dda.offset_x;
+	(*game)->dda.step_x = -1;
+	if (looking_right((*game)->ray.dir_x))
+	{
+		(*game)->dda.first_offset_x = ((float)map_pos_x
+				+ 1 - (*game)->player.pos_x) * (*game)->dda.offset_x;
+		(*game)->dda.step_x = 1;
+	}
+}
+
+void	calc_first_offset_y(t_game **game, int map_pos_y)
+{
+	(*game)->dda.first_offset_y = ((*game)->player.pos_y
+			- map_pos_y) * (*game)->dda.offset_y;
+	(*game)->dda.step_y = -1;
+	if (looking_down((*game)->ray.dir_y))
+	{
+		(*game)->dda.first_offset_y = (map_pos_y
+				+ 1 - (*game)->player.pos_y) * (*game)->dda.offset_y;
+		(*game)->dda.step_y = 1;
+	}
+}
+
+void	get_first_offset(t_game **game)
 {
 	int	map_pos_x;
 	int	map_pos_y;
 
 	map_pos_x = (int)(*game)->player.pos_x;
 	map_pos_y = (int)(*game)->player.pos_y;
-
-
-
-	(*game)->dda.first_offset_x = ((*game)->player.pos_x
-			- (float)map_pos_x) * (*game)->dda.offset_x;
-	(*game)->dda.step_x = -1;
-
-	if ((*game)->ray.dir_x > 0)
-	{
-		(*game)->dda.first_offset_x = ((float)map_pos_x
-				+ 1 - (*game)->player.pos_x) * (*game)->dda.offset_x;
-		(*game)->dda.step_x = 1;
-	}
-
-	(*game)->dda.first_offset_y = ((*game)->player.pos_y
-			- map_pos_y) * (*game)->dda.offset_y;
-	(*game)->dda.step_y = -1;
-
-	if ((*game)->ray.dir_y > 0)
-	{
-		(*game)->dda.first_offset_y = (map_pos_y
-				+ 1 - (*game)->player.pos_y) * (*game)->dda.offset_y;
-		(*game)->dda.step_y = 1;
-	}
+	calc_first_offset_x(game, map_pos_x);
+	calc_first_offset_y(game, map_pos_y);
 }
 
 void	calc_offset(t_game **game)
@@ -85,7 +103,7 @@ void	calc_offset(t_game **game)
 void	get_offsets(t_game **game)
 {
 	calc_offset(game);
-	calc_first_offset(game);
+	get_first_offset(game);
 }
 
 void	calc_dda(t_game **game)
