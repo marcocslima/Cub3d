@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/20 23:28:08 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/20 23:59:48 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ void	calc_delta_dist(t_game **game)
 	(*game)->dists.delta_dist_y = fabs(ray_dir_mag / (*game)->ray.dir_y);
 	if ((*game)->dists.delta_dist_x > 1000)
 	{
-		(*game)->dists.delta_dist_x = 1;
+		(*game)->dists.delta_dist_x = CELL_SIZE;
 		(*game)->dists.delta_dist_y = 0;
 	}
 	if ((*game)->dists.delta_dist_y > 1000)
 	{
 		(*game)->dists.delta_dist_x = 0;
-		(*game)->dists.delta_dist_y = 1;
+		(*game)->dists.delta_dist_y = CELL_SIZE;
 	}
 }
 

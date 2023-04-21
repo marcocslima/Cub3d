@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/18 10:23:46 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/20 23:59:16 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define RESET "\033[0m"
 
 # define MLX_ERROR 1
+
+# define CELL_SIZE 1
 
 # define BLUE_SKY_PIXEL 0x87CEEB
 # define FLOR_PIXEL 0xE2725B
