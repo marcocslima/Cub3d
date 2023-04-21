@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 01:22:12 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 01:31:31 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,7 @@ float	calc_mag(float x, float y)
 	return sqrt(x*x + y*y);
 }
 
-void	calc_offset(t_game **game)
-{
-	float	ray_dir_mag;
-
-	ray_dir_mag = calc_mag((*game)->ray.dir_x, (*game)->ray.dir_y);
-	(*game)->dda.offset_x = fabs(ray_dir_mag / (*game)->ray.dir_x);
-	(*game)->dda.offset_y = fabs(ray_dir_mag / (*game)->ray.dir_y);
-	if ((*game)->dda.offset_x > 1000)
-	{
-		(*game)->dda.offset_x = CELL_SIZE;
-		(*game)->dda.offset_y = 0;
-	}
-	if ((*game)->dda.offset_y > 1000)
-	{
-		(*game)->dda.offset_x = 0;
-		(*game)->dda.offset_y = CELL_SIZE;
-	}
-}
-
-void	calc_side_dist(t_game **game)
+void	calc_first_offset(t_game **game)
 {
 	int	map_pos_x;
 	int	map_pos_y;
@@ -80,6 +61,31 @@ void	calc_side_dist(t_game **game)
 				+ 1 - (*game)->player.pos_y) * (*game)->dda.offset_y;
 		(*game)->dda.step_y = 1;
 	}
+}
+
+void	calc_offset(t_game **game)
+{
+	float	ray_dir_mag;
+
+	ray_dir_mag = calc_mag((*game)->ray.dir_x, (*game)->ray.dir_y);
+	(*game)->dda.offset_x = fabs(ray_dir_mag / (*game)->ray.dir_x);
+	(*game)->dda.offset_y = fabs(ray_dir_mag / (*game)->ray.dir_y);
+	if ((*game)->dda.offset_x > 1000)
+	{
+		(*game)->dda.offset_x = CELL_SIZE;
+		(*game)->dda.offset_y = 0;
+	}
+	if ((*game)->dda.offset_y > 1000)
+	{
+		(*game)->dda.offset_x = 0;
+		(*game)->dda.offset_y = CELL_SIZE;
+	}
+}
+
+void	get_offsets(t_game **game)
+{
+	calc_offset(game);
+	calc_first_offset(game);
 }
 
 void	calc_dda(t_game **game)

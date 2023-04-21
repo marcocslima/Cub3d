@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 01:21:20 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 01:32:58 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,8 +212,7 @@ void	init_data_img(t_img **img);
 void	get_background_rgb(t_game *game);
 void	init_player(t_game *game);
 void	ray_dir(float pixel, t_game **game);
-void	calc_offset(t_game **game);
-void	calc_side_dist(t_game **game);
+void	get_offsets(t_game **game);
 void	calc_dda(t_game **game);
 void	calc_perp_dist(t_game **game);
 void	calc_wall(t_game **game);
