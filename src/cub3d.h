@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 15:14:35 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 15:56:20 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@
 # define MLX_ERROR 1
 
 # define CELL_SIZE 1
+
+# define VERTICAL 0
+# define HORIZONTAL 1
 
 # define BLUE_SKY_PIXEL 0x87CEEB
 # define FLOR_PIXEL 0xE2725B

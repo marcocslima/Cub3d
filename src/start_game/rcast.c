@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 15:14:35 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 15:57:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,13 @@ void	calc_dda(t_game **game)
 		{
 			(*game)->dda.wall_map_pos_x += (*game)->dda.map_step_x;
 			(*game)->dda.line_size_x += (*game)->dda.offset_x;
-			(*game)->dda.hit_side = 0;
+			(*game)->dda.hit_side = VERTICAL;
 		}
 		else
 		{
 			(*game)->dda.wall_map_pos_y += (*game)->dda.map_step_y;
 			(*game)->dda.line_size_y += (*game)->dda.offset_y;
-			(*game)->dda.hit_side = 1;
+			(*game)->dda.hit_side = HORIZONTAL;
 		}
 		if ((*game)->map->matrix[(int)(*game)->dda.wall_map_pos_y]
 			[(int)(*game)->dda.wall_map_pos_x] == '1')
@@ -137,7 +137,7 @@ void	calc_dda(t_game **game)
 
 void	calc_perp_dist(t_game **game)
 {
-	if ((*game)->dda.hit_side == 0)
+	if ((*game)->dda.hit_side == VERTICAL)
 	{
 		(*game)->dda.perp_dist = ((*game)->dda.wall_map_pos_x
 				- (*game)->player.pos_x + ((1 - (*game)->dda.map_step_x) / 2));
