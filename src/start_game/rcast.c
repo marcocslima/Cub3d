@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 09:01:30 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 15:57:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 16:52:10 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,27 @@ int	looking_right(float ray_dir_x)
 	return (0);
 }
 
-void	calc_first_offset_x(t_game **game, int map_pos_x)
+void	calc_first_offset_x(t_game **game)
 {
 	(*game)->dda.first_offset_x = ((*game)->player.pos_x
-			- (float)map_pos_x) * (*game)->dda.offset_x;
+			- (*game)->dda.map_pos_x) * (*game)->dda.offset_x;
 	(*game)->dda.map_step_x = -1;
 	if (looking_right((*game)->ray.dir_x))
 	{
-		(*game)->dda.first_offset_x = ((float)map_pos_x
+		(*game)->dda.first_offset_x = ((*game)->dda.map_pos_x
 				+ 1 - (*game)->player.pos_x) * (*game)->dda.offset_x;
 		(*game)->dda.map_step_x = 1;
 	}
 }
 
-void	calc_first_offset_y(t_game **game, int map_pos_y)
+void	calc_first_offset_y(t_game **game)
 {
 	(*game)->dda.first_offset_y = ((*game)->player.pos_y
-			- map_pos_y) * (*game)->dda.offset_y;
+			- (*game)->dda.map_pos_y) * (*game)->dda.offset_y;
 	(*game)->dda.map_step_y = -1;
 	if (looking_down((*game)->ray.dir_y))
 	{
-		(*game)->dda.first_offset_y = (map_pos_y
+		(*game)->dda.first_offset_y = ((*game)->dda.map_pos_y
 				+ 1 - (*game)->player.pos_y) * (*game)->dda.offset_y;
 		(*game)->dda.map_step_y = 1;
 	}
@@ -72,13 +72,10 @@ void	calc_first_offset_y(t_game **game, int map_pos_y)
 
 void	get_first_offset(t_game **game)
 {
-	int	map_pos_x;
-	int	map_pos_y;
-
-	map_pos_x = (int)(*game)->player.pos_x;
-	map_pos_y = (int)(*game)->player.pos_y;
-	calc_first_offset_x(game, map_pos_x);
-	calc_first_offset_y(game, map_pos_y);
+	(*game)->dda.map_pos_x = (int)(*game)->player.pos_x;
+	(*game)->dda.map_pos_y = (int)(*game)->player.pos_y;
+	calc_first_offset_x(game);
+	calc_first_offset_y(game);
 }
 
 void	calc_offset(t_game **game)
@@ -106,32 +103,37 @@ void	get_offsets(t_game **game)
 	get_first_offset(game);
 }
 
+int	hit_wall(t_game *game)
+{
+	if (game->map->matrix[game->dda.map_pos_y][game->dda.map_pos_x] == '1')
+		return (1);
+	return (0);
+}
+
+void	increment_line_size_x(t_game **game)
+{
+	(*game)->dda.map_pos_x += (*game)->dda.map_step_x;
+	(*game)->dda.line_size_x += (*game)->dda.offset_x;
+	(*game)->dda.hit_side = VERTICAL;
+}
+
+void	increment_line_size_y(t_game **game)
+{
+	(*game)->dda.map_pos_y += (*game)->dda.map_step_y;
+	(*game)->dda.line_size_y += (*game)->dda.offset_y;
+	(*game)->dda.hit_side = HORIZONTAL;
+}
+
 void	calc_dda(t_game **game)
 {
-	int	hit;
-
-	hit = FALSE;
 	(*game)->dda.line_size_x = (*game)->dda.first_offset_x;
 	(*game)->dda.line_size_y = (*game)->dda.first_offset_y;
-	(*game)->dda.wall_map_pos_x = (int)(*game)->player.pos_x;
-	(*game)->dda.wall_map_pos_y = (int)(*game)->player.pos_y;
-	while (hit == FALSE)
+	while (hit_wall(*game) == FALSE)
 	{
 		if ((*game)->dda.line_size_x < (*game)->dda.line_size_y)
-		{
-			(*game)->dda.wall_map_pos_x += (*game)->dda.map_step_x;
-			(*game)->dda.line_size_x += (*game)->dda.offset_x;
-			(*game)->dda.hit_side = VERTICAL;
-		}
+			increment_line_size_x(game);
 		else
-		{
-			(*game)->dda.wall_map_pos_y += (*game)->dda.map_step_y;
-			(*game)->dda.line_size_y += (*game)->dda.offset_y;
-			(*game)->dda.hit_side = HORIZONTAL;
-		}
-		if ((*game)->map->matrix[(int)(*game)->dda.wall_map_pos_y]
-			[(int)(*game)->dda.wall_map_pos_x] == '1')
-			hit = TRUE;
+			increment_line_size_y(game);
 	}
 }
 
@@ -139,13 +141,13 @@ void	calc_perp_dist(t_game **game)
 {
 	if ((*game)->dda.hit_side == VERTICAL)
 	{
-		(*game)->dda.perp_dist = ((*game)->dda.wall_map_pos_x
+		(*game)->dda.perp_dist = ((*game)->dda.map_pos_x
 				- (*game)->player.pos_x + ((1 - (*game)->dda.map_step_x) / 2));
 		(*game)->dda.perp_dist /= (*game)->ray.dir_x;
 	}
 	else
 	{
-		(*game)->dda.perp_dist = ((*game)->dda.wall_map_pos_y
+		(*game)->dda.perp_dist = ((*game)->dda.map_pos_y
 				- (*game)->player.pos_y + ((1 - (*game)->dda.map_step_y) / 2));
 		(*game)->dda.perp_dist /= (*game)->ray.dir_y;
 	}

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 15:56:20 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 16:06:45 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,6 @@ typedef struct s_dda
 	int		map_step_y;
 	float	line_size_x;
 	float	line_size_y;
-	float	wall_map_pos_x;
-	float	wall_map_pos_y;
 	int		hit_side;
 	float	perp_dist;
 	float	wall_line_height;
