@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/21 17:04:02 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/21 19:04:59 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ VPATH = $(SRC_DIR)\
 		$(SRC_DIR)close_game\
 		$(SRC_DIR)start_game\
 		$(SRC_DIR)validate\
+		$(SRC_DIR)ray_casting\
 		$(SRC_DIR)utils
 
 # FILES #

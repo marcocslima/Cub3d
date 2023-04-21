@@ -6,11 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 17:02:20 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/21 17:04:55 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 19:04:24 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 float	calc_mag(float x, float y)
 {

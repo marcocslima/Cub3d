@@ -6,11 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:55:32 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/21 16:56:35 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 19:04:19 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	hit_wall(t_game *game)
 {
