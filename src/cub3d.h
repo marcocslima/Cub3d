@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 16:06:45 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 16:57:22 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,5 +257,7 @@ void	print_whole_map(t_game *game);
 void	print_map(t_game *game);
 
 void	init_textures(t_game **game);
+
+void	calc_dda(t_game **game);
 
 #endif
