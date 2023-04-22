@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/22 13:45:34 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 14:50:28 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	render_textures(t_game **game, int pixel, int *img_data)
 	int	txty;
 	int	color;
 
-	if (((*game)->dda.hit_side == VERTICAL && (*game)->ray.dir_x > 0) || ((*game)->dda.hit_side == HORIZONTAL && (*game)->ray.dir_y < 0))
+	if (((*game)->dda.hit_side == VERTICAL && (*game)->ray.dir_x > 0)
+		|| ((*game)->dda.hit_side == HORIZONTAL && (*game)->ray.dir_y < 0))
 		(*game)->tx_render.txtx = TILE_SIZE - (*game)->tx_render.txtx - 1;
 	(*game)->tx_render.step = 1.0 * TILE_SIZE / (*game)->dda.wall_line_height;
 	(*game)->tx_render.txtpos = ((*game)->dda.line_start - HEIGHT / 2
@@ -48,17 +49,16 @@ void	run_textures(t_game **game, int pixel)
 	if ((*game)->dda.hit_side == VERTICAL)
 	{
 		if ((*game)->ray.dir_x >= 0)
-			render_textures(game, pixel,(*game)->texture_img->ea->data);
+			render_textures(game, pixel, (*game)->texture_img->ea->data);
 		if ((*game)->ray.dir_x < 0)
-			render_textures(game, pixel,(*game)->texture_img->we->data);
-
+			render_textures(game, pixel, (*game)->texture_img->we->data);
 	}
 	if ((*game)->dda.hit_side == HORIZONTAL)
 	{
 		if ((*game)->ray.dir_y >= 0)
-			render_textures(game, pixel,(*game)->texture_img->so->data);
+			render_textures(game, pixel, (*game)->texture_img->so->data);
 		if ((*game)->ray.dir_y < 0)
-			render_textures(game, pixel,(*game)->texture_img->no->data);
+			render_textures(game, pixel, (*game)->texture_img->no->data);
 	}
 }
 

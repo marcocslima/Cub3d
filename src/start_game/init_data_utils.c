@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:19:59 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 11:27:47 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 14:47:07 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,10 @@ void	get_floor_rgb(t_color *color, t_map_header *header)
 	b = ft_atoi(temp[2]);
 	color->floor = (r << 16 | g << 8 | b);
 	free_matrix(temp);
-
 }
 
 void	get_background_rgb(t_game *game)
 {
 	get_ceiling_rgb(game->background_color, game->header);
 	get_floor_rgb(game->background_color, game->header);
-
 }

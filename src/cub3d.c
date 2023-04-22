@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/22 12:14:17 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 14:51:00 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	render_game(t_game *game)
 {
 	render_background(game->img, game->background_color);
 	ray_casting(game);
-	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win, game->img->img_ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win,
+		game->img->img_ptr, 0, 0);
 	plot_map(game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 01:33:38 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 14:47:25 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	plot_rays(t_game *game)
 	while (++pixel < WIDTH)
 	{
 		ray_dir(pixel, &game);
-		// calc_offset(&game);
-		// calc_side_dist(&game);
 		get_offsets(&game);
 		calc_dda(&game);
 		calc_perp_dist(&game);
