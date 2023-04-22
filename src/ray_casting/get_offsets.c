@@ -6,16 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 17:02:20 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/21 19:04:24 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 02:31:20 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-float	calc_mag(float x, float y)
-{
-	return sqrt(x*x + y*y);
-}
 
 int	looking_down(float ray_dir_y)
 {
@@ -67,17 +62,14 @@ void	get_first_offset(t_game **game)
 
 void	calc_offset(t_game **game)
 {
-	float	ray_dir_mag;
-
-	ray_dir_mag = calc_mag((*game)->ray.dir_x, (*game)->ray.dir_y);
-	(*game)->dda.offset_x = fabs(ray_dir_mag / (*game)->ray.dir_x);
-	(*game)->dda.offset_y = fabs(ray_dir_mag / (*game)->ray.dir_y);
-	if ((*game)->dda.offset_x > 1000)
+	(*game)->dda.offset_x = fabs(1 / (*game)->ray.dir_x);
+	(*game)->dda.offset_y = fabs(1 / (*game)->ray.dir_y);
+	if ((*game)->ray.dir_x == 0)
 	{
 		(*game)->dda.offset_x = CELL_SIZE;
 		(*game)->dda.offset_y = 0;
 	}
-	if ((*game)->dda.offset_y > 1000)
+	if ((*game)->ray.dir_y == 0)
 	{
 		(*game)->dda.offset_x = 0;
 		(*game)->dda.offset_y = CELL_SIZE;

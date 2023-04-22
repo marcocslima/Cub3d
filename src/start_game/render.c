@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 15:58:50 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 12:04:32 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	render_textures(t_game **game, int pixel)
 	int	txty;
 	int	color;
 
-	if (((*game)->dda.hit_side == VERTICAL && (*game)->ray.dir_x > 0)
-		|| ((*game)->dda.hit_side == HORIZONTAL && (*game)->ray.dir_y < 0))
+	if (((*game)->dda.hit_side == VERTICAL && (*game)->ray.dir_x > 0) || ((*game)->dda.hit_side == HORIZONTAL && (*game)->ray.dir_y < 0))
 		(*game)->tx_render.txtx = TILE_SIZE - (*game)->tx_render.txtx - 1;
 	(*game)->tx_render.step = 1.0 * TILE_SIZE / (*game)->dda.wall_line_height;
 	(*game)->tx_render.txtpos = ((*game)->dda.line_start - HEIGHT / 2
