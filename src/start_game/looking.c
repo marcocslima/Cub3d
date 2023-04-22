@@ -6,19 +6,18 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/20 23:39:01 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 00:04:16 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	looking(float ang, t_game **game)
+int	moving_direction(float ang, t_game **game)
 {
 	float	tmp;
 	float	tmp_plane;
 
-	tmp = cos(ang) * (*game)->player.dir_x - sin(ang)
-		* (*game)->player.dir_y;
+	tmp = cos(ang) * (*game)->player.dir_x - sin(ang) * (*game)->player.dir_y;
 	(*game)->player.dir_y = sin(ang) * (*game)->player.dir_x + cos(ang)
 		* (*game)->player.dir_y;
 	(*game)->player.dir_x = tmp;

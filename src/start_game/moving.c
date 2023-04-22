@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 23:54:00 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 00:05:16 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int	moving(int key, t_game *game)
 	if (key == S)
 		moving_down(desloc, &game);
 	if (key == LEFT_ARROW)
-		looking(-PI / 100, &game);
+		moving_direction(-PI / 100, &game);
 	if (key == RIGHT_ARROW)
-		looking(+PI / 100, &game);
+		moving_direction(+PI / 100, &game);
 	if (key == KEY_ESC)
 		end_game(&game);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 23:54:10 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 00:04:43 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,7 +234,7 @@ int		check_str_is_number(char *str);
 void	run_textures(t_game **game, int pixel);
 void	render_textures(t_game **game, int pixel);
 int		moving(int key, t_game *game);
-int		looking(float ang, t_game **game);
+int		moving_direction(float ang, t_game **game);
 void	plot_map(t_game *game);
 void	img_pix_put(t_img *img, int x, int y, int color);
 void	render_background(t_img *img, t_color *color);
