@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/22 00:04:43 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 00:09:10 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ typedef struct s_player
 	float	pos_y;
 	float	cam_plane_x;
 	float	cam_plane_y;
-	//float	cam_plane[2];
 }	t_player;
 
 typedef struct s_ray
@@ -122,14 +121,6 @@ typedef struct s_ray
 	float	dir_x;
 	float	dir_y;
 }	t_ray;
-
-typedef struct s_offset
-{
-	float	offset_x;
-	float	offset_y;
-	float	first_offset_x;
-	float	first_offset_y;
-}	t_offset;
 
 typedef struct s_dda
 {
@@ -183,7 +174,6 @@ typedef struct s_game
 	char			**file;
 	t_player		player;
 	t_ray			ray;
-	//t_offset		offset;
 	t_dda			dda;
 	float			ang;
 	int				cur_img;

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/20 23:39:01 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 00:08:31 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,11 @@ void	init_data(t_game **game)
 	(*game)->ang = 0;
 }
 
-void	init_player(t_game *game)
+void	get_player_position(t_game *game)
 {
 	int	x;
 	int	y;
 
-	game->player.dir_x = 0;
-	game->player.dir_y = -1;
-	game->player.cam_plane_x = 0.66;
-	game->player.cam_plane_y = 0;
 	y = -1;
 	while (++y < game->map->height)
 	{
@@ -93,4 +89,13 @@ void	init_player(t_game *game)
 			}
 		}
 	}
+}
+
+void	init_player(t_game *game)
+{
+	game->player.dir_x = 0;
+	game->player.dir_y = -1;
+	game->player.cam_plane_x = 0.66;
+	game->player.cam_plane_y = 0;
+	get_player_position(game);
 }
