@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/21 17:03:42 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/21 23:54:10 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@
 
 # define VERTICAL 0
 # define HORIZONTAL 1
+
+# define LEFT_ARROW 65361
+# define RIGHT_ARROW 65363
 
 # define BLUE_SKY_PIXEL 0x87CEEB
 # define FLOR_PIXEL 0xE2725B
