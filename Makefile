@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/21 19:04:59 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/22 00:12:31 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ SOURCES =	cub3d.c\
 			rcast.c\
 			render.c\
 			moving.c\
-			looking.c\
+			moving_direction.c\
 			minimap.c\
 			init_textures.c\
 			init_data_utils.c\
