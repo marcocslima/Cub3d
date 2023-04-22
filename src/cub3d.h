@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/22 13:35:33 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 14:17:04 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,14 @@
 # define S	115
 # define D	100
 # define A	97
-
-# define RED "\033[38;2;222;56;43m"
-# define RESET "\033[0m"
-
-# define MLX_ERROR 1
-
-# define CELL_SIZE 1
-
-# define VERTICAL 0
-# define HORIZONTAL 1
-
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
-
+# define RED "\033[38;2;222;56;43m"
+# define RESET "\033[0m"
+# define CELL_SIZE 1
+# define VERTICAL 0
+# define HORIZONTAL 1
 # define BLUE_SKY_PIXEL 0x87CEEB
-# define FLOR_PIXEL 0xE2725B
 # define BRICK_PIXEL 0x6E4132
 # define BEIGE_PIXEL 0xDAC8B3
 # define RED_PIXEL 0xFF0000
@@ -175,9 +167,6 @@ typedef struct s_game
 	t_player		player;
 	t_ray			ray;
 	t_dda			dda;
-	float			ang;
-	int				cur_img;
-	int				l_side;
 	t_render_tx		tx_render;
 }	t_game;
 

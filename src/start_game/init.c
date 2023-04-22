@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/22 00:08:31 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/22 14:12:28 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	init_data(t_game **game)
 	init_data_header(&(*game)->header);
 	init_data_map(&(*game)->map);
 	(*game)->file = NULL;
-	(*game)->ang = 0;
 }
 
 void	get_player_position(t_game *game)
