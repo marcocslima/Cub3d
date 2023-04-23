@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 13:35:36 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:47:51 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_texture_x_coordinate(t_game **game)
 	return (txt_pixel_x);
 }
 
-void	render_textures(t_game **game, int wall_pixel_x, int *texture_img_data)
+void	put_texture(t_game **game, int wall_pixel_x, int *texture_img_data)
 {
 	int	wall_pixel_y;
 	int	txt_pixel_y;
@@ -45,10 +45,10 @@ void	render_textures(t_game **game, int wall_pixel_x, int *texture_img_data)
 
 	txt_pixel_x = get_texture_x_coordinate(game);
 	(*game)->tx_render.step = 1.0 * TILE_SIZE / (*game)->dda.wall_line_height;
-	(*game)->tx_render.txtpos = ((*game)->dda.line_start - HEIGHT / 2
+	(*game)->tx_render.txtpos = ((*game)->dda.wall_first_pixel - HEIGHT / 2
 			+ (*game)->dda.wall_line_height / 2) * (*game)->tx_render.step;
-	wall_pixel_y = (*game)->dda.line_start;
-	while (wall_pixel_y < (*game)->dda.line_end)
+	wall_pixel_y = (*game)->dda.wall_first_pixel;
+	while (wall_pixel_y < (*game)->dda.wall_last_pixel)
 	{
 		txt_pixel_y = (int)(*game)->tx_render.txtpos & (TILE_SIZE - 1);
 		(*game)->tx_render.txtpos += (*game)->tx_render.step;
@@ -72,31 +72,31 @@ int	looking_up(float ray_dir_y)
 	return (0);
 }
 
-void	run_textures(t_game **game, int pixel)
+void	render_textured_walls(t_game **game, int pixel)
 {
 	if ((*game)->dda.hit_side == VERTICAL)
 	{
 		if (looking_left((*game)->ray.dir_x))
-			render_textures(game, pixel, (*game)->texture_img->we->data);
+			put_texture(game, pixel, (*game)->texture_img->we->data);
 		else
-			render_textures(game, pixel, (*game)->texture_img->ea->data);
+			put_texture(game, pixel, (*game)->texture_img->ea->data);
 	}
 	if ((*game)->dda.hit_side == HORIZONTAL)
 	{
 		if (looking_up((*game)->ray.dir_y))
-			render_textures(game, pixel, (*game)->texture_img->no->data);
+			put_texture(game, pixel, (*game)->texture_img->no->data);
 		else
-			render_textures(game, pixel, (*game)->texture_img->so->data);
+			put_texture(game, pixel, (*game)->texture_img->so->data);
 	}
 }
 
-void	calc_wall(t_game **game)
+void	calc_wall_height(t_game **game)
 {
 	(*game)->dda.wall_line_height = HEIGHT / (*game)->dda.perp_dist;
-	(*game)->dda.line_start = HEIGHT / 2 - (*game)->dda.wall_line_height / 2;
-	if ((*game)->dda.line_start < 0)
-		(*game)->dda.line_start = 0;
-	(*game)->dda.line_end = (*game)->dda.wall_line_height / 2 + HEIGHT / 2;
-	if ((*game)->dda.line_end >= HEIGHT)
-		(*game)->dda.line_end = HEIGHT - 1;
+	(*game)->dda.wall_first_pixel = HEIGHT / 2 - (*game)->dda.wall_line_height / 2;
+	if ((*game)->dda.wall_first_pixel < 0)
+		(*game)->dda.wall_first_pixel = 0;
+	(*game)->dda.wall_last_pixel = (*game)->dda.wall_line_height / 2 + HEIGHT / 2;
+	if ((*game)->dda.wall_last_pixel >= HEIGHT)
+		(*game)->dda.wall_last_pixel = HEIGHT - 1;
 }

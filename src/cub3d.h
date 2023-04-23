@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/22 14:49:44 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:47:51 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ typedef struct s_dda
 	int		hit_side;
 	float	perp_dist;
 	float	wall_line_height;
-	float	line_start;
-	float	line_end;
+	float	wall_first_pixel;
+	float	wall_last_pixel;
 }	t_dda;
 
 typedef struct s_mlx
@@ -197,7 +197,7 @@ void	ray_dir(float pixel, t_game **game);
 void	get_offsets(t_game **game);
 void	calc_dda(t_game **game);
 void	calc_perp_dist(t_game **game);
-void	calc_wall(t_game **game);
+void	calc_wall_height(t_game **game);
 
 /* ---------------------------------------------------------------------*\
 |								utils									|
@@ -209,8 +209,8 @@ void	print_error_exit(t_game **game, char *msg);
 void	print_error_msg(char *msg);
 int		matrix_len(char **matrix);
 int		check_str_is_number(char *str);
-void	run_textures(t_game **game, int pixel);
-void	render_textures(t_game **game, int pixel, int *img_data);
+void	render_textured_walls(t_game **game, int pixel);
+void	put_texture(t_game **game, int pixel, int *img_data);
 int		moving(int key, t_game *game);
 int		moving_direction(float ang, t_game **game);
 void	plot_map(t_game *game);

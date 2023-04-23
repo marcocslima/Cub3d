@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/22 14:51:00 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:40:55 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	ray_casting(t_game *game)
 		get_offsets(&game);
 		calc_dda(&game);
 		calc_perp_dist(&game);
-		calc_wall(&game);
-		run_textures(&game, pixel);
+		calc_wall_height(&game);
+		render_textured_walls(&game, pixel);
 	}
 }
 
