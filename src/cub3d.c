@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 14:42:04 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 14:45:29 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,6 @@ void	read_file(int fd, t_game **game)
 	verify_empty_lines(ret, game);
 	(*game)->file = ft_split(ret, '\n');
 	free(ret);
-}
-
-void	ray_casting(t_game *game)
-{
-	float	pixel;
-
-	pixel = -1;
-	while (++pixel < WIDTH)
-	{
-		ray_dir(pixel, &game);
-		get_offsets(&game);
-		calc_dda(&game);
-		calc_perp_dist(&game);
-		calc_wall_height(&game);
-		render_textured_walls(game, pixel);
-	}
 }
 
 int	render_game(t_game *game)

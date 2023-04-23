@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 14:41:41 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:00:51 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,4 @@ void	render_textured_walls(t_game *game, int pixel)
 		else
 			put_texture(game, pixel, game->texture_img->so->data);
 	}
-}
-
-void	calc_wall_height(t_game **game)
-{
-	(*game)->dda.wall_line_height = HEIGHT / (*game)->dda.perp_dist;
-	(*game)->dda.wall_first_pixel = HEIGHT / 2 - (*game)->dda.wall_line_height / 2;
-	if ((*game)->dda.wall_first_pixel < 0)
-		(*game)->dda.wall_first_pixel = 0;
-	(*game)->dda.wall_last_pixel = (*game)->dda.wall_line_height / 2 + HEIGHT / 2;
-	if ((*game)->dda.wall_last_pixel >= HEIGHT)
-		(*game)->dda.wall_last_pixel = HEIGHT - 1;
 }

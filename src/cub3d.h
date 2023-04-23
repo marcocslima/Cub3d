@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 14:41:54 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:05:36 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,14 @@ int		end_game(t_game **game);
 void	free_game_assets(t_game **game);
 
 /* ---------------------------------------------------------------------*\
+|							ray_casting									|
+\* ---------------------------------------------------------------------*/
+
+void	calc_dda(t_game **game);
+void	get_offsets(t_game **game);
+void	ray_casting(t_game *game);
+
+/* ---------------------------------------------------------------------*\
 |							start_game									|
 \* ---------------------------------------------------------------------*/
 
@@ -228,8 +236,5 @@ void	print_whole_map(t_game *game);
 void	print_map(t_game *game);
 
 void	init_textures(t_game **game);
-
-void	calc_dda(t_game **game);
-void	get_offsets(t_game **game);
 
 #endif
