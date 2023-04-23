@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 15:24:20 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:30:46 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,8 +208,7 @@ int		moving_direction(float ang, t_game **game);
 void	plot_map(t_game *game);
 void	img_pix_put(t_img *img, int x, int y, int color);
 void	render_background(t_img *img, t_color *color);
-int		looking_up(float ray_dir_y);
-int		looking_left(float ray_dir_x);
+void	render_textured_walls(t_game *game, int pixel);
 
 /* ---------------------------------------------------------------------*\
 |								utils									|
@@ -221,7 +220,10 @@ void	print_error_exit(t_game **game, char *msg);
 void	print_error_msg(char *msg);
 int		matrix_len(char **matrix);
 int		check_str_is_number(char *str);
-void	render_textured_walls(t_game *game, int pixel);
+int		looking_up(float ray_dir_y);
+int		looking_left(float ray_dir_x);
+int		looking_right(float ray_dir_x);
+int		looking_down(float ray_dir_y);
 
 /* ---------------------------------------------------------------------*\
 |							validate									|
