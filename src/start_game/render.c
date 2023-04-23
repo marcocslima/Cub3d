@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 13:24:13 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:35:36 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,35 @@ void	render_textures(t_game **game, int wall_pixel_x, int *texture_img_data)
 	}
 }
 
+int	looking_left(float ray_dir_x)
+{
+	if (ray_dir_x < 0)
+		return (1);
+	return (0);
+}
+
+int	looking_up(float ray_dir_y)
+{
+	if (ray_dir_y < 0)
+		return (1);
+	return (0);
+}
+
 void	run_textures(t_game **game, int pixel)
 {
 	if ((*game)->dda.hit_side == VERTICAL)
 	{
-		if ((*game)->ray.dir_x >= 0)
-			render_textures(game, pixel, (*game)->texture_img->ea->data);
-		if ((*game)->ray.dir_x < 0)
+		if (looking_left((*game)->ray.dir_x))
 			render_textures(game, pixel, (*game)->texture_img->we->data);
+		else
+			render_textures(game, pixel, (*game)->texture_img->ea->data);
 	}
 	if ((*game)->dda.hit_side == HORIZONTAL)
 	{
-		if ((*game)->ray.dir_y >= 0)
-			render_textures(game, pixel, (*game)->texture_img->so->data);
-		if ((*game)->ray.dir_y < 0)
+		if (looking_up((*game)->ray.dir_y))
 			render_textures(game, pixel, (*game)->texture_img->no->data);
+		else
+			render_textures(game, pixel, (*game)->texture_img->so->data);
 	}
 }
 
