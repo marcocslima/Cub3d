@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/23 15:29:35 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/23 15:39:33 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SOURCES =	cub3d.c\
 			check_header.c\
 			check_input.c\
 			create_map.c\
-			init.c\
+			init_data.c\
 			get_header.c\
 			utils_check_file.c\
 			check_map.c\
@@ -62,7 +62,7 @@ SOURCES =	cub3d.c\
 			moving_direction.c\
 			minimap.c\
 			init_textures.c\
-			init_data_utils.c\
+			init_utils.c\
 			init_game_assets.c\
 			calc_dda.c\
 			get_offsets.c\

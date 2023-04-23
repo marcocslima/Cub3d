@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 15:22:47 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:33:00 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	put_texture(t_game *game, int wall_pixel_x, int *texture_img_data)
 		txt_pixel_y = (int)txt_first_pixel & (TILE_SIZE - 1);
 		txt_first_pixel += step;
 		img_pix_put(game->img, wall_pixel_x, wall_pixel_y,
-				get_txt_color(texture_img_data, txt_pixel_x, txt_pixel_y));
+			get_txt_color(texture_img_data, txt_pixel_x, txt_pixel_y));
 		wall_pixel_y++;
 	}
 }

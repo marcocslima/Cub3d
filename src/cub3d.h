@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 15:30:46 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:41:55 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,13 +177,11 @@ void	get_map(char **file, t_map **map);
 void	get_header(t_game **game);
 void	init_data(t_game **game);
 void	init_game_assets(t_game **game);
-void	init_data_assets(t_texture_img **texture_img,
-			t_color **background_color, t_game *game);
 void	init_data_mlx(t_mlx **mlx);
 void	init_data_img(t_img **img);
 void	get_background_rgb(t_game *game);
-void	init_player(t_game *game);
 void	init_textures(t_game **game);
+void	get_player_position(t_game *game);
 
 /* ---------------------------------------------------------------------*\
 |							ray_casting									|

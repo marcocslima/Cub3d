@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 14:45:33 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/23 15:01:20 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:33:25 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	calc_wall_height(t_game **game)
 {
 	(*game)->dda.wall_line_height = HEIGHT / (*game)->dda.perp_dist;
 	(*game)->dda.wall_first_pixel = HEIGHT / 2
-				- (*game)->dda.wall_line_height / 2;
+		- (*game)->dda.wall_line_height / 2;
 	if ((*game)->dda.wall_first_pixel < 0)
 		(*game)->dda.wall_first_pixel = 0;
 	(*game)->dda.wall_last_pixel = (*game)->dda.wall_line_height
-				/ 2 + HEIGHT / 2;
+		/ 2 + HEIGHT / 2;
 	if ((*game)->dda.wall_last_pixel >= HEIGHT)
 		(*game)->dda.wall_last_pixel = HEIGHT - 1;
 }

@@ -6,23 +6,11 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/22 14:45:15 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:37:07 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	init_data_assets(t_texture_img **texture_img,
-						t_color **background_color, t_game *game)
-{
-	*texture_img = (t_texture_img *) malloc(sizeof(t_texture_img));
-	*background_color = (t_color *) malloc(sizeof(t_color));
-	init_data_img(&(*texture_img)->ea);
-	init_data_img(&(*texture_img)->no);
-	init_data_img(&(*texture_img)->so);
-	init_data_img(&(*texture_img)->we);
-	get_background_rgb(game);
-}
 
 void	init_data_mlx(t_mlx **mlx)
 {
@@ -68,34 +56,4 @@ void	init_data(t_game **game)
 	init_data_header(&(*game)->header);
 	init_data_map(&(*game)->map);
 	(*game)->file = NULL;
-}
-
-void	get_player_position(t_game *game)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < game->map->height)
-	{
-		x = -1;
-		while (++x < game->map->width)
-		{
-			if (game->map->matrix[y][x] == 'N')
-			{
-				game->player.pos_x = (float)x + 0.5;
-				game->player.pos_y = (float)y + 0.5;
-				return ;
-			}
-		}
-	}
-}
-
-void	init_player(t_game *game)
-{
-	game->player.dir_x = 0;
-	game->player.dir_y = -1;
-	game->player.cam_plane_x = 0.66;
-	game->player.cam_plane_y = 0;
-	get_player_position(game);
 }

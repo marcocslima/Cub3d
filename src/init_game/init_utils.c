@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:19:59 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/22 14:47:07 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:37:18 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,25 @@ void	get_background_rgb(t_game *game)
 {
 	get_ceiling_rgb(game->background_color, game->header);
 	get_floor_rgb(game->background_color, game->header);
+}
+
+void	get_player_position(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < game->map->height)
+	{
+		x = -1;
+		while (++x < game->map->width)
+		{
+			if (game->map->matrix[y][x] == 'N')
+			{
+				game->player.pos_x = (float)x + 0.5;
+				game->player.pos_y = (float)y + 0.5;
+				return ;
+			}
+		}
+	}
 }
