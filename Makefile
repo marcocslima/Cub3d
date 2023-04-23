@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/23 15:17:18 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/23 15:23:53 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ SOURCES =	cub3d.c\
 			calc_dda.c\
 			get_offsets.c\
 			ray_casting.c\
-			render_walls.c
+			render_walls.c\
+			render_walls_utils.c
 
 
 # COMPILED_SOURCES #

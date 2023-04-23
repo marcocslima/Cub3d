@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 15:17:27 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:24:20 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,8 @@ int		moving_direction(float ang, t_game **game);
 void	plot_map(t_game *game);
 void	img_pix_put(t_img *img, int x, int y, int color);
 void	render_background(t_img *img, t_color *color);
+int		looking_up(float ray_dir_y);
+int		looking_left(float ray_dir_x);
 
 /* ---------------------------------------------------------------------*\
 |								utils									|

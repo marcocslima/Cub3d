@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 15:00:51 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:22:47 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,6 @@ void	put_texture(t_game *game, int wall_pixel_x, int *texture_img_data)
 				get_txt_color(texture_img_data, txt_pixel_x, txt_pixel_y));
 		wall_pixel_y++;
 	}
-}
-
-int	looking_left(float ray_dir_x)
-{
-	if (ray_dir_x < 0)
-		return (1);
-	return (0);
-}
-
-int	looking_up(float ray_dir_y)
-{
-	if (ray_dir_y < 0)
-		return (1);
-	return (0);
 }
 
 void	render_textured_walls(t_game *game, int pixel)
