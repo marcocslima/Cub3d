@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/23 15:08:19 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/23 15:17:18 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ VPATH = $(SRC_DIR)\
 		$(SRC_DIR)init_game\
 		$(SRC_DIR)validate\
 		$(SRC_DIR)ray_casting\
+		$(SRC_DIR)run_game\
 		$(SRC_DIR)utils
 
 # FILES #
@@ -47,7 +48,6 @@ SOURCES =	cub3d.c\
 			create_map.c\
 			init.c\
 			get_header.c\
-			test.c\
 			utils_check_file.c\
 			check_map.c\
 			check_map_player.c\
@@ -67,7 +67,7 @@ SOURCES =	cub3d.c\
 			calc_dda.c\
 			get_offsets.c\
 			ray_casting.c\
-			ploting.c
+			render_walls.c
 
 
 # COMPILED_SOURCES #

@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 15:05:36 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:17:27 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,15 +170,7 @@ int		end_game(t_game **game);
 void	free_game_assets(t_game **game);
 
 /* ---------------------------------------------------------------------*\
-|							ray_casting									|
-\* ---------------------------------------------------------------------*/
-
-void	calc_dda(t_game **game);
-void	get_offsets(t_game **game);
-void	ray_casting(t_game *game);
-
-/* ---------------------------------------------------------------------*\
-|							start_game									|
+|							init_game									|
 \* ---------------------------------------------------------------------*/
 
 void	get_map(char **file, t_map **map);
@@ -191,11 +183,31 @@ void	init_data_mlx(t_mlx **mlx);
 void	init_data_img(t_img **img);
 void	get_background_rgb(t_game *game);
 void	init_player(t_game *game);
+void	init_textures(t_game **game);
+
+/* ---------------------------------------------------------------------*\
+|							ray_casting									|
+\* ---------------------------------------------------------------------*/
+
+void	calc_dda(t_game **game);
+void	get_offsets(t_game **game);
+void	ray_casting(t_game *game);
 void	ray_dir(float pixel, t_game **game);
 void	get_offsets(t_game **game);
 void	calc_dda(t_game **game);
 void	calc_perp_dist(t_game **game);
 void	calc_wall_height(t_game **game);
+
+/* ---------------------------------------------------------------------*\
+|							run_game									|
+\* ---------------------------------------------------------------------*/
+
+void	put_texture(t_game *game, int pixel, int *img_data);
+int		moving(int key, t_game *game);
+int		moving_direction(float ang, t_game **game);
+void	plot_map(t_game *game);
+void	img_pix_put(t_img *img, int x, int y, int color);
+void	render_background(t_img *img, t_color *color);
 
 /* ---------------------------------------------------------------------*\
 |								utils									|
@@ -208,12 +220,6 @@ void	print_error_msg(char *msg);
 int		matrix_len(char **matrix);
 int		check_str_is_number(char *str);
 void	render_textured_walls(t_game *game, int pixel);
-void	put_texture(t_game *game, int pixel, int *img_data);
-int		moving(int key, t_game *game);
-int		moving_direction(float ang, t_game **game);
-void	plot_map(t_game *game);
-void	img_pix_put(t_img *img, int x, int y, int color);
-void	render_background(t_img *img, t_color *color);
 
 /* ---------------------------------------------------------------------*\
 |							validate									|
@@ -230,11 +236,5 @@ void	verify_middle(t_game **game, char character);
 void	verify_sides(t_game **game, char character);
 void	verify_walls(t_game **game);
 void	verify_map(t_game **game);
-
-//test
-void	print_whole_map(t_game *game);
-void	print_map(t_game *game);
-
-void	init_textures(t_game **game);
 
 #endif
