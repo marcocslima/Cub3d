@@ -6,46 +6,60 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 07:41:37 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/22 14:50:28 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:24:13 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	render_textures(t_game **game, int pixel, int *img_data)
+float	get_wall_x_coordinate(t_game **game)
 {
-	int	y;
-	int	txty;
+	float	wall_x;
+
+	if ((*game)->dda.hit_side == VERTICAL)
+		wall_x = (*game)->player.pos_y
+			+ (*game)->dda.perp_dist * (*game)->ray.dir_y;
+	else
+		wall_x = (*game)->player.pos_x
+			+ (*game)->dda.perp_dist * (*game)->ray.dir_x;
+	wall_x -= floor(wall_x);
+	return (wall_x);
+}
+
+int	get_texture_x_coordinate(t_game **game)
+{
+	int		txt_pixel_x;
+	float	wall_x;
+
+	wall_x = get_wall_x_coordinate(game);
+	txt_pixel_x = (int)(wall_x * (float)TILE_SIZE);
+	return (txt_pixel_x);
+}
+
+void	render_textures(t_game **game, int wall_pixel_x, int *texture_img_data)
+{
+	int	wall_pixel_y;
+	int	txt_pixel_y;
+	int	txt_pixel_x;
 	int	color;
 
-	if (((*game)->dda.hit_side == VERTICAL && (*game)->ray.dir_x > 0)
-		|| ((*game)->dda.hit_side == HORIZONTAL && (*game)->ray.dir_y < 0))
-		(*game)->tx_render.txtx = TILE_SIZE - (*game)->tx_render.txtx - 1;
+	txt_pixel_x = get_texture_x_coordinate(game);
 	(*game)->tx_render.step = 1.0 * TILE_SIZE / (*game)->dda.wall_line_height;
 	(*game)->tx_render.txtpos = ((*game)->dda.line_start - HEIGHT / 2
 			+ (*game)->dda.wall_line_height / 2) * (*game)->tx_render.step;
-	y = (*game)->dda.line_start;
-	while (y < (*game)->dda.line_end)
+	wall_pixel_y = (*game)->dda.line_start;
+	while (wall_pixel_y < (*game)->dda.line_end)
 	{
-		txty = (int)(*game)->tx_render.txtpos & (TILE_SIZE - 1);
+		txt_pixel_y = (int)(*game)->tx_render.txtpos & (TILE_SIZE - 1);
 		(*game)->tx_render.txtpos += (*game)->tx_render.step;
-		color = img_data[TILE_SIZE * txty + (*game)->tx_render.txtx];
-		(*game)->img->data[y * WIDTH + pixel] = color;
-		y++;
+		color = texture_img_data[TILE_SIZE * txt_pixel_y + txt_pixel_x];
+		img_pix_put((*game)->img, wall_pixel_x, wall_pixel_y, color);
+		wall_pixel_y++;
 	}
 }
 
 void	run_textures(t_game **game, int pixel)
 {
-	if ((*game)->dda.hit_side == VERTICAL)
-		(*game)->tx_render.wallx = (*game)->player.pos_y
-			+ (*game)->dda.perp_dist * (*game)->ray.dir_y;
-	else
-		(*game)->tx_render.wallx = (*game)->player.pos_x
-			+ (*game)->dda.perp_dist * (*game)->ray.dir_x;
-	(*game)->tx_render.wallx -= floor((*game)->tx_render.wallx);
-	(*game)->tx_render.txtx = (int)((*game)->tx_render.wallx
-			* (float)TILE_SIZE);
 	if ((*game)->dda.hit_side == VERTICAL)
 	{
 		if ((*game)->ray.dir_x >= 0)
