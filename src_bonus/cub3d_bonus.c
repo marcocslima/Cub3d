@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 16:44:12 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 16:36:49 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	read_file(int fd, t_game **game)
 {
@@ -38,6 +38,7 @@ int	render_game(t_game *game)
 	ray_casting(game);
 	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win,
 		game->img->img_ptr, 0, 0);
+	plot_map(game);
 	return (0);
 }
 

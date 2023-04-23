@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 16:46:26 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:41:55 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,15 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
+
+typedef struct s_rect
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+	int	color;
+}	t_rect;
 
 typedef struct s_player
 {
@@ -194,6 +203,7 @@ void	calc_wall_height(t_game **game);
 void	put_texture(t_game *game, int pixel, int *img_data);
 int		moving(int key, t_game *game);
 int		moving_direction(float ang, t_game **game);
+void	plot_map(t_game *game);
 void	img_pix_put(t_img *img, int x, int y, int color);
 void	render_background(t_img *img, t_color *color);
 void	render_textured_walls(t_game *game, int pixel);
