@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 16:36:49 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 17:12:52 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	parse_map_file(t_game **game, int argc, char **argv)
 {
 	int		fd;
 
-	fd = check_input(argc, argv);
+	fd = check_input(game, argc, argv);
 	read_file(fd, game);
 	if ((*game)->file != NULL)
 	{

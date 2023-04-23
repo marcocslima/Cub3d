@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 16:46:26 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 17:04:34 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@ int		looking_down(float ray_dir_y);
 \* ---------------------------------------------------------------------*/
 
 void	check_header(t_game **game);
-int		check_input(int argc, char **argv);
+int		check_input(t_game **game, int argc, char **argv);
 void	verify_empty_lines(char *file, t_game **game);
 void	verify_onlyspace_line(t_game **game);
 void	verify_player(t_game **game);
