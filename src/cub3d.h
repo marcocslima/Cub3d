@@ -6,7 +6,7 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 13:47:51 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/23 14:41:54 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,6 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
-
-typedef struct s_render_tx
-{
-	int		txt_id;
-	float	wallx;
-	int		txtx;
-	float	step;
-	float	txtpos;
-}	t_render_tx;
 
 typedef struct s_rect
 {
@@ -165,7 +156,6 @@ typedef struct s_game
 	t_player		player;
 	t_ray			ray;
 	t_dda			dda;
-	t_render_tx		tx_render;
 }	t_game;
 
 /* ---------------------------------------------------------------------*\
@@ -209,8 +199,8 @@ void	print_error_exit(t_game **game, char *msg);
 void	print_error_msg(char *msg);
 int		matrix_len(char **matrix);
 int		check_str_is_number(char *str);
-void	render_textured_walls(t_game **game, int pixel);
-void	put_texture(t_game **game, int pixel, int *img_data);
+void	render_textured_walls(t_game *game, int pixel);
+void	put_texture(t_game *game, int pixel, int *img_data);
 int		moving(int key, t_game *game);
 int		moving_direction(float ang, t_game **game);
 void	plot_map(t_game *game);
