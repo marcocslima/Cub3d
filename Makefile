@@ -6,7 +6,7 @@
 #    By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/13 10:58:08 by alida-si          #+#    #+#              #
-#    Updated: 2023/04/23 16:47:58 by alida-si         ###   ########.fr        #
+#    Updated: 2023/04/23 17:15:14 by alida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,7 +114,6 @@ SOURCES_BONUS =	cub3d_bonus.c\
 SRC_PATH =	./
 BONUS_PATH =	./
 OBJ_PATH =	obj/
-#SRCS =	${addprefix ${SRC_PATH}, ${SOURCES}}
 OBJS =	$(addprefix $(OBJ_PATH), $(SOURCES:.c=.o))
 OBJS_BONUS =	$(addprefix $(OBJ_PATH), $(SOURCES_BONUS:.c=.o))
 
