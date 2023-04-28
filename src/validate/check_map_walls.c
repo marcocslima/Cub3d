@@ -6,20 +6,20 @@
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:42:39 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 13:59:47 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:03:53 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	verify_top_and_bottom(t_game **game, char character)
+void	verify_top_and_bottom(t_game **game)
 {
 	t_map	*map;
 
 	map = (*game)->map;
-	if (ft_strchr(map->matrix[0], character) != NULL)
+	if (!ft_strcmp_char(map->matrix[0], '1'))
 		print_error_exit(game, "Find error on map...\n");
-	if (ft_strchr(map->matrix[map->height - 1], character) != NULL)
+	if (!ft_strcmp_char(map->matrix[map->height - 1], '1'))
 		print_error_exit(game, "Find error on map...\n");
 }
 
@@ -44,7 +44,7 @@ int	verify_position(t_map *map, int j, int i)
 	return (1);
 }
 
-void	verify_middle(t_game **game, char character)
+void	verify_middle(t_game **game)
 {
 	int		i;
 	int		j;
@@ -57,7 +57,7 @@ void	verify_middle(t_game **game, char character)
 		i = 0;
 		while (i < map->width)
 		{
-			if (map->matrix[j][i] == character)
+			if (map->matrix[j][i] != '1')
 			{
 				if (!verify_position(map, j, i))
 					print_error_exit(game, "Find error on map...\n");
@@ -68,7 +68,7 @@ void	verify_middle(t_game **game, char character)
 	}
 }
 
-void	verify_sides(t_game **game, char character)
+void	verify_sides(t_game **game)
 {
 	t_map	*map;
 	int		i;
@@ -77,15 +77,15 @@ void	verify_sides(t_game **game, char character)
 	i = -1;
 	while (++i < map->height)
 	{
-		if (map->matrix[i][0] == character
-			|| map->matrix[i][map->width - 1] == character)
+		if (map->matrix[i][0] != '1'
+			|| map->matrix[i][map->width - 1] != '1')
 			print_error_exit(game, "Find error on map...\n");
 	}
 }
 
 void	verify_walls(t_game **game)
 {
-	verify_top_and_bottom(game, '0');
-	verify_sides(game, '0');
-	verify_middle(game, '0');
+	verify_top_and_bottom(game);
+	verify_sides(game);
+	verify_middle(game);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_player.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:34:15 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/28 18:41:02 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:13:55 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,4 @@ void	verify_nb_player(t_game **game)
 void	verify_player(t_game **game)
 {
 	verify_nb_player(game);
-	verify_top_and_bottom(game, 'N');
-	verify_sides(game, 'N');
-	verify_middle(game, 'N');
 }
