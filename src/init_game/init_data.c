@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:24:17 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/28 06:25:38 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:22:59 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,4 @@ void	init_data(t_game **game)
 	init_data_header(&(*game)->header);
 	init_data_map(&(*game)->map);
 	(*game)->file = NULL;
-	(*game)->run = 0;
 }

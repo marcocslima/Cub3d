@@ -6,7 +6,7 @@
 /*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 15:21:56 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/28 07:56:50 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:24:08 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 void	side_player_init(t_game *game)
 {
-	if (game->run == 0)
-	{
-		if (game->player.side_init == 'S')
-			moving_direction(-PI, &game);
-		if (game->player.side_init == 'W')
-			moving_direction(-PI / 2, &game);
-		if (game->player.side_init == 'E')
-			moving_direction(+PI / 2, &game);
-		game->run = 1;
-	}
+	if (game->player.side_init == 'S')
+		moving_direction(-PI, &game);
+	if (game->player.side_init == 'W')
+		moving_direction(-PI / 2, &game);
+	if (game->player.side_init == 'E')
+		moving_direction(+PI / 2, &game);
 }
 
 int	looking_down(float ray_dir_y)
