@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_player.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 10:34:15 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/16 13:51:49 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/28 06:04:57 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,19 @@ int	char_occurrence_matrix(char **matrix, char character)
 
 void	verify_nb_player(t_game **game)
 {
+	int		i;
+	int		count;
 	t_map	*map;
+	char	*type_players;
 
+	i = -1;
+	count = 0;
+	type_players = "NSWE";
 	map = (*game)->map;
-	if (char_occurrence_matrix(map->matrix, 'N') != 1)
+	while (++i < 4)
+		if (char_occurrence_matrix(map->matrix, type_players[i]) == 1)
+			count++;
+	if (count != 1)
 		print_error_exit(game, "Invalid number of players\n");
 }
 

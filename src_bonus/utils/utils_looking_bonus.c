@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   utils_looking_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 15:21:56 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/23 16:37:24 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/28 07:56:50 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
+
+void	side_player_init(t_game *game)
+{
+	if (game->run == 0)
+	{
+		if (game->player.side_init == 'S')
+			moving_direction(-PI, &game);
+		if (game->player.side_init == 'W')
+			moving_direction(-PI / 2, &game);
+		if (game->player.side_init == 'E')
+			moving_direction(+PI / 2, &game);
+		game->run = 1;
+	}
+}
 
 int	looking_down(float ray_dir_y)
 {

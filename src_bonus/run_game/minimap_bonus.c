@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:16:02 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 16:37:24 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/28 08:06:00 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	render_elements(t_game **game, int i, int j, int side)
 	if ((*game)->map->matrix[i][j] == '1')
 		color = BRICK_PIXEL;
 	if ((*game)->map->matrix[i][j] == '0'
-		|| (*game)->map->matrix[i][j] == 'N')
+		|| (*game)->map->matrix[i][j] == (*game)->player.side_init)
 		color = BEIGE_PIXEL;
 	render_rect((*game)->img, (t_rect){j * side, i * side, side, side, color});
 	render_rect((*game)->img, (t_rect){(*game)->player.pos_x

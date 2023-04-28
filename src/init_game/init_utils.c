@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data_utils.c                                  :+:      :+:    :+:   */
+/*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:19:59 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/23 15:37:18 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/28 07:29:07 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ void	get_player_position(t_game *game)
 		x = -1;
 		while (++x < game->map->width)
 		{
-			if (game->map->matrix[y][x] == 'N')
+			if (game->map->matrix[y][x] == 'N'
+				|| game->map->matrix[y][x] == 'S'
+				|| game->map->matrix[y][x] == 'W'
+				|| game->map->matrix[y][x] == 'E')
 			{
+				game->player.side_init = game->map->matrix[y][x];
 				game->player.pos_x = (float)x + 0.5;
 				game->player.pos_y = (float)y + 0.5;
 				return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 15:02:40 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/23 16:37:24 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/28 07:56:59 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	verify_invalid_char(t_game **game)
 		while (map->matrix[i][j])
 		{
 			if (map->matrix[i][j] != '1' && map->matrix[i][j] != '0'
-			&& map->matrix[i][j] != ' ' && map->matrix[i][j] != 'N')
+			&& map->matrix[i][j] != ' ' && map->matrix[i][j] != 'N'
+			&& map->matrix[i][j] != 'S' && map->matrix[i][j] != 'W'
+			&& map->matrix[i][j] != 'E')
 				print_error_exit(game, "Invalid character inside map\n");
 			j++;
 		}

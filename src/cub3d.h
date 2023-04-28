@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/23 17:04:34 by alida-si         ###   ########.fr       */
+/*   Updated: 2023/04/28 07:38:21 by mcesar-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_player
 	float	pos_y;
 	float	cam_plane_x;
 	float	cam_plane_y;
+	char	side_init;
 }	t_player;
 
 typedef struct s_ray
@@ -147,6 +148,7 @@ typedef struct s_game
 	t_player		player;
 	t_ray			ray;
 	t_dda			dda;
+	int				run;
 }	t_game;
 
 /* ---------------------------------------------------------------------*\
@@ -173,6 +175,7 @@ void	init_data_img(t_img **img);
 void	get_background_rgb(t_game *game);
 void	init_textures(t_game **game);
 void	get_player_position(t_game *game);
+void	side_player_init(t_game *game);
 
 /* ---------------------------------------------------------------------*\
 |							ray_casting									|
