@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 08:13:20 by alida-si          #+#    #+#             */
-/*   Updated: 2023/04/28 18:01:36 by alida-si         ###   ########.fr       */
+/*   Created: 2023/04/28 18:03:17 by alida-si          #+#    #+#             */
+/*   Updated: 2023/04/28 18:03:39 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-int	matrix_len(char **matrix)
+int	ft_strcmp_char(char *s1, char c)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (matrix[i])
-		i++;
-	return (i);
-}
-
-int	check_str_is_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
+	while (s1[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (s1[i] != c)
 			return (0);
 		i++;
 	}
