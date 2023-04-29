@@ -1,7 +1,7 @@
-NO ../cub3d/assets/imgs/wall_04.xpm
-SO ../cub3d/assets/imgs/wall_03.xpm
-WE ../cub3d/assets/imgs/wall_02.xpm
-EA ../cub3d/assets/imgs/wall_01.xpm
+NO assets/imgs/wall_04.xpm
+SO assets/imgs/wall_03.xpm
+WE assets/imgs/wall_02.xpm
+EA assets/imgs/wall_01.xpm
 
 F 226,114,91
 C 135,206,235

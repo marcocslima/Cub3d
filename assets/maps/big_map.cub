@@ -1,7 +1,7 @@
-NO ../cub3d/assets/imgs/wall_01.xpm
-SO ../cub3d/assets/imgs/wall_02.xpm
-WE ../cub3d/assets/imgs/wall_03.xpm
-EA ../cub3d/assets/imgs/wall_04.xpm
+NO assets/imgs/wall_01.xpm
+SO assets/imgs/wall_02.xpm
+WE assets/imgs/wall_03.xpm
+EA assets/imgs/wall_04.xpm
 
 F 220,100,0
 C 225,30,0
