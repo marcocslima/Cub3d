@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcesar-d <mcesar-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: alida-si <alida-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 23:11:12 by mcesar-d          #+#    #+#             */
-/*   Updated: 2023/04/28 18:22:22 by mcesar-d         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:14:03 by alida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,10 +234,6 @@ int		check_input(t_game **game, int argc, char **argv);
 void	verify_empty_lines(char *file, t_game **game);
 void	verify_onlyspace_line(t_game **game);
 void	verify_player(t_game **game);
-void	verify_top_and_bottom(t_game **game, char character);
-int		verify_position(t_map *map, int j, int i);
-void	verify_middle(t_game **game, char character);
-void	verify_sides(t_game **game, char character);
 void	verify_walls(t_game **game);
 void	verify_map(t_game **game);
 
